@@ -1,0 +1,12 @@
+-This is the previous 728(and more) character slot selection screen
+
+-Copy and paste these two files into the data folder, which will overwrite the new system.def and select.def
+
+-More info about how to use EVE Ikemen can be found here:
+https://mugenguild.com/forum/msg.2540589
+
+DJ-VAN
+
+and
+
+olt-EDEN

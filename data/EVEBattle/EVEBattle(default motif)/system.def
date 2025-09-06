@@ -1,0 +1,2448 @@
+; =============
+;        DJ-VAN
+; =============
+;  "Everything Vs Everything"
+;  version :	.76
+;----------------------------
+[Info]
+name = "EVE BATTLE"          ;Name of motif
+author = "DJ-VAN"       ;Motif author name
+localcoord = 320,240
+;----------------------------
+[Files]
+spr = system.sff            ;Filename of sprite data
+snd = system.snd            ;Filename of sound data
+logo.storyboard =  ;MUGEN_Intro.def  ;Logo storyboard definition (optional) *2001.04.01 NEW*
+intro.storyboard =       ;Intro storyboard definition (optional) *2001.04.01 NEW*
+select = select.def         ;Character and stage selection list
+fight = fight.def          ;Fight definition filename
+font1 = font/f-4x6.def      ;System fonts
+font2 = font/f-6x9.def      ;System fonts
+font3 = font/jg.fnt         ;System fonts
+font4 = font/qoh_big.fnt
+font5 = font/Qoh_small.fnt
+font6 = font/DJV-CUSTOM.fnt
+font7 = Open_Sans.def
+
+;----------------------------
+[Music]
+ ;Put a filename for a MOD, ogg or MIDI here, or just leave it
+ ;blank if you do not want music. If an invalid filename is
+ ;given, then no music will play.
+ ;To play mymusic.ogg from the sound/ directory, put:
+ ;  title.bgm = sound/mymusic.ogg
+ ;Music will continue to play between screens if the files names
+ ;are the same, and both BGMs are specified to loop.
+  ;Music to play at title screen.
+title.bgm = Session.ogg
+title.bgm.volume = 100    ;volume scaling factor in percent. 100 is default
+title.bgm.loop = 1        ;Set to 0 to prevent looping
+title.bgm.loopstart = 
+title.bgm.loopend = 
+  ;Music to play at char select screen.
+select.bgm = select.ogg
+;select.bgm = Toonami.ogg
+select.bgm.volume = 100
+select.bgm.loop = 1
+select.bgm.loopstart = 
+select.bgm.loopend = 
+  ;Music to play at versus screen.
+vs.bgm = versus.ogg
+vs.bgm.volume = 100
+vs.bgm.loop = 0
+vs.bgm.loopstart = 
+vs.bgm.loopend = 
+  ;Music to play at victory screen.
+victory.bgm = vs.ogg
+victory.bgm.volume = 100
+victory.bgm.loop = 0
+victory.bgm.loopstart = 
+victory.bgm.loopend = 
+  ;Music to play at option screen.
+option.bgm = Session.ogg
+option.bgm.volume = 100
+option.bgm.loop = 1
+option.bgm.loopstart = 
+option.bgm.loopend = 
+  ;Music to play at replay screen.
+replay.bgm   = Toonami.ogg
+replay.bgm.volume = 100
+replay.bgm.loop = 1
+replay.bgm.loopstart = 
+replay.bgm.loopend = 
+  ;Music to play at continue screen.
+continue.bgm = 
+continue.bgm.volume = 100
+continue.bgm.loop = 0
+continue.bgm.loopstart = 
+continue.bgm.loopend = 
+  ;Music to play at results screen.
+results.bgm = DJ-VAN_Intro.ogg
+results.bgm.volume = 100
+results.bgm.loop = 1
+results.bgm.loopstart = 
+results.bgm.loopend = 
+  ;Music to play at hiscore screen.
+hiscore.bgm = DJ-VAN_Intro.ogg
+hiscore.bgm.volume = 100
+hiscore.bgm.loop = 1
+hiscore.bgm.loopstart = 
+hiscore.bgm.loopend = 
+
+;-------------------------------------------------------------------
+;Title screen definition
+[Title Info]
+fadein.time = 0;15
+fadeout.time = 0;15
+cursor.move.snd = 100,0
+cursor.done.snd = 100,1
+cancel.snd = 100,2
+menu.pos = 159,143
+menu.item.font = 5,0,0
+menu.item.active.font = 4,0,0
+menu.item.spacing = 0, 11
+menu.window.margins.y = 11, 13
+menu.window.visibleitems = 5
+menu.boxcursor.visible = 1
+menu.boxcursor.coords = -32,-10,32,1
+
+; Footer parameters control rendering of engine version info. Separated into
+; 3 elements to allow left/centre/right text align at the same time.
+;footer1.offset = (2 * localcoordX / 320), localcoordY
+footer1.font = "default-3x5.def", 0, 1, 191, 191, 191, -1
+footer1.scale = 1.0, 1.0
+footer1.text = "VERSION .76"
+;footer2.offset = (localcoordX / 2), localcoordY
+footer2.font = "default-3x5.def", 0, 0, 191, 191, 191, -1
+footer2.scale = 1.0, 1.0
+footer2.text = "WWW.MUGEN-INFANTRY.NET"
+;footer3.offset = (localcoordX - 1 - (2 * localcoordX / 320)), localcoordY
+footer3.font = "default-3x5.def", 0, -1, 191, 191, 191, -1
+footer3.scale = 1.0, 1.0
+footer3.text = "(C) DJ-VAN 2006"
+;footer.overlay.window = 0, (localcoordY - 7), (localcoordX - 1), (localcoordY - 1)
+footer.overlay.col = 0, 0, 64
+footer.overlay.alpha = 255, 100
+
+; Names for each of the items in the menu. Names must be in quotes.
+; Submenu: Arcade
+menu.itemname.menuarcade = "ARCADE"                          ;Ikemen feature
+menu.itemname.menuarcade.arcade = "SINGLE MODE"
+menu.itemname.menuarcade.teamarcade = "TEAM ARCADE"
+menu.itemname.menuarcade.teamcoop = "TEAM CO-OP"
+menu.itemname.menuarcade.back = "BACK"                       ;Ikemen feature
+
+; Submenu: Versus
+menu.itemname.menuversus = "VS MODE"
+menu.itemname.menuversus.versus = "1P VS 2P"
+menu.itemname.menuversus.teamversus = "TEAM VERSUS"
+menu.itemname.menuversus.versuscoop = "VERSUS CO-OP"         ;Ikemen feature
+menu.itemname.menuversus.freebattle = "QUICK MATCH"          ;Ikemen feature
+menu.itemname.menuversus.back = "BACK"                       ;Ikemen feature
+
+; This group is hidden and should not be moved to other menus.
+; It's opened automatically, after synchronization with online player.
+menu.itemname.server.netplayversus = "VERSUS 2P"             ;Ikemen feature
+menu.itemname.server.netplayteamcoop = "ARCADE CO-OP"        ;Ikemen feature
+menu.itemname.server.netplaysurvivalcoop = "SURVIVAL CO-OP"  ;Ikemen feature
+menu.itemname.server.back = "EXIT"                           ;Ikemen feature
+
+; Submenu: Network
+menu.itemname.menunetwork = "NETWORK"                        ;Ikemen feature
+menu.itemname.menunetwork.serverhost = "HOST GAME"           ;Ikemen feature
+menu.itemname.menunetwork.serverjoin = "JOIN GAME"           ;Ikemen feature
+menu.itemname.menunetwork.back = "BACK"                      ;Ikemen feature
+
+; known IP addresses show up before serverjoin.back item
+menu.itemname.menunetwork.serverjoin.joinadd = "NEW ADDRESS" ;Ikemen feature
+menu.itemname.menunetwork.serverjoin.back = "BACK"           ;Ikemen feature
+
+; Submenu: Practice
+menu.itemname.menupractice = "PRACTICE"                      ;Ikemen feature
+menu.itemname.menupractice.training = "TRAINING"             ;Ikemen feature
+;menu.itemname.menupractice.trials = "TRIALS"                 ;Ikemen feature (not implemented yet)
+menu.itemname.menupractice.back = "BACK"                     ;Ikemen feature
+
+; Submenu: Mission
+menu.itemname.menumission = "MISSION"                        ;Ikemen feature
+menu.itemname.menumission.survival = "SURVIVAL"
+menu.itemname.menumission.survivalcoop = "SURVIVAL CO-OP"
+menu.itemname.menumission.timeattack = "TIME ATTACK"         ;Ikemen feature
+menu.itemname.menumission.bonusgames = "BONUS GAMES"         ;Ikemen feature
+menu.itemname.menumission.back = "BACK"                      ;Ikemen feature
+
+; Submenu: Mission => Bonus Games
+; bonus characters menu items are automatically added before bonusgames.back
+menu.itemname.menumission.bonusgames.back = "BACK"           ;Ikemen feature
+
+; Submenu: Watch Mode
+menu.itemname.menuwatch = "WATCH"                       ;Ikemen feature
+menu.itemname.menuwatch.watch = "CPU MATCH"
+menu.itemname.menuwatch.randomtest = "RANDOMTEST"            ;Ikemen feature
+menu.itemname.menuwatch.replay = "REPLAY"                    ;Ikemen feature
+menu.itemname.menuwatch.back = "BACK"                        ;Ikemen feature
+
+; Options
+menu.itemname.options = "OPTIONS"
+
+; Exit Game
+menu.itemname.exit = "EXIT"
+
+connecting.offset = 160, 165                          ;Ikemen feature
+connecting.font = 2,0,0                               ;Ikemen feature
+connecting.scale = 1.0, 1.0                           ;Ikemen feature
+connecting.host.text = "Waiting for player 2... (%s)" ;Ikemen feature
+connecting.join.text = "Now connecting to %s... (%s)" ;Ikemen feature
+;connecting.overlay.window = 0, 0, 320, 240            ;Ikemen feature
+connecting.overlay.col = 0, 0, 0                      ;Ikemen feature
+connecting.overlay.alpha = 20, 100                    ;Ikemen feature
+textinput.offset = 25, 165                            ;Ikemen feature
+textinput.font = 2,0,1, 191,191,191                   ;Ikemen feature
+textinput.scale = 1.0, 1.0                            ;Ikemen feature
+textinput.name.text = "Enter Host display name, e.g. John.\nExisting entries can be removed with DELETE button." ;Ikemen feature
+textinput.address.text = "Enter Host IP address, e.g. 127.0.0.1\nCopied text can be pasted with INSERT button."  ;Ikemen feature
+;textinput.overlay.window = 0, 0, 320, 240             ;Ikemen feature
+textinput.overlay.col = 0, 0, 0                       ;Ikemen feature
+textinput.overlay.alpha = 20, 100                     ;Ikemen feature
+
+;----------------------------
+;Title background definition
+[TitleBGdef]
+bgclearcolor = 0,0,0
+
+[TitleBG 0,haze]
+type = parallax;normal
+layerno = 0
+spriteno = 300,1
+start = 160,0
+mask = 0
+trans = add
+velocity = 1.05625;0.8125
+tile = 1,0
+width = 300,25;400,25
+yscalestart = 110;  Starting y-scale (float, in percent)  (def: 100)
+yscaledelta = 5;?  Change in y-scale per unit (float, in percent)  (def: 0)
+
+[TitleBG 0,haze 2]
+type = parallax;normal
+layerno = 0
+spriteno = 300,3
+start = -160,120
+mask = 0
+velocity = 0.11125;0.1625
+tile = 1,0
+width = 20,300;20
+yscalestart = 100;  Starting y-scale (float, in percent)  (def: 100)
+yscaledelta = 5;?  Change in y-scale per unit (float, in percent)  (def: 0)
+
+[TitleBG 0,haze bg]
+type = normal
+layerno = 0
+spriteno = 300,4
+start = -160,113
+mask = 0
+trans = add
+velocity = 0.08
+tile = 1,0
+
+[TitleBG 0,haze]
+type = normal
+layerno = 0
+spriteno = 300,5
+start = -160,240
+velocity = 1.5;0.8125
+tile = 1,1
+mask = 0
+trans = add
+;------------ Lightning ---------------
+
+[TitleBG 0a] ;lightning (top right side)
+type  = anim
+actionno = 350
+layerno = 0
+start = 20,-40
+trans = add
+
+[TitleBG 0a] ;lightning (top left side)
+type  = anim
+actionno = 351
+layerno = 0
+start = -20,-40
+trans = add
+
+[TitleBG 0a] ;lightning (bottom right side)
+type  = anim
+actionno = 352
+layerno = 0
+start = 10,245
+trans = add
+
+[TitleBG 0a] ;lightning (bottom left side)
+type  = anim
+actionno = 353
+layerno = 0
+start = -10,245
+trans = add
+
+[TitleBG 0] ;BLUE SWIRL
+type = normal
+layerno = 0
+spriteno = 50,0
+start = -160,0
+mask = 0
+trans = add
+
+[TitleBG 0] ;EARTH shad
+type = normal
+layerno = 0
+spriteno = 1,9
+start = -160,0
+trans = add
+
+[TitleBG 0] ;RING grey
+type = normal
+layerno = 0
+spriteno = 1,10
+start = -160,0
+trans = add
+
+[TitleBG 0] ;EARTH
+type = normal
+layerno = 0
+spriteno = 1,7
+start = -160,0
+trans = sub
+
+;[TitleBG 0] ;RING
+;type = normal
+;layerno = 0
+;spriteno = 1,5
+;start = -160,0
+;mask = 1
+
+[TitleBG 0] ;TITLE SHADOW
+type = normal
+layerno = 0
+spriteno = 1,2
+start = -160,0
+trans = add
+
+;[TitleBG 0] ;TITLE SHADOW SUB
+;type = normal
+;layerno = 0
+;spriteno = 1,7
+;start = -160,0
+;trans = SUB
+
+[TitleBG 0] ;TITLE 
+type = normal
+layerno = 0
+spriteno = 1,1
+start = -160,0
+mask = 1
+
+[TitleBG 0] ;blackbox
+type = normal
+layerno = 0
+spriteno = 1,3
+start = -160,120
+trans = sub
+
+[TitleBG 0] ;grey side1
+type = normal
+layerno = 0
+spriteno = 1,4
+start = 33,120
+trans = add
+
+[TitleBG 0] ;grey side1
+type = normal
+layerno = 0
+spriteno = 1,4
+start = -43,120
+trans = add
+
+;[TitleBG 0]
+;type = normal
+;layerno = 0
+;spriteno = 10,11
+;start = 3840, -6000
+;mask = 1
+
+;============== Screen Transitions ================
+
+[TitleBG 1.b1];fader
+type = normal
+layerno = 0
+spriteno = 900,0
+start = 0,0
+velocity = 0,-12
+trans = add
+tile = 1,0
+
+[TitleBG 1.b1];fader
+type = normal
+layerno = 1
+spriteno = 900,0
+start = 0,0
+velocity = 0,-30
+trans = add
+tile = 1,0
+
+;-------------------------------------------------------------------
+[Select Info]
+
+fadein.time = 0;15
+fadeout.time = 0;15
+rows = 20
+columns = 1
+wrapping = 1
+pos = 76, 18
+showemptyboxes = 0
+moveoveremptyboxes = 0
+cell.size = 0,11
+cell.spacing = 0
+;cell.bg.spr = 150,0
+;cell.random.spr = 151,0
+cell.random.switchtime = 5
+
+p1.cursor.startcell = 0,0
+p1.cursor.active.anim = 700
+p1.cursor.done.spr = 700, 0
+p1.cursor.move.snd = 100,0
+p1.cursor.done.snd = 100,1
+p1.random.move.snd = 100,0
+p1.swap.snd = 100, 0
+
+p2.cursor.startcell = 0,0
+p2.cursor.active.Anim = 700
+p2.cursor.done.spr = 700,0
+p2.cursor.blink = 1
+p2.cursor.move.snd = 100,0
+p2.cursor.done.snd = 100,1
+p2.random.move.snd = 100,0
+p2.swap.snd = 100, 0
+
+random.move.snd.cancel = 0		;1 to have random move sound cancel itself when played repeatedly
+stage.move.snd = 100,0
+stage.done.snd = 100,1	
+cancel.snd = 100,2
+
+;---------- Portrait Data ------------
+portrait.offset = 0,0
+portrait.scale = 0,0
+title.offset = 0,0        ;Position of title (Arcade Mode, etc)
+title.font =  -1          ;Font of title (-1 for none)
+
+;Portrait
+p1.face.offset = 0,52	;Position to put big portrait
+p1.face.facing = 1        
+p1.face.scale = 1,1
+p2.face.offset = 320,52	
+p2.face.scale = 1,1
+p2.face.facing = -1
+
+;Name
+p1.name.offset = 9,202          ;Position to put name
+p1.name.spacing = 0,12    ;Space between each name for players on the same team
+p1.name.font = 6,0,1            ;Set to -1 for no display
+p2.name.offset = 311,202
+p2.name.font = 6,0,-1
+p2.name.spacing = 0,12    ;Space between each name for players on the same team
+
+;Stage select
+stage.pos = 160,13
+stage.active.font = 6,0,0
+stage.active2.font = 6,0,0
+stage.done.font = 6,0,0
+
+;~~~~~~~~~~~ Team Menu ~~~~~~~~~~~~      
+;Team menu
+teammenu.move.wrapping = 1
+p1.teammenu.pos = 30, 90
+p1.teammenu.bg.spr = 0,1
+p1.teammenu.selftitle.font = 4,0, 1
+p1.teammenu.selftitle.text = TEAM MODE
+p1.teammenu.enemytitle.font = 4,0, 1
+p1.teammenu.enemytitle.text = COMP MODE
+p1.teammenu.move.snd = 100,0
+p1.teammenu.value.snd = 100,0
+p1.teammenu.done.snd = 100,1
+p1.teammenu.item.offset = 0,20
+p1.teammenu.item.spacing = 0,15
+p1.teammenu.item.font = 4,0, 1
+p1.teammenu.item.active.font = 4,5, 1
+p1.teammenu.item.active2.font = -1
+p1.teammenu.item.cursor.offset = -65, -7
+p1.teammenu.item.cursor.anim = 700
+p1.teammenu.value.icon.offset = 60,1
+p1.teammenu.value.icon.spr = 181,0
+p1.teammenu.value.empty.icon.offset = 60,1
+p1.teammenu.value.empty.icon.spr = 182,0
+p1.teammenu.value.spacing = 6,0
+
+p1.teammenu.ratio1.icon.spr = 1300, 0       ;Ikemen feature
+p1.teammenu.ratio1.icon.offset = 175, 158   ;Ikemen feature
+p1.teammenu.ratio1.icon.facing = 1         ;Ikemen feature
+p1.teammenu.ratio1.icon.scale = 0.40, 0.40 ;Ikemen feature
+p1.teammenu.ratio2.icon.spr = 1300, 1       ;Ikemen feature
+p1.teammenu.ratio2.icon.offset = 175, 158   ;Ikemen feature
+p1.teammenu.ratio2.icon.facing = 1         ;Ikemen feature
+p1.teammenu.ratio2.icon.scale = 0.40, 0.40 ;Ikemen feature
+p1.teammenu.ratio3.icon.spr = 1300, 2       ;Ikemen feature
+p1.teammenu.ratio3.icon.offset = 175, 158   ;Ikemen feature
+p1.teammenu.ratio3.icon.facing = 1         ;Ikemen feature
+p1.teammenu.ratio3.icon.scale = 0.40, 0.40 ;Ikemen feature
+p1.teammenu.ratio4.icon.spr = 1300, 3       ;Ikemen feature
+p1.teammenu.ratio4.icon.offset = 175, 158   ;Ikemen feature
+p1.teammenu.ratio4.icon.facing = 1         ;Ikemen feature
+p1.teammenu.ratio4.icon.scale = 0.40, 0.40 ;Ikemen feature
+p1.teammenu.ratio5.icon.spr = 1300, 4       ;Ikemen feature
+p1.teammenu.ratio5.icon.offset = 175, 158   ;Ikemen feature
+p1.teammenu.ratio5.icon.facing = 1         ;Ikemen feature
+p1.teammenu.ratio5.icon.scale = 0.40, 0.40 ;Ikemen feature
+p1.teammenu.ratio6.icon.spr = 1300, 5       ;Ikemen feature
+p1.teammenu.ratio6.icon.offset = 175, 158   ;Ikemen feature
+p1.teammenu.ratio6.icon.facing = 1         ;Ikemen feature
+p1.teammenu.ratio6.icon.scale = 0.40, 0.40 ;Ikemen feature
+p1.teammenu.ratio7.icon.spr = 1300, 6       ;Ikemen feature
+p1.teammenu.ratio7.icon.offset = 175, 158   ;Ikemen feature
+p1.teammenu.ratio7.icon.facing = 1         ;Ikemen feature
+p1.teammenu.ratio7.icon.scale = 0.40, 0.40 ;Ikemen feature
+
+;p2 team
+p2.teammenu.pos = 289, 90
+;p2.teammenu.bg.spr =
+p2.teammenu.selftitle.font = 4,0, -1
+p2.teammenu.selftitle.text = TEAM MODE
+p2.teammenu.enemytitle.font = 4,0, -1
+p2.teammenu.enemytitle.text = COMP MODE
+p2.teammenu.move.snd = 100,0
+p2.teammenu.value.snd = 100,0
+p2.teammenu.done.snd = 100,1
+p2.teammenu.item.offset = 0,20
+p2.teammenu.item.spacing = 0,15
+p2.teammenu.item.font = 4,0, -1
+p2.teammenu.item.active.font = 4,5, -1
+p2.teammenu.item.active2.font = -1
+p2.teammenu.item.cursor.offset = 65, -7
+p2.teammenu.item.cursor.anim = 701
+p2.teammenu.value.icon.offset = -60,1
+p2.teammenu.value.icon.spr = 191,0
+p2.teammenu.value.empty.icon.offset = -60,1
+p2.teammenu.value.empty.icon.spr = 192,0
+p2.teammenu.value.spacing = -6,0
+
+p2.teammenu.ratio1.icon.spr = 1301, 0       ;Ikemen feature
+p2.teammenu.ratio1.icon.offset = 320, 158   ;Ikemen feature
+p2.teammenu.ratio1.icon.facing = 1         ;Ikemen feature
+p2.teammenu.ratio1.icon.scale = 0.40, 0.40 ;Ikemen feature
+p2.teammenu.ratio2.icon.spr = 1301, 1       ;Ikemen feature
+p2.teammenu.ratio2.icon.offset = 309, 158   ;Ikemen feature
+p2.teammenu.ratio2.icon.facing = 1         ;Ikemen feature
+p2.teammenu.ratio2.icon.scale = 0.40, 0.40 ;Ikemen feature
+p2.teammenu.ratio3.icon.spr = 1301, 2       ;Ikemen feature
+p2.teammenu.ratio3.icon.offset = 309, 158   ;Ikemen feature
+p2.teammenu.ratio3.icon.facing = 1         ;Ikemen feature
+p2.teammenu.ratio3.icon.scale = 0.40, 0.40 ;Ikemen feature
+p2.teammenu.ratio4.icon.spr = 1301, 3       ;Ikemen feature
+p2.teammenu.ratio4.icon.offset = 309, 158   ;Ikemen feature
+p2.teammenu.ratio4.icon.facing = 1         ;Ikemen feature
+p2.teammenu.ratio4.icon.scale = 0.40, 0.40 ;Ikemen feature
+p2.teammenu.ratio5.icon.spr = 1301, 4       ;Ikemen feature
+p2.teammenu.ratio5.icon.offset = 309, 158   ;Ikemen feature
+p2.teammenu.ratio5.icon.facing = 1         ;Ikemen feature
+p2.teammenu.ratio5.icon.scale = 0.40, 0.40 ;Ikemen feature
+p2.teammenu.ratio6.icon.spr = 1301, 5       ;Ikemen feature
+p2.teammenu.ratio6.icon.offset = 309, 158   ;Ikemen feature
+p2.teammenu.ratio6.icon.facing = 1         ;Ikemen feature
+p2.teammenu.ratio6.icon.scale = 0.40, 0.40 ;Ikemen feature
+p2.teammenu.ratio7.icon.spr = 1301, 6       ;Ikemen feature
+p2.teammenu.ratio7.icon.offset = 309, 158   ;Ikemen feature
+p2.teammenu.ratio7.icon.facing = 1         ;Ikemen feature
+p2.teammenu.ratio7.icon.scale = 0.40, 0.40 ;Ikemen feature
+
+teammenu.itemname.single = Single ;Ikemen feature
+teammenu.itemname.simul = Simul   ;Ikemen feature
+teammenu.itemname.tag = Tag       ;Ikemen feature
+teammenu.itemname.turns = Turns   ;Ikemen feature
+teammenu.itemname.ratio = Ratio   ;Ikemen feature
+
+[SelectBGdef]
+[SelectBG s01]	;
+	type  = normal
+	layerno = 1
+	start = -26, 18	;start = -77, 18
+	mask = 1
+				spriteno = 600,1
+
+[SelectBG s02]	;
+	type  = normal
+	layerno = 1
+	start = -26, 29
+	mask = 1
+				spriteno = 600,2
+
+[SelectBG s03]	;
+	type  = normal
+	layerno = 1
+	start = -26, 40
+	mask = 1
+				spriteno = 600,3
+
+[SelectBG s04]	;
+	type  = normal
+	layerno = 1
+	start = -26, 51
+	mask = 1
+				spriteno = 600,4
+
+[SelectBG s05]	;
+	type  = normal
+	layerno = 1
+	start = -26, 62
+	mask = 1
+				spriteno = 600,5
+
+[SelectBG s06]	;
+	type  = normal
+	layerno = 1
+	start = -26, 73
+	mask = 1
+				spriteno = 600,6
+
+[SelectBG s07]	;
+	type  = normal
+	layerno = 1
+	start = -26, 84
+	mask = 1
+				spriteno = 600,7
+
+[SelectBG s08]	;
+	type  = normal
+	layerno = 1
+	start = -26, 95
+	mask = 1
+				spriteno = 600,8
+
+[SelectBG s09]	;
+	type  = normal
+	layerno = 1
+	start = -26, 106
+	mask = 1
+				spriteno = 600,9
+
+[SelectBG s10]	;
+	type  = normal
+	layerno = 1
+	start = -26, 117
+	mask = 1
+				spriteno = 600,10
+
+[SelectBG s11]	;
+	type  = normal
+	layerno = 1
+	start = -26, 128
+	mask = 1
+				spriteno = 600,11
+
+[SelectBG s12]	;
+	type  = normal
+	layerno = 1
+	start = -26, 139
+	mask = 1
+				spriteno = 600,12
+
+[SelectBG s13]	;
+	type  = normal
+	layerno = 1
+	start = -26, 150
+	mask = 1
+				spriteno = 600,13
+
+[SelectBG s14]	;
+	type  = normal
+	layerno = 1
+	start = -26, 161
+	mask = 1
+				spriteno = 600,14
+
+[SelectBG s15]	;
+	type  = normal
+	layerno = 1
+	start = -26, 172
+	mask = 1
+				spriteno = 600,15
+
+[SelectBG s16]	;
+	type  = normal
+	layerno = 1
+	start = -26, 183
+	mask = 1
+				spriteno = 600,16
+
+[SelectBG s17]	;
+	type  = normal
+	layerno = 1
+	start = -26, 194
+	mask = 1
+				spriteno = 600,17
+
+[SelectBG s18]	;
+	type  = normal
+	layerno = 1
+	start = -26, 205
+	mask = 1
+				spriteno = 600,18
+
+[SelectBG s19]	;
+	type  = normal
+	layerno = 1
+	start = -26, 216
+	mask = 1
+				spriteno = 600,19
+
+[SelectBG s20]	;
+	type  = normal
+	layerno = 1
+	start = -26, 227
+	mask = 1
+				spriteno = 600,20
+
+
+[Begin Action 700]
+	700, 0,0, 0, 55
+	700, 1,0, 0, 5
+	700, 2,0, 0, 5
+	700, 3,0, 0, 5
+	700, 4,0, 0, 5
+	700, 5,0, 0, 5
+	700, 6,0, 0, 5
+[Begin Action 701];ADD
+	700, 0,0, 0, 55,H
+	700, 1,0, 0, 5,H
+	700, 2,0, 0, 5,H
+	700, 3,0, 0, 5,H
+	700, 4,0, 0, 5,H
+	700, 5,0, 0, 5,H
+	700, 6,0, 0, 5,H
+
+
+[SelectBG 1] ;BLUE VORTEX
+type  = Anim
+actionno = 750
+layerno = 0
+start = -160,0
+
+[SelectBG 1] ;CLOUD VORTEX
+type  = Anim
+actionno = 770
+layerno = 0
+start = -160,0
+trans = add
+
+[SelectBG 1] ;CLOUD SWIVIL 4 SHISLE
+type  = Anim
+actionno = 780
+layerno = 0
+start = -160,0
+trans = add
+
+[SelectBG 1] ;BLUE SWIRL
+type = normal
+layerno = 0
+spriteno = 50,0
+start = -160,0
+mask = 0
+trans = add
+
+;=========== Marquees ===================
+
+;p1 side 
+
+[SelectBG Select Marquee - left]; Blank
+type = normal
+layerno = 0
+spriteno = 725,0
+start = -141,120
+velocity = 0,0.65
+tile = 0,1
+trans = sub;add
+
+[SelectBG Select Marquee - left]; Blank
+type = normal
+layerno = 0
+spriteno = 725,1
+start = -121,120
+velocity = 0,0.35
+tile = 0,1
+trans = sub;add
+
+[SelectBG Select Marquee - left]; Blank
+type = normal
+layerno = 0
+spriteno = 725,2
+start = -66,120
+velocity = 0,0.2
+tile = 0,1
+trans = sub;add
+
+[SelectBG Select Marquee - left]; Blank
+type = normal
+layerno = 0
+spriteno = 725,3
+start = -148,120
+velocity = 0,0.85
+tile = 0,1
+trans = add
+
+[SelectBG Select Marquee - left]; Blank
+type = normal
+layerno = 0
+spriteno = 725,4
+start = -128,120
+velocity = 0,0.5
+tile = 0,1
+trans = add
+
+;p2 side
+[SelectBG Select Marquee - left]; Blank
+type = normal
+layerno = 0
+spriteno = 725,5
+start = 141,120
+velocity = 0,-0.65
+tile = 0,1
+trans = sub;add
+
+[SelectBG Select Marquee - left]; Blank
+type = normal
+layerno = 0
+spriteno = 725,6
+start = 121,120
+velocity = 0,-0.35
+tile = 0,1
+trans = sub;add
+
+[SelectBG Select Marquee - left]; Blank
+type = normal
+layerno = 0
+spriteno = 725,2
+start = 65,120
+velocity = 0,-0.2
+tile = 0,1
+trans = sub;add
+
+[SelectBG Select Marquee - left]; Blank
+type = normal
+layerno = 0
+spriteno = 725,8
+start = 148,120
+velocity = 0,-0.85
+tile = 0,1
+trans = add
+
+[SelectBG Select Marquee - left]; Blank
+type = normal
+layerno = 0
+spriteno = 725,9
+start = 128,120
+velocity = 0,-0.5
+tile = 0,1
+trans = add
+
+[SelectBG MID LARGE] 
+type  = normal
+spriteno = 750, 0
+layerno = 0
+start = -160,0
+trans = sub
+mask = 1
+
+[SelectBG MID SMALL] 
+type  = normal
+spriteno = 750, 1
+layerno = 0
+start = -160,0
+trans = add
+mask = 1
+
+[SelectBG PortBG1]
+type = normal
+spriteno = 825,0
+layerno = 0
+start = -160, 52
+trans = add
+
+[SelectBG PortBG2]
+type = normal
+spriteno = 825,0
+layerno = 0
+start = 40, 52
+trans = add
+
+[SelectBG LABEL 1P]
+type = anim
+actionno = 801
+layerno = 0
+start = -161, 193
+
+[SelectBG LABEL 3P]
+type = anim
+actionno = 801
+layerno = 0
+start = -161, 205
+
+[SelectBG LABEL 5P]
+type = anim
+actionno = 801
+layerno = 0
+start = -161, 217
+
+[SelectBG LABEL 7P]
+type = anim
+actionno = 801
+layerno = 0
+start = -161, 229
+
+[Begin Action 801]
+800,0,0,0,1, ,A
+
+[SelectBG LABEL 2P]
+type = anim
+actionno = 802
+layerno = 0
+start = 160, 193
+[SelectBG LABEL 4P]
+type = anim
+actionno = 802
+layerno = 0
+start = 160, 205
+[SelectBG LABEL 6P]
+type = anim
+actionno = 802
+layerno = 0
+start = 160, 217
+[SelectBG LABEL 8P]
+type = anim
+actionno = 802
+layerno = 0
+start = 160, 229
+
+[Begin Action 802]
+800,0,0,0,1,H,A
+
+;------------ Lightning ---------------
+
+[SelectBG 0a] ;lightning (top right side)
+type  = anim
+actionno = 350
+layerno = 0
+start = 20,-40
+trans = add
+
+[SelectBG 0a] ;lightning (top left side)
+type  = anim
+actionno = 351
+layerno = 0
+start = -20,-40
+trans = add
+
+[SelectBG 0a] ;lightning (bottom right side)
+type  = anim
+actionno = 352
+layerno = 0
+start = 10,290
+trans = add
+
+[SelectBG 0a] ;lightning (bottom left side)
+type  = anim
+actionno = 353
+layerno = 0
+start = -10,290
+trans = add
+
+[Begin Action 750] ;BLUE VORTEX ANIMATION
+loopstart
+75,0, 0,0, 2
+75,1, 0,0, 2
+75,2, 0,0, 2
+75,3, 0,0, 2
+75,4, 0,0, 2
+75,5, 0,0, 2
+75,6, 0,0, 2
+75,7, 0,0, 2
+75,8, 0,0, 2
+75,9, 0,0, 2
+75,10, 0,0, 2
+75,11, 0,0, 2
+75,12, 0,0, 2
+75,13, 0,0, 2
+75,14, 0,0, 2
+
+[Begin Action 770]  ;CLOUD VORTEX ANIMATION
+loopstart
+77,0, 0,0, 1, ,A
+77,1, 0,0, 1, ,A
+77,2, 0,0, 1, ,A
+77,3, 0,0, 1, ,A
+77,4, 0,0, 1, ,A
+77,5, 0,0, 1, ,A
+77,6, 0,0, 1, ,A
+77,7, 0,0, 1, ,A
+77,8, 0,0, 1, ,A
+77,9, 0,0, 1, ,A
+77,10, 0,0, 1, ,A
+77,11, 0,0, 1, ,A
+77,12, 0,0, 1, ,A
+77,13, 0,0, 1, ,A
+77,14, 0,0, 1, ,A
+77,15, 0,0, 1, ,A
+77,16, 0,0, 1, ,A
+77,17, 0,0, 1, ,A
+77,18, 0,0, 1, ,A
+77,19, 0,0, 1, ,A
+77,20, 0,0, 1, ,A
+77,21, 0,0, 1, ,A
+77,22, 0,0, 1, ,A
+77,23, 0,0, 1, ,A
+77,24, 0,0, 1, ,A
+77,25, 0,0, 1, ,A
+77,26, 0,0, 1, ,A
+77,27, 0,0, 1, ,A
+77,28, 0,0, 1, ,A
+77,29, 0,0, 1, ,A
+77,30, 0,0, 1, ,A
+77,31, 0,0, 1, ,A
+77,32, 0,0, 1, ,A
+77,33, 0,0, 1, ,A
+77,34, 0,0, 1, ,A
+77,35, 0,0, 1, ,A
+77,36, 0,0, 1, ,A
+77,37, 0,0, 1, ,A
+77,38, 0,0, 1, ,A
+77,39, 0,0, 1, ,A
+
+[Begin Action 780]  ;CLOUD VORTEX ANIMATION
+loopstart
+78,0, 0,0, 3, ,A
+78,1, 0,0, 3, ,A
+78,2, 0,0, 3, ,A
+78,3, 0,0, 3, ,A
+78,4, 0,0, 3, ,A
+78,5, 0,0, 3, ,A
+78,6, 0,0, 3, ,A
+78,7, 0,0, 3, ,A
+78,8, 0,0, 3, ,A
+78,9, 0,0, 3, ,A
+78,10, 0,0, 3, ,A
+78,11, 0,0, 3, ,A
+78,12, 0,0, 3, ,A
+78,13, 0,0, 3, ,A
+78,14, 0,0, 3, ,A
+78,15, 0,0, 3, ,A
+78,16, 0,0, 3, ,A
+78,17, 0,0, 3, ,A
+78,18, 0,0, 3, ,A
+78,19, 0,0, 3, ,A
+78,20, 0,0, 3, ,A
+78,21, 0,0, 3, ,A
+78,22, 0,0, 3, ,A
+78,23, 0,0, 3, ,A
+78,24, 0,0, 3, ,A
+78,25, 0,0, 3, ,A
+78,26, 0,0, 3, ,A
+78,27, 0,0, 3, ,A
+78,28, 0,0, 3, ,A
+78,29, 0,0, 3, ,A
+78,30, 0,0, 3, ,A
+78,31, 0,0, 3, ,A
+78,32, 0,0, 3, ,A
+78,33, 0,0, 3, ,A
+78,34, 0,0, 3, ,A
+78,35, 0,0, 3, ,A
+78,36, 0,0, 3, ,A
+78,37, 0,0, 3, ,A
+78,38, 0,0, 3, ,A
+78,39, 0,0, 3, ,A
+
+[begin action 350] ; Lightning 1 (top right side)
+-1,-1,0,0,82;Blank
+350,0,0,0,2, ,A
+-1,-1,0,0,2;Blank
+350,0,0,0,2, ,A
+350,1,0,0,2, ,A
+-1,-1,0,0,2;Blank
+350,1,0,0,2, ,A
+
+[begin action 351] ; Lightning 2 (top left side)
+350,0,0,0,2,H ,A
+-1,-1,0,0,2;Blank
+350,0,0,0,2,H ,A
+350,1,0,0,2,H ,A
+-1,-1,0,0,2;Blank
+350,1,0,0,2,H ,A
+-1,-1,0,0,112;Blank
+
+[begin action 352] ; Lightning 2 (bottom right side)
+-1,-1,0,0,61;Blank
+350,0,0,0,2,V ,A
+-1,-1,0,0,2;Blank
+350,0,0,0,2,V ,A
+350,1,0,0,2,V ,A
+-1,-1,0,0,2;Blank
+350,1,0,0,2,V ,A
+-1,-1,0,0,61;Blank
+
+[begin action 353] ; Lightning 2 (bottom left side)
+-1,-1,0,0,36;Blank
+350,0,0,0,2,VH ,A
+-1,-1,0,0,2;Blank
+350,0,0,0,2,VH ,A
+350,1,0,0,2,VH ,A
+-1,-1,0,0,2;Blank
+350,1,0,0,2,VH ,A
+-1,-1,0,0,66;Blank
+
+;============== Screen Transitions ================
+
+[SelectBG 1.b1];fader
+type = normal
+layerno = 0
+spriteno = 900,0
+start = 0,0
+velocity = 0,-10
+trans = add
+tile = 1,0
+
+[SelectBG 1.b1];fader
+type = normal
+layerno = 1
+spriteno = 900,0
+start = 0,0
+velocity = 0,-25
+trans = add
+tile = 1,0
+
+;-------------------------------------------------------------------
+[VS Screen]
+fadein.time = 0
+fadeout.time = 0
+time = 660 ;590                ;Time to show screen
+;Big portraits
+;X,Y
+p1.pos =  0,11 ;0, 31	;0,0
+p1.facing = 1             ;*2001.04.01 NEW*
+p1.scale = 1,1            ;*2001.04.01 NEW*
+p1.window = 0,31,320,89
+p1.num = 1
+p1.spacing = 25, 0
+p1.padding = 0
+
+p2.pos = 320,129 ;320,151 ;322,129
+p2.facing = -1            ;*2001.04.01 NEW*
+p2.scale = 1,1          ;*2001.04.01 NEW*
+p2.window = 0,151,320,209
+p2.num = 1
+p2.spacing = -25, 0
+p2.padding = 0
+
+;Names
+p1.name.pos  =  128,70 ;115,70
+p1.name.font =   4,0,1
+p1.name.num = 2
+p1.name.scale = 1.0, 1.0
+p2.name.pos  = 191,190 ;205,190
+p2.name.font =   4,0,-1
+p2.name.layerno = 1
+p2.name.num = 2
+p2.name.scale = 1.0, 1.0
+
+;-----------------------
+;VS Match up screen background
+[VersusBGdef] 
+
+[VersusBG 1] ;RED HAIL
+type  = Anim
+actionno = 2050
+layerno = 0
+start = -160,31
+
+[VersusBG 1] ;BLUE HAIL
+type  = Anim
+actionno = 2060
+layerno = 0
+start = -160,151
+
+;[VersusBG 1] ;BLUE HAIL cover up
+;type  = Anim
+;actionno = 2040
+;layerno = 1
+;start = -160,151	
+
+[VersusBG 1] ;RED ARROW
+type = normal
+layerno = 0
+spriteno = 208,0
+start = -160,31
+mask = 1
+trans = add
+
+;[VersusBG 1] ;RED SPACER
+;type = normal
+;layerno = 0
+;spriteno = 208,1
+;start = -40,31
+
+[VersusBG 1] ;BLUE ARROW
+type = normal
+layerno = 0
+spriteno = 209,0
+start = -50,151 ;-40,151
+mask = 1
+trans = add
+
+;[VersusBG 1] ;BLUE SPACER
+;type = normal
+;layerno = 0
+;spriteno = 209,1
+;start = 32,151
+
+[VersusBG 1] ;BLACK BARS
+;type  = normal
+;spriteno = 210,2
+;layerno = 1 ; Front
+;start = 0,0
+;mask = 1
+type  = Anim
+actionno = 210
+layerno = 1 ; Front
+start = 0,0
+mask = 1
+
+[VersusBG 3] ;VS Logo
+type  = Anim
+actionno = 200
+layerno = 1 ; Front
+start = -160,90
+mask = 1
+
+[Begin Action 2050] ;RED HAIL
+loopstart
+205,0, 0,0, 2
+205,1, 0,0, 2
+205,2, 0,0, 2
+205,3, 0,0, 2
+205,4, 0,0, 2
+205,5, 0,0, 2
+205,6, 0,0, 2
+205,7, 0,0, 2
+205,8, 0,0, 2
+205,9, 0,0, 2
+205,10, 0,0, 2
+205,11, 0,0, 2
+205,12, 0,0, 2
+205,13, 0,0, 2
+205,14, 0,0, 2
+
+[Begin Action 2060] ;BLUE HAIL
+loopstart
+206,0, 0,0,2
+206,1, 0,0,2
+206,2, 0,0,2
+206,3, 0,0,2
+206,4, 0,0,2
+206,5, 0,0,2
+206,6, 0,0,2
+206,7, 0,0,2
+206,8, 0,0,2
+206,9, 0,0,2
+206,10, 0,0,2
+206,11, 0,0,2
+206,12, 0,0,2
+206,13, 0,0,2
+206,14, 0,0,2
+
+[Begin Action 2040] ;BLUE HAIL
+loopstart
+204,0, 0,0,2
+204,1, 0,0,2
+204,2, 0,0,2
+204,3, 0,0,2
+204,4, 0,0,2
+204,5, 0,0,2
+204,6, 0,0,2
+204,7, 0,0,2
+204,8, 0,0,2
+204,9, 0,0,2
+204,10, 0,0,2
+204,11, 0,0,2
+204,12, 0,0,2
+204,13, 0,0,2
+204,14, 0,0,2
+
+[Begin Action 210] ;BLACK BARS ANIMATION
+210,1, 0,0, 13
+;210,15, 0,0, 13
+;;;;;;;;;;;;;;;210,0, 0,0, 30
+;210,14, 0,0, 15
+210,1, 0,0, 30
+210,2, 0,0, 3
+210,3, 0,0, 3
+210,4, 0,0, 3
+210,5, 0,0, 3
+210,6, 0,0, 3
+210,7, 0,0, 3
+210,8, 0,0, 3
+210,9, 0,0,-1
+
+[Begin Action 200] ;VS ANIMATION
+199,0, 0,0, 60
+200,0, 0,0, 2
+200,0, 0,0, 2
+200,1, 0,0, 2
+200,2, 0,0, 2
+200,3, 0,0, 2
+200,4, 0,0, 2
+200,5, 0,0, 2
+200,6, 0,0, 2
+200,7, 0,0, 2
+200,8, 0,0, 2
+200,9, 0,0, 2
+200,10, 0,0, 2
+200,11, 0,0, 2
+200,12, 0,0, 2
+200,13, 0,0, 2
+200,14, 0,0, 2
+200,15, 0,0, 2
+200,16, 0,0, 2
+200,17, 0,0, 2
+200,18, 0,0, 2
+200,19, 0,0, 2
+200,20, 0,0, 2
+200,21, 0,0, 2
+200,22, 0,0, 2
+200,23, 0,0, -1
+
+;-------------------------------------------------------------------
+;Demo mode definition
+;Whole group is *2001.04.01 NEW*
+[Demo Mode]
+enabled = 1               ;Set to 1 to enable demo mode, 0 to disable
+title.waittime = 600      ;Time to wait at title before starting demo mode
+fight.endtime = 1500      ;Time to display the fight before returning to title
+fight.playbgm = 1         ;Set to 1 to enable in-fight BGM, 0 to disable
+fight.bars.display = 0    ;Set to 1 to display lifebar, 0 to disable
+intro.waitcycles = 1      ;Cycles to wait before intro cutscene is played again
+debuginfo = 0             ;Set to 0 to hide debugging info (debug mode only)
+
+;-------------------------------------------------------------------
+;Continue screen definition
+;Whole group is *2001.04.01 NEW*
+[Continue Screen]
+enabled = 1               ;Set to 1 to show continue screen, 0 to disable
+legacymode.enabled = 1
+sounds.enabled = 0
+pos = 160, 40
+continue.text = "Continue?"
+continue.font = "f-6x9.def", 0, 0, 255, 255, 255, -1
+continue.scale = 1.0, 1.0
+continue.offset = 0, 0
+yes.text = "Yes"
+yes.font = "f-6x9.def", 0, 0, 191, 191, 191, -1
+yes.scale = 1.0, 1.0
+yes.offset = -17, 20
+yes.active.text = "Yes"
+yes.active.font = "f-6x9.def", 0, 0, 255, 255, 255, -1
+yes.active.scale = 1.0, 1.0
+yes.active.offset = -17, 20
+no.text = "No"
+no.font = "f-6x9.def", 0, 0, 191, 191, 191, -1
+no.scale = 1.0, 1.0
+no.offset = 15, 20
+no.active.text = "No"
+no.active.font = "f-6x9.def", 0, 0, 255, 255, 255, -1
+no.active.scale = 1.0, 1.0
+no.active.offset = 15, 20
+fadein.time = 8
+fadein.col = 0, 0, 0
+fadein.anim = -1
+fadeout.time = 8
+fadeout.col = 0, 0, 0
+fadeout.anim = -1
+p1.state = 5500, 5300
+p1.yes.state = 5500, 5300
+p1.no.state = 5500, 5300
+
+;-------------------------------------------------------------------
+;Game over screen definition
+;Whole group is *2001.04.01 NEW*
+[Game Over Screen]
+enabled = 0               ;Set to 1 to show game over screen, 0 to disable
+storyboard = gameover.def          ;Game over storyboard filename
+
+;-------------------------------------------------------------------
+;Victory screen definition
+;This is the screen that is shown when you win a match in arcade mode.
+;It will not be displayed on the last match of arcade mode.
+[Victory Screen]
+enabled = 1
+sounds.enabled = 0        ;Ikemen feature
+time = 600                ;Time to show screen
+fadein.time = 0
+fadeout.time = 15
+;Winner's portrait and name
+p1.offset = 96,7
+p1.spr = 9000,2
+p1.facing = 1
+p1.scale = 1,1
+p1.window = 0,0, 319,150
+p1.name.offset = 12,166
+p1.name.font = 4,0,1
+;Win quote text
+winquote.text = "Winner!" ;Default win quote text to show
+winquote.offset = 12,177
+winquote.spacing = 0, 0   ;Ikemen feature
+winquote.font = 5,0,1
+winquote.window = 12,170, 308,230
+winquote.textwrap = w     ;Word wrap
+winquote.delay = 2        ;Ikemen feature
+winquote.time = 0         ;Ikemen feature
+
+;-----------------------
+;Victory screen background
+[VictoryBGdef]
+
+[VictoryBG 1] ;BLUE VORTEX
+type  = Anim
+actionno = 750
+layerno = 0
+start = -160,0
+
+[VictoryBG 1] ;CLOUD VORTEX
+type  = Anim
+actionno = 770
+layerno = 0
+start = -160,0
+trans = add
+
+[VictoryBG 1] ;CLOUD SWIVIL 4 SHISLE
+type  = Anim
+actionno = 780
+layerno = 0
+start = -160,0
+trans = add
+
+[VictoryBG 1] ;BLUE SWIRL
+type = normal
+layerno = 0
+spriteno = 50,0
+start = -160,0
+mask = 0
+trans = add
+
+;------------ Lightning ---------------
+
+[VictoryBG 0a] ;lightning (top right side)
+type  = anim
+actionno = 350
+layerno = 0
+start = 20,-40
+trans = add
+
+[VictoryBG 0a] ;lightning (top left side)
+type  = anim
+actionno = 351
+layerno = 0
+start = -20,-40
+trans = add
+
+[VictoryBG 0a] ;lightning (bottom right side)
+type  = anim
+actionno = 352
+layerno = 0
+start = 10,290
+trans = add
+
+[VictoryBG 0a] ;lightning (bottom left side)
+type  = anim
+actionno = 353
+layerno = 0
+start = -10,290
+trans = add
+
+;--------- Victory Screen -------------
+
+[VictoryBG 2] ;MESSAGE BOX
+type = normal
+layerno = 0
+spriteno = 81,1
+start = 0,189
+trans = addalpha
+alpha = 128,256
+velocity = 0, 0
+
+;============== Screen Transitions ================
+
+[SelectBG 1.b1];fader
+type = normal
+layerno = 0
+spriteno = 900,0
+start = 0,0
+velocity = 0,-10
+trans = add
+tile = 1,0
+
+[SelectBG 1.b1];fader
+type = normal
+layerno = 1
+spriteno = 900,0
+start = 0,0
+velocity = 0,-25
+trans = add
+tile = 1,0
+
+;-------------------------------------------------------------------
+;Win screen definition
+;This is the screen that is shown when you win in arcade mode.
+;It will not be displayed if the winning character has an ending.
+[Win Screen]
+enabled = 1               ;Set to 1 to show win screen, 0 to disable *2001.04.01 NEW*
+wintext.text = "CONGURATULATIONS!!!\nBUT IS THE BATTLE\nTRULY OVER ?..."
+wintext.font = 4,0,0
+wintext.offset = 160,65
+wintext.displaytime = -1
+wintext.layerno = 2
+fadein.time = 32
+pose.time = 300
+fadeout.time = 64
+
+;-------------------------------------------------------------------
+;Game ending screen definition
+;This screen shows up after the Win Screen.
+;It will not be displayed if the winning character has an ending.
+;Whole group is *2001.04.01 NEW*
+[Default Ending]
+enabled = 0              ;Set to 1 to show credits, 0 to disable
+storyboard =             ;Default ending storyboard filename
+
+;-------------------------------------------------------------------
+;Ending credits screen definition
+;This screen shows up after the Win Screen and Ending
+;Whole group is *2001.04.01 NEW*
+[End Credits]
+enabled = 1               ;Set to 1 to show credits, 0 to disable
+storyboard = credits.def             ;Credits storyboard filename
+
+;-------------------------------------------------------------------
+;Survival mode results screen definition
+;This is the screen that is shown when you win in survival mode.
+;It will not be displayed if the winning character has an ending.
+;Whole group is *2001.11.14 NEW*
+[Survival Results Screen]
+enabled = 1
+winstext.text = Rounds survived: %i  ;Use %i for win counter
+winstext.font = 3,0,0
+winstext.offset = 159,70
+winstext.displaytime = -1
+winstext.layerno = 2
+fadein.time = 32
+show.time = 300
+fadeout.time = 64
+roundstowin = 10          ;Number of rounds to get win pose (lose pose otherwise)
+
+;-------------------------------------------------------------------
+[Time Attack Results Screen] ;Ikemen feature
+enabled = 1
+fadein.time = 0
+fadeout.time = 64
+show.time = 300
+winstext.text = "Clear Time: %m:%s.%x"
+winstext.font = 3,0,0
+winstext.offset = 159,70
+winstext.displaytime = -1
+winstext.layerno = 2
+
+;-------------------------------------------------------------------
+;Options screen definition
+[Option Info]
+fadein.time = 0
+fadeout.time = 0
+cursor.move.snd = 100,0
+cursor.done.snd = 100,1
+cancel.snd = 100,2
+
+;-------------------
+;Options screen background
+[OptionBGdef] 
+
+[OptionBG 1] ;COMIX STRIP
+type  = normal
+layerno = 0
+spriteno = 500,0
+start = -160,0
+tile  = 1,0
+velocity = -1,0
+
+;------------ Lightning ---------------
+
+[OptionBG 0a] ;lightning (top right side)
+type  = anim
+actionno = 350
+layerno = 0
+start = 20,-40
+trans = add
+
+[OptionBG 0a] ;lightning (top left side)
+type  = anim
+actionno = 351
+layerno = 0
+start = -20,-40
+trans = add
+
+[OptionBG 0a] ;lightning (bottom right side)
+type  = anim
+actionno = 352
+layerno = 0
+start = 10,290
+trans = add
+
+[OptionBG 0a] ;lightning (bottom left side)
+type  = anim
+actionno = 353
+layerno = 0
+start = -10,290
+trans = add
+
+[OptionBG 1] ;MIST
+type  = normal
+spriteno = 340,0
+layerno = 0
+start = -160,0
+tile  = 1,0
+velocity=-0.5
+trans = sub
+
+[OptionBG 1] ;MIST
+type  = normal
+spriteno = 340,1
+layerno = 0
+start = -160,0
+tile  = 1,0
+velocity=0.5
+trans = sub
+
+[OptionBG 1] ;BLUE SWIRL
+type = normal
+layerno = 0
+spriteno = 50,0
+start = -160,0
+mask = 0
+trans = add
+
+[begin action 350] ; Lightning 1 (top right side)
+-1,-1,0,0,70;Blank
+350,0,0,0,3, ,A
+-1,-1,0,0,3;Blank
+350,0,0,0,3, ,A
+350,1,0,0,3, ,A
+-1,-1,0,0,3;Blank
+350,1,0,0,3, ,A
+
+[begin action 351] ; Lightning 2 (top left side)
+350,0,0,0,3,H ,A
+-1,-1,0,0,3;Blank
+350,0,0,0,3,H ,A
+350,1,0,0,3,H ,A
+-1,-1,0,0,3;Blank
+350,1,0,0,3,H ,A
+-1,-1,0,0,100;Blank
+
+[begin action 352] ; Lightning 2 (bottom right side)
+-1,-1,0,0,55;Blank
+350,0,0,0,3,V ,A
+-1,-1,0,0,3;Blank
+350,0,0,0,3,V ,A
+350,1,0,0,3,V ,A
+-1,-1,0,0,3;Blank
+350,1,0,0,3,V ,A
+-1,-1,0,0,55;Blank
+
+[begin action 353] ; Lightning 2 (bottom left side)
+-1,-1,0,0,30;Blank
+350,0,0,0,3,VH ,A
+-1,-1,0,0,3;Blank
+350,0,0,0,3,VH ,A
+350,1,0,0,3,VH ,A
+-1,-1,0,0,3;Blank
+350,1,0,0,3,VH ,A
+-1,-1,0,0,60;Blank
+
+;============== Screen Transitions ================
+
+[OptionBG 1.b1];fader
+type = normal
+layerno = 0
+spriteno = 900,0
+start = 0,0
+velocity = 0,-10
+trans = add
+tile = 1,0
+
+[OptionBG 1.b1];fader
+type = normal
+layerno = 1
+spriteno = 900,0
+start = 0,0
+velocity = 0,-25
+trans = add
+tile = 1,0
+;-------------------------------------------------------------------
+;Replay select screen definition
+[Replay Info] ;Ikemen feature
+fadein.time = 0
+fadein.col = 0, 0, 0
+fadeout.time = 0
+fadeout.col = 0, 0, 0
+title.offset = 159, 15
+title.font = 2,0,0
+title.scale = 1.0, 1.0
+title.text = "REPLAY SELECT"
+menu.uselocalcoord = 0
+menu.pos = 85, 33
+menu.item.offset = 0, 0
+menu.item.font = 2,0,1, 191,191,191
+menu.item.scale = 1.0, 1.0
+menu.item.active.offset = 0, 0
+menu.item.active.font = 2,0,1
+menu.item.active.scale = 1.0, 1.0
+menu.item.spacing = 0, 14
+;menu.window.margins.y = 0, 0
+menu.window.visibleitems = 13
+menu.boxcursor.visible = 1
+menu.boxcursor.coords = -5, -10, 154, 3
+menu.boxcursor.col = 255, 255, 255
+menu.boxcursor.alpharange = 10, 40, 2, 255, 255, 0
+menu.boxbg.visible = 1
+menu.boxbg.col = 0, 0, 0
+menu.boxbg.alpha = 20, 100
+;menu.arrow.up.anim =
+menu.arrow.up.spr = 400, 0
+menu.arrow.up.offset = 368, -7
+menu.arrow.up.facing = 1
+menu.arrow.up.scale = 0.5, 0.5
+;menu.arrow.down.anim =
+menu.arrow.down.spr = 401, 0
+menu.arrow.down.offset = 368, 385
+menu.arrow.down.facing = 1
+menu.arrow.down.scale = 0.5, 0.5
+menu.title.uppercase = 1
+cursor.move.snd = 100, 0
+cursor.done.snd = 100, 1
+cancel.snd = 100, 2
+menu.itemname.back = "Back"
+
+;-------------------
+;Replay select screen background
+[ReplayBGdef] ;Ikemen feature
+
+[ReplayBG 1] ;COMIX STRIP
+type  = normal
+layerno = 0
+spriteno = 500,0
+start = -160,0
+tile  = 1,0
+velocity = -1,0
+
+;------------ Lightning ---------------
+
+[ReplayBG 0a] ;lightning (top right side)
+type  = anim
+actionno = 350
+layerno = 0
+start = 20,-40
+trans = add
+
+[ReplayBG 0a] ;lightning (top left side)
+type  = anim
+actionno = 351
+layerno = 0
+start = -20,-40
+trans = add
+
+[ReplayBG 0a] ;lightning (bottom right side)
+type  = anim
+actionno = 352
+layerno = 0
+start = 10,290
+trans = add
+
+[ReplayBG 0a] ;lightning (bottom left side)
+type  = anim
+actionno = 353
+layerno = 0
+start = -10,290
+trans = add
+
+[ReplayBG 1] ;MIST
+type  = normal
+spriteno = 340,0
+layerno = 0
+start = -160,0
+tile  = 1,0
+velocity=-0.5
+trans = sub
+
+[ReplayBG 1] ;MIST
+type  = normal
+spriteno = 340,1
+layerno = 0
+start = -160,0
+tile  = 1,0
+velocity=0.5
+trans = sub
+
+[ReplayBG 1] ;BLUE SWIRL
+type = normal
+layerno = 0
+spriteno = 50,0
+start = -160,0
+mask = 0
+trans = add
+
+;============== Screen Transitions ================
+
+[ReplayBG 1.b1];fader
+type = normal
+layerno = 0
+spriteno = 900,0
+start = 0,0
+velocity = 0,-10
+trans = add
+tile = 1,0
+
+[ReplayBG 1.b1];fader
+type = normal
+layerno = 1
+spriteno = 900,0
+start = 0,0
+velocity = 0,-25
+trans = add
+tile = 1,0
+
+;-------------------------------------------------------------------
+;Challenger definition
+[Challenger Info] ;Ikemen feature
+enabled = 1
+fadein.time = 0
+fadein.col = 0, 0, 0
+;fadein.anim = 
+fadeout.time = 15
+fadeout.col = 0, 0, 0
+;fadeout.anim = 
+time = 200
+pause.time = 0 ;Time to wait before pausing characters and background
+snd.time = 0
+snd = 500,0
+text.text = "Here Comes A New Challenger!!"
+text.offset = 160, 120
+text.font = 4,0,0
+text.scale = 1.0, 1.0
+text.displaytime = 0
+text.layerno = 2
+;overlay.window = 0, 0, 320, 240
+overlay.col = 0, 0, 0
+overlay.alpha = 20, 100
+
+;-------------------------------------------------------------------
+;Dialogue definition
+[Dialogue Info] ;Ikemen feature
+enabled = 1
+starttime = 30
+endtime = 60
+switchtime = 30
+skiptime = 30
+key.skip = "a"
+key.cancel = "b&c&x&y&z&s"
+p1.bg.anim = 1700
+;p1.bg.spr = 
+p1.bg.offset = 0, 32
+p1.bg.facing = 1
+p1.bg.scale = 1.0, 1.0
+p2.bg.anim = 1701
+;p2.bg.spr = 
+p2.bg.offset = 0, 144
+p2.bg.facing = 1
+p2.bg.scale = 1.0, 1.0
+p1.face.spr = 9000,3
+p1.face.offset = 0, 96
+p1.face.facing = 1
+p1.face.scale = 1.0, 1.0
+;p1.face.window = 0, 0, 320, 240
+p2.face.spr = 9000,3
+p2.face.offset = 320, 208
+p2.face.facing = -1
+p2.face.scale = 1.0, 1.0
+;p2.face.window = 0, 0, 320, 240
+p1.name.offset = 90, 45
+p1.name.font = 2,0,1
+p1.name.scale = 1.0, 1.0
+p2.name.offset = 10, 157
+p2.name.font = 2,0,1
+p2.name.scale = 1.0, 1.0
+p1.text.offset = 90, 59
+p1.text.font = 2,0,1
+p1.text.scale = 1.0, 1.0
+p1.text.spacing = 0, 0
+p1.text.delay = 3
+p1.text.textwrap = w
+p1.text.window = 90,32, 300,96
+p2.text.offset = 10, 171
+p2.text.font = 2,0,1
+p2.text.scale = 1.0, 1.0
+p2.text.spacing = 0, 0
+p2.text.delay = 3
+p2.text.textwrap = w
+p2.text.window = 10,144, 220,208
+
+[Begin Action 1700]
+1700,0, -320,0, 1, ,AS192D64
+1700,0, -300,0, 1, ,AS192D64
+1700,0, -280,0, 1, ,AS192D64
+1700,0, -260,0, 1, ,AS192D64
+1700,0, -240,0, 1, ,AS192D64
+1700,0, -220,0, 1, ,AS192D64
+1700,0, -200,0, 1, ,AS192D64
+1700,0, -180,0, 1, ,AS192D64
+1700,0, -160,0, 1, ,AS192D64
+1700,0, -140,0, 1, ,AS192D64
+1700,0, -120,0, 1, ,AS192D64
+1700,0, -100,0, 1, ,AS192D64
+1700,0, -80,0, 1, ,AS192D64
+1700,0, -60,0, 1, ,AS192D64
+1700,0, -40,0, 1, ,AS192D64
+1700,0, -20,0, 1, ,AS192D64
+1700,0, 0,0, -1, ,AS192D64
+
+[Begin Action 1701]
+1700,0, 320,0, 1, ,AS192D64
+1700,0, 300,0, 1, ,AS192D64
+1700,0, 280,0, 1, ,AS192D64
+1700,0, 260,0, 1, ,AS192D64
+1700,0, 240,0, 1, ,AS192D64
+1700,0, 220,0, 1, ,AS192D64
+1700,0, 200,0, 1, ,AS192D64
+1700,0, 180,0, 1, ,AS192D64
+1700,0, 160,0, 1, ,AS192D64
+1700,0, 140,0, 1, ,AS192D64
+1700,0, 120,0, 1, ,AS192D64
+1700,0, 100,0, 1, ,AS192D64
+1700,0, 80,0, 1, ,AS192D64
+1700,0, 60,0, 1, ,AS192D64
+1700,0, 40,0, 1, ,AS192D64
+1700,0, 20,0, 1, ,AS192D64
+1700,0, 0,0, -1, ,AS192D64
+
+;-------------------------------------------------------------------
+;Hiscore definition
+[Hiscore Info] ;Ikemen feature
+enabled = 1
+fadein.time = 0
+fadein.col = 0, 0, 0
+;fadein.anim = 
+fadeout.time = 0
+fadeout.col = 0, 0, 0
+;fadeout.anim = 
+time = 360
+pos = 0, 0
+title.offset = 160, 28
+title.font = 4,0,0
+title.scale = 1.0, 1.0
+title.text = "Ranking %s"
+title.uppercase = 0
+title.rank.offset = 35, 50
+title.rank.font = 5,0,0
+title.rank.scale = 1.0, 1.0
+title.rank.text = "Rank"
+title.data.offset = 112, 50
+title.data.font = 5,0,0
+title.data.scale = 1.0, 1.0
+title.data.text = "Result"
+title.name.offset = 186, 50
+title.name.font = 5,0,0
+title.name.scale = 1.0, 1.0
+title.name.text = "Name"
+title.face.offset = 258, 50
+title.face.font = 5,0,0
+title.face.scale = 1.0, 1.0
+title.face.text = "Character"
+item.offset = 0, 0
+item.spacing = 0, 0
+item.rank.offset = 42, 70
+item.rank.font = 4,0,-1
+item.rank.scale = 1.0, 1.0
+item.rank.spacing = 0, 6
+item.rank.text = "%sth"
+item.rank.1.text = "%sst"
+item.rank.2.text = "%snd"
+item.rank.3.text = "%srd"
+item.rank.active.font = 4,0,-1, 191,191,191
+item.rank.active.scale = 1.0, 1.0
+item.rank.active.switchtime = 4
+item.rank.active2.font = 4,0,-1
+item.rank.active2.scale = 1.0, 1.0
+item.data.offset = 133, 70
+item.data.font = 4,0,-1
+item.data.scale = 1.0, 1.0
+item.data.spacing = 0, 6
+item.data.score.text = "%8s"
+item.data.time.text = "%m'%s''%x"
+item.data.win.text = "Round %s"
+item.data.active.font = 4,0,-1, 191,191,191
+item.data.active.scale = 1.0, 1.0
+item.data.active.switchtime = 4
+item.data.active2.font = 4,0,-1
+item.data.active2.scale = 1.0, 1.0
+item.name.offset = 175, 70
+item.name.font = 4,0,1
+item.name.scale = 1.0, 1.0
+item.name.spacing = 0, 6
+item.name.text = "%3s"
+item.name.active.font = 4,0,1, 191,191,191
+item.name.active.scale = 1.0, 1.0
+item.name.active.switchtime = 4
+item.name.active2.font = 4,0,1
+item.name.active2.scale = 1.0, 1.0
+item.name.uppercase = 1
+;item.face.anim = 
+item.face.spr = 9000, 0
+item.face.offset = 240, 61
+item.face.facing = 1
+item.face.scale = 0.5, 0.5
+;item.face.window = 0, 0, 320, 240
+item.face.num = 4
+item.face.spacing = 15, 16
+;item.face.bg.anim = 
+item.face.bg.spr = 1500,0
+item.face.bg.offset = 0, 0
+item.face.bg.facing = 1
+item.face.bg.scale = 0.5, 0.5
+;item.face.unknown.anim = 
+item.face.unknown.spr = 151,0
+item.face.unknown.offset = 0, 0
+item.face.unknown.facing = 1
+item.face.unknown.scale = 0.5, 0.5
+timer.offset = 310, 232
+timer.font = 4,0,-1
+timer.scale = 1.0, 1.0
+timer.text = "%i"
+timer.count = 30
+timer.framespercount = 60
+timer.displaytime = 10
+window.width = 300
+window.margins.y = 20, 1
+window.visibleitems = 10
+;overlay.window = 0, 0, 320, 240
+overlay.col = 0, 0, 0
+overlay.alpha = 20, 100
+move.snd = 100, 0
+done.snd = 100, 1
+cancel.snd = 100, 2
+glyphs = "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "!", "?", ".", "<", ">"
+
+;-------------------
+;Hiscore screen background
+[HiscoreBGdef] ;Ikemen feature
+
+[HiscoreBG 1] ;COMIX STRIP
+type  = normal
+layerno = 0
+spriteno = 500,0
+start = -160,0
+tile  = 1,0
+velocity = -1,0
+
+;------------ Lightning ---------------
+
+[HiscoreBG 0a] ;lightning (top right side)
+type  = anim
+actionno = 350
+layerno = 0
+start = 20,-40
+trans = add
+
+[HiscoreBG 0a] ;lightning (top left side)
+type  = anim
+actionno = 351
+layerno = 0
+start = -20,-40
+trans = add
+
+[HiscoreBG 0a] ;lightning (bottom right side)
+type  = anim
+actionno = 352
+layerno = 0
+start = 10,290
+trans = add
+
+[HiscoreBG 0a] ;lightning (bottom left side)
+type  = anim
+actionno = 353
+layerno = 0
+start = -10,290
+trans = add
+
+[HiscoreBG 1] ;MIST
+type  = normal
+spriteno = 340,0
+layerno = 0
+start = -160,0
+tile  = 1,0
+velocity=-0.5
+trans = sub
+
+[HiscoreBG 1] ;MIST
+type  = normal
+spriteno = 340,1
+layerno = 0
+start = -160,0
+tile  = 1,0
+velocity=0.5
+trans = sub
+
+[HiscoreBG 1] ;BLUE SWIRL
+type = normal
+layerno = 0
+spriteno = 50,0
+start = -160,0
+mask = 0
+trans = add
+
+;============== Screen Transitions ================
+
+[HiscoreBG 1.b1];fader
+type = normal
+layerno = 0
+spriteno = 900,0
+start = 0,0
+velocity = 0,-10
+trans = add
+tile = 1,0
+
+[HiscoreBG 1.b1];fader
+type = normal
+layerno = 1
+spriteno = 900,0
+start = 0,0
+velocity = 0,-25
+trans = add
+tile = 1,0
+
+;-------------------------------------------------------------------
+;Rank definition
+[Rank Info] ;Ikemen feature
+enabled = 0
+bars.display = 0
+snd.time = 8
+snd = 600, 0
+p1.pos = 0, 0
+p2.pos = 0, 0
+
+p1.score.offset = 45, 40
+p1.score.font = 5,0,1
+p1.score.font.scale = 0.5, 0.5
+;p1.score.font.height = -1
+p1.score.text = "SCORE: %s"
+p1.score.displaytime = 0
+p2.score.offset = 275, 40
+p2.score.font = 5,0,-1
+p2.score.font.scale = 0.5, 0.5
+;p2.score.font.height = -1
+p2.score.text = "SCORE: %s"
+p2.score.displaytime = 0
+p1.bg.anim = 600
+;p1.bg.spr = 
+p1.bg.offset = 0, 0
+p1.bg.facing = 1
+p1.bg.scale = 0.5, 0.5
+p1.bg.displaytime = 0
+p2.bg.anim = 600
+;p2.bg.spr = 
+p2.bg.offset = 320, 0
+p2.bg.facing = 1
+p2.bg.scale = 0.5, 0.5
+p2.bg.displaytime = 0
+p1.gauge.displaytime = 0
+p2.gauge.displaytime = 0
+p1.rank.displaytime = 0
+p2.rank.displaytime = 0
+p1.icon.displaytime = 0
+p2.icon.displaytime = 0
+p1.icon.spacing = 0, 0
+p2.icon.spacing = 0, 0
+
+; gauge window parameter (x1,y1,x2,y2) is used not only to set drawing space,
+; but also to define gauge range (how much meter should be filled based on match
+; result, cutting portion of the art between x1 and x2 values, if needed). Gauge
+; art must be perfectly surrounded by rectangular window box to work correctly.
+
+;p1.gauge.tech.anim = 
+p1.gauge.tech.spr = 1600,11
+p1.gauge.tech.offset = 47, 14
+p1.gauge.tech.facing = 1
+p1.gauge.tech.scale = 0.5, 0.5
+p1.gauge.tech.window = 47, 14, 124, 16
+p1.gauge.tech.ticks = 30
+p1.gauge.tech.max = 38
+;p1.gauge.attack.anim = 
+p1.gauge.attack.spr = 1600,12
+p1.gauge.attack.offset = 47, 19
+p1.gauge.attack.facing = 1
+p1.gauge.attack.scale = 0.5, 0.5
+p1.gauge.attack.window = 47, 19, 124, 22
+p1.gauge.attack.ticks = 30
+p1.gauge.attack.max = 36
+;p1.gauge.guard.anim = 
+p1.gauge.guard.spr = 1600,13
+p1.gauge.guard.offset = 47, 24
+p1.gauge.guard.facing = 1
+p1.gauge.guard.scale = 0.5, 0.5
+p1.gauge.guard.window = 47, 24, 124, 26
+p1.gauge.guard.ticks = 30
+p1.gauge.guard.max = 31
+;p1.gauge.life.anim = 
+p1.gauge.life.spr = 1600,14
+p1.gauge.life.offset = 47, 29
+p1.gauge.life.facing = 1
+p1.gauge.life.scale = 0.5, 0.5
+p1.gauge.life.window = 47, 29, 124, 31
+p1.gauge.life.ticks = 30
+p1.gauge.life.max = 30
+
+;p1.rank.1.anim = 
+p1.rank.1.spr = 1601,0
+p1.rank.1.offset = 0, 0
+p1.rank.1.facing = 1
+p1.rank.1.scale = 0.5, 0.5
+;p1.rank.2.anim = 
+p1.rank.2.spr = 1602,0
+p1.rank.2.offset = 0, 0
+p1.rank.2.facing = 1
+p1.rank.2.scale = 0.5, 0.5
+;p1.rank.3.anim = 
+p1.rank.3.spr = 1603,0
+p1.rank.3.offset = 0, 0
+p1.rank.3.facing = 1
+p1.rank.3.scale = 0.5, 0.5
+;p1.rank.4.anim = 
+p1.rank.4.spr = 1604,0
+p1.rank.4.offset = 0, 0
+p1.rank.4.facing = 1
+p1.rank.4.scale = 0.5, 0.5
+;p1.rank.5.anim = 
+p1.rank.5.spr = 1605,0
+p1.rank.5.offset = 0, 0
+p1.rank.5.facing = 1
+p1.rank.5.scale = 0.5, 0.5
+;p1.rank.6.anim = 
+p1.rank.6.spr = 1606,0
+p1.rank.6.offset = 0, 0
+p1.rank.6.facing = 1
+p1.rank.6.scale = 0.5, 0.5
+;p1.rank.7.anim = 
+p1.rank.7.spr = 1607,0
+p1.rank.7.offset = 0, 0
+p1.rank.7.facing = 1
+p1.rank.7.scale = 0.5, 0.5
+;p1.rank.8.anim = 
+p1.rank.8.spr = 1608,0
+p1.rank.8.offset = 0, 0
+p1.rank.8.facing = 1
+p1.rank.8.scale = 0.5, 0.5
+;p1.rank.9.anim = 
+p1.rank.9.spr = 1609,0
+p1.rank.9.offset = 0, 0
+p1.rank.9.facing = 1
+p1.rank.9.scale = 0.5, 0.5
+;p1.rank.10.anim = 
+p1.rank.10.spr = 1610,0
+p1.rank.10.offset = 0, 0
+p1.rank.10.facing = 1
+p1.rank.10.scale = 0.5, 0.5
+;p1.rank.11.anim = 
+p1.rank.11.spr = 1611,0
+p1.rank.11.offset = 0, 0
+p1.rank.11.facing = 1
+p1.rank.11.scale = 0.5, 0.5
+;p1.rank.12.anim = 
+p1.rank.12.spr = 1612,0
+p1.rank.12.offset = 0, 0
+p1.rank.12.facing = 1
+p1.rank.12.scale = 0.5, 0.5
+;p1.rank.13.anim = 
+p1.rank.13.spr = 1613,0
+p1.rank.13.offset = 0, 0
+p1.rank.13.facing = 1
+p1.rank.13.scale = 0.5, 0.5
+;p1.rank.14.anim = 
+p1.rank.14.spr = 1614,0
+p1.rank.14.offset = 0, 0
+p1.rank.14.facing = 1
+p1.rank.14.scale = 0.5, 0.5
+
+;p1.icon.fa.anim = 
+p1.icon.fa.spr = -1,0
+p1.icon.fa.offset = 0, 0
+p1.icon.fa.facing = 1
+p1.icon.fa.scale = 1.0, 1.0
+;p1.icon.p.anim = 
+p1.icon.p.spr = -1,0
+p1.icon.p.offset = 0, 0
+p1.icon.p.facing = 1
+p1.icon.p.scale = 1.0, 1.0
+;p1.icon.sf.anim = 
+p1.icon.sf.spr = -1,0
+p1.icon.sf.offset = 0, 0
+p1.icon.sf.facing = 1
+p1.icon.sf.scale = 1.0, 1.0
+;p1.icon.hf.anim = 
+p1.icon.hf.spr = -1,0
+p1.icon.hf.offset = 0, 0
+p1.icon.hf.facing = 1
+p1.icon.hf.scale = 1.0, 1.0
+
+;p2.gauge.tech.anim = 
+p2.gauge.tech.spr = 1600,21
+p2.gauge.tech.offset = 273, 14
+p2.gauge.tech.scale = 0.5, 0.5
+p2.gauge.tech.window = 196, 14, 273, 16
+p2.gauge.tech.ticks = 30
+p2.gauge.tech.max = 38
+;p2.gauge.attack.anim = 
+p2.gauge.attack.spr = 1600,22
+p2.gauge.attack.offset = 273, 19
+p2.gauge.attack.scale = 0.5, 0.5
+p2.gauge.attack.window = 196, 19, 273, 21
+p2.gauge.attack.ticks = 30
+p2.gauge.attack.max = 36
+;p2.gauge.guard.anim = 
+p2.gauge.guard.spr = 1600,23
+p2.gauge.guard.offset = 273, 24
+p2.gauge.guard.scale = 0.5, 0.5
+p2.gauge.guard.window = 196, 24, 273, 26
+p2.gauge.guard.ticks = 30
+p2.gauge.guard.max = 31
+;p2.gauge.life.anim = 
+p2.gauge.life.spr = 1600,24
+p2.gauge.life.offset = 273, 29
+p2.gauge.life.scale = 0.5, 0.5
+p2.gauge.life.window = 196, 29, 273, 31
+p2.gauge.life.ticks = 30
+p2.gauge.life.max = 30
+
+;p2.rank.1.anim = 
+p2.rank.1.spr = 1601,0
+p2.rank.1.offset = 276, 0
+p2.rank.1.facing = 1
+p2.rank.1.scale = 0.5, 0.5
+;p2.rank.2.anim = 
+p2.rank.2.spr = 1602,0
+p2.rank.2.offset = 276, 0
+p2.rank.2.facing = 1
+p2.rank.2.scale = 0.5, 0.5
+;p2.rank.3.anim = 
+p2.rank.3.spr = 1603,0
+p2.rank.3.offset = 276, 0
+p2.rank.3.facing = 1
+p2.rank.3.scale = 0.5, 0.5
+;p2.rank.4.anim = 
+p2.rank.4.spr = 1604,0
+p2.rank.4.offset = 276, 0
+p2.rank.4.facing = 1
+p2.rank.4.scale = 0.5, 0.5
+;p2.rank.5.anim = 
+p2.rank.5.spr = 1605,0
+p2.rank.5.offset = 276, 0
+p2.rank.5.facing = 1
+p2.rank.5.scale = 0.5, 0.5
+;p2.rank.6.anim = 
+p2.rank.6.spr = 1606,0
+p2.rank.6.offset = 276, 0
+p2.rank.6.facing = 1
+p2.rank.6.scale = 0.5, 0.5
+;p2.rank.7.anim = 
+p2.rank.7.spr = 1607,0
+p2.rank.7.offset = 276, 0
+p2.rank.7.facing = 1
+p2.rank.7.scale = 0.5, 0.5
+;p2.rank.8.anim = 
+p2.rank.8.spr = 1608,0
+p2.rank.8.offset = 276, 0
+p2.rank.8.facing = 1
+p2.rank.8.scale = 0.5, 0.5
+;p2.rank.9.anim = 
+p2.rank.9.spr = 1609,0
+p2.rank.9.offset = 276, 0
+p2.rank.9.facing = 1
+p2.rank.9.scale = 0.5, 0.5
+;p2.rank.10.anim = 
+p2.rank.10.spr = 1610,0
+p2.rank.10.offset = 276, 0
+p2.rank.10.facing = 1
+p2.rank.10.scale = 0.5, 0.5
+;p2.rank.11.anim = 
+p2.rank.11.spr = 1611,0
+p2.rank.11.offset = 276, 0
+p2.rank.11.facing = 1
+p2.rank.11.scale = 0.5, 0.5
+;p2.rank.12.anim = 
+p2.rank.12.spr = 1612,0
+p2.rank.12.offset = 276, 0
+p2.rank.12.facing = 1
+p2.rank.12.scale = 0.5, 0.5
+;p2.rank.13.anim = 
+p2.rank.13.spr = 1613,0
+p2.rank.13.offset = 276, 0
+p2.rank.13.facing = 1
+p2.rank.13.scale = 0.5, 0.5
+;p2.rank.14.anim = 
+p2.rank.14.spr = 1614,0
+p2.rank.14.offset = 276, 0
+p2.rank.14.facing = 1
+p2.rank.14.scale = 0.5, 0.5
+
+;p2.icon.fa.anim = 
+p2.icon.fa.spr = -1,0
+p2.icon.fa.offset = 0, 0
+p2.icon.fa.facing = 1
+p2.icon.fa.scale = 1.0, 1.0
+;p2.icon.p.anim = 
+p2.icon.p.spr = -1,0
+p2.icon.p.offset = 0, 0
+p2.icon.p.facing = 1
+p2.icon.p.scale = 1.0, 1.0
+;p2.icon.sf.anim = 
+p2.icon.sf.spr = -1,0
+p2.icon.sf.offset = 0, 0
+p2.icon.sf.facing = 1
+p2.icon.sf.scale = 1.0, 1.0
+;p2.icon.hf.anim = 
+p2.icon.hf.spr = -1,0
+p2.icon.hf.offset = 0, 0
+p2.icon.hf.facing = 1
+p2.icon.hf.scale = 1.0, 1.0
+
+[Begin Action 600]
+1600,0, 0,0, 1, ,AS128D128
+1600,0, 0,0, 1, ,AS136D120
+1600,0, 0,0, 1, ,AS144D112
+1600,0, 0,0, 1, ,AS152D104
+1600,0, 0,0, 1, ,AS160D96
+1600,0, 0,0, 1, ,AS168D88
+1600,0, 0,0, 1, ,AS176D80
+1600,0, 0,0, 1, ,AS184D72
+1600,0, 0,0, 1, ,AS192D64
+1600,0, 0,0, 1, ,AS200D56
+1600,0, 0,0, 1, ,AS208D48
+1600,0, 0,0, 1, ,AS216D40
+1600,0, 0,0, -1, ,AS224D32
