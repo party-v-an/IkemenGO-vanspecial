@@ -1,0 +1,12 @@
+# autogenned guck
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.log
+# don't track changes to the save folder
+save/
+Ikemen.log
