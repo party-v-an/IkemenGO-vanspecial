@@ -1,0 +1,2120 @@
+; 112200 - AI helper
+; 112210 - Stage bounds helper
+; 112220 - AI ON
+; 112230 - Attack learning
+; 112240 - Reversal learning
+; 112250 - Helper learning
+; 112260 - Projectile learning
+
+[Statedef 112200]
+Type = A
+Movetype = I
+Physics = N
+Anim = 9999
+Velset = 0,0
+Ctrl = 0
+
+;===============================
+;===== STANDARD PROCESSING =====
+;===============================
+[State ]
+type = nothitby
+trigger1 = 1
+value = SCA
+
+[State ]
+type = assertspecial
+trigger1 = 1
+flag = invisible
+flag2 = noshadow
+
+[State ]
+type = helper
+trigger1 = !NumHelper(112210)
+helpertype = normal
+name = "AI"
+stateno = 112210
+ID = 112210
+pos = 0,0
+keyctrl = 0
+pausemovetime = 99999
+supermovetime = 99999
+persistent = 0
+
+[State ]
+type = varset
+trigger1 = 1
+v = 10
+value = random
+
+[State ] ; Distance to left edge
+type = varset
+trigger1 = 1
+v = 58
+value = ceil(abs((root,pos x - pos x)-var(12)))
+
+[State ] ; Distance to right edge
+type = varset
+trigger1 = 1
+v = 59
+value = ceil(abs(var(13)-(root,pos x - pos x)))
+
+[State ] ; Distance to front edge
+type = varset
+trigger1 = 1
+v = 50
+value = ifelse(root,facing=1, var(59), var(58))
+
+[State ] ; Distance to back edge
+type = varset
+trigger1 = 1
+v = 51
+value = ifelse(root,facing=1, var(58), var(59))
+
+[State ]
+type = null
+triggerall = numenemy
+trigger1 = enemy(root,var(0)),const(size.height) > enemy(root,var(0)),const(size.head.pos.y)/-1.5
+trigger1 = 1||var(52):=floor(enemy(root,var(0)),const(size.head.pos.y)/-1.5)
+trigger2 = 1||var(52):=enemy(root,var(0)),const(size.height)
+
+[State ]
+type = varset
+trigger1 = !root,numtarget
+fv = 37
+value = 1
+
+[State ]
+type = varset
+triggerall = numenemy
+trigger1 = enemy(root,var(0)),stateno=5100
+trigger1 = enemy(root,var(0)),time=1
+fv = 37
+value = fvar(37) * enemy(root,var(0)),const(data.fall.defence_mul)
+
+[State ] ; Effective HP shorthand
+type = varset
+triggerall = numenemy
+trigger1 = 1
+v = 57
+value = enemy(root,var(0)),life*enemy(root,var(0)),const(data.defence)/root,const(data.attack)
+
+[State ] ; Health percentage shorthand
+type = varset
+triggerall = numenemy
+trigger1 = 1
+fv = 39
+value = 1.0*enemy(root,var(0)),life/enemy(root,var(0)),lifemax
+
+[State ] ; Defense shorthand
+type = varset
+triggerall = numenemy
+trigger1 = 1
+fv = 38
+value = 100/enemy(root,var(0)),const(data.defence)*ifelse(enemy(root,var(0)),statetype=a,(enemy(root,var(0)),const(data.fall.defence_mul)), 1)
+
+[State ] ; Time until enemy regains ctrl
+type = null
+triggerall = numenemy
+trigger1 = var(49)&1072693248
+trigger1 = 0&&var(49):=var(49)-1048576
+trigger2 = ((var(49)&1072693248)/1048576) != enemy(root,var(0)),gethitvar(hitshaketime) || ((var(49)&1047552)/1024) != enemy(root,var(0)),gethitvar(fall.recovertime)
+trigger2 = 0&&var(49):=enemy(root,var(0)),gethitvar(fall.recovertime) + enemy(root,var(0)),gethitvar(fall.recovertime)*1024 + enemy(root,var(0)),gethitvar(hitshaketime)*1048576
+trigger3 = var(49)&1023
+trigger3 = 1||var(49):=var(49)-1
+
+[State ] ; True enemy statetype=L
+type = varset
+triggerall = numenemy
+trigger1 = 1
+v = 55
+value = (enemy(root,var(0)),statetype=L) || ((enemy(root,var(0)),stateno=[5000,5299]) && enemy(root,var(0)),movetype=I && enemy(root,var(0)),statetype!=A)
+
+[State ] ; Base enemy hitbox width
+type = VarSet
+trigger1 = var(44)<=0
+fv = 34
+value = 30
+
+[State ] ; Base enemy hitbox height
+type = VarSet
+triggerall = numenemy
+trigger1 = var(44)<=0
+fv = 35
+value = enemy(root,var(0)),const(size.height)
+
+[State ] ; Last seen enemy hitbox width
+type = VarSet
+trigger1 = abs(p2dist x-p2bodydist x)>0
+fv = 34
+value = abs(p2dist x-p2bodydist x)
+
+[State ] ; Last seen enemy hitbox height
+type = VarSet
+trigger1 = abs(p2dist y-p2bodydist y)>0
+fv = 35
+value = abs(p2dist y-p2bodydist y)
+
+[State ] ; p2bodydist x (anti-AI killer)
+type = VarSet
+triggerall = numenemy
+trigger1 = 1
+fv = 30
+value = -root,facing*(root,pos x-enemy(root,var(0)),pos x)-fvar(34)
+
+[State ] ; p2dist x (anti-AI killer)
+type = VarSet
+triggerall = numenemy
+trigger1 = 1
+fv = 31
+value = -root,facing*(root,pos x-enemy(root,var(0)),pos x)
+
+[State ] ; p2bodydist y (anti-AI killer)
+type = VarSet
+triggerall = numenemy
+trigger1 = root,pos y<enemy(root,var(0)),pos y
+fv = 32
+value = enemy(root,var(0)),pos y-root,pos y-fvar(35)
+
+[State ] ; p2bodydist y (anti-AI killer)
+type = VarSet
+triggerall = numenemy
+trigger1 = root,pos y>=enemy(root,var(0)),pos y
+fv = 32
+value = enemy(root,var(0)),pos y-root,pos y
+
+[State ] ; p2dist y (anti-AI killer)
+type = VarSet
+triggerall = numenemy
+trigger1 = 1
+fv = 33
+value = enemy(root,var(0)),pos y-root,pos y
+
+[State ] ; p2bodydist x (standard)
+type = VarSet
+triggerall = numenemy
+trigger1 = enemy(root,var(0)),stateno!=5150 || root,p2bodydist x!=0
+fv = 30
+value = root,p2bodydist x
+
+[State ] ; p2dist x (standard)
+type = VarSet
+triggerall = numenemy
+trigger1 = enemy(root,var(0)),stateno!=5150 || root,p2dist x!=0
+fv = 31
+value = root,p2dist x
+
+[State ] ; p2bodydist y (standard)
+type = VarSet
+triggerall = numenemy
+trigger1 = enemy(root,var(0)),stateno!=5150 || root,p2bodydist y!=0
+fv = 32
+value = root,p2bodydist y
+
+[State ] ; p2dist x (standard)
+type = VarSet
+triggerall = numenemy
+trigger1 = enemy(root,var(0)),stateno!=5150 || root,p2dist y!=0
+fv = 33
+value = root,p2dist y
+
+;========================================
+;===== CHARACTER SPECIFIC PROCESSING ====
+;========================================
+[State ] ; Level processing
+type = varset
+trigger1 = 1
+v = 1
+value = (var(1)**2)*10
+
+[State ] ; Level processing
+type = varset
+trigger1 = 1
+v = 2
+value = (var(2)**2)*10
+
+[State ] ; Level processing
+type = varset
+trigger1 = 1
+v = 3
+value = (var(3)**2)*10
+
+[State ] ; Guard recommendation
+type = null
+triggerall = fvar(10):=(helper(112230),var(9)|helper(112250),var(9)|helper(112260),var(9))
+trigger1 = root,statetype!=A
+trigger1 = (floor(fvar(10))&1) && !(floor(fvar(10))&2)
+trigger1 = 1||fvar(10):=1
+trigger2 = root,statetype!=A
+trigger2 = !(floor(fvar(10))&1) && (floor(fvar(10))&2)
+trigger2 = 1||fvar(10):=2
+trigger3 = root,statetype!=A
+trigger3 = (floor(fvar(10))&1) && (floor(fvar(10))&2)
+trigger3 = 1||fvar(10):=-1
+trigger4 = root,statetype=A
+trigger4 = 1||fvar(10):=ifelse(floor(fvar(10))&4,-1,0)
+
+[State ] ; Grab learning shorthand
+type = varset
+trigger1 = 1
+fv = 11
+value = (1.0+floor(root,fvar(32)/10000.0))/(2.0+(floor(root,fvar(32))%10000))
+
+[State ] ; Grab learning
+type = null
+trigger1 = root,fvar(23)!=1
+trigger1 = 1||fvar(11):=0
+trigger2 = 1||fvar(11):=ifelse(fvar(11) > 1, 1, ifelse(fvar(11) < 0, 0, fvar(11)))
+
+[State ] ; 1200 learning shorthand
+type = varset
+trigger1 = 1
+fv = 12
+value = (1.0+floor(root,fvar(24)/10000.0))/(1.0+(floor(root,fvar(24))%10000))
+
+[State ] ; Grab learning
+type = null
+trigger1 = 1||fvar(12):=ifelse(fvar(12) > 1, 1, ifelse(fvar(12) < 0, 0, fvar(12)))
+
+;=======================
+;===== DEBUT OUTPUT ====
+;=======================
+[State ]
+type=displaytoclipboard
+trigger1 = 1
+text = "RED: %d, LED: %d, EHP: %d, BM: %d, TH: %d, ATE: %d"
+params = var(59), var(58), var(57), var(56), var(55), var(54)
+
+[State ]
+type=appendtoclipboard
+triggerall = numenemy
+trigger1 = 1
+text = "\nRND: %d, VEL: %d, Grab: %f, Guard: %d, Hit: %d"
+params = var(10), root,vel x, fvar(11), fvar(10), enemy(root,var(0)),movecontact || enemy(root,var(0)),hitpausetime
+
+;================================================================
+;========================= AI ENDS HERE =========================
+;================================================================
+
+;---------------------------------------------------------------------------
+[Statedef 112210]
+Type = A
+Movetype = I
+Physics = N
+Anim = 9999
+Velset = 20,0
+Ctrl = 0
+
+[State ]
+type = nothitby
+trigger1 = 1
+value = SCA
+
+[State ]
+type = assertspecial
+trigger1 = 1
+flag = invisible
+flag2 = noshadow
+
+[State ]
+type = turn
+trigger1 = !Time && facing = -1
+
+[State ]
+type = velset
+trigger1 = !Time
+x = 20
+
+[State ]
+type = nothitby
+trigger1 = 1
+value = SCA
+
+[State ]
+type = assertspecial
+trigger1 = 1
+flag = invisible
+flag2 = noshadow
+
+[State ]
+type = posset
+trigger1 = !Time
+x = 0
+
+[State ]
+type = parentvarset
+trigger1 = pos x < 0 && vel x = 0 && time
+var(12) = ceil(pos x)+10-ceil(parent,pos x)
+persistent = 0
+
+[State ]
+type = parentvarset
+trigger1 = pos x > 0 && vel x = 0 && time
+var(13) = ceil(pos x)-10-ceil(parent,pos x)
+persistent = 0
+
+[State ]
+type = projectile
+trigger1 = !Time
+projanim = 9999
+projhitanim = 9999
+projID = 112210
+postype = p1
+offset = 0,5000
+projpriority = 10000
+projremovetime = -1
+attr = A, AP
+damage = 0,0
+projedgebound = 99999
+projstagebound = 0
+projheightbound = -99999,99999
+hitflag =
+guardflag =
+pausetime = 0,0
+velocity = 20,0
+sparkno = -1
+sparkxy = 0,0
+hitsound = -1
+guardsound = -1
+ground.slidetime = 0
+ground.hittime = 0
+ground.velocity = 0
+persistent = 0
+
+[State ]
+type = projectile
+trigger1 = time > 0 && vel x = 0 && !root,numprojID(112210)
+projanim = 9999
+projhitanim = 9999
+projID = 112220
+offset = 0,5000
+projpriority = 10000
+projremovetime = -1
+attr = A, AP
+damage = 0,0
+projedgebound = 99999
+projstagebound = 0
+projheightbound = -99999,99999
+hitflag =
+guardflag =
+pausetime = 0,0
+velocity = -20,0
+sparkno = -1
+sparkxy = 0,0
+hitsound = -1
+guardsound = -1
+ground.slidetime = 0
+ground.hittime = 0
+ground.velocity = 0
+persistent = 0
+
+[State ]
+type = velset
+trigger1 = !root,numprojID(112220) && !root,numprojID(112210)
+x = 0
+y = 0
+
+[State ]
+type = velset
+trigger1 = time > 0 && root,numprojID(112220)
+x = -20
+persistent = 0
+
+[State ]
+type = destroyself
+trigger1 = parent,var(12) && parent,var(13) && time > 10
+ignorehitpause = 1
+
+;---------------------------------------------------------------------------
+[statedef 112220] ; AI ON
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ]
+type = nothitby
+trigger1 = 1
+value = SCA
+
+[State ]
+type = assertspecial
+trigger1 = 1
+flag = invisible
+flag2 = noshadow
+
+[State ]
+type = varadd
+trigger1 = time < 10
+var(1) = 1
+IgnoreHitPause = 1
+SuperMoveTime = 9999
+PauseMoveTime = 9999
+
+[State ]
+type = varadd
+trigger1 = time > 50
+var(1) = -1
+IgnoreHitPause = 1
+SuperMoveTime = 9999
+PauseMoveTime = 9999
+
+[State ]
+type = Explod
+trigger1 = teamside = 1
+anim = 8237
+id = 8237
+sprpriority = -5
+postype = left
+pos = 27,92
+;ontop = 1
+bindtime = -1
+ownpal = 1
+IgnoreHitPause = 1
+SuperMoveTime = 9999
+PauseMoveTime = 9999
+scale = 0.5, 0.05*var(1)
+
+[State ]
+type = Explod
+trigger1 = teamside = 2
+anim = 8237
+id = 8237
+sprpriority = -5
+postype = right
+pos = -27,92
+;ontop = 1
+bindtime = -1
+ownpal = 1
+IgnoreHitPause = 1
+SuperMoveTime = 9999
+PauseMoveTime = 9999
+scale = 0.5, 0.05*var(1)
+
+[State ]
+type = destroyself
+trigger1 = time = 60
+IgnoreHitPause = 1
+SuperMoveTime = 9999
+PauseMoveTime = 9999
+
+;---------------------------------------------------------------------------
+[Statedef 112230]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+; var(0) = state
+; var(1) = variable
+; var(3) = saved attacks
+; var(4) = save state
+; var(5) = save slot
+; var(6) = value to save
+; var(7) = variable to save to
+; var(8) = guard type last frame
+; var(9) = guard recommendation
+; var(10) = time until connect
+; var(15) = number of guard fails saved
+; var(16) = number of inactive attacks saved
+; var(17) = number of active attacks saved
+; var(18) = last frame time
+; var(19) = last frame index
+; var(20-59) = saved attacks
+
+; negative = hit confirmed
+; &2147481600/2048 = stateno, max 1048575
+; &2040/8 = hittime, max 255
+; &7 = flags, 3 bits
+
+; state 0 -> initialisation, load
+; state 1 -> guard break/contact detection
+; state 2 -> search for current state
+; state 3 -> guard recommendation
+; state 4 -> save logic
+; state 9 -> prepare for next frame
+
+; LOAD ATTACK DATA START
+[State ]
+type = null
+triggerall = teammode != turns
+trigger1 = 0
+; LOAD ATTACK DATA END
+
+[State ]
+type = selfstate
+trigger1 = 1||var(3):=var(3)+19
+value = 112239
+
+;---------------------------------------------------------------------------
+[Statedef 112231]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ] ; Contact confirmation
+type = null
+triggerall = numenemy
+triggerall = var(19)
+triggerall = var(var(19))>0
+triggerall = root,fvar(23)!=2
+trigger1 = enemy(root,var(0)),movecontact || enemy(root,var(0)),hitpausetime || (root,movetype=H && !root,gethitvar(guarded) && enemy(root,var(0)),stateno!=floor((var(var(19))&2147481600)/2048))
+trigger1 = 1||var(var(19)):=(var(var(19))|-2147481608)
+trigger2 = floor((var(var(19))&2040)/8) = [1,254]
+trigger2 = 1||var(var(19)):=var(var(19))+8
+
+[State ] ; Contact time set
+type = null
+triggerall = numenemy
+triggerall = var(19)
+triggerall = root,fvar(23)!=2
+trigger1 = enemy(root,var(0)),movecontact || enemy(root,var(0)),hitpausetime || (root,movetype=H && !root,gethitvar(guarded) && enemy(root,var(0)),stateno!=floor((var(var(19))&2147481600)/2048))
+trigger1 = floor((var(var(19))&2040)/8)>var(18)
+trigger1 = 1||var(var(19)):=((var(var(19))&-2041)|(var(18)*8))
+
+[State ] ; Guard flag set
+type = null
+triggerall = numenemy
+triggerall = var(19)
+triggerall = var(8)
+trigger1 = enemy(root,var(0)),movehit=1 || (root,movetype=H && !root,gethitvar(guarded) && enemy(root,var(0)),stateno!=floor((var(var(19))&2147481600)/2048))
+trigger1 = 1||var(var(19)):=(var(var(19))|var(8))
+
+[State ] ; Clear current index if necessary
+type = null
+triggerall = numenemy
+trigger1 = var(19)
+trigger1 = enemy(root,var(0)),stateno != floor((var(var(19))&2147481600)/2048)
+trigger1 = 1||var(19):=0
+
+[State ] ; Detect when to match
+type = null
+triggerall = numenemy
+trigger1 = enemy(root,var(0)),movetype=A
+trigger1 = enemy(root,var(0)),stateno<=1048575
+trigger1 = 1||var(1):=20
+trigger1 = 1||var(0):=var(0)+1
+trigger2 = 1||var(0):=var(0)+2
+
+[State 0, DestroySelf]
+type = DestroySelf
+trigger1 = !numenemy
+
+[State ]
+type = selfstate
+trigger1 = 1; roundstate = 2 ;1
+value = 112230 + var(0)
+
+;---------------------------------------------------------------------------
+[Statedef 112232]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ] ; Match or store
+type = null
+triggerall = numenemy
+trigger1 = var(1)<=var(3)
+trigger1 = enemy(root,var(0)),stateno = floor((var(var(1))&2147481600)/2048)
+trigger1 = 1||var(19):=var(1)
+trigger1 = 1||var(0):=var(0)+1
+trigger2 = var(1)<=var(3) && var(1)<59
+trigger2 = 1||var(1):=var(1)+1
+trigger3 = var(3)<59
+trigger3 = 1||var(var(1)):=enemy(root,var(0)),stateno*2048+8
+trigger3 = 1||var(19):=var(1)
+trigger3 = 1||var(3):=var(3)+1
+trigger3 = 1||var(0):=var(0)+1
+trigger4 = 1||var(0):=var(0)+1
+
+[State ]
+type = selfstate
+trigger1 = 1; roundstate = 2 ;1
+value = 112230 + var(0)
+
+;---------------------------------------------------------------------------
+[Statedef 112233]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ] ; Reset
+type = null
+trigger1 = 1||var(9):=0
+trigger1 = 1||var(10):=0
+
+[State ] ; Store additional data
+type = null
+triggerall = numenemy
+triggerall = var(19)
+trigger1 = var(var(19))<0
+trigger1 = 1||var(10):=floor((var(var(19))&2040)/8)-enemy(root,var(0)),time
+trigger2 = floor((var(var(19))&2040)/8) = 255
+trigger2 = 1||var(10):=-999
+
+[State ] ; Guard recommendation
+type = null
+triggerall = var(19)
+triggerall = 1||var(9):=(var(var(19))&7)
+trigger1 = root,statetype!=A
+trigger1 = (var(9)&1) && !(var(9)&2)
+trigger1 = 1||var(9):=2
+trigger2 = root,statetype!=A
+trigger2 = (var(9)&2) && !(var(9)&1)
+trigger2 = 1||var(9):=1
+trigger3 = root,statetype!=A
+trigger3 = (var(9)&2) && (var(9)&1)
+trigger3 = 1||var(9):=-1
+trigger4 = root,statetype=A
+trigger4 = 1||var(9):=ifelse(var(9)&4,-1,0)
+
+[State ]
+type = selfstate
+trigger1 = 1||var(0):=var(0)+1
+trigger1 = 1||var(1):=20
+trigger1 = 1||var(4):=0
+trigger1 = 1||var(5):=0
+trigger1 = 1||var(15):=0
+trigger1 = 1||var(16):=0
+trigger1 = 1||var(17):=0
+value = 112230 + var(0)
+
+;---------------------------------------------------------------------------
+[Statedef 112234]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ]
+type = null
+triggerall = 1||var(6):=0
+triggerall = 1||var(7):=-1
+trigger1 = var(4)=0
+trigger1 = var(var(1))&7
+trigger1 = 1||var(6):=var(var(1))
+trigger1 = 1||var(15):=var(15)+1
+trigger2 = var(4)=1
+trigger2 = !(var(var(1))&7)
+trigger2 = var(var(1))<0
+trigger2 = 1||var(6):=var(var(1))
+trigger2 = 1||var(16):=var(16)+1
+trigger3 = var(4)=2
+trigger3 = var(var(1))>0
+trigger3 = 1||var(6):=var(var(1))
+trigger3 = 1||var(17):=var(17)+1
+
+; SAVE ATTACK DATA START
+[State ]
+type = null
+triggerall = var(6) && var(5)<11
+trigger1 = 0
+; SAVE ATTACK DATA END
+
+[State ]
+type = parentvarset
+trigger1 = var(6) && var(7)=[0,59]
+trigger1 = 1||var(5):=var(5)+1
+var(var(7)) = var(6)
+
+[State ]
+type = selfstate
+trigger1 = var(1)<var(3)
+trigger1 = 1||var(1):=var(1)+1
+trigger2 = var(4)<2
+trigger2 = 1||var(1):=20
+trigger2 = 1||var(4):=var(4)+1
+trigger3 = 1||var(0):=9
+value = 112230 + var(0)
+
+;---------------------------------------------------------------------------
+[Statedef 112239]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ]
+type = null
+triggerall = time
+trigger1 = 1||var(0):=1
+
+[State ]
+type = selfstate
+trigger1 = time
+value = 112230 + var(0)
+
+[State ]
+type = null
+triggerall = numenemy
+trigger1 = 1||var(18):=enemy(root,var(0)),time
+
+[State ]
+type = null
+trigger1 = root,stateno!=[120,155]
+trigger1 = 1||var(8):=0
+trigger2 = root,statetype=S
+trigger2 = 1||var(8):=1
+trigger3 = root,statetype=C
+trigger3 = 1||var(8):=2
+trigger4 = root,statetype=A
+trigger4 = 1||var(8):=4
+
+[State ]
+type = nothitby
+trigger1 = 1
+value = SCA
+
+[State ]
+type = assertspecial
+trigger1 = 1
+flag = invisible
+flag2 = noshadow
+
+[State ]
+type = displaytoclipboard
+trigger1 = 1
+text="Saved guard: %d, Saved active: %d, Saved inactive: %d, Recommendation: %d, Time: %d, Current: %d"
+params=var(15), var(16), var(17), var(9), var(10), var(var(19))
+
+[State ]
+type = appendtoclipboard
+trigger1 = 1
+text="\n%d, %d, %d, %d, %d, %d"
+params=var(20), var(21), var(22), var(23), var(24), var(25)
+
+;---------------------------------------------------------------------------
+[Statedef 112240]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+; var(0) = state
+; var(1) = variable
+; var(3) = saved reversals
+; var(8) = attack attributes
+; var(9) = reversal recommendation
+; var(20-59) = saved reversals
+
+; &2147483584/64 = stateno, max 33554431
+; &63 = flags, 6 bits
+
+; state 0 -> initialisation, load
+; state 1 -> state identification
+; state 2 -> reversal storage
+; state 3 -> reversal matching
+; state 4 -> reversal recommendation
+; state 9 -> save, prepare for next frame
+
+; LOAD REVERSAL DATA START
+[State ]
+type = null
+triggerall = teammode != turns
+trigger1 = 0
+; LOAD REVERSAL DATA END
+
+[State ]
+type = selfstate
+trigger1 = 1||var(3):=var(3)+19
+value = 112249
+
+;---------------------------------------------------------------------------
+[Statedef 112241]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ]
+type = null
+trigger1 = root,movereversed=2
+trigger1 = 1||var(0):=var(0)+1
+trigger2 = 1||var(0):=var(0)+2
+
+[State ]
+type = selfstate
+trigger1 = 1||var(1):=20
+value = 112240 + var(0)
+
+;---------------------------------------------------------------------------
+[Statedef 112242]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ]
+type = null
+trigger1 = var(1)<=var(3)
+trigger1 = var(18) = floor((var(var(1))&2147483584)/64)
+trigger1 = 1||var(var(1)):=(var(var(1))|var(8))
+trigger1 = 1||var(0):=var(0)+1
+trigger2 = var(1)<=var(3) && var(3)<59
+trigger2 = 1||var(1):=var(1)+1
+trigger3 = var(3)<59
+trigger3 = 1||var(var(1)):=var(18)*64+var(8)
+trigger3 = 1||var(3):=var(3)+1
+trigger3 = 1||var(0):=var(0)+1
+trigger4 = 1||var(0):=var(0)+1
+
+[State ]
+type = selfstate
+trigger1 = 112240 + var(0) = stateno
+trigger2 = 1||var(1):=20
+value = 112240 + var(0)
+
+;---------------------------------------------------------------------------
+[Statedef 112243]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ]
+type = null
+triggerall = numenemy
+trigger1 = var(1)<=var(3)
+trigger1 = enemy(root,var(0)),stateno = floor((var(var(1))&2147483584)/64)
+trigger1 = 1||var(0):=var(0)+1
+trigger2 = var(1)<var(3)
+trigger2 = 1||var(1):=var(1)+1
+trigger3 = 1||var(1):=0
+trigger3 = 1||var(0):=var(0)+1
+
+[State 0, DestroySelf]
+type = DestroySelf
+trigger1 = !numenemy
+
+[State ]
+type = selfstate
+trigger1 = 1; roundstate = 2 ;1
+value = 112240 + var(0)
+
+;---------------------------------------------------------------------------
+[Statedef 112244]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ]
+type = null
+trigger1 = var(1)
+trigger1 = 1||var(9):=(var(var(1))&63)
+trigger2 = 1||var(9):=0
+
+[State ]
+type = selfstate
+trigger1 = 1||var(0):=9
+value = 112240 + var(0)
+
+;---------------------------------------------------------------------------
+[Statedef 112249]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ]
+type = null
+triggerall = time
+trigger1 = 1||var(0):=1
+trigger1 = 1||var(1):=20
+
+[State ]
+type = selfstate
+trigger1 = time
+value = 112240 + var(0)
+
+[State ]
+type = null
+trigger1 = 1||var(8):=(var(8)|(1*(root,hitdefattr=S,AA,AP,AT)))
+trigger1 = 1||var(8):=(var(8)|(2*(root,hitdefattr=C,AA,AP,AT)))
+trigger1 = 1||var(8):=(var(8)|(4*(root,hitdefattr=A,AA,AP,AT)))
+trigger1 = 1||var(8):=(var(8)|(8*(root,hitdefattr=SCA,AA)))
+trigger1 = 1||var(8):=(var(8)|(16*(root,hitdefattr=SCA,AP)))
+trigger1 = 1||var(8):=(var(8)|(32*(root,hitdefattr=SCA,AT)))
+
+[State ]
+type = null
+triggerall = numenemy
+trigger1 = var(18):=enemy(root,var(0)),stateno
+
+[State ]
+type = nothitby
+trigger1 = 1
+value = SCA
+
+[State ]
+type = assertspecial
+trigger1 = 1
+flag = invisible
+flag2 = noshadow
+
+; SAVE REVERSAL DATA START
+; SAVE REVERSAL DATA END
+
+[State ]
+type = displaytoclipboard
+trigger1 = 1
+text="Saved reversals: %d, Recommendation: %d, Hitdefs: %d, Test: %d, %d"
+params=var(3)-19, var(9), var(8), var(7), root,movereversed
+
+[State ]
+type = appendtoclipboard
+trigger1 = 1
+text="\n%d, %d, %d, %d, %d, %d"
+params=var(20), var(21), var(22), var(23), var(24), var(25)
+
+;---------------------------------------------------------------------------
+[Statedef 112250]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+; var(0) = state
+; var(1) = variable
+; var(2) = highest id
+; var(3) = saved helper states
+; var(4) = save state
+; var(5) = save slot
+; var(6) = value to save
+; var(7) = variable to save to
+; var(8) = guard type last frame
+; var(9) = guard recommendation
+; var(10) = closest helper id
+; var(11) = closest helper pos x
+; var(12) = closest helper pos y
+; var(13) = closest helper distance (before sqrt)
+; var(14) = closest helper distance (after sqrt)
+; var(15) = closest helper has throw attribute
+; var(16) = closest helper has aerial attributes
+; var(19) = closest helper index
+; var(20-59) = saved helper states
+
+; &2147481600/2048 = stateno, max 1048575
+; &2040/8 = nothit, max 255
+; &7 = flags, 3 bits
+
+; state 0 -> initialisation, load
+; state 1 -> find highest id
+; state 2 -> guard break/contact detection, decompile closest helper
+; state 3 -> search for closer helpers
+; state 4 -> match closer helpers
+; state 5 -> save logic
+; state 9 -> guard recommendation, compile additional helper info
+
+[State ] ; Own id will be highest id on creation
+type = null
+trigger1 = 1||var(2):=id
+
+; LOAD HELPER DATA START
+[State ]
+type = null
+triggerall = teammode != turns
+trigger1 = root,var(35)
+trigger1 = 1||var(20):=root,var(35)
+trigger1 = 1||var(3):=var(3)+1
+trigger1 = root,var(40)
+trigger1 = 1||var(21):=root,var(40)
+trigger1 = 1||var(3):=var(3)+1
+trigger1 = root,var(41)
+trigger1 = 1||var(22):=root,var(41)
+trigger1 = 1||var(3):=var(3)+1
+; LOAD HELPER DATA END
+
+[State ]
+type = selfstate
+trigger1 = 1||var(3):=var(3)+19
+value = 112259
+
+;---------------------------------------------------------------------------
+[Statedef 112251]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ] ; Search for higher IDs
+type = varadd
+trigger1 = PlayerIdExist(var(1)+1)
+trigger2 = PlayerIdExist(var(1)+2)
+trigger3 = PlayerIdExist(var(1)+3)
+trigger4 = PlayerIdExist(var(1)+4)
+trigger5 = PlayerIdExist(var(1)+5)
+trigger6 = PlayerIdExist(var(1)+6)
+trigger7 = PlayerIdExist(var(1)+7)
+trigger8 = PlayerIdExist(var(1)+8)
+trigger9 = PlayerIdExist(var(1)+9)
+trigger10= PlayerIdExist(var(1)+10)
+trigger11= PlayerIdExist(var(1)+11)
+trigger12= PlayerIdExist(var(1)+12)
+trigger13= PlayerIdExist(var(1)+13)
+trigger14= PlayerIdExist(var(1)+14)
+trigger15= PlayerIdExist(var(1)+15)
+trigger16= PlayerIdExist(var(1)+16)
+trigger17= PlayerIdExist(var(1)+17)
+trigger18= PlayerIdExist(var(1)+18)
+trigger19= PlayerIdExist(var(1)+19)
+trigger20= PlayerIdExist(var(1)+20)
+var(1) = 1
+
+[State ]
+type = null
+trigger1 = var(1)=var(2)
+trigger1 = 1||var(0):=var(0)+1
+trigger2 = 1||var(2):=var(1)
+
+[State ]
+type = selfstate
+trigger1 = 1
+value = 112250 + var(0)
+
+;---------------------------------------------------------------------------
+[Statedef 112252]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ] ; Guard break detection
+type = null
+triggerall = PlayerIdExist(var(10)) && var(19)
+trigger1 = PlayerID(var(10)),movehit > 0 || (root,movetype=H && !root,gethitvar(guarded) && PlayerID(var(10)),stateno!=floor((var(var(19))&2147481600)/2048))
+trigger1 = 1||var(var(19)):=(var(var(19))|var(8))
+
+[State ] ; Guard break detection
+type = null
+triggerall = !PlayerIdExist(var(10)) && var(19)
+trigger1 = root,movetype=H && root,statetype!=L && root,stateno!=[120,155]
+trigger1 = 1||var(var(19)):=(var(var(19))|var(8))
+
+[State ] ; Contact tracking
+type = null
+triggerall = PlayerIdExist(var(10)) && var(19)
+triggerall = var(var(19))&2040
+trigger1 = PlayerID(var(10)),movecontact > 0 || PlayerID(var(10)),hitpausetime || (var(var(19))&7) || (PlayerID(var(10)),time=1 && stateno!=(var(var(19))&2147481600)/2048)
+trigger1 = 1||var(var(19)):=(var(var(19))&2147481607)
+trigger2 = PlayerID(var(10)),movecontact <= 0
+trigger2 = floor((var(var(19))&2040)/8) = [1,254]
+trigger2 = 1||var(var(19)):=var(var(19))+8
+
+[State ] ; Contact tracking
+type = null
+triggerall = !PlayerIdExist(var(10)) && var(19)
+trigger1 = root,movetype=H && root,statetype!=L && root,stateno!=[120,155]
+trigger1 = var(var(19))&2040
+trigger1 = 1||var(var(19)):=(var(var(19))&2147481607)+8
+
+[State ] ; At the start of the frame, check the currently closest helper
+type = null
+trigger1 = PlayerIdExist(var(10))
+trigger1 = PlayerID(var(10)),movetype=A
+trigger1 = root,facing=-1 || (root,facing=1 && (PlayerID(var(10)),pos x - root,pos x >= -50 || PlayerID(var(10)),facing*PlayerID(var(10)),vel x >= 0))
+trigger1 = root,facing=1 || (root,facing=-1 && (root,pos x - PlayerID(var(10)),pos x >= -50 || PlayerID(var(10)),facing*PlayerID(var(10)),vel x <= 0))
+trigger1 = PlayerID(var(10)),pos y - root,pos y >= -100 || PlayerID(var(10)),vel y >= 0
+trigger1 = PlayerID(var(10)),pos y - root,pos y <= 100 || PlayerID(var(10)),vel y <= 0
+trigger1 = 1||var(11):=floor(-root,facing*(root,pos x-PlayerID(var(10)),pos x))
+trigger1 = 1||var(12):=floor(PlayerID(var(10)),pos y-root,pos y)
+trigger1 = 1||var(13):=var(11)**2+var(12)**2
+trigger2 = 1||var(10):=0
+trigger2 = 1||var(19):=0
+
+[State ]
+type = selfstate
+trigger1 = 1||var(0):=var(0)+1
+trigger1 = 1||var(1):=var(2)
+value = 112250 + var(0)
+
+;---------------------------------------------------------------------------
+[Statedef 112253]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ] ; Search for closest helper
+type = null
+triggerall = PlayerIdExist(var(1))
+triggerall = PlayerID(var(1)),ishelper && root,teamside!=PlayerID(var(1)),teamside
+trigger1 = PlayerID(var(1)),movetype=A
+trigger1 = root,facing=-1 || (root,facing=1 && (PlayerID(var(1)),pos x - root,pos x >= -50 || PlayerID(var(1)),facing*PlayerID(var(1)),vel x >= 0))
+trigger1 = root,facing=1 || (root,facing=-1 && (root,pos x - PlayerID(var(1)),pos x >= -50 || PlayerID(var(1)),facing*PlayerID(var(1)),vel x <= 0))
+trigger1 = PlayerID(var(1)),pos y - root,pos y >= -100 || PlayerID(var(1)),vel y >= 0
+trigger1 = PlayerID(var(1)),pos y - root,pos y <= 100 || PlayerID(var(1)),vel y <= 0
+trigger1 = var(10)=0 || (-root,facing*(root,pos x-PlayerID(var(1)),pos x))**2+(PlayerID(var(1)),pos y-root,pos y)**2 < var(13)
+trigger1 = 1||var(10):=var(1)
+trigger1 = 1||var(11):=floor(-root,facing*(root,pos x-PlayerID(var(1)),pos x))
+trigger1 = 1||var(12):=floor(PlayerID(var(1)),pos y-root,pos y)
+trigger1 = 1||var(13):=var(11)**2+var(12)**2
+trigger1 = 1||var(19):=0
+
+[State ] ; Loop until we've reached the end
+type = null
+trigger1 = var(1)>root,id && var(1)>var(2)-128
+trigger1 = 1||var(1):=var(1)-1
+trigger2 = !var(19) && var(10)
+trigger2 = 1||var(0):=var(0)+1
+trigger2 = 1||var(1):=20
+trigger3 = 1||var(0):=9
+
+[State ]
+type = selfstate
+trigger1 = 1
+value = 112250 + var(0)
+
+;---------------------------------------------------------------------------
+[Statedef 112254]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ] ; Search for stored data
+type = null
+trigger1 = var(1)<=var(3)
+trigger1 = floor((var(var(1))&2147481600)/2048)=PlayerID(var(10)),stateno
+trigger1 = 1||var(19):=var(1)
+trigger1 = 1||var(0):=var(0)+1
+trigger2 = var(1)<=var(3)
+trigger2 = 1||var(1):=var(1)+1
+trigger3 = PlayerID(var(10)),stateno<=1048575 && var(3)<59
+trigger3 = 1||var(var(1)):=PlayerID(var(10)),stateno*2048+8+2032*(roundstate<2)
+trigger3 = 1||var(19):=var(1)
+trigger3 = 1||var(3):=var(3)+1
+trigger3 = 1||var(0):=var(0)+1
+trigger4 = 1||var(0):=var(0)+1
+
+[State ]
+type = selfstate
+trigger1 = 112250 + var(0) = stateno
+trigger2 = 1||var(1):=20
+trigger2 = 1||var(4):=0
+trigger2 = 1||var(5):=0
+value = 112250 + var(0)
+
+;---------------------------------------------------------------------------
+[Statedef 112255]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ]
+type = null
+triggerall = 1||var(6):=0
+triggerall = 1||var(7):=-1
+trigger1 = var(4)=0
+trigger1 = var(var(1))&7
+trigger1 = 1||var(6):=var(var(1))
+trigger2 = var(4)=1
+trigger2 = !(var(var(1))&7)
+trigger2 = 1||var(6):=var(var(1))
+
+; SAVE HELPER DATA START
+[State ]
+type = null
+triggerall = var(6) && var(5)<3
+trigger1 = var(5)=0
+trigger1 = 1||var(7):=35
+trigger2 = var(5)=1
+trigger2 = 1||var(7):=40
+trigger3 = var(5)=2
+trigger3 = 1||var(7):=41
+; SAVE HELPER DATA END
+
+[State ]
+type = parentvarset
+trigger1 = var(6) && var(7)=[0,59]
+trigger1 = 1||var(5):=var(5)+1
+var(var(7)) = var(6)
+
+[State ]
+type = selfstate
+trigger1 = var(1)<var(3)
+trigger1 = 1||var(1):=var(1)+1
+trigger2 = var(4)<1
+trigger2 = 1||var(1):=20
+trigger2 = 1||var(4):=var(4)+1
+trigger3 = 1||var(0):=9
+value = 112250 + var(0)
+
+;---------------------------------------------------------------------------
+[Statedef 112259]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ]
+type = null
+triggerall = time
+trigger1 = 1||var(0):=1
+trigger1 = 1||var(1):=var(2)
+
+[State ]
+type = selfstate
+trigger1 = time
+;trigger1 = var(0) != 9
+value = 112250 + var(0)
+
+[State ]
+type = nothitby
+trigger1 = 1
+value = SCA
+
+[State ]
+type = assertspecial
+trigger1 = 1
+flag = invisible
+flag2 = noshadow
+
+[State ] ; Prepare some additional data about closest helper
+type = null
+trigger1 = !var(10)
+trigger1 = 1||var(14):=9999
+trigger1 = 1||var(15):=0
+trigger1 = 1||var(16):=-1
+trigger2 = var(19)
+trigger2 = floor((var(var(19))&2040)/8)=255
+trigger2 = 1||var(14):=9999
+trigger2 = 1||var(15):=0
+trigger2 = 1||var(16):=-1
+trigger3 = 1||var(14):=floor(var(13)**0.5)
+trigger3 = 1||var(15):=(PlayerID(var(10)),hitdefattr=SCA,AT)
+trigger3 = 1||var(16):=(PlayerID(var(10)),hitdefattr=A,AA,AP)
+
+[State ] ; Guard recommendation
+type = null
+triggerall = var(19)
+triggerall = 1||var(9):=(var(var(19))&7)
+trigger1 = root,statetype!=A
+trigger1 = (var(9)&1) && !(var(9)&2)
+trigger1 = 1||var(9):=2
+trigger2 = root,statetype!=A
+trigger2 = (var(9)&2) && !(var(9)&1)
+trigger2 = 1||var(9):=1
+trigger3 = root,statetype!=A
+trigger3 = (var(9)&2) && (var(9)&1)
+trigger3 = 1||var(9):=-1
+trigger4 = root,statetype=A
+trigger4 = 1||var(9):=ifelse(var(9)&4,-1,0)
+
+[State ] ; Guard recommendation
+type = null
+trigger1 = !var(19)
+trigger1 = 1||var(9):=0
+
+[State ]
+type = null
+trigger1 = root,stateno!=[120,155]
+trigger1 = 1||var(8):=0
+trigger2 = root,statetype=S
+trigger2 = 1||var(8):=1
+trigger3 = root,statetype=C
+trigger3 = 1||var(8):=2
+trigger4 = root,statetype=A
+trigger4 = 1||var(8):=4
+
+[State ]
+type = displaytoclipboard
+trigger1 = 1
+text="Highest ID: %d, Saved states: %d, Recommendation: %d, StateNo: %d"
+params=var(2), var(3)-19, var(9), floor((var(var(19))&2147481600)/2048)
+
+[State ]
+type = appendtoclipboard
+trigger1 = 1
+text="\nClosest ID: %d, Distance: %d, IsThrow: %d, IsProjectile: %d, Value: %d, Test: %d"
+params=var(10), var(14), var(15), var(16), var(var(19)), var(20)
+
+;---------------------------------------------------------------------------
+[Statedef 112260]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+; var(0) = state
+; var(1) = variable
+; var(2) = number of active projectile
+; var(3) = number of saved projectiles
+; var(4) = number of projectiles accounted for
+; var(5) = number of loops performed
+; var(6) = current projectile id
+; var(7) = free variable
+; var(8) = guard type last frame
+; var(9) = guard recommendation
+; var(10) = number of confirmed projectiles
+; var(14) = save state
+; var(15) = save slot
+; var(16) = value to save
+; var(17) = variable to save to
+; var(20-59)
+
+; state 0 -> initialisation, load
+; state 1 -> search for saved projectiles (40)
+; state 2 -> search for projectiles (2+3=2100)
+; state 3 -> projectile id found, checking if already saved (2+3=2100)
+; state 4 -> contact tracking (40)
+; state 5 -> guard break detection (40)
+; state 6 -> guard recommendation (40)
+; stage 7 -> save logic
+; state 9 -> save, prepare next frame state
+
+; &2147481600/2048 = projid, max 1048575
+; &2040/8 = nothit, max 255
+; &7 = flags, 3 bits
+
+; LOAD PROJECTILE DATA START
+[State ]
+type = null
+triggerall = teammode != turns
+trigger1 = 0
+; LOAD PROJECTILE DATA END
+
+[State ]
+type = selfstate
+trigger1 = 1||var(3):=var(3)+19
+value = 112269
+
+;---------------------------------------------------------------------------
+[Statedef 112261]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ]
+type = null
+triggerall = numenemy
+trigger1 = var(1)<=var(3)
+trigger1 = 1||var(4):=var(4)+enemy(root,var(0)),numprojid(floor((var(var(1))&2147481600)/2048))
+trigger1 = 1||var(1):=var(1)+1
+trigger2 = var(4) >= var(2)
+trigger2 = 1||var(0):=4
+trigger2 = 1||var(1):=20
+trigger2 = 1||var(10):=0
+trigger3 = 1||var(0):=2
+
+[State ]
+type = selfstate
+trigger1 = 1; roundstate = 2 ;1
+value = 112260 + var(0)
+
+;---------------------------------------------------------------------------
+[Statedef 112262]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ] ; Loop increment
+type = null
+trigger1 = 1||var(5):=var(5)+1
+trigger1 = var(6)>1048575
+trigger1 = 1||var(6):=0
+
+[State ] ; Search
+type = null
+triggerall = numenemy
+trigger1 = enemy(root,var(0)),numprojid(var(6))
+trigger1 = 1||var(0):=3
+trigger1 = 1||var(1):=20
+trigger2 = 1||var(6):=var(6)+1
+
+[State ]
+type = null
+trigger1 = var(5) > 2200
+trigger1 = 1||var(0):=4
+trigger1 = 1||var(1):=20
+trigger1 = 1||var(10):=0
+
+[State ]
+type = selfstate
+trigger1 = 1; roundstate = 2 ;1
+value = 112260 + var(0)
+
+;---------------------------------------------------------------------------
+[Statedef 112263]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ] ; Loop increment
+type = null
+trigger1 = 1||var(5):=var(5)+1
+
+[State ] ; Match
+type = null
+triggerall = numenemy
+trigger1 = var(1)<=var(3)
+trigger1 = floor((var(var(1))&2147481600)/2048) = var(6)
+trigger1 = 1||var(0):=2
+trigger1 = 1||var(6):=var(6)+1
+trigger2 = var(1)<=var(3)
+trigger2 = 1||var(1):=var(1)+1
+trigger3 = var(3)<59
+trigger3 = 1||var(var(1)):=var(6)*2048+8+2032*(roundstate!=2)
+trigger3 = 1||var(3):=var(3)+1
+trigger3 = 1||var(4):=var(4)+enemy(root,var(0)),numprojid(var(6))
+trigger3 = 1||var(0):=ifelse(var(4)>=var(2),4,2)
+trigger3 = 1||var(1):=ifelse(var(4)>=var(2),10,var(1))
+trigger3 = 1||var(6):=ifelse(var(4)>=var(2),0,var(6)+1)
+trigger4 = 1||var(0):=2
+trigger4 = 1||var(6):=var(6)+1
+
+[State ]
+type = null
+trigger1 = var(5) > 2200
+trigger1 = 1||var(0):=4
+trigger1 = 1||var(1):=20
+trigger1 = 1||var(10):=0
+
+[State ]
+type = selfstate
+trigger1 = 1; roundstate = 2 ;1
+value = 112260 + var(0)
+
+;---------------------------------------------------------------------------
+[Statedef 112264]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ] ; Contact tracking
+type = null
+triggerall = numenemy
+triggerall = var(1)<=var(3)
+triggerall = 1||var(7):=floor((var(var(1))&2147481600)/2048)
+trigger1 = floor((var(var(1))&2040)/8) = [1,254]
+trigger1 = enemy(root,var(0)),numprojid(var(7))
+trigger1 = enemy(root,var(0)),projcontacttime(var(7)) <= 0
+trigger1 = 1||var(var(1)):=var(var(1))+8
+trigger2 = enemy(root,var(0)),projcontacttime(var(7)) > 0
+trigger2 = floor((var(var(1))&2040)/8) > 0
+trigger2 = 1||var(var(1)):=(var(var(1))&2147481607)
+trigger2 = 1||var(10):=var(10)+enemy(root,var(0)),numprojid(var(7))
+trigger3 = floor((var(var(1))&2040)/8) = 0
+trigger3 = 1||var(10):=var(10)+enemy(root,var(0)),numprojid(var(7))
+trigger4 = floor((var(var(1))&2040)/8) = 255
+trigger4 = 1||var(2):=var(2)-enemy(root,var(0)),numprojid(var(7))
+trigger4 = 1||var(4):=var(4)-enemy(root,var(0)),numprojid(var(7))
+
+[State ]
+type = selfstate
+trigger1 = var(1)<var(3)
+trigger1 = 1||var(1):=var(1)+1
+trigger2 = 1||var(0):=var(0)+1
+trigger2 = 1||var(1):=20
+value = 112260 + var(0)
+
+;---------------------------------------------------------------------------
+[Statedef 112265]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ] ; Guard break detection
+type = null
+triggerall = numenemy
+trigger1 = var(1)<=var(3)
+trigger1 = enemy(root,var(0)),projhittime(floor((var(var(1))&2147481600)/2048)) = 1
+trigger1 = 1||var(var(1)):=(var(var(1))|var(8))
+trigger1 = 1||var(1):=var(1)+1
+trigger2 = var(1)<var(3)
+trigger2 = 1||var(1):=var(1)+1
+trigger3 = 1||var(0):=var(0)+1
+trigger3 = 1||var(1):=20
+
+[State ]
+type = selfstate
+trigger1 = 1; roundstate = 2 ;1
+value = 112260 + var(0)
+
+;---------------------------------------------------------------------------
+[Statedef 112266]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ] ; Collecting guard flags
+type = null
+triggerall = numenemy
+trigger1 = !var(2)
+trigger1 = 1||var(9):=0
+trigger2 = enemy(root,var(0)),numprojid(floor((var(var(1))&2147481600)/2048))
+trigger2 = floor((var(var(1))&2040)/8) < 255
+trigger2 = 1||var(9):=(var(9)|(var(var(1))&7))
+
+[State ] ; Guard recommendation
+type = null
+triggerall = 1||var(1):=var(1)+1
+triggerall = var(1)>=var(4)
+triggerall = 1||var(0):=var(0)+1
+triggerall = 1||var(1):=20
+triggerall = 1||var(14):=0
+triggerall = 1||var(15):=0
+trigger1 = root,statetype!=A
+trigger1 = (var(9)&1) && !(var(9)&2)
+trigger1 = 1||var(9):=2
+trigger2 = root,statetype!=A
+trigger2 = (var(9)&2) && !(var(9)&1)
+trigger2 = 1||var(9):=1
+trigger3 = root,statetype!=A
+trigger3 = (var(9)&2) && (var(9)&1)
+trigger3 = 1||var(9):=-1
+trigger4 = root,statetype=A
+trigger4 = 1||var(9):=ifelse(var(9)&4,-1,0)
+
+[State ]
+type = selfstate
+trigger1 = 1; roundstate = 2 ;1
+value = 112260 + var(0)
+
+;---------------------------------------------------------------------------
+[Statedef 112267]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ]
+type = null
+triggerall = 1||var(16):=0
+triggerall = 1||var(17):=-1
+trigger1 = var(14)=0
+trigger1 = var(var(1))&7
+trigger1 = 1||var(16):=var(var(1))
+trigger2 = var(14)=1
+trigger2 = !(var(var(1))&7)
+trigger2 = 1||var(16):=var(var(1))
+
+; SAVE PROJECTILE DATA START
+[State ]
+type = null
+triggerall = var(16) && var(15)<3
+trigger1 = 0
+; SAVE PROJECTILE DATA END
+
+[State ]
+type = parentvarset
+trigger1 = var(16) && var(17)=[0,59]
+trigger1 = 1||var(15):=var(15)+1
+var(var(17)) = var(16)
+
+[State ]
+type = selfstate
+trigger1 = var(1)<var(3)
+trigger1 = 1||var(1):=var(1)+1
+trigger2 = var(14)<2
+trigger2 = 1||var(1):=20
+trigger2 = 1||var(14):=var(14)+1
+trigger3 = 1||var(0):=9
+value = 112260 + var(0)
+
+;---------------------------------------------------------------------------
+[Statedef 112269]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ]
+type = null
+triggerall = numenemy
+triggerall = time
+trigger1 = 1||var(0):=1
+trigger1 = 1||var(1):=10
+trigger1 = 1||var(2):=enemy(root,var(0)),numproj
+trigger1 = 1||var(4):=0
+trigger1 = 1||var(5):=0
+trigger1 = 1||var(9):=0
+
+[State ]
+type = selfstate
+trigger1 = time
+value = 112260 + var(0)
+
+[State ]
+type = nothitby
+trigger1 = 1
+value = SCA
+
+[State ]
+type = assertspecial
+trigger1 = 1
+flag = invisible
+flag2 = noshadow
+
+[State ]
+type = null
+trigger1 = root,stateno!=[120,155]
+trigger1 = 1||var(8):=0
+trigger2 = root,statetype=S
+trigger2 = 1||var(8):=1
+trigger3 = root,statetype=C
+trigger3 = 1||var(8):=2
+trigger4 = root,statetype=A
+trigger4 = 1||var(8):=4
+
+[State ]
+type = displaytoclipboard
+trigger1 = 1
+text="Projectiles: %d, Confirmed: %d, Saved: %d, Detected: %d, Recommendation: %d"
+params=var(2), var(10), var(3)-19, var(4), var(9)
+
+[State ]
+type = appendtoclipboard
+trigger1 = 1
+text="\n%d, %d, %d, %d, %d, %d"
+params=var(20), var(21), var(22), var(23), var(24), var(25)
+
+;---------------------------------------------------------------------------
+[Statedef 112270]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+; var(0) = fvar slot
+; var(1) = slidetime/recovertime left
+; var(2) = hitshaketime left
+; var(11) = slidetime/recovertime loop variable
+; var(12) = hitshaketime loop variable
+; fvar(0) = enemy velocity
+; fvar(1-38) = position in X frames
+; fvar(39) = friction
+
+[State ] ; Slidetime/recovertime reset
+type = null
+triggerall = root,movetype=H
+trigger1 = root,gethitvar(hitshaketime) || var(2)
+trigger1 = root,gethitvar(hitshaketime) != var(2) - 1
+trigger1 = 1||var(1):=0
+
+[State ] ; Slidetime/recovertime left
+type = null
+triggerall = root,movetype=H
+trigger1 = root,statetype=A && root,gethitvar(fall) && !root,gethitvar(fall.recover)
+trigger1 = 1||var(1):=999
+trigger2 = root,statetype!=A && !root,gethitvar(fall)
+trigger2 = root,gethitvar(hitshaketime)
+trigger2 = 1||var(1):=ifelse(root,gethitvar(slidetime) > root,gethitvar(hittime), root,gethitvar(hittime), root,gethitvar(slidetime))
+trigger3 = var(1)=0
+trigger3 = root,statetype=A || root,gethitvar(fall)
+trigger3 = 1||var(1):=root,gethitvar(fall.recovertime)
+
+[State ] ; Slidetime/recovertime left
+type = null
+triggerall = root,movetype=H
+trigger1 = !var(2) || root,statetype=A
+trigger1 = 1||var(1):=var(1)-1
+
+[State ] ; Hitshaketime left
+type = null
+triggerall = root,movetype=H
+trigger1 = 1||var(2):=root,gethitvar(hitshaketime)
+
+[State ] ; Loop variables
+type = null
+triggerall = root,movetype=H
+trigger1 = 1||var(11):=ifelse(root,statetype=A, var(1) + 1, var(1) + 1)
+trigger1 = 1||var(11):=ifelse(root,statetype=C, var(11), var(11) - 1)
+trigger1 = 1||var(12):=var(2)
+trigger1 = 1||fvar(0):=-ifelse(root,gethitvar(hitshaketime), root,gethitvar(xvel), -root,vel x)
+
+[State ]
+type = null
+trigger1 = 1||fvar(39):=ifelse(root, statetype=C,root,const(movement.crouch.friction), root,const(movement.stand.friction))
+trigger1 = 1||fvar(39):=ifelse(root,statetype=A, 1, fvar(39))
+
+[State ]
+type = selfstate
+trigger1 = root,movetype!=H
+trigger1 = 1||var(0):=1
+trigger1 = 1||fvar(0):=-root,vel x
+value = 112272
+
+[State ]
+type = selfstate
+trigger1 = 1||var(0):=1
+value = 112271
+
+;---------------------------------------------------------------------------
+[Statedef 112271]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ]
+type = null
+trigger1 = var(0)=1
+trigger1 = 1||fvar(1):=0
+trigger2 = 1||fvar(var(0)):=fvar(var(0)-1)
+
+[State ]
+type = null
+trigger1 = var(12)>0
+trigger1 = 1||fvar(var(0)):=0
+trigger1 = 1||var(12):=var(12)-1
+trigger2 = var(11)>0
+trigger2 = 1||fvar(var(0)):=fvar(0)+fvar(var(0))
+trigger2 = 1||fvar(0):=fvar(0)*fvar(39)
+trigger2 = 1||var(11):=var(11)-1
+trigger3 = 1||fvar(var(0)):=fvar(var(0)-1)
+
+[State ]
+type = null
+trigger1 = fvar(0)=(-1,1)
+trigger1 = !(root,statetype=A || root,gethitvar(fall))
+trigger1 = 1||fvar(0):=0
+
+[State ]
+type = null
+trigger1 = 1||var(0):=var(0)+1
+
+[State ]
+type = selfstate
+trigger1 = var(0)=38
+value = 112279
+
+[State ]
+type = selfstate
+trigger1 = 1; roundstate = 2 ;1
+value = 112271
+
+;---------------------------------------------------------------------------
+[Statedef 112272]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ]
+type = null
+trigger1 = var(0)=1
+trigger1 = 1||fvar(1):=0
+trigger2 = 1||fvar(var(0)):=fvar(var(0)-1)
+
+[State ]
+type = null
+trigger1 = 1||fvar(var(0)):=fvar(var(0)) + fvar(0)
+trigger1 = 1||fvar(0):=fvar(0) * fvar(39)
+trigger1 = 1||var(0):=var(0)+1
+
+[State ]
+type = null
+trigger1 = fvar(0)=(-1,1)
+trigger1 = !(root,statetype=A || root,gethitvar(fall))
+trigger1 = 1||fvar(0):=0
+
+[State ]
+type = selfstate
+trigger1 = var(0)=38
+value = 112279
+
+[State ]
+type = selfstate
+trigger1 = 1; roundstate = 2 ;1
+value = 112272
+
+;---------------------------------------------------------------------------
+[Statedef 112279]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ]
+type = varset
+trigger1 = 1
+var(3) = var(1) + var(2)
+
+[State ]
+type = displaytoclipboard
+trigger1 = 1
+text="Slidetime: %d, Hitshaketime: %d, Combined: %d"
+params=var(1), var(2), var(3)
+
+[State ]
+type = appendtoclipboard
+trigger1 = 1
+text="\n%d, %d, %d, %d, %d, %d"
+params=fvar(1), fvar(2), fvar(3), fvar(4), fvar(5), fvar(6)
+
+[State ]
+type = selfstate
+trigger1 = time
+value = 112270
+
+;---------------------------------------------------------------------------
+[Statedef 112280]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+; var(0) = fvar slot
+; var(1) = slidetime/recovertime left
+; var(2) = hitshaketime left
+; var(11) = slidetime/recovertime loop variable
+; var(12) = hitshaketime loop variable
+; fvar(0) = enemy velocity
+; fvar(1-38) = position in X frames
+; fvar(39) = friction
+
+[State ] ; Slidetime/recovertime reset
+type = null
+triggerall = numenemy
+triggerall = enemy(root,var(0)),movetype=H
+trigger1 = enemy(root,var(0)),gethitvar(hitshaketime) || var(2)
+trigger1 = enemy(root,var(0)),gethitvar(hitshaketime) != var(2) - 1
+trigger1 = 1||var(1):=0
+
+[State ] ; Slidetime/recovertime left
+type = null
+triggerall = numenemy
+triggerall = enemy(root,var(0)),movetype=H
+trigger1 = (enemy(root,var(0)),statetype=A || enemy(root,var(0)),gethitvar(fall)) && !enemy(root,var(0)),gethitvar(fall.recover)
+trigger1 = 1||var(1):=999
+trigger2 = enemy(root,var(0)),statetype!=A && !enemy(root,var(0)),gethitvar(fall)
+trigger2 = enemy(root,var(0)),gethitvar(hitshaketime)
+trigger2 = 1||var(1):=ifelse(enemy(root,var(0)),gethitvar(slidetime) > enemy(root,var(0)),gethitvar(hittime), enemy(root,var(0)),gethitvar(hittime), enemy(root,var(0)),gethitvar(slidetime))
+trigger3 = var(1)=0
+trigger3 = enemy(root,var(0)),statetype=A || enemy(root,var(0)),gethitvar(fall)
+trigger3 = 1||var(1):=enemy(root,var(0)),gethitvar(fall.recovertime)
+
+[State ] ; Slidetime/recovertime left
+type = null
+triggerall = numenemy
+triggerall = enemy(root,var(0)),movetype=H
+trigger1 = !var(2) || enemy(root,var(0)),statetype=A
+trigger1 = 1||var(1):=var(1)-1
+
+[State ] ; Hitshaketime left
+type = null
+triggerall = numenemy
+triggerall = enemy(root,var(0)),movetype=H
+trigger1 = 1||var(2):=enemy(root,var(0)),gethitvar(hitshaketime)
+
+[State ] ; Loop variables
+type = null
+triggerall = numenemy
+triggerall = enemy(root,var(0)),movetype=H
+trigger1 = 1||var(11):=ifelse(enemy(root,var(0)),statetype=A, var(1) + 1, var(1) + 1)
+trigger1 = 1||var(11):=ifelse(enemy(root,var(0)),statetype=C, var(11), var(11) - 1)
+trigger1 = 1||var(12):=var(2)
+trigger1 = 1||fvar(0):=-ifelse(enemy(root,var(0)),gethitvar(hitshaketime), enemy(root,var(0)),gethitvar(xvel) * root,facing * enemy(root,var(0)),facing, enemy(root,var(0)),vel x)
+trigger1 = 1||fvar(39):=ifelse(enemy(root,var(0)), statetype=C,enemy(root,var(0)),const(movement.crouch.friction), enemy(root,var(0)),const(movement.stand.friction))
+trigger1 = 1||fvar(39):=ifelse(enemy(root,var(0)),statetype=A, 1, fvar(39))
+
+[State ]
+type = selfstate
+triggerall = numenemy
+trigger1 = enemy(root,var(0)),movetype!=H
+trigger1 = 1||var(0):=1
+trigger1 = 1||fvar(0):=enemy(root,var(0)),vel x * enemy(root,var(0)),facing * root,facing
+value = 112282
+
+[State ]
+type = selfstate
+trigger1 = 1||var(0):=1
+value = 112281
+
+;---------------------------------------------------------------------------
+[Statedef 112281]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ]
+type = null
+trigger1 = var(0)=1
+trigger1 = 1||fvar(1):=0
+trigger2 = 1||fvar(var(0)):=fvar(var(0)-1)
+
+[State ]
+type = null
+trigger1 = var(12)>0
+trigger1 = 1||fvar(var(0)):=0
+trigger1 = 1||var(12):=var(12)-1
+trigger2 = var(11)>0
+trigger2 = 1||fvar(var(0)):=fvar(0)+fvar(var(0))
+trigger2 = 1||fvar(0):=fvar(0)*fvar(39)
+trigger2 = 1||var(11):=var(11)-1
+trigger3 = 1||fvar(var(0)):=fvar(var(0)-1)
+
+[State ]
+type = null
+triggerall = numenemy
+trigger1 = fvar(0)=(-1,1)
+trigger1 = !(enemy(root,var(0)),statetype=A || enemy(root,var(0)),gethitvar(fall))
+trigger1 = 1||fvar(0):=0
+
+[State ]
+type = null
+trigger1 = 1||var(0):=var(0)+1
+
+[State ]
+type = selfstate
+trigger1 = var(0)=38
+value = 112289
+
+[State ]
+type = selfstate
+trigger1 = 1; roundstate = 2 ;1
+value = 112281
+
+;---------------------------------------------------------------------------
+[Statedef 112282]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ]
+type = null
+trigger1 = var(0)=1
+trigger1 = 1||fvar(1):=0
+trigger2 = 1||fvar(var(0)):=fvar(var(0)-1)
+
+[State ]
+type = null
+trigger1 = 1||fvar(var(0)):=fvar(var(0)) + fvar(0)
+trigger1 = 1||var(0):=var(0)+1
+
+[State ]
+type = selfstate
+trigger1 = var(0)=38
+value = 112289
+
+[State ]
+type = selfstate
+trigger1 = 1; roundstate = 2 ;1
+value = 112282
+
+;---------------------------------------------------------------------------
+[Statedef 112289]
+Type    = A
+movetype= I
+Physics = N
+anim = 9999
+
+[State ]
+type = varset
+trigger1 = 1
+var(3) = var(1) + var(2)
+
+[State ]
+type = displaytoclipboard
+trigger1 = 1
+text="Slidetime: %d, Hitshaketime: %d, Combined: %d"
+params=var(1), var(2), var(3)
+
+[State ]
+type = appendtoclipboard
+trigger1 = 1
+text="\n%d, %d, %d, %d, %d, %d"
+params=fvar(1), fvar(2), fvar(3), fvar(4), fvar(5), fvar(6)
+
+[State ]
+type = selfstate
+trigger1 = time
+value = 112280
+
+;---------------------------------------------------------------------------
+; Air get-hit (falling)
+[Statedef 5050]
+type    = A
+movetype= H
+physics = N
+
+[State 5050, 1] ;Change anim when done with transition
+type = ChangeAnim
+trigger1 = AnimTime = 0
+trigger1 = Anim = 5035
+trigger2 = Time = 0     ;If no transition anim
+trigger2 = Anim != 5035
+trigger2 = (Anim != [5051, 5059]) && (Anim != [5061, 5069])
+trigger2 = Anim != 5090 ;Not if hit off ground anim
+value = 5050
+
+[State 5050, 2] ;Coming down anim
+type = ChangeAnim
+trigger1 = anim = [5050,5059]
+trigger1 = Vel Y >= ifelse(anim = 5050, Const720p(4), Const720p(-8))
+trigger1 = SelfAnimExist(anim+10)
+value = anim+10
+persistent = 0
+
+[State 5050, 3] ;Gravity
+type = VelAdd
+trigger1 = 1
+y = GetHitVar(yaccel)
+
+[State 5050, 4] ;Recover near ground
+type = ChangeState
+triggerall = Vel Y > 0
+triggerall = Pos Y >= Const(movement.air.gethit.groundrecover.ground.threshold)
+triggerall = alive
+triggerall = CanRecover
+triggerall = !AILevel
+trigger1 = Command = "recovery"
+value = 5200 ;Air get-hit (fall recovery on ground)
+
+[State 5050, 5]; Recover in mid air
+type = ChangeState
+triggerall = Vel Y > Const(movement.air.gethit.airrecover.threshold)
+triggerall = alive
+triggerall = CanRecover
+triggerall = !AILevel
+trigger1 = Command = "recovery"
+value = 5210 ;Air get-hit (fall recovery in air)
+
+[State 5050, 4] ;Recover near ground
+type = ChangeState
+triggerall = Vel Y > 0
+triggerall = Pos Y >= Const(movement.air.gethit.groundrecover.ground.threshold)
+triggerall = alive
+triggerall = CanRecover
+triggerall = AILevel
+triggerall = numenemy
+trigger1 = enemy(var(0)),movetype=A && helper(112230),var(10)=[0,2]
+trigger2 = helper(112250),var(14)<125
+trigger3 = helper(112260),var(2)
+trigger4 = var(59)
+trigger4 = BackEdgeDist <= 45
+value = 5200 ;Air get-hit (fall recovery on ground)
+
+[State 5050, 5]; Recover in mid air
+type = ChangeState
+triggerall = Vel Y > Const(movement.air.gethit.airrecover.threshold)
+triggerall = alive
+triggerall = CanRecover
+triggerall = AILevel
+triggerall = numenemy
+trigger1 = enemy(var(0)),movetype=A && helper(112230),var(10)=[0,2]
+trigger2 = helper(112250),var(14)<125
+trigger3 = helper(112260),var(2)
+trigger4 = helper(112200),fvar(32)>200 && random<10
+trigger5 = var(59)
+trigger5 = BackEdgeDist <= 45
+value = 5210 ;Air get-hit (fall recovery in air)
+
+[State 5050, 6]
+type = ChangeState
+trigger1 = Vel Y > 0
+trigger1 = Pos Y >= ifelse((anim = [5051,5059]) || (anim = [5061,5069]), 0, Const(movement.air.gethit.groundlevel))
+value = 5100 ;Downed get-hit (hit ground from fall)

@@ -1,0 +1,62 @@
+; ________________________________
+;| Cammy by Phantom.of.the.Server |
+; ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+;====================<DEFINITION>====================
+[Info]
+name          = "Cammy"
+displayname   = "Cammy"
+lifebarname   = "Cammy"
+versiondate   = 2025
+mugenversion  = 1.1; deprecated
+ikemenversion = 1.0
+author        = "Phantom.of.the.Server"
+pal.defaults  = 1, 7, 2, 8, 3, 9, 4, 10, 5, 11, 6, 12
+localcoord    = 320, 240
+portraitscale = 1.0
+
+[Files]
+cmd     = camcmd.cns
+cns     = camcns.cns
+st1     = states/camzss.zss
+st2     = states/camsystem.st
+st3     = states/camnormal.st
+st4     = states/camspecial.st
+st5     = states/camsuper.st
+st6     = states/camhelper.st
+st7     = states/inputs.zss
+st8     = CONFIG.txt
+stcommon= common1.cns
+sprite  = camsprite.sff
+anim    = camanim.air
+sound   = camsound.snd
+movelist= cammovelist.dat
+pal1    = palettes/Default.act
+pal2    = palettes/Green.act
+pal3    = palettes/Pink.act
+pal4    = palettes/Orange.act
+pal5    = palettes/Blue.act
+pal6    = palettes/Grey.act
+pal7    = palettes/Doll.act
+pal8    = palettes/DollRed.act
+pal9    = palettes/DollPurple.act
+pal10   = palettes/DollGreen.act
+pal11   = palettes/Chun-Li.act
+pal12   = palettes/Morrigan.act
+
+[Palette Keymap]
+x = 1
+y = 2
+z = 3
+a = 4
+b = 5
+c = 6
+x2 = 7
+y2 = 8
+z2 = 9
+a2 = 10
+b2 = 11
+c2 = 12
+
+;[Arcade]
+;intro.storyboard = intro.def
+;ending.storyboard= ending.def

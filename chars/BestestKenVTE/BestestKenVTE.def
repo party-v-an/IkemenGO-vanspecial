@@ -1,0 +1,44 @@
+; Definition file for Kung Fu Man
+; Contains all the filenames needed for the character
+
+; Player information
+[Info]
+name = "MOVE OVER BANANA KEN"        ;Name of character
+displayname = "The Bestest Ken in the World" ;Name of character to display
+versiondate = 02,07,2020    ;Version date of character (MM-DD-YYYY or X.XX) ;Production started on November 2nd 2016
+mugenversion = 1.0          ;Version of M.U.G.E.N character works on (X.XX)
+author = "Brergrsart"         ;Character author name
+pal.defaults = 1,2,3,4      ;Default palettes in order of preference (up to 4)
+                            ;Numbering starts from 1
+localcoord = 320,240        ;Local coordinate space width and height
+
+; Files for the player
+[Files]
+cmd     = BKen.cmd           ;Command set
+cns     = BKen.cns           ;Constants
+st      = BKen.cns           ;States
+stcommon = common1.cns      ;Common states (from data/ or motif)
+sprite  = BKen.sff           ;Sprite
+anim    = BKen.air           ;Animation
+sound   = BKen.snd           ;Sound
+;ai      = BKen.ai            ;AI hints data (not used)
+
+; Maps character selection buttons to palette numbers.
+[Palette Keymap]
+a = 1
+b = 2
+c = 3
+x = 4
+y = 5
+z = 6
+;x2 = 7 ;Hold Start and press button X for palette 7, etc.
+;y2 = 8
+;z2 = 9
+;a2 = 10
+;b2 = 11
+;c2 = 12
+
+; Arcade mode
+[Arcade]
+intro.storyboard = intro.def
+ending.storyboard = ending.def

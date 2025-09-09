@@ -1,0 +1,102 @@
+; ________________________________
+;| Cammy by Phantom.of.the.Server |
+; ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+;====================<CONSTANTS>====================
+
+[Data]
+life = 950
+power = 3000
+attack = 100
+defence = 100
+dizzypoints = 950
+guardpoints = 1000
+fall.defence_up = 50
+liedown.time = 20
+airjuggle = 15
+sparkno = 2
+guard.sparkno = 40
+hitsound.channel = 2
+guardsound.channel = 2
+KO.echo = 0
+volumescale = 100
+intpersistindex = 0
+floatpersistindex = 0
+
+[Size]
+xscale = 0.8333
+yscale = 1
+ground.back = 16
+ground.front = 16
+air.back = 16
+air.front = 16
+height = 57
+height.crouch = 57
+height.air = 57, 0
+height.down = 57
+attack.dist = 160
+proj.attack.dist = 80
+proj.doscale = 0
+head.pos = -12, -83
+mid.pos = -4, -53
+shadowoffset = 0
+draw.offset = 0, 0
+
+[Velocity]
+walk.fwd = 4.175
+walk.back = -3.097
+run.fwd = 6.869, 0
+run.back = -5.0132, 0
+jump.neu = 0, -10.220
+jump.fwd = 3.120
+jump.back = -3.761
+runjump.fwd = 4.679, -11.753
+runjump.back = -5.641, -11.753
+air.gethit.groundrecover = -8.0, 0
+air.gethit.airrecover.mul = 0, 0
+air.gethit.airrecover.add = 0, -7.55
+air.gethit.airrecover.back = -3.50
+air.gethit.airrecover.fwd = 3.50
+air.gethit.airrecover.up = 0
+air.gethit.airrecover.down = 0
+
+[Movement]
+airjump.num = 0
+airjump.height = 0
+yaccel = 0.510
+stand.friction = 0.85
+crouch.friction = 0.82
+stand.friction.threshold = 1.0
+crouch.friction.threshold = 1.0
+air.gethit.groundlevel = 0
+air.gethit.groundrecover.ground.threshold = -32
+air.gethit.groundrecover.groundlevel = 0
+air.gethit.airrecover.threshold = -1
+air.gethit.airrecover.yaccel = 0.6275
+air.gethit.trip.groundlevel = 0
+down.bounce.offset = 0, 0
+down.bounce.yaccel = 0.5
+down.bounce.groundlevel = 0
+down.friction.threshold = 2.0
+
+[Constants]
+default.ignoredefeatedenemies = 0
+super.targetdefencemul = 1.0
+default.lifetodizzypointsmul = 0
+super.lifetodizzypointsmul = 0
+input.pauseonhitpause = 0
+animtagenteringscreen = 5600
+animtagleavingscreen = 5610
+
+[Quotes]
+victory1 = "You can't escape my sting!"
+victory2 = "I didn't even break a sweat."
+victory3 = "You're far too slow to take me on."
+victory4 = "How does it feel getting beaten up by a pretty little girl like me?"
+victory5 = "If all the fights are this easy, I'm gonna get bored real quick..."
+victory6 = "Did you take me for an amateur? I guess you paid for that mistake."
+victory7 = "Data evaluated! Target exhibiting zero capability. Terminating..."
+victory8 = "Fighting data retrieved successfully!"
+victory9 = "Life readings confirmed. Power readings are negative!"
+victory10 = "Mission complete! Standing by for the next command!"
+victory11 = "You must enjoy being beat. Let me remodel your face one more time!"
+victory12 = "Your missing teeth will remind you of my victory!"

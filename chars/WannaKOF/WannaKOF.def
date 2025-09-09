@@ -1,0 +1,46 @@
+; Definition file for WannaKOF
+; Contains all the filenames needed for the character
+
+; Player information
+[Info]
+name = "Bodega Ameze"       ;Name of character
+displayname = "WannaKOF"    ;Name of character to display
+versiondate = 11,22,2021    ;Version date of character (MM-DD-YYYY or X.XX) Production started on September 5th, 2021
+mugenversion = 1.1          ;Version of M.U.G.E.N character works on (X.XX)
+author = "Brergrsart"       ;Character author name
+pal.defaults = 1,4,2,3      ;Default palettes in order of preference (up to 4)
+                            ;Numbering starts from 1
+localcoord = 320,240        ;Local coordinate space width and height
+;SC;Idle=12012
+;SC;Preview=197,58
+
+
+; Files for the player
+[Files]
+cmd     = WannaKOF.cmd           ;Command set
+cns     = WannaKOF.cns           ;Constants
+st      = WannaKOF.cns           ;States
+stcommon = common1.cns      ;Common states (from data/ or motif)
+sprite  = WannaKOF.sff           ;Sprite
+anim    = WannaKOF.air           ;Animation
+sound   = WannaKOF.snd           ;Sound
+
+; Maps character selection buttons to palette numbers.
+[Palette Keymap]
+a = 1 ;Press button X to select palette 1, etc.
+b = 2
+c = 3
+x = 4
+y = 5
+z = 6
+a2 = 7 ;Hold Start and press button X for palette 7, etc.
+b2 = 8
+c2 = 9
+x2 = 10
+y2 = 11
+z2 = 12
+
+; Arcade mode
+[Arcade]
+intro.storyboard = intro.def
+ending.storyboard = ending.def

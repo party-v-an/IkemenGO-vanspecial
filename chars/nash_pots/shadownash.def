@@ -1,0 +1,118 @@
+; _______________________________
+;| Nash by Phantom.of.the.Server |
+; ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+;====================<DEFINITION>====================
+[Info]
+name          = "Nash"
+displayname   = "Shadow"
+lifebarname   = "Shadow"
+versiondate   = 2025
+mugenversion  = 1.1; deprecated
+ikemenversion = 1.0
+author        = "Phantom.of.the.Server"
+pal.defaults  = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+localcoord    = 320, 240
+portraitscale = 1.0
+
+[Files]
+cmd     = nashcmd.cns
+cns     = nashcns.cns
+st1     = shadownash.def
+st2     = states/nashzss.zss
+st3     = states/nashsystem.st
+st4     = states/nashnormal.st
+st5     = states/nashspecial.st
+st6     = states/nashsuper.st
+st7     = states/nashhelper.st
+st8     = states/inputs.zss
+st9     = CONFIG.txt
+stcommon= common1.cns
+sprite  = nashsprite.sff
+anim    = nashanim.air
+sound   = nashsound.snd
+movelist= movelists/shadowmovelist.dat
+pal1    = shadowpalettes/shadow.act
+pal2    = shadowpalettes/shadow2.act
+pal3    = shadowpalettes/shadow3.act
+pal4    = shadowpalettes/shadow4.act
+pal5    = shadowpalettes/mvc2assist.act
+pal6    = shadowpalettes/victor.act
+pal7    = shadowpalettes/cyber1.act
+pal8    = shadowpalettes/cyber2.act
+pal9    = shadowpalettes/dictator.act
+pal10   = shadowpalettes/shin.act
+pal11   = shadowpalettes/god.act
+pal12   = shadowpalettes/shadow9000.act
+
+[Palette Keymap]
+x = 1
+y = 2
+z = 3
+a = 4
+b = 5
+c = 6
+x2 = 7
+y2 = 8
+z2 = 9
+a2 = 10
+b2 = 11
+c2 = 12
+
+;[Arcade]
+;intro.storyboard = intro.def
+;ending.storyboard= ending.def
+
+
+;==========<SHADOW MODE>==========
+[Statedef 5900]
+type = S
+anim = 9999
+
+[State 5900, varreset]
+type = varrangeset
+trigger1 = !roundsexisted
+value = 0
+
+[State 5900, varreset]
+type = varrangeset
+trigger1 = !roundsexisted
+fvalue = 0
+
+[State 5900, Palette]
+type = remappal
+trigger1 = 1
+source = 1, 1
+dest = 1, palno
+
+[State 5900, Shadow Mode]
+type = mapset
+map = "shadow"
+trigger1 = 1
+value = 1
+
+;[State 5900, Maximum Health]
+;type = modifyplayer
+;trigger1 = !time
+;trigger1 = !roundsexisted
+;lifemax = 0.85 * lifemax
+;dizzypointsmax = 0.85 * dizzypointsmax
+
+[State 5900, Set PalFX 1 Colors]
+type = null
+;Blue
+trigger1 = palno = 6
+trigger1 = 1 || map(palfx1_r) := 0 || map(palfx1_g) := 128 || map(palfx1_b) := 256
+;Orange
+trigger2 = palno = 7 || palno = 8 || palno = 12
+trigger2 = 1 || map(palfx1_r) := 256 || map(palfx1_g) := 96 || map(palfx1_b) := 0
+;Magenta
+trigger3 = palno = 11
+trigger3 = 1 || map(palfx1_r) := 256 || map(palfx1_g) := 0 || map(palfx1_b) := 128
+;Purple (Default)
+trigger4 = 1
+trigger4 = 1 || map(palfx1_r) := 128 || map(palfx1_g) := 0 || map(palfx1_b) := 256
+
+[State 5900, End]
+type = changestate
+trigger1 = time > 0; Wait for enemy to be loaded
+value = 5901; Config

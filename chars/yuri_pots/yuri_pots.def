@@ -1,0 +1,62 @@
+; _______________________________
+;| Yuri by Phantom.of.the.Server |
+; ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+;====================<DEFINITION>====================
+[Info]
+name          = "Yuri Sakazaki"
+displayname   = "Yuri"
+lifebarname   = "Yuri"
+versiondate   = 2025
+mugenversion  = 1.1; deprecated
+ikemenversion = 1.0
+author        = "Phantom.of.the.Server"
+pal.defaults  = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+localcoord    = 320, 240
+portraitscale = 1.0
+
+[Files]
+cmd     = yuricmd.cns
+cns     = yuricns.cns
+st1     = states/yurizss.zss
+st2     = states/yurisystem.st
+st3     = states/yurinormal.st
+st4     = states/yurispecial.st
+st5     = states/yurisuper.st
+st6     = states/yurihelper.st
+st7     = states/inputs.zss
+st8     = CONFIG.txt
+stcommon= common1.cns
+sprite  = yurisprite.sff
+anim    = yurianim.air
+sound   = yurisound.snd
+movelist= yurimovelist.dat
+pal1    = palettes/Default.act
+pal2    = palettes/TealBlue.act
+pal3    = palettes/YellowBlack.act
+pal4    = palettes/Orange.act
+pal5    = palettes/PinkGreen.act
+pal6    = palettes/PinkGrey.act
+pal7    = palettes/TakiP3.act
+pal8    = palettes/Ryo.act
+pal9    = palettes/MissKarate.act
+pal10   = palettes/Saikyo.act
+pal11   = palettes/Kasumi.act
+pal12   = palettes/Goku.act
+
+[Palette Keymap]
+x = 1
+y = 2
+z = 3
+a = 4
+b = 5
+c = 6
+x2 = 7
+y2 = 8
+z2 = 9
+a2 = 10
+b2 = 11
+c2 = 12
+
+;[Arcade]
+;intro.storyboard = intro.def
+;ending.storyboard= ending.def

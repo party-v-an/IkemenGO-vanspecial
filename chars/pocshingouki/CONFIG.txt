@@ -1,0 +1,35 @@
+; ____________________________________________
+;| Pocket Shin Gouki by Phantom.of.the.Server |
+; ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+;==============================================================================================
+;==================================< CONFIGURATION FILE >======================================
+;==============================================================================================
+
+;==============================================================================================
+[Statedef 5901];NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-N
+type = S;NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO
+[State 5901, Var];NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO
+type = mapset;NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-
+trigger1 = 1;NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-N
+map = "cfg_victorybgm";NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-N
+
+
+
+;-------------------------------------- VICTORY CAMERA ----------------------------------------
+;Set the number below to 1 to zoom in on the character during win poses
+
+trigger1 = pi || map(cfg_winzoom) := 1
+
+
+
+;-------------------------------------- VICTORY MUSIC -----------------------------------------
+;Set the value below to 1 to play a character-specific music during the victory screen
+
+value = 1
+
+
+
+[State 5901, End];NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO
+type = changestate;NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-N
+trigger1 = 1;NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-N
+value = 5902;NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-NO-N

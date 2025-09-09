@@ -1,0 +1,55 @@
+<#f0f000>THROWS</>
+
+Knee Gatling					[_B/_F]_+^2P
+Dragon Suplex					[_B/_F]_+^2K
+Airjack							_AIR[_B/_F]_+^2P
+Flying Buster Drop				_AIR[_B/_F]_+^2K
+
+<#f0f000>UNIQUE ATTACKS</>
+
+Jumping Sobat					[_B/_F]_+^B
+Step Kick						[_B/_F]_+^C
+
+<#f0f000>SPECIAL MOVES</>
+
+Sonic Boom						_D_DF_F^P
+Somersault Shell				_B_D_DB^K
+Moonsault Slash					_U_UF_F^K
+Shadow Warp						_D_DF_F^K
+
+<#f0f000>LEVEL 1 SUPER COMBOS</>
+
+Sonic Break						_D_DF_F_D_DF_F^P
+Reversed Somersault				_D_DB_B_D_DB_B^K
+Moonsault Strike				_AIR_D_DF_F_D_DF_F^K
+
+<#f0f000>LEVEL 2 SUPER COMBOS</>
+
+Crossfire Blitz					_D_DF_F_D_DF_F^2K
+
+<#f0f000>LEVEL 3 SUPER COMBOS</>
+
+Final Mission					_D_DF_F_D_DF_F^2P
+
+<#f0f000>SYSTEM</>
+
+Forward Dash					_F_F
+_!Run							_HOLD_F
+Back Dash						_B_B
+High Jump						_TAP_D,_U
+Hop								_TAP_U
+Hyper Hop						_TAP_D, _TAP_U
+Parry							_TAP_F / _TAP_D
+Roll							[_B/_F]_+^A_+^X
+Sidestep						^A_+^X
+_!Sidestep Attack				^P/^K
+Power Charge					^B_+^Y
+Custom Combo					_AIROK^C_+^Z
+Guard Cancel High				(during guard) _F_+^2P
+Guard Cancel Low				(during guard) _F_+^2K
+Fall Recovery					(when allowed)^P
+Roll Recovery					(while falling from a hit)^K
+Taunt							^S
+
+(N)								Nash mode
+(S)								Shadow mode

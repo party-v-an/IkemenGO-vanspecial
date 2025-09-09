@@ -1,0 +1,110 @@
+; _______________________________________
+;| Edmond Honda by Phantom.of.the.Server |
+; ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+;====================<CONSTANTS>====================
+
+[Data]
+life = 1050
+power = 3000
+attack = 100
+defence = 100
+dizzypoints = 1100
+guardpoints = 1000
+fall.defence_up = 50
+liedown.time = 20
+airjuggle = 15
+sparkno = 2
+guard.sparkno = 40
+hitsound.channel = 2
+guardsound.channel = 2
+KO.echo = 0
+volumescale = 100
+intpersistindex = 0
+floatpersistindex = 0
+
+[Size]
+xscale = 0.8333
+yscale = 1
+ground.back = 22
+ground.front = 22
+air.back = 22
+air.front = 22
+height = 54
+height.crouch = 54
+height.air = 54, 0
+height.down = 54
+attack.dist = 160
+proj.attack.dist = 80
+proj.doscale = 0
+head.pos = -5, -86
+mid.pos = -8, -40
+shadowoffset = 0
+draw.offset = 0, 0
+;weight = 200; 137 / 70kg
+
+[Velocity]
+walk.fwd = 2.566
+walk.back = -1.756
+run.fwd = 4.836, 0
+run.back = -4.250, -4.578
+jump.neu = 0, -8.793
+jump.fwd = 3.139
+jump.back = -3.334
+runjump.fwd = 4.709, -10.112
+runjump.back = -5.000, -10.112
+air.gethit.groundrecover = -8.0, 0
+air.gethit.airrecover.mul = 0, 0
+air.gethit.airrecover.add = 0, -7.55
+air.gethit.airrecover.back = -3.50
+air.gethit.airrecover.fwd = 3.50
+air.gethit.airrecover.up = 0
+air.gethit.airrecover.down = 0
+
+[Movement]
+airjump.num = 0
+airjump.height = 0
+yaccel = 0.475
+stand.friction = 0.85
+crouch.friction = 0.82
+stand.friction.threshold = 1.0
+crouch.friction.threshold = 1.0
+air.gethit.groundlevel = 0
+air.gethit.groundrecover.ground.threshold = -32
+air.gethit.groundrecover.groundlevel = 0
+air.gethit.airrecover.threshold = -1
+air.gethit.airrecover.yaccel = 0.6275
+air.gethit.trip.groundlevel = 0
+down.bounce.offset = 0, 0
+down.bounce.yaccel = 0.5
+down.bounce.groundlevel = 0
+down.friction.threshold = 2.0
+
+[Constants]
+default.ignoredefeatedenemies = 0
+super.targetdefencemul = 1.0
+default.lifetodizzypointsmul = 0
+super.lifetodizzypointsmul = 0
+input.pauseonhitpause = 0
+animtagenteringscreen = 5600
+animtagleavingscreen = 5610
+
+[Quotes]
+victory1 = "It's natural for a sumo wrestler to become the world's strongest!"
+victory2 = "Good spirit! But you should push an opponent with more force!"
+victory3 = "Nothing is as thrilling as fighting in such a vast world!"
+victory4 = "Now you have learned the meaning of Sumo! Dosukoi!"
+victory5 = "What's the matter with you?! You should be more aggressive!"
+victory6 = "How was my Tsuppari? Stronger than you thought?! Ga ha ha ha!"
+victory7 = "Eat chanko to build your body! Push the opponent out of the Dobyo!"
+victory8 = "You need more Keiko, if you want to be a true Rikishi like me!"
+victory9 = "If you wanna learn about strength, sign up for one of my seminars!"
+victory10 = "You've gotta learn how to use your stomach as a counterweight, fool!"
+victory11 = "Say, that was kinda fun! You might have what it takes to be a sumo wrestler!"
+victory12 = "Exercise and training! That's how I got to be this good!"
+victory13 = "The sponsors won't be pleased with a pitiful move like that!"
+victory14 = "I'm the best in Japan! Heh, I'm the best in the freakin' world!"
+victory15 = "Impressed with sumo? Come check out a real match someday, eh?"
+victory16 = "I'm takin' sumo on a worldwide tour! And you've got front row seats!"
+victory17 = "You can't be strong if you ain't huge! No fewer than five meals a day, I say!"
+victory18 = "Wah ha ha! That was fun! Wanna go again?"
+victory19 = "Ha ha! You can't compete with sumo!"

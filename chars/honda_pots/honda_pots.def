@@ -1,0 +1,62 @@
+; ________________________________
+;| Honda by Phantom.of.the.Server |
+; ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+;====================<DEFINITION>====================
+[Info]
+name          = "Edmond Honda"
+displayname   = "E. Honda"
+lifebarname   = "E. Honda"
+versiondate   = 2025
+mugenversion  = 1.1; deprecated
+ikemenversion = 1.0
+author        = "Phantom.of.the.Server"
+pal.defaults  = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+localcoord    = 320, 240
+portraitscale = 1.0
+
+[Files]
+cmd     = honcmd.cns
+cns     = honcns.cns
+st1     = states/honzss.zss
+st2     = states/honsystem.st
+st3     = states/honnormal.st
+st4     = states/honspecial.st
+st5     = states/honsuper.st
+st6     = states/honhelper.st
+st7     = states/inputs.zss
+st8     = CONFIG.txt
+stcommon= common1.cns
+sprite  = honsprite.sff
+anim    = honanim.air
+sound   = honsound.snd
+movelist= honmovelist.dat
+pal1    = palettes/Default.act
+pal2    = palettes/OrangeBlue.act
+pal3    = palettes/CVS2c.act
+pal4    = palettes/CVSzc.act
+pal5    = palettes/SFA3z.act
+pal6    = palettes/CVS2kkk.act
+pal7    = palettes/kiri-Bobby.act
+pal8    = palettes/kiri-Custom.act
+pal9    = palettes/kiri-Mech2.act
+pal10   = palettes/3.act
+pal11   = palettes/ESFAndy011.act
+pal12   = palettes/Cybaster2.act
+
+[Palette Keymap]
+x = 1
+y = 2
+z = 3
+a = 4
+b = 5
+c = 6
+x2 = 7
+y2 = 8
+z2 = 9
+a2 = 10
+b2 = 11
+c2 = 12
+
+;[Arcade]
+;intro.storyboard = intro.def
+;ending.storyboard= ending.def

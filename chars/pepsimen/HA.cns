@@ -1,0 +1,49 @@
+;---------------------------------------------------------------------------
+; HA用ヘルパー
+;---------------------------------------------------------------------------
+[Statedef 8800]; HA用ヘルパー
+type      = A
+movetype  = H
+physics   = N
+velset    = 0, 0
+
+[State 8800, 本体がきたら場合立ちへ移行]
+type = ChangeState
+trigger1 = !IsHelper
+value = 0
+ignorehitpause = 1
+
+[State 8800, 親の位置に固定]
+type = BindToRoot
+trigger1 = 1
+time = 1
+facing = 1
+pos = 0, 0
+ignorehitpause = 1
+
+[State 8800, ブランクアニメ設定]; HA処理用ヘルパーは基本ブランクアニメ
+type = ChangeAnim
+trigger1 = 1
+value = 20000
+ignorehitpause = 1
+
+[State 8800, アニメ変更]; HA処理用 食らい判定アニメ
+type = ChangeAnim
+trigger1 = 1
+value = Root, Anim
+Elem = Root, AnimElemNo(0)
+ignorehitpause = 1
+
+[State 1001, ]
+type = NotHitBy
+trigger1 = 1
+value = SCA,AA,AT
+time = -1
+
+[State 1001, ]
+type = destroyself
+trigger1 = root,var(5)<=0
+
+
+
+

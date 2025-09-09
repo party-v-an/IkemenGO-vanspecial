@@ -1,0 +1,62 @@
+<#f0f000>THROWS</>
+
+Yashiro Kuzushi					[_B/_F]_+[^2P/^2K]
+Abise Yashiro Kuzushi			_AIR[_B/_F]_+[^2P/^2K]
+
+<#f0f000>UNIQUE ATTACKS</>
+
+Tsumuji-gari					_F_+^B
+Target Combo 1					^C,^Z
+Target Combo 2					_AIR^Y,^B
+
+<#f0f000>SPECIAL MOVES</>
+
+Gurenken_EX						_D_DF_F^P, ^P
+_!Guren Hosho					_F_+^P
+_!Guren Mujinkyaku				^K
+_!Jodan Guren Yasha				_B_+^P
+_!Gedan Guren Yasha				_B_+^K
+_!Guren Ressenha				_U_+^K
+_!Guren Kusabi					_D_+^K
+_!Guren Chouchuu				(after _EX) ^P
+Hosho_EX						_F_D_DF^P
+Mujinkyaku_EX					_F_D_DF^K
+Ressenha_EX						_D_DF_F^K
+Jodan Yasha Gaeshi_EX			_D_DB_B^P
+Gedan Yasha Gaeshi				_D_DB_B^K
+Arakuma Inashi_EX				_FUB^K_MASH
+
+<#f0f000>LEVEL 1 SUPER COMBOS</>
+
+Kanzuki-ryu Shinpikaibyaku		_D_DF_F_D_DF_F^P
+Kanzuki-ryu Kouoken				_D_DF_F_D_DF_F^K
+
+<#f0f000>LEVEL 2 SUPER COMBOS</>
+
+Kisaki no Korin					_AIR_D_DF_F_D_DF_F^K
+
+<#f0f000>LEVEL 3 SUPER COMBOS</>
+
+Kira Eisei Neraiuchi			_D_DB_B_D_DB_B^P
+_!Second hit					_D_DF_F^P
+_!Final hit						_B_DB_D_DF_F^P
+
+<#f0f000>SYSTEM</>
+
+Run								_F_F
+Back Dash						_B_B
+High Jump						_TAP_D,_U
+Hop								_TAP_U
+Hyper Hop						_TAP_D, _TAP_U
+Wall Jump						(near corner) _AIR_UF / _UB
+Parry							_TAP_F / _TAP_D
+Roll							[_B/_F]_+^A_+^X
+Sidestep						^A_+^X
+_!Sidestep Attack				^P/^K
+Power Charge					^B_+^Y
+Custom Combo					_AIROK^C_+^Z
+Guard Cancel High				(during guard) _F_+^2P
+Guard Cancel Low				(during guard) _F_+^2K
+Fall Recovery					(when allowed)^P
+Roll Recovery					(while falling from a hit)^K
+Taunt							^S

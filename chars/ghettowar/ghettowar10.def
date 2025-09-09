@@ -1,0 +1,37 @@
+; Definition file for WarMachine
+; Contains all the filenames needed for the character
+
+; Player information
+[Info]
+name = "Ghetto WarMachine"        ;Name of character
+displayname = "Ghetto WarMachine" ;Name of character to display
+versiondate = 03,17,2012
+mugenversion = 1.0
+author = "One Winged Angel / MelvanaInChains + The_None"      ;Character author name
+pal.defaults = 1,2,6,9,3,4,5,7,8   ;Default palettes in order of preference
+
+; Files for the player
+[Files]
+cmd     = ghettowar.cmd   ;Command set
+cns     = ghettowar-basics.cns   ;Constants
+st      = 10ov.st   ;States
+stcommon = Common1.cns ;Common states
+sprite  = ghettowar.sff   ;Sprite
+anim    = ghettowar.air   ;Animation
+sound  = ghettowar.snd   ;Sound
+pal1   = cashmoneyfamecash.act
+pal2   = reggie.act
+pal3   = jaoh.act
+pal4   = cutman.act
+pal5   = pisspoorblack.act
+pal6   = mrfartastic.act
+pal7   = magneticshockwave.act
+pal8   = chaka.act
+pal9   = anwar.act
+pal10  = reimi.act
+pal11  = megafag.act
+pal12  = royalmarshall.act
+st1      = ghettowar-basics.cns   ;States
+st2 = ghettowar-supers.cns
+st9 = config.txt
+;st3 = misc/ghettowar-sentoshuryo.cns

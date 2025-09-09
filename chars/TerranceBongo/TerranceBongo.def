@@ -1,0 +1,47 @@
+; Definition file for Terrance Bongo
+; Contains all the filenames needed for the character
+
+; Player information
+[Info]
+name = "The Pin-Headed Son"        ;Name of character
+displayname = "Terrance Bongo" ;Name of character to display
+versiondate = 07,14,2025    ;Version date of character (MM-DD-YYYY or X.XX) Production started on August 28th, 2021
+mugenversion = 1.1          ;Version of M.U.G.E.N character works on (X.XX)
+author = "Brergrsart"       ;Character author name
+pal.defaults = 1,4,5,2      ;Default palettes in order of preference (up to 4)
+                            ;Numbering starts from 1
+localcoord = 320,240        ;Local coordinate space width and height
+;SC;Idle=22100
+;SC;Preview=1299,7
+
+; Files for the player
+[Files]
+cmd     = TerranceBongo.cmd           ;Command set
+cns     = TerranceBongo.cns           ;Constants
+st      = TerranceBongo.cns           ;States
+st1     = ForceAI.cns
+stcommon = common1.cns      ;Common states (from data/ or motif)
+sprite  = TerranceBongo.sff           ;Sprite
+anim    = TerranceBongo.air           ;Animation
+sound   = TerranceBongo.snd           ;Sound
+ai      = TerranceBongo.ai            ;AI hints data (not used)
+
+; Maps character selection buttons to palette numbers.
+[Palette Keymap]
+a = 1 ;Press button A to select palette 1, etc.
+b = 2
+c = 3
+x = 4
+y = 5
+z = 6
+a2 = 7 ;Hold Start and press button A for palette 7, etc.
+b2 = 8
+c2 = 9
+x2 = 10
+y2 = 11
+z2 = 12
+
+; Arcade mode
+;[Arcade]
+;intro.storyboard = intro.def
+;ending.storyboard = ending.def

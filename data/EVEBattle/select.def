@@ -200,29 +200,33 @@ slot={ ; KUNG FU MAN (START)
 	kfm_zss, stages\kfm.def, previous=d, next=w
 	kfm_zaxis, stages\kfm.def, previous=d, next=w
 }
-randomselect
-randomselect
-randomselect
-randomselect
-randomselect
-randomselect
-randomselect
-randomselect
-randomselect
-randomselect
-randomselect
-randomselect
-randomselect
-randomselect
-randomselect
-randomselect
-randomselect
-randomselect
-randomselect
-randomselect
-randomselect
-randomselect
-randomselect
+slot={ ; AKUMA/GOUKI
+	RareAkuma, previous=d, next=w
+	pocshingouki, previous=d, next=w
+	shingouki_pots, previous=d, next=w
+}
+Bison ; NOT DICTATOR
+cammy_pots
+nash_pots ; CHARLIE NASH
+dan_pots
+DukiNuki ; DUKE NUKEM
+geese_pots
+guy_pots
+honda_pots
+karin_pots
+lei-lei_pots ; HSIEN-KO/LEI-LEI
+BestestKenVTE ; KEN MASTERS
+WannaKOF ; KYO KUSANAGI
+vega_pots ; M.BISON/DICTATOR
+morrigan_pots
+nakoruru_pots
+pepsimen
+ryu_pots
+sakura_pots
+Spinto
+TerranceBongo ; TERRY BOGARD
+ghettowar/ghettowar10 ; WAR MACHINE
+yuri_pots
 randomselect
 randomselect
 ;-------------------------------------------------------------------------------

@@ -1,0 +1,101 @@
+; _______________________________
+;| Karin by Phantom.of.the.Server|
+; ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+;====================<CONSTANTS>====================
+
+[Data]
+life = 950
+power = 3000
+attack = 100
+defence = 100
+dizzypoints = 1000
+guardpoints = 1000
+fall.defence_up = 50
+liedown.time = 20
+airjuggle = 15
+sparkno = 2
+guard.sparkno = 40
+hitsound.channel = 2
+guardsound.channel = 2
+KO.echo = 0
+volumescale = 100
+intpersistindex = 0
+floatpersistindex = 0
+
+[Size]
+xscale = 0.8333
+yscale = 1
+ground.back = 18
+ground.front = 18
+air.back = 18
+air.front = 18
+height = 52
+height.crouch = 52
+height.air = 52, 0
+height.down = 52
+attack.dist = 160
+proj.attack.dist = 80
+proj.doscale = 0
+head.pos = -9, -73
+mid.pos = -9, -46
+shadowoffset = 0
+draw.offset = 0, 0
+
+[Velocity]
+walk.fwd = 4.10
+walk.back = -3.07
+run.fwd = 5.61, 0
+run.back = -5.83, -2.5
+jump.neu = 0, -9.888
+jump.fwd = 3.018
+jump.back = -3.829
+runjump.fwd = 4.527, -11.371
+runjump.back = -5.743, -11.371
+air.gethit.groundrecover = -8.0, 0
+air.gethit.airrecover.mul = 0, 0
+air.gethit.airrecover.add = 0, -7.55
+air.gethit.airrecover.back = -3.50
+air.gethit.airrecover.fwd = 3.50
+air.gethit.airrecover.up = 0
+air.gethit.airrecover.down = 0
+
+[Movement]
+airjump.num = 0
+airjump.height = 0
+yaccel = 0.520
+stand.friction = 0.85
+crouch.friction = 0.82
+stand.friction.threshold = 1.0
+crouch.friction.threshold = 1.0
+air.gethit.groundlevel = 0
+air.gethit.groundrecover.ground.threshold = -32
+air.gethit.groundrecover.groundlevel = 0
+air.gethit.airrecover.threshold = -1
+air.gethit.airrecover.yaccel = 0.6275
+air.gethit.trip.groundlevel = 0
+down.bounce.offset = 0, 0
+down.bounce.yaccel = 0.5
+down.bounce.groundlevel = 0
+down.friction.threshold = 2.0
+animtagenteringscreen = 5600
+animtagleavingscreen = 5610
+
+[Constants]
+default.ignoredefeatedenemies = 0
+super.targetdefencemul = 1.0
+default.lifetodizzypointsmul = 0
+super.lifetodizzypointsmul = 0
+input.pauseonhitpause = 0
+animtagenteringscreen = 5600
+animtagleavingscreen = 5610
+
+[Quotes]
+victory1 = "To defeat an opponent is to get to know them intimately."
+victory2 = "Succeed in everything! That is the motto of my family!"
+victory3 = "How rude! You lack both manners and fighting ability!"
+victory4 = "If you expected me to lose out of generosity, I'm truly sorry!"
+victory5 = "It went as I expected. Thank you for making it nice and quick!"
+victory6 = "Someone of your breeding could never stand a chance against me!"
+victory7 = "Would you like to be my servant? You may start right now!"
+victory8 = "You had your chance... Now it's time to pay up!"
+victory9 = "Apologies. I did not mean to aim for the face!"

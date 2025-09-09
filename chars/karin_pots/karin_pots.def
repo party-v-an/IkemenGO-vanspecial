@@ -1,0 +1,62 @@
+; ________________________________
+;| Karin by Phantom.of.the.Server |
+; ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+;====================<DEFINITION>====================
+[Info]
+name          = "Karin Kanzuki"
+displayname   = "Karin"
+lifebarname   = "Karin"
+versiondate   = 2025
+mugenversion  = 1.1; deprecated
+ikemenversion = 1.0
+author        = "Phantom.of.the.Server"
+pal.defaults  = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+localcoord    = 320, 240
+portraitscale = 1.0
+
+[Files]
+cmd     = karcmd.cns
+cns     = karcns.cns
+st1     = states/karzss.zss
+st2     = states/karsystem.st
+st3     = states/karnormal.st
+st4     = states/karspecial.st
+st5     = states/karsuper.st
+st6     = states/karhelper.st
+st7     = states/inputs.zss
+st8     = CONFIG.txt
+stcommon= common1.cns
+sprite  = karsprite.sff
+anim    = karanim.air
+sound   = karsound.snd
+movelist= karmovelist.dat
+pal1    = palettes/default.act
+pal2    = palettes/x-ism1.act
+pal3    = palettes/v-ism1.act
+pal4    = palettes/pink.act
+pal5    = palettes/x-ism2.act
+pal6    = palettes/v-ism2.act
+pal7    = palettes/blue.act
+pal8    = palettes/purple.act
+pal9    = palettes/blackgreen.act
+pal10   = palettes/orange.act
+pal11   = palettes/sakura.act
+pal12   = palettes/godkarin.act
+
+[Palette Keymap]
+x = 1
+y = 2
+z = 3
+a = 4
+b = 5
+c = 6
+x2 = 7
+y2 = 8
+z2 = 9
+a2 = 10
+b2 = 11
+c2 = 12
+
+;[Arcade]
+;intro.storyboard = intro.def
+;ending.storyboard= ending.def

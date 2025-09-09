@@ -1,0 +1,57 @@
+<#f0f000>THROWS</>
+
+Oni Harite							[_B/_F]_+^2P
+Silent Nage							[_B/_F]_+^2K
+Tsubame Otoshi						_AIR[_B/_F]_+[^2P/^2K]
+
+<#f0f000>UNIQUE ATTACKS</>
+
+En Yoku								_F_+^B
+Yuri Raijin Kyaku					_AIR_D_+^B
+Enbu Kyaku							^X, ^B, ^Y, ^C
+
+<#f0f000>SPECIAL MOVES</>
+
+Kouoken_EX							_D_DF_F^P
+Raioken_EX							_AIR_D_DF_F^P
+Raiosho_EX							_D_DF_F^K
+Yuri Cho Upper_EX					_F_D_DF^P
+_!Double_EX							(after ^Z version) _F_D_DF^Z
+_!Triple							(after _EX version) _F_D_DF^Z
+Saifa_EX							_D_DB_B^P
+Hyakuretsu Binta_EX					_F_DF_D_DB_B^K
+
+<#f0f000>LEVEL 1 SUPER COMBOS</>
+
+Hien Houokyaku						_D_DF_F_DF_D_DB_B^K
+Haoh Shokoken						_F_B_DB_D_DF_F^P
+Hien Rekko							_D_DF_F_D_DF_F^P
+Hien Senpukyaku						_AIR_D_DB_B_D_DB_B^K
+
+<#f0f000>LEVEL 2 SUPER COMBOS</>
+
+Yuri Cho Enbu						_D_DF_F_D_DF_F^2K
+Raiodama							_AIR_D_DF_F_D_DF_F^2P
+
+<#f0f000>LEVEL 3 SUPER COMBOS</>
+
+Shin Hien Houokyaku					_D_DF_F_DF_D_DB_B^2K
+
+<#f0f000>SYSTEM</>
+
+Forward Dash					_F_F
+_!Run							_HOLD_F
+Back Dash						_B_B
+High Jump						_TAP_D,_U
+Hop								_TAP_U
+Hyper Hop						_TAP_D, _TAP_U
+Parry							_TAP_F / _TAP_D
+Roll							[_B/_F]_+^A_+^X
+Sidestep						^A_+^X
+_!Sidestep Attack				^P/^K
+Power Charge					^B_+^Y
+Custom Combo					_AIROK^C_+^Z
+Guard Cancel High				(during guard) _F_+^2P
+Guard Cancel Low				(during guard) _F_+^2K
+Fall Recovery					(when allowed)^P/^K
+Taunt							^S

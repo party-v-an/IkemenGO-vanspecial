@@ -1,0 +1,100 @@
+; ____________________________________________
+;| Pocket Shin Gouki by Phantom.of.the.Server |
+; ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+;====================<CONSTANTS>====================
+
+[Data]
+life = 850
+power = 3000
+attack = 100
+defence = 100
+dizzypoints = 900
+guardpoints = 1000
+fall.defence_up = 50
+liedown.time = 20
+airjuggle = 15
+sparkno = 2
+guard.sparkno = 40
+hitsound.channel = 2
+guardsound.channel = 2
+KO.echo = 0
+volumescale = 100
+intpersistindex = 0
+floatpersistindex = 0
+
+[Size]
+xscale = 0.8333
+yscale = 1
+ground.back = 17
+ground.front = 17
+air.back = 17
+air.front = 17
+height = 38
+height.crouch = 38
+height.air = 38, 0
+height.down = 38
+attack.dist = 160
+proj.attack.dist = 80
+proj.doscale = 0
+head.pos = 0, -42
+mid.pos = 0, -20
+shadowoffset = 0
+draw.offset = 0, 0
+
+[Velocity]
+walk.fwd = 3.33
+walk.back = -2.50
+run.fwd = 6, 0
+run.back = -6, -4
+jump.neu = 0, -12.165
+jump.fwd = 3.770
+jump.back = -4.284
+runjump.fwd = 4.886, -12.165
+runjump.back = -5.657, -12.165
+air.gethit.groundrecover = -8.0, 0
+air.gethit.airrecover.mul = 0, 0
+air.gethit.airrecover.add = 0, -7.55
+air.gethit.airrecover.back = -3.50
+air.gethit.airrecover.fwd = 3.50
+air.gethit.airrecover.up = 0
+air.gethit.airrecover.down = 0
+
+[Movement]
+airjump.num = 0
+airjump.height = 0
+yaccel = 0.640
+stand.friction = 0.85
+crouch.friction = 0.82
+stand.friction.threshold = 1.0
+crouch.friction.threshold = 1.0
+air.gethit.groundlevel = 0
+air.gethit.groundrecover.ground.threshold = -32
+air.gethit.groundrecover.groundlevel = 0
+air.gethit.airrecover.threshold = -1
+air.gethit.airrecover.yaccel = 0.6275
+air.gethit.trip.groundlevel = 0
+down.bounce.offset = 0, 0
+down.bounce.yaccel = 0.5
+down.bounce.groundlevel = 0
+down.friction.threshold = 2.0
+
+[Constants]
+default.ignoredefeatedenemies = 0
+super.targetdefencemul = 1.0
+super.lifetodizzypointsmul = 0
+input.pauseonhitpause = 0
+animtagenteringscreen = 5600
+animtagleavingscreen = 5610
+
+[Quotes]
+victory1 = "I am Gouki, but you may call me Master!"
+victory2 = "You weren't even enough for a warm up!"
+victory3 = "These stubby limbs are enough to take you down!"
+victory4 = "Hmph! You should go back to playing puzzle games!"
+victory5 = "I am Gouki! You are garbage!"
+victory6 = "Behold the might of me!"
+victory7 = "I fight with the strength of ten!"
+victory8 = "You won't be the last to fall to my might!"
+victory9 = "Pathetic. Next!"
+victory10 = "I'm the final boss. You're the tutorial."
+victory11 = "I've faced children with more skill than you!"

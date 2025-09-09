@@ -1,0 +1,49 @@
+<#f0f000>THROWS</>
+
+Cement Toss							[_B/_F]_+^2P
+Monkey Clam							[_B/_F]_+^2K
+
+<#f0f000>UNIQUE ATTACKS</>
+
+Floor Is Lava Kick					_F_+^B
+Floor Is Rubber Punch				_F_+^Y
+Pointy Kick							_AIR_D_+^B
+
+<#f0f000>SPECIAL MOVES</>
+
+Skull Ball							_D_DF_F^P
+_!Spirit Skull Ball					(charge)
+Air Skull Ball						_AIR_D_DF_F^P
+_!Consecutive Air Skull Ball		^P
+Invincibility Punch					(air also)_F_D_DF^P
+Hurricane Kick						(air also)_D_DB_B^K
+Massacre Roll						_D_DB_B^P
+Chocolate Beam						_D_DF_F^K
+Hit Override Stance					_D,_D,[^P/^K]
+Tactical Relocation					[_F_D_DF/_B_D_DB][^2P/^2K]
+Akuma Junior						_F_DF_D_DB_B^P
+
+<#f0f000>SUPER COMBOS</>
+
+Full Power Skull Beam				_D_DB_B^2P
+Meteor Skull Shower					_AIR_D_DF_F^2P
+Jet Invincibility Punch				_D_DF_F^2P
+Warping Hurricane Kick				(air also)_D_DB_B^2K
+Record Scratch Kick					_AIR_D_DF_F^2K
+Extinction Bomber					_D_D_D^2P
+Massive Ball Drop					_D_D_D^2K
+Katamari Revolution					_D_DF_F^2K
+
+<#f0f000>HYPER COMBOS</>
+
+Disco Hell Murder					(air also)^X, ^X, _F, ^A, ^Z
+Half Past Ten Strike				_F_DF_D_DB_B^2K
+Self-destruction					^Z,^A,_B,^X,^X
+
+<#f0f000>SYSTEM</>
+
+Parry								_HOLD_B
+Afterimage							^A_+^X
+Ki Charge							^B_+^Y
+Time Stop							^C_+^Z
+Taunt								^S

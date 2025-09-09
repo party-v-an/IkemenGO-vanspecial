@@ -1,0 +1,59 @@
+; _____________________________________
+;| Rare Akuma by Phantom.of.the.Server |
+; ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+;====================<DEFINITION>====================
+[Info]
+name          = "Rare Akuma"
+displayname   = "Rare Akuma"
+lifebarname   = "Rare Akuma"
+versiondate   = 2024
+mugenversion  = 1.1
+ikemenversion = 1.0
+author        = "Phantom.of.the.Server"
+pal.defaults  = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+localcoord    = 320, 240
+portraitscale = 1.0
+
+[Files]
+cmd     = Command.cns
+cns     = Constants.cns
+st      = States/System.st
+st1     = States/Normal.st
+st2     = States/Special.st
+st3     = States/Super.st
+st4     = States/Helper.st
+stcommon= common1.cns
+sprite  = Sprite.sff
+anim    = Anim.air
+sound   = Sound.snd
+movelist= Movelist.dat
+pal1    = Palettes/Holy.act
+pal2    = Palettes/Joker.act
+pal3    = Palettes/Orochi_Hadou.act
+pal4    = Palettes/itorres32.act
+pal5    = Palettes/blunted.act
+pal6    = Palettes/Renzo.act
+pal7    = Palettes/NightmareSSJ2000.act
+pal8    = Palettes/Eric.act
+pal9    = Palettes/GodCybaster.act
+pal10   = Palettes/InternetJesus.act
+pal11   = Palettes/Vegita.act
+pal12   = Palettes/MrKarate.act
+
+[Palette Keymap]
+x = 1
+y = 2
+z = 3
+a = 4
+b = 5
+c = 6
+x2 = 7
+y2 = 8
+z2 = 9
+a2 = 10
+b2 = 11
+c2 = 12
+
+;[Arcade]
+;intro.storyboard = intro.def
+;ending.storyboard = ending.def

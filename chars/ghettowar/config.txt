@@ -1,0 +1,22 @@
+;
+
+[Statedef 444]
+type    = S
+movetype= I
+physics = N
+velset = 0,0
+anim = 9741
+
+[State AI Level (winmugen users only, those using the 1.0 version can ignore this)]
+type = ParentVarSet
+trigger1 = 1
+fvar(34) = 8 ; from 1 to 8
+ignorehitpause = 1
+
+; DO NOT ABSOLUTELY MODIFY ANYTHING BELOW ;
+
+[State 0, DestroySelf]
+type = DestroySelf
+trigger1 = roundstate = 2
+ignorehitpause = 1
+

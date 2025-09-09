@@ -1,0 +1,63 @@
+; ___________________________________
+;| Morrigan by Phantom.of.the.Server |
+; ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+;====================<DEFINITION>====================
+[Info]
+name          = "Morrigan Aensland"
+displayname   = "Morrigan"
+lifebarname   = "Morrigan"
+versiondate   = 2025
+mugenversion  = 1.1; deprecated
+ikemenversion = 1.0
+author        = "Phantom.of.the.Server"
+pal.defaults  = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+localcoord    = 320, 240
+portraitscale = 1.0
+
+[Files]
+cmd     = moricmd.cns
+cns     = moricns.cns
+st1     = states/morizss.zss
+st2     = states/morisystem.st
+st3     = states/morinormal.st
+st4     = states/morispecial.st
+st5     = states/morisuper.st
+st6     = states/morihelper.st
+st7     = states/moridarkforce.st
+st8     = states/inputs.zss
+st9     = CONFIG.txt
+stcommon= common1.cns
+sprite  = morisprite.sff
+anim    = morianim.air
+sound   = morisound.snd
+movelist= morimovelist.dat
+pal1    = palettes/toni.act
+pal2    = palettes/blonde.act
+pal3    = palettes/purple.act
+pal4    = palettes/pocket1.act
+pal5    = palettes/pocket2.act
+pal6    = palettes/dark.act
+pal7    = palettes/artwork.act
+pal8    = palettes/light.act
+pal9    = palettes/redpink.act
+pal10   = palettes/blueorange.act
+pal11   = palettes/saviourpp.act
+pal12   = palettes/saviourkk.act
+
+[Palette Keymap]
+x = 1
+y = 2
+z = 3
+a = 4
+b = 5
+c = 6
+x2 = 7
+y2 = 8
+z2 = 9
+a2 = 10
+b2 = 11
+c2 = 12
+
+;[Arcade]
+;intro.storyboard = intro.def
+;ending.storyboard = ending.def

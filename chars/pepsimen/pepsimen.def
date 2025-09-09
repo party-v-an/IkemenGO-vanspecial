@@ -1,0 +1,32 @@
+; Definition file for Kung Fu Man
+; Contains all the filenames needed for the character
+
+; Player information
+[Info]
+name = "PEPSIMAN"        ;Name of character
+displayname = "PEPSIMEN" ;Name of character to display
+versiondate = 04,14,2002    ;Version date of character (MM-DD-YYYY)
+mugenversion = 1.0   ;Version of M.U.G.E.N character works on
+author = "suteneko, 'improved' by Brergrsart"         ;Character author name
+pal.defaults = 1,2,3,4      ;Default palettes in order of preference
+
+; Files for the player
+[Files]
+cmd     = P.cmd   ;Command set
+cns     = P.cns   ;Constants
+st      = P.cns   ;States
+st0      = HA.cns
+stcommon = commonP.cns ;Common states
+sprite  = P.sff   ;Sprite
+anim    = P.air   ;Animation
+sound   = P.snd   ;Sound
+pal1    = P1.act
+pal2    = P2.act
+pal3    = ACT/NEX.act
+pal4    = ACT/StrongShot.act
+pal5    = ACT/CaribbeanGold.act
+pal6    = ACT/IceCucumber.act
+
+; Arcade mode
+;[Arcade]
+

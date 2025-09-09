@@ -1,0 +1,66 @@
+<#f0f000>THROWS</>
+
+(SD) Sailor Shot				[_B/_F]_+^2P
+(SD) Sakura Jime				[_B/_F]_+^2K
+(SD) Sailor Fly					_AIR[_B/_F]_+[^2P/^2K]
+
+<#f0f000>UNIQUE ATTACKS</>
+
+(SD) Flower Kick				_F_+^B
+(S) Target Combo 1				^Y, _F_+^B
+(S) Target Combo 2				_D_+^B , ^B
+
+<#f0f000>SPECIAL MOVES</>
+
+(SD) Hadoken_EX					_D_DF_F^P
+(S) _!Charge						_HOLD^P
+(SD) Tengyo Hadoken_EX			_D_DB_B^P
+(S) _!Charge						_HOLD^P
+(D) Air Hadoken					_AIR_D_DF_F^P
+(SD) Shouoken_EX				_F_D_DF^P
+(SD) Shunpukyaku_EX				_AIROK_D_DB_B^K
+(S) Sakura Otoshi_EX			_F_D_DF^K
+_!Attack						^P
+_!Cancel						^K
+(SD) Oukakyaku_EX				_D_DF_F^K
+(D) Sakura Senkuu				[_F_D_DF/_B_D_DB][^3P/^3K]
+
+<#f0f000>LEVEL 1 SUPER COMBOS</>
+
+(SD) Shinku Hadoken				_D_DF_F_D_DF_F^P
+(SD) Shinku Tengyo Hadoken		_D_DB_B_D_DB_B^P
+(SD) Midare Zakura				_D_DF_F_D_DF_F^K
+(SD) Haru Ichiban				_D_DB_B_D_DB_B^K
+(SD) Mode Change				_D_D_D^2K
+
+<#f0f000>LEVEL 2 SUPER COMBOS</>
+
+(SD) Haru Issen					_D_DF_F_D_DF_F^2K
+
+<#f0f000>LEVEL 3 SUPER COMBOS</>
+
+(S) Nekketsu Hadouken			_D_DF_F_D_DF_F^2P
+(D) Fuku Hadouken				_D_DB_B_D_DB_B^2P
+(SD) Shun Goku Satsu			^X,^X,_F,^A,^Z
+
+<#f0f000>SYSTEM</>
+
+Forward Dash					_F_F
+_!Run							_HOLD_F
+Back Dash						_B_B
+High Jump						_TAP_D,_U
+Hop								_TAP_U
+Hyper Hop						_TAP_D, _TAP_U
+Parry							_TAP_F / _TAP_D
+Roll							[_B/_F]_+^A_+^X
+Sidestep						^A_+^X
+_!Sidestep Attack				^P/^K
+Power Charge					^B_+^Y
+Custom Combo					_AIROK^C_+^Z
+Guard Cancel High				(during guard) _F_+^2P
+Guard Cancel Low				(during guard) _F_+^2K
+Fall Recovery					(when allowed)^P
+Roll Recovery					(while falling from a hit)^K
+
+(S)								Sakura mode
+(D)								Dark Sakura mode

@@ -1,0 +1,137 @@
+; ___________________________________
+;| Morrigan by Phantom.of.the.Server |
+; ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+;===================<CONSTANTS>================
+
+[Data]
+life = 950
+power = 3000
+attack = 100
+defence = 100
+dizzypoints = 950
+guardpoints = 1000
+fall.defence_up = 50
+liedown.time = 20
+airjuggle = 15
+sparkno = 2
+guard.sparkno = 40
+hitsound.channel = 2
+guardsound.channel = 2
+KO.echo = 0
+volumescale = 100
+intpersistindex = 0
+floatpersistindex = 0
+
+[Size]
+xscale = 0.8333
+yscale = 1
+ground.back = 14
+ground.front = 14
+air.back = 14
+air.front = 14
+height = 55
+height.crouch = 55
+height.air = 55, 0
+height.down = 55
+attack.dist = 160
+proj.attack.dist = 80
+proj.doscale = 0
+head.pos = 0, -82
+mid.pos = -2, -56
+shadowoffset = 0
+draw.offset = 0, 0
+
+[Velocity]
+walk.fwd = 3.125
+walk.back = -2.083
+run.fwd = 8.200, -3.459
+run.back = -5.740, -2.636
+jump.neu = 0, -10.20
+jump.fwd = 3.88
+jump.back = -4.01
+runjump.fwd = 5.82, -11.73
+runjump.back = -6.02, -11.73
+air.gethit.groundrecover = -8.0, 0
+air.gethit.airrecover.mul = 0, 0
+air.gethit.airrecover.add = 0, -7.55
+air.gethit.airrecover.back = -3.50
+air.gethit.airrecover.fwd = 3.50
+air.gethit.airrecover.up = 0
+air.gethit.airrecover.down = 0
+
+[Movement]
+airjump.num = 0
+airjump.height = 0
+yaccel = 0.617
+stand.friction = 0.85
+crouch.friction = 0.82
+stand.friction.threshold = 1.0
+crouch.friction.threshold = 1.0
+air.gethit.groundlevel = 0
+air.gethit.groundrecover.ground.threshold = -32
+air.gethit.groundrecover.groundlevel = 0
+air.gethit.airrecover.threshold = -1
+air.gethit.airrecover.yaccel = 0.6275
+air.gethit.trip.groundlevel = 0
+down.bounce.offset = 0, 0
+down.bounce.yaccel = 0.5
+down.bounce.groundlevel = 0
+down.friction.threshold = 2.0
+
+[Constants]
+default.ignoredefeatedenemies = 0
+super.targetdefencemul = 1.0
+default.lifetodizzypointsmul = 0
+super.lifetodizzypointsmul = 0
+input.pauseonhitpause = 0
+animtagenteringscreen = 5600
+animtagleavingscreen = 5610
+
+[Quotes]
+; The imported ones are not necessarily accurate
+; DS
+victory1 = "Ahh, this thrill! There's nothing like some roughness to get me going."
+victory2 = "Arouse me some more, won't you? I want this to be a night I won't forget!"
+victory3 = "Don't be so scared. It only hurts a little..."
+victory4 = "I want to steal you away... all of you."
+victory5 = "Mmm... I can feel your life energy filling me..."
+victory6 = "We should meet again tonight... in your dreams."
+victory7 = "You're boring me. I'm going home."
+; VH
+victory8 = "My victories, like my beauty, are eternal!"
+; VS
+victory9 = "Ah honey. Is that all you got?"
+victory10 = "It doesn't turn me on unless you're coming at me..."
+victory11 = "I don't need eternal love... These moments of passion are enough for me."
+victory12 = "I thought you'd entertain me at least a little..."
+victory13 = "Attack me harder! I want to get all hot and sweaty too!"
+victory14 = "Your pain shall soon turn into ultimate pleasure, I promise!"
+victory15 = "Still afraid? Come and feel the climax together!"
+victory16 = "Shhh... Can you hear it? My heartbeat..."
+victory17 = "You're so adorable.. I'll take you, body and soul."
+victory18 = "You were delicious. I look forward to seconds."
+; PF
+victory19 = "These bats around me? They hold my stuff when I go shopping!"
+victory20 = "If you don't think I'm the most beautiful, I'll punish you!"
+; MvC
+victory21 = "Eternity can be lonely. Please keep me company."
+victory22 = "Stay down. It's easier that way."
+victory23 = "How's that? Did you feel me enough?"
+victory24 = "That won't satisfy me. Come over here. I'll show you..."
+; MvC3
+victory25 = "Aw, don't be afraid. I'll be ever so gentle..."
+victory26 = "I could use a nice plaything like you."
+victory27 = "You didn't have what it takes to truly satisfy me."
+; MvCI
+victory28 = "Now that you've got me all warmed up, can you handle what comes next?"
+victory29 = "Relax. What's a moment of pain in exchange for eternal pleasure?"
+; Original
+victory30 = "That's for mistaking me for some ugly vampire!"
+victory31 = "What's a succubus? Easier to show you than tell you..."
+victory32 = "Aww, did I break you already? I was just getting started."
+victory33 = "I’ll make you crave more... even if it destroys you."
+victory34 = "You look so tired... Want me to tuck you in for eternity?"
+victory35 = "Oh, you poor thing. Did I take too much from you?"
+victory36 = "I’ll leave you with just enough strength to come crawling back to me."
+victory37 = "Every encounter with me is a lesson in pleasure and pain."
+victory38 = "You should be proud. You entertained me longer than most."

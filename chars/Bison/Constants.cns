@@ -1,0 +1,77 @@
+; ______________________________
+;| Bison by Coelasquid and PotS |
+; ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+;====================<CONSTANTS>====================
+
+[Data]
+life = 1500
+power = 3000
+attack = 100
+defence = 100
+fall.defence_up = 50
+liedown.time = 60
+airjuggle = 15
+sparkno = 2
+guard.sparkno = 40
+KO.echo = 0
+volumescale = 100
+IntPersistIndex = 0
+FloatPersistIndex = 0
+
+[Size]
+xscale = 0.5
+yscale = 0.5
+ground.back = 60
+ground.front = 60
+air.back = 60
+air.front = 60
+height = 80
+attack.dist = 160
+proj.attack.dist = 90
+proj.doscale = 0
+head.pos = 70, -72
+mid.pos = -30, -46
+shadowoffset = 0
+draw.offset = 0, 0
+
+[Velocity]
+walk.fwd = 4.0
+walk.back = -3.0
+run.fwd = 8, 0
+run.back = -6.0, -4.5
+jump.neu = 0, -10.2
+jump.fwd = 4.0
+jump.back = -3.0
+runjump.fwd = 8.0, -9.0
+runjump.back = -8.0, -9.0
+air.gethit.groundrecover = -0.15, -3.5
+air.gethit.airrecover.mul = 0.5, 0.2
+air.gethit.airrecover.add = 0, -4.5
+air.gethit.airrecover.back = -1
+air.gethit.airrecover.fwd = 0
+air.gethit.airrecover.up = -2
+air.gethit.airrecover.down = 1.5
+
+[Movement]
+airjump.num = 0
+airjump.height = 0
+yaccel = 0.6
+stand.friction = 0.85
+crouch.friction = 0.85
+stand.friction.threshold = 1.0
+crouch.friction.threshold = 1.0
+air.gethit.groundlevel = 25
+air.gethit.groundrecover.ground.threshold = -20
+air.gethit.groundrecover.groundlevel = 10
+air.gethit.airrecover.threshold = -1
+air.gethit.airrecover.yaccel = 0.35
+air.gethit.trip.groundlevel = 15
+down.bounce.offset = 0, 20
+down.bounce.yaccel = 0.4
+down.bounce.groundlevel = 12
+down.friction.threshold = 0.05
+
+[Quotes]
+victory1 = "Delicious I say!"
+victory2 = "Is it Tuesday again already? Oh my!"
+victory3 = "I never say no!"

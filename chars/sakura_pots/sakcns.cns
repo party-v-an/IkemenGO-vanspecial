@@ -1,0 +1,108 @@
+; _________________________________
+;| Sakura by Phantom.of.the.Server |
+; ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+;===================<CONSTANTS>================
+
+[Data]
+life = 950
+power = 3000
+attack = 100
+defence = 100
+dizzypoints = 1000
+guardpoints = 1000
+fall.defence_up = 50
+liedown.time = 20
+airjuggle = 15
+sparkno = 2
+guard.sparkno = 40
+hitsound.channel = 2
+guardsound.channel = 2
+KO.echo = 0
+volumescale = 100
+intpersistindex = 0
+floatpersistindex = 0
+
+[Size]
+xscale = 0.8333
+yscale = 1
+ground.back = 14
+ground.front = 14
+air.back = 18
+air.front = 18
+height = 55
+height.crouch = 55
+height.air = 55, 0
+height.down = 55
+attack.dist = 160
+proj.attack.dist = 80
+proj.doscale = 0
+head.pos = -8, -81
+mid.pos = -6, -53
+shadowoffset = 0
+draw.offset = 0, 0
+
+[Velocity]
+walk.fwd = 3.07
+walk.back = -2.56
+run.fwd = 5.61, 0
+run.back = -5.60, -2.75
+jump.neu = 0, -9.31
+jump.fwd = 3.09
+jump.back = -3.73
+runjump.fwd = 4.64, -10.71
+runjump.back = -5.60, -10.71
+airjump.neu = 0, -8.1
+airjump.back = -2.55
+airjump.fwd = 2.5
+air.gethit.groundrecover = -8.0, 0
+air.gethit.airrecover.mul = 0, 0
+air.gethit.airrecover.add = 0, -7.55
+air.gethit.airrecover.back = -3.50
+air.gethit.airrecover.fwd = 3.50
+air.gethit.airrecover.up = 0
+air.gethit.airrecover.down = 0
+
+[Movement]
+airjump.num = 0
+airjump.height = 0
+yaccel = 0.503
+stand.friction = 0.85
+crouch.friction = 0.82
+stand.friction.threshold = 1.0
+crouch.friction.threshold = 1.0
+air.gethit.groundlevel = 0
+air.gethit.groundrecover.ground.threshold = -32
+air.gethit.groundrecover.groundlevel = 0
+air.gethit.airrecover.threshold = -1
+air.gethit.airrecover.yaccel = 0.6275
+air.gethit.trip.groundlevel = 0
+down.bounce.offset = 0, 0
+down.bounce.yaccel = 0.5
+down.bounce.groundlevel = 0
+down.friction.threshold = 2.0
+
+[Constants]
+default.ignoredefeatedenemies = 0
+super.targetdefencemul = 1.0
+default.lifetodizzypointsmul = 0
+super.lifetodizzypointsmul = 0
+input.pauseonhitpause = 0
+animtagenteringscreen = 5600
+animtagleavingscreen = 5610
+
+[Quotes]
+victory1 = "Did I impress you! I really hope I did!"
+victory2 = "I like street fighting better than sparring in rival schools!"
+victory3 = "I'll be late for class, but it's okay! A good street fight is worth it!"
+victory4 = "Oh, no! I was suppose to go to the mall with Kei!"
+victory5 = "Okay, I'll skip class to fight you again! But only this time!"
+victory6 = "That must have been a real street fight! I could feel it!"
+victory7 = "Thanks for not keeping me long, I can still get to class in time!"
+victory8 = "Cool! We finished in time for me to meet up with Kei after all!"
+victory9 = "You didn't expect me to be this good, did you?"
+victory10 = "If I keep this up I might have a chance with him!"
+victory11 = "I've done my homework, but it looks like you haven't!"
+
+victory50 = "Looks like I'm catching up to you, huh?";Ryu
+victory51 = "You did tell me to hit you as hard as I could...";Dan
+victory52 = "If you keep following me around like this I'll get stronger in no time!";Karin

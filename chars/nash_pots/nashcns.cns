@@ -1,0 +1,104 @@
+; ______________________________
+;| Nash by Phantom.of.the.Server|
+; ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+;====================<CONSTANTS>====================
+
+[Data]
+life = 1000
+power = 3000
+attack = 100
+defence = 100
+dizzypoints = 1000
+guardpoints = 1000
+fall.defence_up = 50
+liedown.time = 20
+airjuggle = 15
+sparkno = 2
+guard.sparkno = 40
+hitsound.channel = 2
+guardsound.channel = 2
+KO.echo = 0
+volumescale = 100
+intpersistindex = 0
+floatpersistindex = 0
+
+[Size]
+xscale = 0.8333
+yscale = 1
+ground.back = 20
+ground.front = 20
+air.back = 20
+air.front = 20
+height = 60
+height.crouch = 60
+height.air = 60, 0
+height.down = 60
+attack.dist = 160
+proj.attack.dist = 80
+proj.doscale = 0
+head.pos = -12, -89
+mid.pos = -3, -58
+shadowoffset = 0
+draw.offset = 0, 0
+
+[Velocity]
+walk.fwd = 3.20
+walk.back = -2.31
+run.fwd = 5.61, 0
+run.back = -6.1, -4.4
+jump.neu = 0, -9.61
+jump.fwd = 3.195
+jump.back = -3.796
+runjump.fwd = 4.793, -11.05
+runjump.back = -5.694, -11.05
+air.gethit.groundrecover = -8.0, 0
+air.gethit.airrecover.mul = 0, 0
+air.gethit.airrecover.add = 0, -7.55
+air.gethit.airrecover.back = -3.50
+air.gethit.airrecover.fwd = 3.50
+air.gethit.airrecover.up = 0
+air.gethit.airrecover.down = 0
+
+[Movement]
+airjump.num = 0
+airjump.height = 0
+yaccel = 0.519
+stand.friction = 0.85
+crouch.friction = 0.82
+stand.friction.threshold = 1.0
+crouch.friction.threshold = 1.0
+air.gethit.groundlevel = 0
+air.gethit.groundrecover.ground.threshold = -32
+air.gethit.groundrecover.groundlevel = 0
+air.gethit.airrecover.threshold = -1
+air.gethit.airrecover.yaccel = 0.6275
+air.gethit.trip.groundlevel = 0
+down.bounce.offset = 0, 0
+down.bounce.yaccel = 0.5
+down.bounce.groundlevel = 0
+down.friction.threshold = 2.0
+
+[Constants]
+default.ignoredefeatedenemies = 0
+super.targetdefencemul = 1.0
+default.lifetodizzypointsmul = 0
+super.lifetodizzypointsmul = 0
+input.pauseonhitpause = 0
+animtagenteringscreen = 5600
+animtagleavingscreen = 5610
+
+[Quotes]
+victory1 = "Be all that you can be, scumbag!"
+victory2 = "One more down. On with the war."
+victory3 = "Are you always so slow?"
+victory4 = "You've got some talent. Uncle Sam could use you."
+victory5 = "Fighting skill depends on one's ability to anticipate visually."
+victory6 = "Tracking a target precisely is a basic skill, critical to victory!"
+victory7 = "You don't have the mettle to be a fighter."
+victory8 = "Didn't even scratch my lens."
+victory9 = "Hmph, I could've kept the glasses on."
+victory10 = "The ambulance is on its way."
+victory11 = "I break the sound barrier on a daily basis."
+
+victory50 = "You still need both arms to do that?"; Guile
+victory51 = "Justice is served."; Dictator

@@ -1,0 +1,116 @@
+; __________________________________
+;| Lei-Lei by Phantom.of.the.Server |
+; ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+;===================<CONSTANTS>================
+
+[Data]
+life = 950
+power = 3000
+attack = 100
+defence = 100
+dizzypoints = 950
+guardpoints = 1000
+fall.defence_up = 50
+liedown.time = 20
+airjuggle = 15
+sparkno = 2
+guard.sparkno = 40
+hitsound.channel = 2
+guardsound.channel = 2
+KO.echo = 0
+volumescale = 100
+intpersistindex = 0
+floatpersistindex = 0
+
+[Size]
+xscale = 0.8333
+yscale = 1
+ground.back = 18
+ground.front = 18
+air.back = 18
+air.front = 18
+height = 48
+height.crouch = 48
+height.air = 48, 0
+height.down = 48
+attack.dist = 160
+proj.attack.dist = 80
+proj.doscale = 0
+head.pos = -12, -64
+mid.pos = 6, -45
+shadowoffset = 0
+draw.offset = 0, 0
+
+[Velocity]
+walk.fwd = 3.00
+walk.back = -2.75
+run.fwd = 5.6, 0
+run.back = -6, 0
+jump.neu = 0, -7.76
+jump.fwd = 3.93
+jump.back = -4.19
+runjump.fwd = 5.25, -8.92
+runjump.back = -5.75, -8.92
+air.gethit.groundrecover = -8.0, 0
+air.gethit.airrecover.mul = 0, 0
+air.gethit.airrecover.add = 0, -7.55
+air.gethit.airrecover.back = -3.50
+air.gethit.airrecover.fwd = 3.50
+air.gethit.airrecover.up = 0
+air.gethit.airrecover.down = 0
+
+[Movement]
+airjump.num = 0
+airjump.height = 0
+yaccel = 0.469
+stand.friction = 0.85
+crouch.friction = 0.82
+stand.friction.threshold = 1.0
+crouch.friction.threshold = 1.0
+air.gethit.groundlevel = 0
+air.gethit.groundrecover.ground.threshold = -32
+air.gethit.groundrecover.groundlevel = 0
+air.gethit.airrecover.threshold = -1
+air.gethit.airrecover.yaccel = 0.6275
+air.gethit.trip.groundlevel = 0
+down.bounce.offset = 0, 0
+down.bounce.yaccel = 0.5
+down.bounce.groundlevel = 0
+down.friction.threshold = 2.0
+
+[Constants]
+default.ignoredefeatedenemies = 0
+super.targetdefencemul = 1.0
+default.lifetodizzypointsmul = 0
+super.lifetodizzypointsmul = 0
+input.pauseonhitpause = 0
+animtagenteringscreen = 5600
+animtagleavingscreen = 5610
+
+[Quotes]
+; The imported ones are not necessarily accurate
+; VH
+victory1 = "Close though you may come, you will never defeat us, nor sway our course!"
+victory2 = "Have a pleasant journey through the Nine Courts of Judgement!"
+victory3 = "That was too easy! In your next life try defending yourself!"
+victory4 = "We shall not be denied our vengeance!"
+; VS
+victory5 = "You knew this would happen. You shouldn't have struggled."
+victory6 = "Don't get the wrong idea. Not all of them are like myself!"
+victory7 = "Sigh... You feel hungry even after you die..."
+victory8 = "Use your weapons if you must. This isn't a street fight."
+victory9 = "We work pretty well together, sis... Hey, are you even listening?"
+victory10 = "If you catch us at just the right angle, we look really scary!"
+victory11 = "Have we met before? Before I died, maybe?"
+victory12 = "Don't you have any sympathy for the dead?"
+; PF
+victory13 = "I think I lost an iron ball... Can you help me find it?"
+; MvC3
+victory14 = "What's Senjutsu you ask? There is no way I could explain that here and now."
+victory15 = "What else do I have up my sleeves? A girl's gotta keep her secrets, you know!"
+victory16 = "You're pushing me too hard, sis! You don't know what it's like to fight."
+victory17 = "Stop calling me a zombie! I don't even eat brains!"
+; Original
+victory18 = "Life and death are just part of the dance, right?"
+victory19 = "Not bad. I've seen worse from the living."
+victory20 = "Perhaps we’ll meet again. In another life."

@@ -1,0 +1,63 @@
+; __________________________________
+;| Lei-Lei by Phantom.of.the.Server |
+; ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+;====================<DEFINITION>====================
+[Info]
+name          = "Lei-Lei"
+displayname   = "Lei-Lei"
+lifebarname   = "Lei-Lei"
+versiondate   = 2025
+mugenversion  = 1.1; deprecated
+ikemenversion = 1.0
+author        = "Phantom.of.the.Server"
+pal.defaults  = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+localcoord    = 320, 240
+portraitscale = 1.0
+
+[Files]
+cmd     = llcmd.cns
+cns     = llcns.cns
+st1     = states/llzss.zss
+st2     = states/llsystem.st
+st3     = states/llnormal.st
+st4     = states/llspecial.st
+st5     = states/llsuper.st
+st6     = states/llhelper.st
+st7     = states/lldarkforce.st
+st8     = states/inputs.zss
+st9     = CONFIG.txt
+stcommon= common1.cns
+sprite  = llsprite.sff
+anim    = llanim.air
+sound   = llsound.snd
+movelist= llmovelist.dat
+pal1    = palettes/default.act
+pal2    = palettes/redwine.act
+pal3    = palettes/pinkblue.act
+pal4    = palettes/pink.act
+pal5    = palettes/dark.act
+pal6    = palettes/seanyellow.act
+pal7    = palettes/yanggreen.act
+pal8    = palettes/dee.act
+pal9    = palettes/loona.act
+pal10   = palettes/chun1.act
+pal11   = palettes/chun2.act
+pal12   = palettes/ttg.act
+
+[Palette Keymap]
+x = 1
+y = 2
+z = 3
+a = 4
+b = 5
+c = 6
+x2 = 7
+y2 = 8
+z2 = 9
+a2 = 10
+b2 = 11
+c2 = 12
+
+;[Arcade]
+;intro.storyboard = intro.def
+;ending.storyboard = ending.def

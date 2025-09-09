@@ -1,0 +1,54 @@
+<#f0f000>THROWS</>
+
+Breast Anguish					[_B/_F]_+^2P
+Moon Tracer						[_B/_F]_+^2K
+
+<#f0f000>UNIQUE ATTACKS</>
+
+Necro Desire					_F_+^C
+Sensual Insert					_DF_+^B
+Ecstatic Climb					_DF_+^Z
+
+<#f0f000>SPECIAL MOVES</>
+
+Soul Fist_EX					_AIROK_D_DF_F^P
+Shadow Blade_EX					_F_D_DF^P
+Parasite Roll_EX				_D_DB_B^K
+Vector Drain_EX					_F_DF_D_DB_B^P
+Shell Pierce_EX					(while opponent is down) _U_+^P/^K
+
+<#f0f000>LEVEL 1 SUPER COMBOS</>
+
+Soul Phoenix					_AIROK_D_DF_F_D_DF_F^P
+Cardinal Blade					_D_DF_F_D_DF_F^K
+Valkyrie Turn					_D_DB_B_D_DB_B^K
+
+<#f0f000>LEVEL 2 SUPER COMBOS</>
+
+Finishing Shower				_D_DF_F_D_DF_F^2P
+Twilight Illusion				_AIR_D_DF_F_D_DF_F^K
+
+<#f0f000>LEVEL 3 SUPER COMBOS</>
+
+Darkness Illusion				^X,^X,_F,^A,^Z
+Eternal Slumber					^X,^B,_B,^Y,^C
+
+<#f0f000>SYSTEM</>
+
+Forward Flight					_F_F
+_!Upward Flight					_U
+_!Downward Flight				_D
+Back Flight						_B_B
+High Jump						_TAP_D,_U
+Parry							_TAP_F / _TAP_D
+Roll							[_B/_F]_+^A_+^X
+Sidestep						^A_+^X
+_!Sidestep Attack				^P/^K
+Power Charge					^B_+^Y
+Dark Force						^C_+^Z
+_!Cancel						^C_+^Z
+Guard Cancel High				(during guard) _F_+^2P
+Guard Cancel Low				(during guard) _F_+^2K
+Fall Recovery					(when allowed)^P
+Retreat							(while down) [_B/_F]_+^K
+Taunt							^S

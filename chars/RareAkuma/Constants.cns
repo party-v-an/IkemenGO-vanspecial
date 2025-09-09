@@ -1,0 +1,100 @@
+; _____________________________________
+;| Rare Akuma by Phantom.of.the.Server |
+; ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+;===================<CONSTANTS>================
+
+[Data]
+life = 2000
+power = 9001
+attack = 100
+defence = 200
+fall.defence_up = 350
+liedown.time = 0
+airjuggle = 1000000
+sparkno = 1
+guard.sparkno = 40
+KO.echo = 0
+volumescale = 100
+IntPersistIndex = 0
+FloatPersistIndex = 0
+
+[Size]
+xscale = 1
+yscale = 1
+ground.back = 18
+ground.front = 18
+air.back = 18
+air.front = 18
+height = 60
+attack.dist = 320
+proj.attack.dist = 320
+proj.doscale = 0
+head.pos = 7, -91
+mid.pos = -1, -59
+shadowoffset = 0
+draw.offset = 0, 0
+
+[Velocity]
+walk.fwd = 6
+walk.back = -6
+run.fwd = 12, 0
+run.back = -20, 0
+jump.neu = 0, -15
+jump.back = -8
+jump.fwd = 8
+runjump.back = -6, -15
+runjump.fwd = 6, -15
+airjump.neu = 0,-12
+airjump.back = -4
+airjump.fwd = 4
+air.gethit.groundrecover = -0.15, -3.5
+air.gethit.airrecover.mul = 0.5, 0.2
+air.gethit.airrecover.add = 0, -4.5
+air.gethit.airrecover.back = -1
+air.gethit.airrecover.fwd = 0
+air.gethit.airrecover.up = -2
+air.gethit.airrecover.down = 1.5
+
+[Movement]
+airjump.num = 1
+airjump.height = -64
+yaccel = 1
+stand.friction = 0.85
+crouch.friction = 0.85
+stand.friction.threshold = 1.0
+crouch.friction.threshold = 1.0
+air.gethit.groundlevel = 25
+air.gethit.groundrecover.ground.threshold = -20
+air.gethit.groundrecover.groundlevel = 10
+air.gethit.airrecover.threshold = -1
+air.gethit.airrecover.yaccel = 0.35
+air.gethit.trip.groundlevel = 15
+down.bounce.offset = 0, 20
+down.bounce.yaccel = 0.4
+down.bounce.groundlevel = 12
+down.friction.threshold = 0.05
+
+[Constants]
+default.enable.dizzy = 0
+default.enable.guardbreak = 0
+
+[Quotes]
+victory1 = "There can be only one."
+victory2 = "And time resumes flowing."
+victory3 = "You must defeat my HitOverride to stand a chance."
+victory4 = "Must find more candy... Hmmm candy..."
+victory5 = "What have they done to me?! I am a monster!"
+victory6 = "Must train harder to surpass my damage scaling!"
+victory7 = "You died for my sins..."
+victory8 = "In space, no one can hear you complain."
+victory9 = "This is why we can't be friends."
+victory10 = "Behold my mighty feet and despair!"
+victory11 = "Call your mother. You are not going home!"
+victory12 = "This is no longer funny!"
+victory13 = "That wasn't a bug, just my awesome new feature!"
+victory14 = "Can't touch this!"
+victory15 = "I would've beaten you sooner if it weren't for the download queue."
+victory16 = "I'm not unbalanced. It is you who are underpowered."
+victory17 = "If a character dies offline, does it make a KO scream?"
+victory18 = "Oh boy this one's going straight to YouTube!"
+victory19 = "Don't talk to me or my sons ever again."

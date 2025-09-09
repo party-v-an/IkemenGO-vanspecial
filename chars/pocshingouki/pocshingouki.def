@@ -1,0 +1,62 @@
+; ____________________________________________
+;| Pocket Shin Gouki by Phantom.of.the.Server |
+; ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+;====================<DEFINITION>====================
+[Info]
+name          = "Pocket Shin Gouki"
+displayname   = "Shin Gouki"
+lifebarname   = "Shin Gouki"
+versiondate   = 2025
+mugenversion  = 1.1; deprecated
+ikemenversion = 1.0
+author        = "Phantom.of.the.Server"
+pal.defaults  = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+localcoord    = 320, 240
+portraitscale = 1.0
+
+[Files]
+cmd     = psgcmd.cns
+cns     = psgcns.cns
+st1     = states/psgzss.zss
+st2     = states/psgsystem.st
+st3     = states/psgnormal.st
+st4     = states/psgspecial.st
+st5     = states/psgsuper.st
+st6     = states/psghelper.st
+st7     = states/inputs.zss
+st8     = CONFIG.txt
+stcommon= common1.cns
+sprite  = psgsprite.sff
+anim    = psganim.air
+sound   = psgsound.snd
+movelist= psgmovelist.dat
+pal1    = palettes/default.act
+pal2    = palettes/black.act
+pal3    = palettes/orange.act
+pal4    = palettes/teal.act
+pal5    = palettes/green.act
+pal6    = palettes/grey.act
+pal7    = palettes/meldopurple.act
+pal8    = palettes/meldoteal.act
+pal9    = palettes/meldored.act
+pal10   = palettes/meldopink.act
+pal11   = palettes/meldogreen.act
+pal12   = palettes/meldoyellow.act
+
+[Palette Keymap]
+x = 1
+y = 2
+z = 3
+a = 4
+b = 5
+c = 6
+x2 = 7
+y2 = 8
+z2 = 9
+a2 = 10
+b2 = 11
+c2 = 12
+
+;[Arcade]
+;intro.storyboard = intro.def
+;ending.storyboard = ending.def

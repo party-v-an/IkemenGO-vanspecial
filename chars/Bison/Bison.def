@@ -1,0 +1,51 @@
+; ______________________________
+;| Bison by Coelasquid and PotS |
+; ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+;====================<DEFINITION>====================
+[Info]
+name         = "Bison Bison"
+displayname  = "Bison"
+versiondate  = 2022
+mugenversion = 1.0
+author       = "Coelasquid and PotS"
+pal.defaults = 1,2,3,4,5,6,7,8,9,10,11,12
+localcoord   = 320,240
+
+[Files]
+cmd     = Command.cmd
+cns     = Constants.cns
+st      = States.st
+stcommon= common1.cns
+sprite  = Sprite.sff
+anim    = Anim.air
+sound   = Sound.snd
+pal1    = Palettes/default.act
+pal2    = Palettes/blue.act
+pal3    = Palettes/green.act
+pal4    = Palettes/violet.act
+pal5    = Palettes/orange.act
+pal6    = Palettes/gray.act
+pal7    = Palettes/greenblue.act
+pal8    = Palettes/yellow.act
+pal9    = Palettes/magenta.act
+pal10   = Palettes/pink.act
+pal11   = Palettes/blackandwhite.act
+pal12   = Palettes/lineart.act
+
+[Palette Keymap]
+x = 1
+y = 2
+z = 3
+a = 4
+b = 5
+c = 6
+x2 = 7
+y2 = 8
+z2 = 9
+a2 = 10
+b2 = 11
+c2 = 12
+
+;[Arcade]
+;intro.storyboard = intro.def
+;ending.storyboard= ending.def

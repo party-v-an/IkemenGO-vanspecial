@@ -1,0 +1,47 @@
+<#f0f000>THROWS</>
+
+Saba Ori							[_B/_F]_+^2P
+Tawara Nage							[_B/_F]_+^2K
+
+<#f0f000>UNIQUE ATTACKS</>
+
+Harai-geri							_F_+^C
+Target Combo 1						^X, ^Y
+Target Combo 2						_D_+^A, _D_+^X
+
+<#f0f000>SPECIAL MOVES</>
+
+Hyakuretsu Harite_EX				^P, ^P, ^P, ^P
+Super Zutsuki_EX					~B_F^P
+Super Hyakkan Otoshi_EX				~D_U^K
+Ooichou Nage_EX						_F_DF_D_DB_B^P
+Iwato Biraki_EX						_F_DF_D_DB_B^K
+
+<#f0f000>SUPER COMBOS</>
+
+Oni Musou_MAX						~B_F_B_F^P
+Fuji Oroshi_MAX						~B_F_B_F^K
+_!MAX followup						_MASH^P
+
+<#f0f000>LEVEL 3 SUPER COMBOS</>
+
+Orochi Kudaki						_F_DF_D_DB_B_F_DF_D_DB_B^2P
+
+<#f0f000>SYSTEM</>
+
+Forward Dash					_F_F
+_!Run							_HOLD_F
+Back Dash						_B_B
+High Jump						_TAP_D,_U
+Hop								_TAP_U
+Hyper Hop						_TAP_D, _TAP_U
+Parry							_TAP_F / _TAP_D
+Roll							[_B/_F]_+^A_+^X
+Sidestep						^A_+^X
+_!Sidestep Attack				^P/^K
+Power Charge					^B_+^Y
+Custom Combo					_AIROK^C_+^Z
+Guard Cancel High				(during guard) _F_+^2P
+Guard Cancel Low				(during guard) _F_+^2K
+Fall Recovery					(when allowed)^P/^K
+Taunt							^S
