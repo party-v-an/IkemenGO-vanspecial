@@ -155,10 +155,10 @@ intensity = 128
 ; Put a filename for a MOD, MP3 or MIDI here, or just leave it
 ; blank if you don't want music. If an invalid filename is
 ; given, then no music will play.
-bgMusic =
+bgMusic = stage1.mp3
 
-; bgmLoopstart = <sample number>
-; bgmloopend = <sample number>
+bgmLoopstart = 229601
+bgmloopend = 10121472
 
  ;Adjust the volume. 100 is for 100%.
 bgmVolume = 100

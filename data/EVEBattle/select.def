@@ -1075,9 +1075,9 @@ kfmZ,stages/kfm.def,bonus=1,single=1,ai=8,hidden=2
  ;Insert your stages below.
 
 stages/kfm.def
-stages/stage0.def
-stages/stage0-720.def
 stages/stage1.def
+stages/stage3d.def
+stages/stageZ.def
 ;-------------------------------------------------------------------------------
 [Options]
  ;Here you set the maximum number of matches to fight before game ends in arcade

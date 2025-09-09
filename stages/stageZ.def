@@ -172,7 +172,7 @@ offset = 0, 0
 ; Put a filename for a MOD, MP3 or MIDI here, or just leave it
 ; blank if you don't want music. If an invalid filename is
 ; given, then no music will play.
-bgMusic =
+bgMusic = stageZ.mp3
 
 ; bgmLoopstart = <sample number>
 ; bgmloopend = <sample number>
