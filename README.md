@@ -1,13 +1,14 @@
 # Raw ass lobbies
 ## Setup instructions
 ### The easy way
-* Click the big green Code button and download ZIP
+* Grab the latest release from the sidebar on the right
 * Extract it wherever
 * Note that you'll have to re-download the entire thing whenever an update happens so you might want to consider...
 ### The hard way
-* Download [Git for Windows](https://git-scm.com/downloads/win) and install it, you'll need this to be able to update. Keep most of the options set to default except the bahavior of "git pull", change that to "Only ever fast-forward".
-  * Linux users probably have this installed already, but if not use your distro's package manager (apt-get, pacman, etc.)
-* Open a command line somewhere and type "git clone https://github.com/party-v-an/IkemenGO-vanspecial.git" to download everything
+* Download [Git for Windows](https://git-scm.com/downloads/win) and install it, you'll need this to be able to update. Keep most of the options set to default except the bahavior of "git pull", change that to "Only ever fast-forward". Also make absolutely sure you leave Git LFS support enabled, you'll need that.
+  * Linux users probably have this installed already, but if not use your distro's package manager (apt-get, pacman, etc.). Make sure you have the git-lfs package installed as well as your distro may not include it by default.
+* Open a command line somewhere and type "git lfs install" to set up Git LFS (this is needed because it reduces the size of the repository to keep it within Github's size limits)
+* Afterwards type "git clone https://github.com/party-v-an/IkemenGO-vanspecial.git" to download everything
 * Once it's downloaded you can use the update.bat file to download updates. If something goes wrong use reset.bat to reset the game to its default state.
 
 ## Playing online
