@@ -11,3 +11,5 @@ Ikemen.log
 save/logs
 save/replays
 save/stats.json
+*.bat
+*.sh

@@ -2,7 +2,8 @@
 ## Setup instructions
 * Grab the updater from the sidebar on the right
 * Extract it to an empty folder
-* Run the .bat (on Windows) or .sh (on Linux) file
+* Run the .bat file
+* If you're on Linux figure it out yourself lol. You need git-lfs installed and activated or else it won't work.
 
 ## Playing online
 * Set up a VPN account at https://madhammer.club/povertyvpn/ (unless you wanna forward ports on your router and give out your IP address to people)
