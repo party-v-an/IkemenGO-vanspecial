@@ -1,0 +1,42 @@
+; Definition file for Kung Fu Man
+; Contains all the filenames needed for the character
+
+; Player information
+[Info]
+name = "Curly Brace"    ;Name of character
+displayname = "Curly Brace" ;Name of character to display
+versiondate = 23,05,2019    ;Version of character (MM-DD-YYYY or X.XX)
+mugenversion = 1.0          ;Version of M.U.G.E.N character works on (X.XX)
+author = "CH";or Taty parker (CH)          ;Character author name 
+pal.defaults = 1,2,3,4,5,6,7;,8,9,10      ;Default palettes in order of preference (up to 4)
+                            ;Numbering starts from 1
+localcoord = 920,640       ;Local coordinate space width and height
+
+; Files for the player
+[Files]
+cmd     = CurlyB.cmd        ;Command set
+cns     = CurlyB.cns        ;Constants
+st      = CurlyB.cns        ;States
+st2      = CurlyB_Normal.cns        ;States
+st3      = CurlyB_Special.cns        ;States
+st4      = CurlyB_Hyper.cns        ;States
+st5      = CurlyB_Helper.cns        ;States
+stcommon = common.cns      ;Common states (from data/ or motif)
+sprite  = CurlyB.sff        ;Sprite
+anim    = CurlyB.air        ;Animation
+sound   = CurlyB.snd           ;Sound
+pal1 = 1.act
+pal2 = 2.act
+pal3 = 3.act
+pal4 = 4.act
+pal5 = 5.act
+pal6 = 6.act
+pal7 = 7.act
+pal8 = 8.act
+;pal9 = 9.act <---Unfinished
+;pal10 = 10.act <---Unfinished
+; Arcade mode
+
+;[Arcade]
+;intro.storyboard = intro.def
+;ending.storyboard = ending.def

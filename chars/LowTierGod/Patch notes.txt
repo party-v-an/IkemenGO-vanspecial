@@ -1,0 +1,75 @@
+v1.25
+LTG now ACTUALLY berates Bellamy for being a shrimp, wheenie scrub after winning the match. He still only makes these remarks at the victory screen.
+Adjusted many of LTG's normals. said normals now do more damage but are easier to stuff during active frames.
+
+v1.24
+Buffed CHP. Pushback the opponent recieves from getting hit by the first active frame now only applies on block.
+Removed eronious code that was left in after changing the AI charge buffer code.
+Zhihao & Bellamy have been added to the list of "twinks", LTG will now question thier manhood after bodying the boys.
+
+v1.22
+LTG now uses his boss-specific winquote when he beats Gill, regardless if he's on his boss stage or not. LTG has bias towards Gill, perhaps because the two see themselves as gods amongst men...
+LTG now has unique winquotes whenever he bodies dudes that... have more fragile-looking builds.(many of which unsurprisingly come from weeb sources)Currently applies to Gliz, though more can be added by you the player.
+
+v1.21
+Adjusted cmd file. merged triggers for player & AI regarding normal links, they are just as functional but take less space now.(this change slightly improves the AI)
+Updated Charge Buffer coding. The AI adheres to the same rules that you follow regarding charge inputs more closely now.
+Updated AI Parry code. AI's ability to parry projectiles now more accurately scales with AIlevel, meaning LTG's AI might actually be worse at parrying them.
+
+v1.195
+SHK,Back SHK, & all versions of Laggin Knee Drop deal bonus damage whenever they hit foes that are attacking, HKs & EX Knee Drop inflict additional hitstun in these scenarios as well.
+Nerfed CMP. reduced blockstun by 2 ticks.
+LTG's KO scream when he loses to Ken now also plays when he gets KO'd by Blaziken.(his rage is so great, it blinds him!)
+Edited audio clip that plays during LTG's Intro against Ryu.
+LtG's winquotes that play when LTG's bodies shotos now also play when he bodies Blaziken.
+
+v1.17
+Removed the interactions.cns & all associated anims & states.
+LTG can now cancel forward dash end frames with all of his standing & crouching attacks since he has no attack that cancel back dash end frames.
+Forward dash & running can now be toggled in the config.txt file. No more hunting down the forward dash/run states in the cmd.
+LTG can't jump during a run anymore, Running always lasts for at least 9 ticks before it can be ended by releasing forward.(unless it's interupted by getting attacked.)
+Jump cancelling run end frames are now possible on frame 2 or later as opposed to any frame.(running must be enabled for this change to take effect)
+Updated LTG's winquotes to play when LTG's bodies the following characters:
+Shotos:Kairi
+Boss fights:Nyal(when battling on THE MADNESS CITY)
+
+v1.14
+Adjusted blockstun for standing & crouching normals as well as Triggered Tackle.
+Adjusted hitstun for standing & crouching normals.
+Edited CMK. Frame 3 no longer has a hitbox, base damage increased to 45,0 from 39,0
+Edited CMP. Frame 4 no longer has a hitbox, base damage increased to 59,0 from 49,0.
+Added more voice clips for the following: gethit, grabbed, getting caught in a combo of at least 10 hits.
+Boss-specific victory quote now plays when LTG defeats Ingrid in the Infinity Chamber.
+Adjusted jump land cancelling & dash end cancelling.
+Fixed unintentional grammar errors in two of his victory quotes.
+
+v1.1
+Implemented "Spam Control" variables for charge moves, limiting rapid use of these attacks. This code affects the AI as well.
+
+v1.095
+Salt Levels tweaked. When LTG wins a round, his salt decreases by a value equal to his remaining HP.(It will never go below zero)
+Fixed Salt levels mechanic. Salt no longer carries over to the next match.(it still persists between rounds in a fight)
+increased Height stat to 62 from 60
+
+v1.08
+Adjusted Eraserhead Smash. you no longer take damage when connecting the move, instead the hurtbox within the hitbox is bigger.
+Fixed Cheating AI issue. AI won't use triggered tackle when moving forward, won't use Eraserhead smash or Laggin Knee drop unless it's stationary.
+Reworked the Supers. They cost no power but can only be used when LTG gets angry enough(explained further in the Read or GTAB.txt file)
+
+v1.065
+set yaccel to .5 for all normals & specials
+Removed movecontact requirement for the AI to special cancel in the .cmd file.(The AI can do anything you can now.)
+Replaced duplicate voice clips with new ones to reduce repetition.
+Buffed EX Eraserhead Smash. LTG's invincible for the first 5 ticks on startup.
+Removed juggle limit for Triggered Tackle & EX Eraserhead.
+Fixed SLP. Now you can ONLY follow-up with standing lights if the previous light hits.
+
+
+v1.035
+Edited super cancel timing for normals & disabled super canceling from specials.
+Removed self damage from connecting Laggin Ass Knee Drop. It made the move too shitty
+Removed unused audio clips from the .snd file.
+Modder's block now reflects projectiles.(He can still hurt himself with the barrier.)
+EX Triggered Tackle can be canceled now & only Desperate Fireball can cancel Eraserhead Smash's landing frames.
+All specials(excluding Fireball)can be canceled regardless if it hits or not.(LTG doesn't reward skill IRL)
+Can no longer follow up blocked or whiffed normals with another normal.

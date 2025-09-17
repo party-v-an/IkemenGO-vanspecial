@@ -1,0 +1,341 @@
+MUGEN: DARK DONALD(or Dark Ronald)
+ORIGNAL CHAR: KISHIO
+EDITED BY: DONALDDESU
+
+;-------------------------------------------------------
+***ATTENTION***
+
+Before you use or play this Char:
+-Please set your "PlayerProjectileMax" into 100 or higher. (in mugen.cfg)
+-Please don't edit this character just because YOU CAN'T DEFEAT HIM.
+ No cheating and don't be so bullshit.
+-Be sure your CPU is too fast and has no problem with your video card.
+-Also don't forget get that Dark Donald is SUPPOSE TO BE CHEAP CHAR.
+ But he's not a SUPER CHEAP CHAR like Chuck Norris or whatever.
+ trust me, Dark Donald is still beatable.
+-If you hate cheap characters then please go kill yourself and fuck off.
+ Seriously, this char is not fun at all if you're not interested with cheap chars.
+-If you think this Dark Donald was waaay too strong, you can change something
+ in OPTION.txt
+
+:________________________________________
+:Profile
+:________________________________________
+-----
+Name: - Dark Donald
+        ダークドナルド
+-----
+Last Name: - McDonald
+　　　　　　　　　　　　　　　マクドナルド
+-----
+Species: - Clown, Zombie, Vampire, Devil and Ghost
+           ピエロ、ゾンビ、吸血鬼、デビル、お化け
+-----
+Modes of Combat: - Death Clown
+　　　　　　　　　　　　　　　　　　　　　　死のピエロ
+-----
+Location: - Abandoned McDonald?
+            捨てられたマクドナルド？
+-----
+Age: - Approximately 666 Years
+　　　　　　　　およそ６６６年
+-----
+Birthday: - June 20 (In Japan)
+　　　　　　　　　　　　　　6月20日
+-----
+Gender: - Male
+　　　　　　　　　　　男
+-----
+Blood Type: - Type MC
+　　　　　　　　　　　　　　　　ＭＣタイプ
+-----
+Appearances: - Ronald McDonald insanity/McRoll'd  (A.K.A: "U.N.owen was her?" with McDonald remix)
+               M.C.ドナルドはダンスに夢中なのか？最終鬼畜道化師ドナルド・Ｍ (A.K.A:"U.N.オーエンは彼女なのか?最終鬼畜妹フランドール・Ｓ"のドナルド音ＭＡＤ)
+-----
+Birthplace: - Japan
+　　　　　　　　　　　　　　　　日本
+-----
+Hobbies: - Killing and Murdering people
+         - All Junk Food
+         - Torment a person
+         - Sleep on Midnight
+         - Dancing
+         - And games, of course
+           人間を皆殺し
+           ジャンクフード（何でも）
+           人を酷く苦しめる
+           夜中に寝る
+           ダンス
+           そしてもちろんゲーム
+_____________________
+_____________________
+Likes:- All Touhou and Vocaloid character
+      - Cheap character
+      - Edit character
+      - Bonus character
+      - Punching bag character
+_____________________
+_____________________
+Dislikes:- Shitty Character
+         - Spriteswap Character
+         - Rapist Character
+         - char that stronger than Dark Donald
+_____________________
+_____________________
+Motto: - Ran Ran Ruu
+       - i'm lovin' it!
+       - When Donald become happy... I'll kill it!
+
+_______________________________________________________________________________________
+:________________________________________
+:Command
+:________________________________________
+x - Weak  
+
+y - Weak_Normal
+
+z - Warp
+
+a - Normal    
+
+b - Strong
+
+c - Short-Cut
+
+s - Taunt(1000 power)
+
+;---------------------------------------
+F - Forward
+
+B - Back
+
+D - Down
+
+U - Up
+
+:_______________________________________
+:Specials
+:_______________________________________
+
+hold_F + b = Potato Blade
+--------------------------------
+            (done in air)
+F or B + b  (near opponent) = Throw
+--------------------------------
+             (done in air)
+F or B + x+y (near opponent) = Basher
+--------------------------------
+D, DF, F, a (done in air) = Hamva-ga
+OR
+c
+--------------------------------
+B, D, F, b  (done in air) = Hamva-ga a lot
+OR
+hold_F + c
+--------------------------------
+F, D, DF, a (done in air) = Great Dona-side cutter
+OR
+hold_D + c
+--------------------------------
+D, DB, B, a = Eat a lot of french flies!
+OR
+hold_B + c
+--------------------------------
+
+B, D, DB, a = Dark Turbo
+--------------------------------
+
+D, DF, F, x = Go Active!
+--------------------------------
+
+D, DF, F, y = Go Happy!
+--------------------------------
+
+D, DB, B, x = Call D.Donald-Girl 
+--------------------------------
+
+D, DB, B, b = Death Bomb
+--------------------------------
+
+D, DB, B, y = B.K. Bomb
+--------------------------------
+
+x + b       = Red Spirit
+:_________________________________________
+:Supers
+:_________________________________________
+________
+/Lv.1/
+D, DF, F, D, DF, F, x = I'm over crazy about dancing!
+D, DF, F, x+y
+--------------------------------
+
+D, DF, F, D, DF, F, y (in Air) = A lot of Hamva-ga!
+D, DF, F, x+y (in Air)
+--------------------------------
+
+D, DB, B, D, DB, B, a = McGhost Wave
+D, DB, B, y+a
+--------------------------------
+________
+/Lv.2/
+D, DF, F, D, DF, F, a = D-DONALD MAGIC
+D, DF, F, y+a
+--------------------------------
+
+D, DB, B, D, DB, B, x = D.Donald-Girl Rush
+D, DB, B, x+y
+--------------------------------
+
+D, DB, B, D, DB, B, b = Hell Aura Bomb
+D, DB, B, a+b
+--------------------------------
+________
+/Lv.3/
+
+D, DF, F, D, DF, F, b = UnHappy Meal
+D, DF, F, a+b
+----------------------------------------
+
+x + y + z (Life 80%)  = Hamva-ga DA!!!
+
+----------------------------------------
+
+a + b + C (Life 40%)  = ELEMENT MASTER
+
+----------------------------------------
+========================================
+"ELEMENT MASTER" SUMMON:
+= FLAME
+= BLIZZARD
+= VOLTZ
+= TORNADO
+= GOD STONE
+= HOLY JUDGEMENT
+= BLACK JUDGEMENT
+= METEOR
+= MEDIC
+= ALL ELEMENT(Summon all elements)
+
+:_________________________________________
+:UPDATE
+;_________________________________________
+
+・GO FIND YOURSELF... GOOD LUCK...
+
+:_________________________________________
+:SPECIAL THANKS/CREDITS/WHATEVER
+;_________________________________________
+-Kishio             (Most of thanks)(Original Creator)
+-The_None           (Most of thanks)
+-YU-TOHARU          (Most of thanks)
+-Kurogane           (Most of thanks)
+-42code42/code4240  (Most of thanks)
+-TheAerialRave      (Most of thanks)
+-MAITAKE            (Most of thanks)
+-Gaelik             (Most of thanks)
+-rasen rinne        (Most of thanks)
+-DarkDonald1        (Most of thanks)
+-Excursion
+-Orochi Herman
+-Warusaki3
+-The Lord of Flies
+-Ayumu Sekijo
+-Neat Unsou
+-Ricepigeon
+-muteki
+-minoo
+-frule
+-ouchi
+-SSkye
+-maten
+-ju
+-EL
+-H
+-peg
+-Man
+-kari
+-⑨
+-こんばんおっぱい
+-CAPCOM
+-D*sney
+-Bio hazzard 4
+-Nice boat/School days
+-Pixiv
+-All of my friends in YouTube and DA
+-McRoll(youtube or Nicodouga)
+-AVGN(CINEMASSACRE)
+-McDonald
+-Vocaloid
+-Touhou(ZUN)
+-ELECBYTE
+-Fighter Factory
+-Vegas Movie Studio Platinum 9.0
+-Nico Nico Douga
+-Old Youtube
+-And You
+
+:___________________________________________________
+:SPECIAL FUCK YOU
+:___________________________________________________
+-New YouTube
+-New DA
+-Viacom
+-blackdragon20092010
+-Trextrex65
+-Souken
+
+
+;====================>Contact<======================
+;You can report, comment or contact it in here:
+;BUT I DON'T THINK I'LL FIX THE GLITCHES OR BUGS...
+;===================================================
+
+-Youtube(QUIT BUT OPEN ACCOUNTS)
+http://www.youtube.com/user/Donalddesu
+
+-deviantArt(QUIT)
+???
+
+-Y!messanger(DEAD)
+???
+
+====================================================
+My mediafire:
+http://www.mediafire.com/donadona
+
+
+=================DarkDonald1 Edits==================
+This ReadMe was edited by DarkDonald1 because of
+some grammar issues. Now it is easier to read.
+(Sorry Donalddesu, but I must say that the grammar
+in this ReadMe was kinda bad.....)<-[No problem! Thanks to let me know! by Donalddesu]
+
+DD1 Edits....(O=Accept,X=NotAccept)
+O-A sound will play if Dark Donald says something from the mirror posing commercial....(for teh lulz)
+X-"Hell Aura Bomb" will not go away until the enemy is dead.
+O-Some sounds are now clearer than before....
+O-Changed the Readme at Christmas Eve
+O-Dark Donald's "Basher" skill has some sounds play, while bashing, he will say MUDAMUDAMUDA!!! At the end of it, he will say "I'm lovin' it"
+O-Dark Donald's face will change when doing "Hamva-ga DA!" (To:Dark Dio Donald)
+O-Dark Donald's stepping sound is now much louder and clearer.
+O-When doing the suprise, D4Reimu will talk.....
+O-Did change AVGN in the suprise to regular Donald, but changed it back when something strange happened.....
+O-Dark Donald now has a crossed arms sprite, but is not used. (made by me of course, and you can use it if you want to....)
+O-Dark Donald's taunt has been put back and gives you 1000 power, but has a price....
+X-Changed "The Maze Bitch" picture to McDonald's logo.....(I'M FUCKING SCARED OF THAT THING!!!!)
+O-But I've decided to keep "Devil Satan", cause I'm not scared of that....
+O-Added an extra normal intro.
+O-Edited this ReadMe at Christmas Eve.
+=====================D-Donald Girl edits============
+O-Donald girl now has stance sprites
+O-Anim 2105 has been changed to look better.
+O-Anim 192 has been changed to look better.
+O-When Donald girl is hit, a new sprite is added, making it look realistic.
+O-Donald girl has a win pose.
+O-When Donald girl wins with "D-Donald Girl Rush", she will automatically stop.
+------------------------------------------------------------------------------------
+That's all! Until the next time I update him......
+Thanks for getting my edited Dark Donald. If you have any ideas, please tell me! I'll be more than happy to try new stuff out....
+
+-Thanks, DarkDonald1 and Donalddesu

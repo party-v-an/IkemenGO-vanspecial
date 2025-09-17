@@ -1,0 +1,852 @@
+;---------------------- Integer variable list ----------------------
+
+; var(0):=  EX move FX,  EX move FX(Alt),  super move FX R(Alt),  super move FX L(Alt),  Drive off FX,  Roman Cancel FX,  FLAMES Particles,  Drive mode aura glow,  Drive mode offline aura glow
+; var(1):=  SP Combo,  EX SP Combo,  EX move FX,  EX move FX(Alt),  super move FX R(Alt),  super move FX L(Alt),  Drive off FX,  Roman Cancel FX,  Drive mode aura glow,  Drive mode offline aura glow
+; var(2):=  Drive mode aura glow,  Drive mode offline aura glow
+; var(4):=  Downed get-hit (lying defeated)
+; var(5):=  Center Slash Spark,  Center Slash Spark,  Center Slash Spark(Alt),  Center Slash Spark(Alt2)
+; var(6):=  Slash Spark,  Hyper spark
+; var(8):=  particles Slash Spark
+; var(9):=  scene,  particles Slash Spark
+;var(10):=  Super Port,  White BG fade,  Super BG,  Super BG,  Super BG,  CUT IN FX2,  Super BG,  Super BG,  White BG,  Instant Comment
+;var(11):=  Speed line BG,  Speed line BG
+;var(12):=  Drive mode aura
+;var(13):=  king slash start,  king slash start,  king(Specialy for super),  Drive mode aura
+;var(14):=  king slash start,  king slash start
+;var(21):=  missil Launch,  missil Launch,  missil Launch,  missil Launch
+;var(25):=  fire(front),  fire(diagonal),  fire(air),  fire(air + diagonal),  LV2 fire(front),  LV2 fire(front),  LV2 fire(front),  LV2 fire(diagonal),  LV2 fire(diagonal),  LV2 fire(diagonal),  LV2 fire(air),  LV2 fire(air),  LV2 fire(air),  LV2 fire(air + diagonal),  LV2 fire(air + diagonal),  LV2 fire(air + diagonal),  LV3 fire(front),  LV3 fire(diagonal),  LV3 fire(air),  fire(air + diagonal),  fire(Specialy for super),  fire diag up(Specialy for super)
+;var(31):=  States that are always executed (use statedef -2),  Throw - Throwing the opponent,  Throw - Throwing the opponent,  LV2 Machine gun shot(front),  LV2 Machine gun shot(Diagonal),  LV2 Machine gun shot(air),  LV2 Machine gun shot(air Diagonal),  EX Missil launch LV2,  ---(EX) Sp-Combo star ---,  Waiting P2,  Downed get-hit (lying defeated)
+;var(40):=  missil(super),  missil air(super),  fireball(pojectile),  EXfireball(pojectile),  D-EXfireball(pojectile),  fireball(pojectile Air),  EXfireball(pojectile Air),  D-EXfireball(pojectile Air),  missil(med),  Missle fall(med),  missil(EX),  missil(EX),  missil(EX),  Missle fall(EX),  Missle fall(EX),  Missle fall(EX)
+;var(41):=  king slash start,  king slash start,  king slash start,  king slash start
+;var(45):=  States that are always executed (use statedef -2),  AirJump Start,  SuperJump
+;var(46):=  States that are always executed (use statedef -2)
+;var(47):=  fireball(pojectile),  EXfireball(pojectile),  D-EXfireball(pojectile),  fireball(pojectile Air),  EXfireball(pojectile Air),  D-EXfireball(pojectile Air)
+;var(48):=  States that are always executed (use statedef -2)
+;var(49):=  States that are always executed (use statedef -2)
+;var(50):=  States that are always executed (use statedef -2),  Stand Light Punch,  Standing strong punch,  Standing strong kick,  Standing light kick,  Standing strong kick,  Standing strong kick,  Standing strong kick,  Crouching light punch,  Crouching light kick,  Crouching strong punch,  Crouching light kick,  Jump Light Kick,  Jump Strong Punch,  Jump Light Kick,  Jump Strong Punch,  Jump Strong Kick,  Dash Kick,  Dive Kick (Air),  Crouching light kick,  Standing Strong Kick,  Dash(Ground),  Flying sword,  Throw - Throwing the opponent,  Throw - Throwing the opponent,  Machine gun shot(front),  Machine gun shot(Diagonal),  Machine gun shot(air),  Machine gun shot(air Diagonal),  LV2 Machine gun shot(front),  LV2 Machine gun shot(Diagonal),  LV2 Machine gun shot(air),  LV2 Machine gun shot(air Diagonal),  EXfireball shot,  EXfireball shot(Diagonal),  EX Missil launch LV2,  missil Launch,  missil Launch,  Waiting P2,  fire(air),  fire(air + diagonal),  LV3 fire(air),  fire(air + diagonal),  Super Cancel,  Super Cancel(Aerial)
+;var(51):=  States that are always executed (use statedef -2),  Waiting P2,  Burst
+
+;---------------------- Float variable list ----------------------
+
+; fvar(0):=  Run Intro,  Hitspark - Center,  Hitspark - Streaks,  Hitspark - Impact,  Slash Spark - Impact
+; fvar(1):=  scene,  particles Slash Spark
+; fvar(2):=  Super BG
+; fvar(3):=  3040 - Slap FX prt
+; fvar(6):=  Machine gun shot(air Diagonal),  LV2 Machine gun shot(air Diagonal)
+; fvar(7):=  States that are executed when in self's state file (use statedef -3),  Ex Machine gun Hammer(Star),  Ex Machine gun Hammer(Hit)
+; fvar(8):=  CUT IN FX2,  Instant Comment
+; fvar(9):=  CUT IN FX2,  Instant Comment
+;fvar(17):=  king slash start,  king slash start
+;fvar(18):=  king slash start,  king slash start
+;fvar(28):=  king slash start,  king slash start,  king slash start,  king slash start
+;fvar(29):=  king slash start,  king slash start,  king slash start,  king slash start
+
+; Curly Brace's constants and state file.
+; There are comments scattered through this file, so you may like to
+; take a look if would like to learn more about the cns.
+
+[Data]
+life = 1000
+power = 3000
+attack = 100
+defence = 100
+fall.defence_up = 50
+liedown.time = 25
+airjuggle = 999
+sparkno = 2
+guard.sparkno = 40
+KO.echo = 0
+volume = 100
+IntPersistIndex = 0
+FloatPersistIndex = 0   
+
+[Size]
+xscale = .95           ;Horizontal scaling factor.
+yscale = .95          ;Vertical scaling factor.
+ground.back = 50     ;Player width (back, ground)
+ground.front = 54    ;Player width (front, ground)
+air.back = 48        ;Player width (back, air)
+air.front = 48       ;Player width (front, air)
+height = 250         ;Height of player (for opponent to jump over)
+attack.dist = 640    ;Default attack distance
+proj.attack.dist = 90 ;Default attack distance for projectiles
+proj.doscale = 0     ;Set to 1 to scale projectiles too
+head.pos = -20, -220 ;Approximate position of head
+mid.pos = -20, -180  ;Approximate position of midsection
+shadowoffset = 0     ;Number of pixels to vertically offset the shadow
+draw.offset = 0,10    ;Player drawing offset in pixels (x, y). Recommended 0,0
+
+[Velocity]
+walk.fwd  = 4.9      ;Walk forward
+walk.back = -3.9     ;Walk backward
+run.fwd  = 14,0   ;Run forward (x, y)
+run.back = -9.5,-15.5 ;Hop backward (x, y)
+jump.neu = 0,-23.6   ;Neutral jumping velocity (x, y)
+jump.back = -10.2,-33.6 ;Jump back Speed (x, y)
+jump.fwd = 10,-23.6     ;Jump forward Speed (x, y)
+runjump.back = -10.2,-23.4 ;Running jump speeds (opt)
+runjump.fwd = 16,-23.4    ;.
+airjump.neu = 0,-23.4     ;.
+airjump.back = -10.2      ;Air jump speeds (opt)
+airjump.fwd = 10          ;.
+air.gethit.groundrecover = -.15,-3.5  ;Velocity for ground recovery state (x, y) **MUGEN 1.0**
+air.gethit.airrecover.mul = .5,.2     ;Multiplier for air recovery velocity (x, y) **MUGEN 1.0**
+air.gethit.airrecover.add = 0,-5.5    ;Velocity offset for air recovery (x, y) **MUGEN 1.0**
+air.gethit.airrecover.back = -3       ;Extra x-velocity for holding back during air recovery **MUGEN 1.0**
+air.gethit.airrecover.fwd = 3         ;Extra x-velocity for holding forward during air recovery **MUGEN 1.0**
+air.gethit.airrecover.up = -3         ;Extra y-velocity for holding up during air recovery **MUGEN 1.0**
+air.gethit.airrecover.down = 3        ;Extra y-velocity for holding down during air recovery **MUGEN 1.0**
+
+
+[Movement]
+airjump.num = 0      ;Number of air jumps allowed (opt)
+airjump.height = 65 ;Minimum distance from ground before you can air jump (opt)
+yaccel = 1.20         ;Vertical acceleration
+stand.friction = .75  ;Friction coefficient when standing
+crouch.friction = .82 ;Friction coefficient when crouching
+stand.friction.threshold = 8          ;If player's speed drops below this threshold while standing, stop his movement **MUGEN 1.0**
+crouch.friction.threshold = .2        ;If player's speed drops below this threshold while crouching, stop his movement **MUGEN 1.0**
+air.gethit.groundlevel = 100          ;Y-position at which a falling player is considered to hit the ground **MUGEN 1.0**
+air.gethit.groundrecover.ground.threshold = -80 ;Y-position below which falling player can use the recovery command **MUGEN 1.0**
+air.gethit.groundrecover.groundlevel = 40   ;Y-position at which player in the ground recovery state touches the ground **MUGEN 1.0**
+air.gethit.airrecover.threshold = -4  ;Y-velocity above which player may use the air recovery command **MUGEN 1.0**
+air.gethit.airrecover.yaccel = 1.4    ;Vertical acceleration for player in the air recovery state **MUGEN 1.0**
+air.gethit.trip.groundlevel = 60      ;Y-position at which player in the tripped state touches the ground **MUGEN 1.0**
+down.bounce.offset = 0, 80            ;Offset for player bouncing off the ground (x, y) **MUGEN 1.0**
+down.bounce.yaccel = 1.6              ;Vertical acceleration for player bouncing off the ground **MUGEN 1.0**
+down.bounce.groundlevel = 48          ;Y-position at which player bouncing off the ground touches the ground again **MUGEN 1.0**
+down.friction.threshold = .2          ;If the player's speed drops below this threshold while lying down, stop his movement **MUGEN 1.0**
+
+;Default language victory quotes **MUGEN 1.0**
+;The default language victory quotes must be implemented in English.
+[Quotes]
+; Up to 100 victory quotes can be specified per language (victory0 - victory99)
+victory1 = "Look like you're not able to deal with my Machine-Gun Right ?"
+victory2 = "Phew that was close! I almost ended up as scrap metal"
+victory3 = "I win that match but you're not so bad at all!"
+victory4 = "That was a great fight, huh i guess..."
+victory5 = "Hey you're pretty good! Let's do it again next time"
+victory6 = "When my Machine-Gun Reach his last level, no one can stand against me"
+victory7 = "I must protect the Mimiga against all type of threat no matter what"
+Victory8 = "It's Finally over"
+Victory9 = "The Great powerful and cheerful soldier at your service" ;--:D
+Victory10 = "A great fight to spend time...Whoaw"
+
+;Vs Quote
+Victory11 = "I won this time! Now the machine gun win against the Polar Star!Hurray!!"
+Victory12 = "Now we see who manage his stuff LMAO"
+
+;Vs Gunvolt(and other char who can handle electric power)
+Victory13 = "You can handle electricity not bad...But it's not too dangerous for your body"
+Victory14 = "Shut it off"
+
+;Vs Shovel-knight(and other char armed with a weird weapon)
+Victory15 = "I see that we can do anythings with anythings nowadays...Interesting"
+
+;Vs Kawase
+Victory16 = "I think that I will try fishing, huh can you teach me Please?"
+
+;Vs Helen
+Victory17 = "You said that you will have your revenge but You're not so scary at all"
+
+;Vs Solange
+Victory18 = "And you're surprised to be hit with that type of cloths"
+
+;------------Vs RWBY char-----------------
+;Vs Ruby rose
+Victory19 = "Whoaw Your weapon is very cool, can I try it"
+
+;Vs Weiss
+Victory20 = "Why the time turned to snow suddenly It's weird"
+
+;Vs Blake
+Victory21 = "Just by looking, you seem to be a quite person just like Quote"
+
+;Vs Yang Xiao Long
+Victory22 = "Hey you look like you're nervouse,Sorry but no hard feeling okay,Then let's be friends"
+
+;Alternate language victory quotes (optional).
+;0 or more alternate language sections may be added, preceded by the
+;ISO 639-1 code followed by a ".", e.g. "[ja.Quotes]".
+;See language setting in mugen.cfg.
+;[ja.Quotes]
+;victory1 = "SUMANAI...I Don't speak jap"
+;victory2 = "NANIIII？？？"
+
+
+;---------------------------------------------------------------------------
+; Variable usage:
+; This is a record of the variables that Quote uses. Keeping a record of your
+; variable usage helps you avoid careless mistakes later.
+; var(1)  - Used in Quote.cmd for combo condition (updated every tick)
+; var(2)  - Used in Kung Fu Throw (state 800) to remember if fwd was being
+;           held (remembered from state 800 through state 810).
+
+
+;---------------------------------------------------------------------------
+; Lose by Time Over
+; CNS difficulty: basic
+[Statedef 170]
+type = S
+ctrl = 0
+anim = 170
+velset = 0,0
+
+[State 170, 1]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 1
+
+;---------------------------------------------------------------------------
+; Win state decider
+; CNS difficulty: basic
+[Statedef 180]
+type = S
+
+[State 180, Perfect]
+type = PlaySnd
+;triggerall = MatchOver
+trigger1 = winperfect
+trigger1 = time = 0
+value = 33001,0
+
+[State 180, meme winning]
+type = changestate
+trigger1 = var(4) = 1
+value = 3103
+
+[State 180, 1]
+type = ChangeState
+triggerall = var(4) = 0
+trigger1 = Time = 0
+value = 181+Random%3
+;---------------------------------------------------------------------------
+; Win pose 1
+; CNS difficulty: basic
+[Statedef 181]
+type = S
+ctrl = 0
+anim = 180
+velset = 0,0
+
+[State 210,SND]
+type = PlaySnd
+trigger1 = animelemtime(4) = 0
+value = s180,0+(random%3)
+
+[State 181, 1]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 1
+
+[State 2260, bg]
+type = assertspecial
+;trigger1 = winperfect
+trigger1 = time = [0,300]
+flag = roundnotover
+ignorehitpause = 1
+;---------------------------------------------------------------------------
+; Win pose 2
+; CNS difficulty: basic
+[Statedef 182]
+type = S
+ctrl = 0
+anim = 181
+velset = 0,0
+
+[State 210,SND]
+type = PlaySnd
+trigger1 = !time
+value = s181,0+(random%1)
+
+[State 181, 1]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 1
+
+[State 2260, bg]
+type = assertspecial
+;trigger1 = winperfect
+trigger1 = time = [0,300]
+flag = roundnotover
+ignorehitpause = 1
+;---------------------------------------------------------------------------
+; Win pose 3
+; CNS difficulty: basic
+[Statedef 183]
+type = S
+ctrl = 0
+anim = 182
+velset = 0,0
+
+[State 210,SND]
+type = PlaySnd
+trigger1 = !time
+value = s182,0+(random%3)
+
+[State 181, 1]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 1
+
+[State 2260, bg]
+type = assertspecial
+;trigger1 = winperfect
+trigger1 = time = [0,300]
+flag = roundnotover
+ignorehitpause = 1
+;---------------------------------------------------------------------------
+[Statedef 190]
+type = S
+
+[State 190, 1]
+type = AssertSpecial
+trigger1 = 1
+flag = intro
+
+[State 190, アニメ変更];バトル画面に切り替わった瞬間のフェードインの時、アニメを固定している
+type = changeState
+trigger1 = time = 1
+value = 191+Random%2
+
+;----------------------------------------------------------------------------
+[Statedef 191]
+type = S
+ctrl = 0
+Anim = 191
+
+[State 210,Voice]
+type = PlaySnd
+trigger1 = animelem = 4
+value = 190,0+(random%5)
+channel = 0
+lowpriority =  1
+
+[State 191, 1]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+;---------------------------------------------------------
+;Run Intro
+;---------------------------------------------------------------------------
+[Statedef 192]
+type = S
+ctrl = 0
+anim = 100
+velset = 0,0
+
+[State 191, 2]
+type = AssertSpecial
+trigger1 = 1
+flag = Intro
+
+[State 0, VarSet]
+type = VarSet
+trigger1 = !time
+fvar(0) = -350 - backedgedist
+persistent = 0
+
+;[State 191, 1]
+;type = ChangeAnim
+;trigger1 = roundstate != 0
+;trigger1 = anim = 9999
+;value = 100
+
+[State 621, 1]
+type = playsnd
+triggerall = anim  = 100
+trigger1 = animelem = 3
+trigger2 = animelem = 5
+trigger3 = animelem = 9
+value = 100,0
+
+[State 0, VarSet]
+type = VarSet
+trigger1 = anim = 100
+fvar(0) = ifelse(fvar(0)+15>0,0,fvar(0)+15)
+
+[State 0, VarSet]
+type = VarSet
+trigger1 = anim = 192
+fvar(0) = ifelse(fvar(0)+4>0,0,fvar(0)+4)
+
+[State 0, ScreenBound]
+type = ScreenBound
+trigger1 = roundstate != 0
+trigger1 = anim = 100 ;fvar(0)
+value = 0
+movecamera = 0,0
+ignorehitpause = 1
+
+[State 0, Offset]
+type = Offset
+trigger1 = anim = 100
+trigger1 = fvar(0)
+x = fvar(0)*facing
+
+[State 193, into]
+type = AssertSpecial
+trigger1 = 1
+flag = Intro
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+triggerall = anim = 100
+trigger1 = fvar(0) >= -120
+value = 192
+
+[State 100, 1]
+type = offset
+triggerall = anim = 192
+trigger1 = animelem=1, >=0 && animelem=6, <0
+x = fvar(0)*facing
+
+[State 100, 1]
+type = playsnd
+triggerall = anim = 192
+trigger1 = animelemtime(1) = 0 
+value = 1,21
+
+[State 210,Voice]
+type = PlaySnd
+triggerall = anim = 192
+trigger1 = animelem = 12
+value = 190,0+(random%5)
+channel = 0
+lowpriority =  1
+
+[State 6061, Effect]
+type = Explod
+triggerall = anim = 192
+trigger1 = animelemtime(1) = 0
+anim = 7722
+id = 1920
+scale = 1.4, 1.4
+postype = p1
+facing = 1
+pos = 50,0
+sprpriority = 3
+ownpal = 1
+vel = 2.8,0
+removeongethit = 1
+pausemovetime = 99999
+supermovetime = 99999
+ignorehitpause = 1
+persistent = 0
+bindtime = 1
+
+[State 191, 1]
+type = ChangeState
+triggerall = anim = 192
+trigger1 = AnimTime = 0
+value = 0
+;---------------------------------------------------------------------------
+; Override common states (use same number to override) :
+;---------------------------------------------------------------------------
+
+;---------------------------------------------------------------------------
+; States that are always executed (use statedef -2)
+;---------------------------------------------------------------------------
+[Statedef -2]
+
+;-----------------------------------------------------------------------------------------------
+[State 180, Quote];Quote
+type = victoryquote
+triggerall = numenemy
+trigger1 = enemy,name="Quote" && enemy,authorname="CH"
+trigger2 = enemy,name="Quote" && enemy,authorname="OHMSBY"
+value = 11+random%2
+
+[State 180, Quote];GV
+type = victoryquote
+triggerall = numenemy
+trigger1 = enemy,name="Gunvolt" && enemy,authorname="k6666orochi & OHMSBY"
+value = 13+random%2
+
+[State 180, Quote];Shovel-Knight
+type = victoryquote
+triggerall = numenemy
+trigger1 = enemy,name="Shovel-Knight" && enemy,authorname="k6666orochi" || enemy,name="Shovel_Knight" && enemy,authorname="k6666orochi & OHMSBY" || enemy,name="ShovelKnight" && enemy,authorname="k6666orochi & OHMSBY" || enemy,name="Shovel-Knight" && enemy,authorname="k6666orochi & OHMSBY"
+value = 15
+
+[State 180, Quote];Kawase
+type = victoryquote
+triggerall = numenemy
+trigger1 = enemy,name="Kawase" && enemy,authorname="CH"
+value = 16
+
+[State 180, Quote];Helen
+type = victoryquote
+triggerall = numenemy
+trigger1 = enemy,name="Helen" && enemy,authorname="CH"
+value = 17
+
+[State 180, Quote];Ruby
+type = victoryquote
+triggerall = numenemy
+trigger1 = enemy,name="Ruby Rose" ;&& enemy,authorname="OHMSBY" || enemy,name="Ruby Rose" ;&& enemy,authorname="Mr Giang"
+value = 19
+
+[State 180, Quote];Weiss
+type = victoryquote
+triggerall = numenemy
+trigger1 = enemy,name="Weiss Schnee" ;&& enemy,authorname="OHMSBY" || enemy,name="Weiss Schnee" ;&& enemy,authorname="Mr Giang"
+value = 20
+
+[State 180, Quote];Blake
+type = victoryquote
+triggerall = numenemy
+trigger1 = enemy,name="Blake Belladona" ;&& enemy,authorname="OHMSBY" || enemy,name="Blake Belladona" ;&& enemy,authorname="Mr Giang"
+value = 21
+
+[State 180, Quote];yang
+type = victoryquote
+triggerall = numenemy
+trigger1 = enemy,name="Yang Xiao Long" ;&& enemy,authorname="OHMSBY" || enemy,name="Yang Xiao Long" ;&& enemy,authorname="Mr Giang"
+value = 22
+;-----------------------------------------------------------------------------------------------
+
+[State -2]
+type = Helper
+triggerall = var(31) != 0
+trigger1 = Numhelper(28500) = 0
+stateno = 28500
+ID = 28500
+name = "Drive Gauge"
+pos = 0,0
+postype = left
+helpertype = normal
+keyctrl = 0
+ownpal = 1
+Persistent = 0
+
+[State -2]
+type = Helper
+triggerall = roundstate=2
+trigger1 = Numhelper(15000) = 0
+stateno = 15000
+ID = 15000
+name = "Drive Gauge"
+pos = 0,0
+postype = left
+helpertype = normal
+keyctrl = 0
+ownpal = 1
+Persistent = 0
+
+[State -2]
+type = Helper
+triggerall = var(51) = 1
+trigger1 = Numhelper(15040) = 0
+stateno = 15040
+ID = 15040
+name = "Drive FX"
+pos = 0,0
+postype = p1
+helpertype = normal
+keyctrl = 0
+ownpal = 1
+Persistent = 0
+
+[State -2]
+type = Helper
+triggerall = var(51) = 1
+trigger1 = Numhelper(15041) = 0
+stateno = 15041
+ID = 15041
+name = "Drive FX"
+pos = 0,0
+postype = p1
+helpertype = normal
+keyctrl = 0
+ownpal = 1
+Persistent = 0
+
+[State -2]
+type = Helper
+triggerall = roundstate=2
+triggerall = var(51) = 0
+triggerall = var(49) < 1000
+triggerall = var(48) = 0
+trigger1 = Numhelper(7904) = 0
+;trigger1 = Numhelper(15042) = 0
+stateno = 7904
+ID = 7904
+name = "Drive off FX"
+pos = 0,0
+postype = p1
+helpertype = normal
+keyctrl = 0
+ownpal = 1
+Persistent = 0
+
+[State -2]
+type = Helper
+triggerall = var(49) < 1000
+trigger1 = Numhelper(15042) = 0
+stateno = 15042
+ID = 15042
+name = "Drive off FX"
+pos = 0,0
+postype = p1
+helpertype = normal
+keyctrl = 0
+ownpal = 1
+Persistent = 0
+
+[State -2,Drive mode end]
+type= varset
+trigger1 = var(50) = 0
+v = 51
+value = 0
+
+[State -2,Drive bar buffer]
+type= varset
+;trigger1 = Roundno = 1
+trigger1 = Roundstate = 3
+trigger2 = RoundState = 0
+v = 51
+value = 0
+
+[State -2,Drive bar buffer]
+type= varset
+;trigger1 = Roundno = 1
+;trigger1 = RoundsExisted = 0
+trigger1 = RoundState = 0
+v = 49
+value = 1000
+
+[State -2,Drive bar buffer]
+type= varset
+trigger1 = Roundno = 1
+trigger1 = RoundsExisted = 0
+trigger1 = RoundState = 0
+v = 50
+value = 0             ;3000
+
+[State -2, Drive increase]
+type = Varadd
+triggerall = var(51) = 0
+triggerall = var(49) >= 1000
+trigger1 = Numhelper(1151) = 1 && helper(1151),stateno = 1166 || Numhelper(1150) = 1 && helper(1150),stateno = 1166
+trigger1 = Numhelper(8040) = 1 && helper(8040),time = 2
+var(50) = 21
+
+[state -2 , RB Bar off]
+type = VarSet
+triggerall = var(31) != 0
+trigger1 = Numhelper(28500) = 1 && helper(28500),time > 55
+var(31) = 0
+
+[state -2 , RB Bar off]
+type = VarSet
+triggerall = var(51) = 1
+trigger1 = Numhelper(15041) = 1
+var(49) = 0
+
+[state -2 , Drive Bar off]
+type = VarSet
+triggerall = roundstate = 2
+triggerall = var(51) = 0
+trigger1 = var(49) < 1000
+var(50) = 0
+
+[state -2 , Drive Bar off]
+type = VarSet
+triggerall = roundstate = 2
+triggerall = var(51) = 0
+trigger1 = Numhelper(7904) = 1 && helper(7904),time = 2
+var(48) = 1
+
+[state -2 , Drive Bar off]
+type = VarSet
+triggerall = roundstate = 2
+triggerall = var(51) = 0
+trigger1 = var(49) >= 1000
+var(48) = 0
+
+[State -2, Drive reboot]
+type = varadd
+triggerall = Var(51) = 0
+triggerall = Var(50) = 0
+triggerall = Var(49) < 1000
+trigger1 = GameTime % 10=1
+v = 49
+value = 3
+
+[state -2 , RB Bar limiter]
+type = VarSet
+trigger1 = var(49) < 0
+var(49) = 0
+
+[state -2 ,RB Bar limiter]
+type = VarSet
+trigger1 = var(49) > 1000
+var(49) = 1000
+
+[State -2, Drive mode]
+type = varadd
+triggerall = Var(51) = 1
+trigger1 = GameTime % 4=1;5=1
+v = 50
+value = -6
+
+[State -2, Drive mode]
+type = poweradd
+triggerall = Var(51) = 1
+trigger1 = GameTime % 10=1
+value = 4
+
+[State -2, Drive mode]
+type = lifeadd
+triggerall = Var(51) = 1
+trigger1 = GameTime % 10=1
+value = 3
+
+[State -2, Drive mode]
+Type     = DefenceMulSet
+trigger1 = Var(51) = 1
+Value    = (2-FVar(9))*Const(Data.Fall.Defence_Mul)
+Ignorehitpause = 1
+
+[State -2, Drive mode]
+type = attackMulSet
+triggerall = Var(51) = 1
+trigger1 = 1
+value = 1.8
+
+[State -2, Drive mode]
+type = attackMulSet
+triggerall = Var(51) = 0
+triggerall = Var(49) < 999
+trigger1 = 1
+value = 0.4
+
+[State -2, Drive mode]
+type = DefenceMulSet
+triggerall = Var(51) = 0
+triggerall = Var(49) < 999
+trigger1 = 1
+value = 0.3
+
+[State -2, Drive mode]
+type = attackMulSet
+triggerall = Var(51) = 0
+triggerall = Var(49) > 999
+trigger1 = 1
+value = 1
+
+[State -2, Drive mode]
+type = DefenceMulSet
+triggerall = Var(51) = 0
+triggerall = Var(49) > 999
+trigger1 = 1
+value = 1
+
+[state -2 , Bar limiter]
+type = VarSet
+trigger1 = var(50) < 0
+var(50) = 0
+
+[state -2 , Bar limiter]
+type = VarSet
+trigger1 = var(50) > 3000
+var(50) = 3000
+
+
+[State -2, Finish]
+type = ScreenBound
+triggerall = (Life <= 0) || (!Alive) || (Lose)
+trigger1 = (StateNo = 5150) && (RoundState = 4)
+value = 0
+MoveCamera = 0,0
+IgnoreHitPause = 1
+;-------------------------------------------------------------------
+[State -2, Voice Position]
+type = SndPan
+trigger1 = 1
+channel = 11
+pan = 0
+ignoreHitPause = 1
+
+[State -2, varKOsnd]
+type=varset
+trigger1= alive && var(46)>0
+trigger2= !alive && var(46)<2
+var(46)=ifelse(alive,0,var(46)+1)
+ignorehitpause=1
+
+[State -2, KOsnd]
+type=playsnd
+trigger1= !alive && var(46)=1
+trigger1= var(46):=2
+value= 11, ifelse(stateno=5950, 7, ifelse(random<500, 1+random%3, 1+random%3))
+channel=11
+ignorehitpause=1
+
+;---------------------------------------------------------------------------
+[State -2, stop Power-C snd]
+type = stopsnd
+trigger1 = stateno != 900
+channel = 9
+persistent = 0
+
+[State -2]
+type = varset
+trigger1 = statetype != A
+trigger2 = movetype = H
+var(45) = 1
+
+;---------------------------------------------------------------------------
+; States that are executed when in self's state file (use statedef -3)
+;---------------------------------------------------------------------------
+[Statedef -3]
+
+;This controller plays a sound everytime Curly lands from a jump, or
+;from his back-dash.
+[State -3, Landing Sound]
+type = PlaySnd
+triggerall = Time = 1
+trigger1 = stateno = 52 ;Jump land
+trigger2 = stateno = 106 ;Run-back land
+value = 40, 0
+
+[State -3, Guarding voice]
+type = PlaySnd
+triggerall = time = 0
+trigger1 = random <= 499
+trigger1 = stateno = [150,152]
+value = 151,0+random%2
+channel = 0
+
+[State 900, starting value]
+type = VarSet
+trigger1 = time = 1 
+trigger1 = !stateno = 710
+trigger2 = !stateno = 711
+var(710) = 0
+
+[State 711, fvar reset]
+type = VarSet
+trigger1 = time = 1 
+trigger1 = !stateno = 710
+trigger2 = !stateno = 711
+fvar(7) = 0
+
+[State -3, Cheap KO]
+type = selfstate
+trigger1 = !alive && (stateno = [5000, 5010])
+trigger1 = (prevstateno = [130, 131]) || (prevstateno = [140, 141]) || (prevstateno = [150, 153])
+value = 5950
+ignorehitpause = 1
+
+[State -3, Cheap KO]
+type = assertspecial
+trigger1 = (stateno = [5000, 5010])
+trigger1 = (prevstateno = [130, 131]) || (prevstateno = 140) || (prevstateno = [150, 153])
+flag = nokosnd
+ignorehitpause = 1

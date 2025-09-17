@@ -1,0 +1,43 @@
+(Note This character is ment for stronger computers.)
+
+;Credits---------------
+Main Sprites riped by Haseo
+Except for the Super Hammer, Night Shade, Super Taunt, and Poison Tackle sprites.
+Hitsparks and some of the type wild effects ripped by Fido
+
+Credit to Pokesho for makeing typewild game and original sprites
+
+;Programs--------------
+VirtualTek -
+fighter factory UP3
+fighter factory ultimate
+mugen character maker
+
+;Commands--------------
+BASICS
+Punch = x
+Kick = z
+Lick = b
+Slam 1 = y
+Slam 2 = a
+
+SUPERS
+Night Shade = down fwd x or down fwd y
+Shadow Ball = down back x or down back y
+Super Taunt = down fwd a or down fwd b
+Hypnosis = down back a or down back b
+Call Haunter = down back down back b
+will of wisp = down back b
+
+MEGA SUPERS
+Super Hammper = down fwd x+y
+Toxic Tackle = down back x+y
+
+HYPERS
+Dream Eater = down back b while oppenent is asleep and you are performing hypnosis
+Dark Pulse = down back down fwd x+y
+
+Special Movements
+Dash through solid objects = press c while holding fwd or back
+Advance Guard = a+b
+Float = Up Up While Jumping

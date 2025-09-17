@@ -1,0 +1,67 @@
+
+;
+;--| 基本情報 |---------------------------------------------------------------
+
+[Info]
+Name         ="Curly_Brace"
+DisplayName  ="Curly Brace"
+VersionDate  =110824
+MugenVersion =
+Author       ="cabocha"
+Pal.Defaults =1,4,7,10
+
+;--| 必要なファイルの設定 |---------------------------------------------------
+
+[Files]
+Cmd      = state/Curly_Brace.cmd      ;コマンドファイルの登録
+Cns      = state/Curly_Brace.cns      ;コンスタンツファイルの登録
+St       = state/Curly_Brace.cns      ;｝
+St0      = state/Curly_Brace_OverRide.cns  ;｝
+St1      = state/Curly_Brace-2.cns        ;｝ステートファイルの登録・最大１１個まで増やせます
+St2      = state/Curly_Brace-3_AI.cns        ;｝（St,St0,St1,St2,St3,St4,St5,St6,St7,St8,St9）
+St3      = state/Curly_Brace_Tech.cns      ;｝
+St4      = state/Curly_Brace_Special.cns   ;｝「St」のみ必要な項目なので省略出来ません
+St5      = state/Curly_Brace_SuperArts.cns ;｝
+St6      = state/Curly_Brace_Helper.cns    ;｝
+st7=config.txt		;環境設定（コンフィグ）
+
+StCommon = common1.cns         ;コモンステートファイルの登録
+Sprite   = media/Curly_Brace.sff      ;複数のＰＣＸ画像をまとめたスプライトファイルの登録
+Anim     = state/Curly_Brace.air      ;アニメーションファイルの登録
+Sound    = media/Curly_Brace.snd      ;複数のＷＡＶＥ音声をまとめたサウンドファイルの登録
+
+;--| カラーパレットファイル |-------------------------------------------------
+;
+; キャラクターの色を定義するファイルは最大１２個まで登録が可能です。
+;
+; なお、Pal7～12（７Ｐ～１２Ｐカラー）を選びたい時は、
+; スタートボタン（Ｓボタン）を押しながらキャラクターを決定すれば使えます。
+;
+;-----------------------------------------------------------------------------
+
+Pal1 = media/01.act				;Ａ
+Pal2 = media/02_MEIKO.act		;Ｂ　ＭＥＩＫＯ(VOCALOID)
+Pal3 = media/03_KAITO.act		;Ｃ　ＫＡＩＴＯ(VOCALOID)
+Pal4 = media/04_Luka.act		;Ｘ　巡音ルカ(VOCALOID2)
+Pal5 = media/05_Haku.act		;Ｙ　弱音ハク(VOCALOID亜種)
+Pal6 = media/06_Lilulu.act		;Ｚ　リルル(ドラえもん のび太と鉄人兵団)
+
+Pal7 = media/07_HMX12.act		;Ｓ押しながらＡ　マルチ(ToHeart)
+Pal8 = media/08_HMX13.act		;Ｓ押しながらＢ　セリオ(ToHeart)
+Pal9 = media/09_Mech-Hisui.act		;Ｓ押しながらＣ　メカヒスイ(MeltyBlood)
+Pal10= media/10_Misery.act		;Ｓ押しながらＸ　ミザリー(洞窟物語)
+Pal11= media/11_bk.act			;Ｓ押しながらＹ
+Pal12= media/12_gld.act  		;Ｓ押しながらＺ
+
+;--| ストーリーボード設定 |---------------------------------------------------
+
+;[Arcade]
+;Intro.Storyboard  = arcade/kfm_intro.def  ;オープニングのファイルを登録します
+;Ending.Storyboard = arcade/kfm_ending.def ;エンディングのファイルを登録します
+
+;-----------------------------------------------------------------------------
+;-----------------------------------------------------------------------------
+;-----------------------------------------------------------------------------
+;-----------------------------------------------------------------------------
+;-----------------------------------------------------------------------------
+

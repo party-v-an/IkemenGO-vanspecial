@@ -1,0 +1,53 @@
+;====================<INITIALIZE>====================
+[StateDef 5900]
+type = S
+
+;__________________________________________________________________________
+;==========================================================================
+;__________________________________________________________________________
+[state 5900, Reset Variables]
+type = varrangeset
+trigger1 = !roundsexisted && matchno = 1
+value = 0
+[state 5900, Reset Variables]
+type = varrangeset
+trigger1 = !roundsexisted && matchno = 1
+fvalue = 0
+;==============================================================================================
+;Run/Dash forward toggle
+[State 5900, Dash or run?]
+type = VarSet
+trigger1 = 1
+v = 24
+value = 1
+;set value number to 1 to enable forward dash. Otherwise, set it to 0 to enable running instead.
+;==========================================================================
+;0 = EX Violence Knee Drop (2 Hits, P2 Doesn't Fall) 
+;1 = EX Violence Knee Drop (2 Hits, Makes P2 Fall)
+[State 5900, EX Violence Knee Drop Priorities]
+type = VarSet
+trigger1 = 1
+v = 40
+value = 0 ;CHANGE THIS LINE
+;==============================================================================================
+[State 5900, Palette]
+type = remappal
+trigger1 = 1
+source = 1, 1
+dest = 1, palno
+
+[State 5900, Turns Intro]
+type = ChangeState
+trigger1 = TeamMode = Turns
+trigger1 = !RoundsExisted && RoundNo >= 2
+value = 6900
+
+[State 5900, Intro Decider]
+type = ChangeState
+trigger1 = RoundNo = 1
+value = 190
+
+[State 5900, End]
+type = ChangeState
+trigger1 = 1
+value = 0

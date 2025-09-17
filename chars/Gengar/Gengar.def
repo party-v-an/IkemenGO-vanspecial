@@ -1,0 +1,28 @@
+;***************************************************************************;
+;******************* Created in Fighter Factory Ultimate *******************;
+;*******************      http://www.virtualltek.com     *******************;
+;***************************************************************************;
+
+[Info]
+name = ""
+displayname = "Gengar"
+versiondate = 
+mugenversion = 
+author = ""
+pal.defaults = 1,2,1,1,1,2
+
+[Files]
+sprite = Gengar.sff
+anim = Gengar.air
+sound = Gengar.snd
+cmd = Gengar.txt
+cns = Gengar.cns
+stcommon = common1.cns
+st = Gengar.cns
+st1 = HelperSelect.cns
+pal1 = Gengar.act
+pal2 = Gengar2.act
+
+[Arcade]
+intro.storyboard = 
+ending.storyboard = 

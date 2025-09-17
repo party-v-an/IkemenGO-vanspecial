@@ -1,0 +1,76 @@
+                            __________________________________________
+===========================|      Lowtiergod By Dalauan Sparrow       |===========================
+                            ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯        [10.02.12]
+ - Contact:	50$ dollar donation required
+ - Twitter:	Fucking banned
+ - Customized version of The Covenant's LTG character, for MUGEN 1.0 only
+
+=====<Features>=====
+
+ - Most of the essential stuff
+ - Details and moves taken from his various Streams & TIHYDP video series appearances
+ - Gameplay based on Low Tier Chronicles & Clash of the Salt Lords
+
+=====<Movelist>=====
+
+ U - up          x - light punch        a - light kick
+ D - down        y - medium punch       b - medium kick
+ F - forward     z - heavy punch        c - heavy kick
+ B - back        p - any punch          k - any kick
+ s - start       2p- two punches        2k- two kicks
+
+ (Air) - Move must be performed in the air.
+ (EX)  - Move has an EX version, will be performed instead of the normal version when enough power is obtained.
+
+
+<NORMAL>
+
+.Quarrel Punch  			F + y
+.Terrible Smash 			F + z
+.Quarrel Kick				F + c
+
+
+<SPECIAL>
+.Desperate Fireball  (EX): 		D, DF, F, p
+.Triggered Tackle  (EX):  	        (charge) B, F, k
+.Laggin Ass Knee Drop  (EX):		(charge) D, U, k 
+.Eraserhead Smash  (EX):		(charge) D, U, p 
+
+<SYSTEM>
+
+.Forward Dash:                  	F, F
+.Backward Dash:                 	B, B
+.Parry High:                    	tap F
+.Parry Low:                     	tap D
+.Air Parry:                     	tap F           	(Air)
+
+
+=====<Gameplay Notes>=====
+
+COMBO SYSTEM:
+ - Can follow up normals with stronger inputs if the button is pressed at the right time
+ - Normal attacks can be canceled into Specials and Salt Expressions
+
+GOD TIER FURY:
+ - LTG will get angry as he gets hit or is put in a helpless state(being grabbed or knocked down for example)
+ - LowTierGod will start flashing indicating he is quite upset.
+ - When LTG is salty enough he can perform a Salt Expression. Performing Salt Expressions will reduce his Fury.
+ - BEWARE! If Lowtiergod gets too frustrated he will unleash Salt Overload ... KO'ing himself in the process.
+SALT EXPRESSIONS:
+.Roid Rage:      2000 fury			D, DF, F, D, DF, F, 2k
+.Ban Hammer:     1000 fury 		 	D, DF, F, D, DF, F, 2p
+.Modder's Block: 1000 fury	                D, DB, B, D, DB, B, 2p
+SALT LEVELS:
+ 1000-1999 = a Dim Orange
+ 2000-2999 = a bright reddish orange
+ 3000 & up = a Vibrant Red. You're fucked at this point!
+=====<Special Thanks>=====
+
+- Nobody! Humanity was a mistake from the beginning!
+
+=====<Disclaimer>=====
+
+ - The LTG character is property of the Covenant
+ - Clash of the Salt Lords is property of the Covenant & Pigroach Studio
+ - Low Tier Chronicles is property of the Covenant 
+ - This MUGEN character is a non-profit fan work, any drones tryin to make money off of it will get skull-fucked by the law!

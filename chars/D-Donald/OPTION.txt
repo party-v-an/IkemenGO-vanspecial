@@ -1,0 +1,312 @@
+;===========================================================================================================
+;================== Option =================================================================================
+;===========================================================================================================
+;
+;:How to use:
+;
+;[State -3]
+;type = VarSet
+;Trigger1 = RoundState = 0
+;trigger2 = roundsexisted = 0
+;v = 5@
+;range ="#"
+;        ªplease change the number here if you wish to change the option
+;        ª‚±‚±‚ç‚Ö‚ñ‚Ì”Ô†‚ğ•Ï‚¦‚Ä‚­‚¾‚³‚¢B  
+;
+; 
+;==================================================================================
+;======================================================================================
+[Statedef 5900];===========================================================================
+type=U;========================================================================================
+anim=ifelse(random<700,5900,5901+random%22);=======================================================
+;======================================================================================================
+
+;==========================================================================================================
+;1)==========================================================================================================
+;Remove "ALL-ELEMENT" from ELEMENT MASTER?
+;================================================
+; 0 - No / 1 - Yes
+;
+;
+
+[State -3, ALL-ELEMENT]
+Type = VarSet
+Trigger1 = RoundState = 0
+trigger2 = roundsexisted = 0
+v = 50
+value = 0
+
+
+;===========================================================================================================
+;2)==========================================================================================================
+;Auto Holy-Judgement in Dark Donald's Pal 12?
+;================================================
+; 0 - No / 1 - Yes with automatically / 2 - Yes when damaging or Guarding with random
+;
+;
+
+[State -3, Judgement]
+Type = VarSet
+Trigger1 = RoundState = 0
+trigger2 = roundsexisted = 0
+v = 51
+value = 2
+
+
+;===========================================================================================================
+;3)==========================================================================================================
+;Remove "ELEMENT MASTER" and change into "Hamva-ga DA"?
+;================================================
+; 0 - No / 1 - Yes
+;
+;
+
+[State -3, ELE-M@S]
+Type = VarSet
+Trigger1 = RoundState = 0
+trigger2 = roundsexisted = 0
+v = 52
+value = 0
+
+
+;===========================================================================================================
+;4)==========================================================================================================
+;Remove the Dark Donald Super Guard?
+;(Setting "yes" make D-Donald stop guarding all attack and stop reversing damage from guarding)
+;================================================
+; 0 - No / 1 - Yes / 2 - Random?
+;
+;
+
+[State -3, Arma-]
+Type = VarSet
+Trigger1 = RoundState = 0
+trigger2 = roundsexisted = 0
+v = 53
+value = 0
+
+
+;===========================================================================================================
+;5)==========================================================================================================
+;Lv of reverse damage while guarding?
+;(This will not activate when Super guard is removed)
+;================================================
+; Up to 1~999
+;
+;
+
+[State -3, Arma-LV]
+Type = VarSet
+Trigger1 = RoundState = 0
+trigger2 = roundsexisted = 0
+v = 55
+value = 500
+
+
+;===========================================================================================================
+;6)==========================================================================================================
+;Remove the Dark Donald Weakness?
+;================================================
+; 0 - No / 1 - Yes
+;
+;
+
+[State -3, WEAK]
+Type = VarSet
+Trigger1 = RoundState = 0
+trigger2 = roundsexisted = 0
+v = 54
+value = 0
+
+
+;_________________________________________
+;DARK DONALD WEAKNESS LIST.
+;NOTE: playing at simul mode, sometime D-Donald won't die or some glitch start...
+;      This is just for fun, if you don't like it or if you founded some glitch then set it 1 now.
+;_________________________________________
+;-I** S*****  = MOFU MOFU
+;
+;-D* *****    = DASH ATTACK WITH FANFARE
+;
+;-S*********  = FREE HUGGING
+;             = I GET LUCK EH... SLOWLY? RETURNED GOODS?
+;
+;-B* *****    = SWORD/SLASH SAME AS KFC
+;
+;-K********* *** = BED TIME
+;
+;-******* ****  = ô
+;
+
+;===========================================================================================================
+;5)==========================================================================================================
+;Stop Dark Donald summoning a "Element Master" when he damaging?
+;(It'll summon it but very random)
+;================================================
+; 0 - No / 1 - Yes
+;
+
+[State -3, Spirits]
+Type = VarSet
+Trigger1 = RoundState = 0
+trigger2 = roundsexisted = 0
+v = 56
+value = 0
+
+
+;===========================================================================================================
+;6)==========================================================================================================
+;Stop Dark Donald Escape from the opponent's grabbing, catching or throwing?
+;*NOTE: Setting "yes" might glitch come some reason. (I'm tired to fix it...)
+;       And it'll make Dark Donald weaker... maybe...
+;=====================================================
+; 0 - No / 1 - Yes
+;
+
+[State -3, ASS]
+Type = VarSet
+Trigger1 = RoundState = 0
+trigger2 = roundsexisted = 0
+v = 57
+value = 0
+
+
+;===========================================================================================================
+;7)==========================================================================================================
+;Remove the Red Soul summon?
+;=====================================================
+; 0 - No / 1 - Yes
+;
+
+[State -3, Bat attack]
+Type = VarSet
+Trigger1 = RoundState = 0
+trigger2 = roundsexisted = 0
+v = 48
+value = 0
+
+;===========================================================================================================
+;8)==========================================================================================================
+;Remove the Screamer?
+;=====================================================
+; 0 - No / 1 - Yes
+;
+
+[State -3, Kowai]
+Type = VarSet
+Trigger1 = RoundState = 0
+trigger2 = roundsexisted = 0
+v = 49
+value = 0
+
+;================================================
+;Okay, you're done setting now!
+;These code are from "‡H" and "Kurogane"
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;===========================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;===========================================================================================================
+;These code in below are from "The None"
+;===========================================================================================================
+;===========================================================================================================
+[State 5900,]
+type=Changeanim
+triggerall=1||!time
+trigger1=anim=[5900,5999]
+trigger1=anim!=0
+trigger1=enemynear,name="Donald"
+trigger1=enemynear,authorname="kishio&&Donalddesu"
+trigger2=var(49)!=0
+value=0
+[State 5900,]
+type = AngleDraw
+triggerall=var(49)=0
+trigger1=anim=[5901,5903]
+trigger2=anim=[5905,5910]
+trigger3=anim=[5914,5919]
+scale=2,2
+[State 5900,]
+type=AngleDraw
+triggerall=var(49)=0
+trigger1=anim=5920
+scale=1.5,1.5
+[State 5900,]
+type=AngleDraw
+triggerall=var(49)=0
+trigger1=anim=5921
+scale=3.5,3.4
+[State 5900,]
+type=AssertSpecial
+triggerall=var(49)=0
+trigger1=anim=5921
+flag=noshadow
+[State 5900,]
+type=ChangeState
+trigger1=roundno=1
+value=190
+[State 0, PlaySnd]
+type=PlaySnd
+triggerall=var(49)=0
+trigger1=time=1
+trigger1=anim=5920
+value=S1123,33
+[State 5900,]
+type=Helper
+triggerall=var(49)=0
+triggerall=anim!=0&&anim!=5900&&stateno!=0
+triggerall=numhelper(5999)=0
+trigger1=roundstate=2
+helpertype=normal
+name="KowaiKowai"
+ID=5999
+stateno=ifelse(random<500,5998,5999)
+pos=0,0
+postype=p1
+ownpal=1
+supermovetime=65535
+pausemovetime=65535
+ignorehitpause=1
+[State 5900,]
+type = ChangeState
+trigger1=numhelper(5999)
+trigger1=roundstate=2
+value=0
+ctrl=0
+;======================
+;======================
+;===========================================================================================================
+;===========================================================================================================

@@ -1,0 +1,28 @@
+; Definition file for Niko Bellic
+; Contains all the filenames needed for the character
+
+; Player information
+[Info]
+name ="Niko Bellic GTA IV"
+displayname ="Niko Bellic"
+author ="Sandler98"
+pal.defaults =1,2,3,4,5,6
+versiondate=12/23/2017
+mugenversion =04,14,2002
+
+; Files for the player
+[Files]
+cmd     =Niko.cmd
+cns     =Niko.cns
+st      =Niko.cns
+stcommon =common1.cns
+sprite  =Niko.sff
+anim    =Niko.air
+sound   =Niko.snd
+pal.default = default.act ;Palettes (can have up to 12)
+pal1=NikoBellic.act
+st1=AI.st
+[Arcade]
+intro.storyboard=
+ending.storyboard=
+st1=AI.st

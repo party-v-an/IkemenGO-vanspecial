@@ -1,0 +1,250 @@
+;---------------------[イズ待機]
+
+[Statedef 6000]
+type=S
+ctrl=0
+anim=6000
+velset=0,0
+sprpriority=-3
+
+[State 210, 1]
+type = attackdist
+trigger1 = 1
+value = 0
+
+[State 210, 1]
+type = posset
+trigger1 = 1
+y = 0
+
+[State 210, 1]
+type = turn
+trigger1 = root,facing != facing
+
+[State 10000, 1];殴られたり投げられたりしないように設定
+type = NotHitBy
+trigger1 = Time >= 0
+value = SCA;, NA, SA, HA, NT, ST, HT
+
+[State 10000, 3]
+type = null;HitBy
+trigger1 = 1
+value = SCA, NP, SP, HP
+
+[State 3090, ステート変更]
+type = ChangeState
+triggerall = time > 20 && RootDist X > 45 ;相手の中心座標より前にいるとき
+trigger1 = root,stateno!=3413
+trigger2 = root,stateno=3413
+trigger2 = root,time>=80
+value = 6001
+
+[State 3090, ステート変更]
+type = ChangeState
+triggerall = time > 20 && RootDist X < 35 ;相手の中心座標より前にいるとき
+trigger1 = root,stateno!=3413
+trigger2 = root,stateno=3413
+trigger2 = root,time>=80
+value = 6002
+
+[State 180,勝利分岐]
+type = ChangeState
+triggerall = roundstate = 4
+trigger1 = Root,stateno=[170,189]
+trigger2 = Root,stateno=3103
+trigger3 = lose
+value = 6003
+
+[State 180,挑発]
+type = ChangeState
+trigger1 = root,stateno = 900 && root,time <= 100
+value = 6900
+
+;---------------------[イズ前進]
+
+[Statedef 6001]
+type=S
+ctrl=0
+anim=6001
+velset=0,0
+sprpriority=-3
+
+[State 1505]
+type = Velset
+trigger1 = time = 1
+x= 2
+
+[State 3090, ステート変更]
+type = ChangeState
+trigger1 = RootDist X <= 40
+trigger2 = root,stateno=3413
+trigger2 = root,time<80
+value = 6000
+
+;---------------------[イズ後退]
+
+[Statedef 6002]
+type=S
+ctrl=0
+anim=6002
+velset=0,0
+sprpriority=-3
+
+[State 1505]
+type = Velset
+trigger1 = time = 1
+x= -2
+
+[State 3090, ステート変更]
+type = ChangeState
+trigger1 = RootDist X >= 40
+trigger2 = root,stateno=3413
+trigger2 = root,time<80
+value = 6000
+
+;---------------------[イズ判定]
+
+[Statedef 6003]
+type=S
+ctrl=0
+velset=0,0
+sprpriority=-3
+
+[State 3090, ステート変更]
+type = ChangeState
+triggerall = root,var(6)=0
+trigger1 = MatchOver && WIN
+value = 185
+
+[State 3090, ステート変更]
+type = ChangeState
+trigger1 = WIN = 1
+Trigger1 = ( Random % 3 ) = 0
+value = 6004
+
+[State 3090, ステート変更]
+type = ChangeState
+trigger1 = WIN = 1
+Trigger1 = ( Random % 3 ) = 0
+value = 6007
+
+[State 3090, ステート変更]
+type = ChangeState
+trigger1 = WIN = 1
+value = 6008
+
+[State 3090, ステート変更]
+type = ChangeState
+trigger1 = !win
+value = 6005
+
+
+;---------------------[あるとじゃないと]
+[Statedef 185]
+type=S
+ctrl=0
+anim=6000
+velset=0,0
+sprpriority=-3
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = anim=6000
+trigger1 = root,anim=184
+trigger1 = root,animelem=2
+value = 185
+ignorehitpause = 1
+
+[State 2190, 1]
+type = destroyself
+trigger1 = 0
+
+;---------------------[イズ拍手]
+[Statedef 6004]
+type=S
+ctrl=0
+anim=6004
+velset=0,0
+sprpriority=-3
+
+[State 2190, 1]
+type = destroyself
+trigger1 = 0
+
+;---------------------[イズ負け]
+[Statedef 6005]
+type=S
+ctrl=0
+velset=0,0
+sprpriority=-3
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = anim=6000
+trigger1 = time = 35
+value = 6005
+ignorehitpause = 1
+
+[State 2190, 1]
+type = destroyself
+trigger1 = 0
+
+;---------------------[バイバイ]
+[Statedef 6007]
+type=S
+ctrl=0
+anim=6007
+velset=0,0
+sprpriority=-3
+
+[State 2190, 1]
+type = destroyself
+trigger1 = 0
+
+;---------------------[おじぎ]
+[Statedef 6008]
+type=S
+ctrl=0
+anim=6008
+velset=0,0
+sprpriority=-3
+
+[State 2190, 1]
+type = destroyself
+trigger1 = 0
+
+
+;---------------------[イントロ]
+[Statedef 6006]
+type=S
+ctrl=0
+anim=6006
+velset=0,0
+sprpriority=-3
+
+[State 2190, 1]
+type = changestate
+trigger1 = time >= 710
+value = 6000
+
+;---------------------[挑発]
+[Statedef 6900]
+type=S
+ctrl=0
+velset=0,0
+sprpriority=-3
+
+[State 2190, 1]
+type = changeanim
+trigger1 = time = 35
+value = 6900
+
+[State 2190, 1]
+type = playsnd
+trigger1 = time = 36
+value = 6900,0
+
+[State 2190, 1]
+type = changestate
+trigger1 = anim = 6900 && animtime = 0
+value = 6000

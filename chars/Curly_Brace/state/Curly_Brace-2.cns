@@ -1,0 +1,421 @@
+;===========================================================================
+;---------------------------------------------------------------------------
+
+[Statedef -2] 
+;===========================================================================
+; コンボ補正
+;===========================================================================
+[State -2,AttackMulSet] 
+Type = AttackMulSet
+TriggerAll = NumEnemy
+TriggerAll = Alive
+Trigger1 = Enemy,GetHitVar(HitCount) < 25
+Value = 0.50+(0.50-(Enemy,GetHitVar(HitCount)*0.02)) 
+
+
+[State -2,AttackMulSet] 
+Type = AttackMulSet
+TriggerAll = NumEnemy
+TriggerAll = Alive
+Trigger1 = Enemy,GetHitVar(HitCount) >= 25
+Value = 0.50 
+
+;===========================================================================
+; 設定ファイル読み込み
+;===========================================================================
+;---------------------------------------------------------------------------
+[State -2];コンフィグヘルパー
+type = helper
+trigger1 = numhelper(12345) = 0
+name = "config"
+id = 12345
+stateno = 12345
+keyctrl = 0
+
+;===========================================================================
+; 変数セットアップ
+;===========================================================================
+;---------------------------------------------------------------------------
+; リセット系
+;---------------------------------------------------------------------------
+[State -2, 移動起き上がり用]
+type = VarSet
+trigger1 = (StateNo != 10002)
+v = 36
+value = 0
+IgnoreHitPause = 1
+
+;---------------------------------------------------------------------------
+; Simul用
+;---------------------------------------------------------------------------
+[State -2, プレイヤー判定]
+type = VarSet
+triggerall = (NumPartner) && (var(33) != 1)
+trigger1 = ID < (Partner,ID) ;自分のＩＤナンバーがパートナーよりも少ない数字なら
+v = 33
+value = 0
+IgnoreHitPause = 1
+
+[State -2, プレイヤー判定]
+type = VarSet
+triggerall = (NumPartner)
+trigger1 = ID > (Partner,ID) ;自分のＩＤナンバーがパートナーよりも多い数字なら
+v = 33
+value = 1
+IgnoreHitPause = 1
+
+;---------------------------------------------------------------------------
+; 崩れＫＯ用処理
+;---------------------------------------------------------------------------
+[State -2, 「立ち」か「しゃがみ」を判断]
+type = VarSet
+triggerall = (RoundState > 1)
+trigger1 = (StateNo = [120,131])
+trigger2 = (StateNo = [150,153])
+v = 37
+value = ifelse((StateType=C),1,0)
+IgnoreHitPause = 1
+
+;---------------------------------------------------------------------------
+; スーパージャンプ用処理
+;---------------------------------------------------------------------------
+[State -2, フラグリセット]
+type = VarSet
+trigger1 = (StateNo != 50) && (StateNo != 10003)
+v = 54
+value = 0
+IgnoreHitPause = 1
+
+[State -2, フラグリセット]
+type = VarSet
+trigger1 = (StateNo != 50)
+trigger2 = (StateNo = 50) && (command != "holdfwd" || command != "holdback")
+v = 55
+value = 0
+IgnoreHitPause = 1
+
+[State -2, キーを前方か後方に]
+type = VarSet
+trigger1 = (var(54) = 1) && (StateNo = 50)
+v = 55
+value = (command="holdfwd")-(command="holdback")
+IgnoreHitPause = 1
+
+;---------------------------------------------------------------------------
+; キャラ幅
+;---------------------------------------------------------------------------
+[State -2, 幅]
+type = Width
+TriggerAll = Alive
+trigger1 = (RoundState > 2)
+player = 0,0
+edge = 20,20
+
+;---------------------------------------------------------------------------
+; 変数の値の特定範囲をランダムで処理
+;---------------------------------------------------------------------------
+[State -2, 汎用ランダム]
+type = VarRandom
+trigger1 = 1
+v = 28
+range = 1,120
+IgnoreHitPause = 1
+
+;***********************************
+;ヒットスパーク
+[State -2, 弱]
+type = VarRandom
+trigger1 = 1
+v = 43
+range = 4200,4203
+IgnoreHitPause = 1
+
+[State -2, 強]
+type = VarRandom
+trigger1 = 1
+v = 44
+range = 4204,4207
+IgnoreHitPause = 1
+
+[State -2, 必殺技]
+type = VarRandom
+trigger1 = 1
+v = 45
+range = 4208,4211
+IgnoreHitPause = 1
+
+[State -2, スーパーアーツ]
+type = VarRandom
+trigger1 = 1
+v = 46
+range = 4212,4215
+IgnoreHitPause = 1
+
+;===========================================================================
+; その他の登録
+;===========================================================================
+;---------------------------------------------------------------------------
+; 汎用処理
+;---------------------------------------------------------------------------
+[State -2, 無敵]
+type = NotHitBy
+trigger1 = (RoundState != 2);（※）
+value = SCA
+time = 10
+supermovetime = 99999999
+pausemovetime = 99999999
+IgnoreHitPause = 1
+
+[State -2, スクロール];負けて倒れたらカメラワークを相手に移す処理
+type = ScreenBound
+triggerall = (Life <= 0) || (!Alive) || (Lose)
+trigger1 = (StateNo = 5150) && (RoundState = 4);（※）
+value = 0
+MoveCamera = 0,0
+IgnoreHitPause = 1
+
+[State -2, 残像表示時間];攻撃食らったら残像を強制的に消す処理
+type = AfterImageTime
+trigger1 = (StateNo = [800,899]) && (MoveType = H)
+trigger2 = (PrevStateNo = [1000,4999]) && (MoveType = H)
+trigger3 = (PrevStateNo >= 6000) && (MoveType = H)
+trigger5 = (RoundState > 3);（※）
+time = 0
+IgnoreHitPause = 1
+
+;---------------------------------------------------------------------------
+; ※：RoundState
+;
+; 　バトル時の『ラウンド中の段階』を判断するトリガー。
+;
+; 　0 = イントロ直前の画面が切り替わった瞬間のフェードインの時
+; 　1 = イントロ（キャラの登場演出時）
+; 　2 = バトル中
+; 　3 = ＫＯした瞬間～勝利ポーズ直前まで（フィニッシュ時）
+; 　4 = 勝利ポーズ時
+;
+;---------------------------------------------------------------------------
+; スーパージャンプ用処理
+;---------------------------------------------------------------------------
+[State -2, スーパージャンプ用]
+type = VelAdd
+triggerall = (var(54) = 1) && (var(55) != 0)
+trigger1 = (StateNo = 50) && (Time > 0)
+x = var(55)*0.08
+IgnoreHitPause = 1
+
+[State -2, スーパージャンプ用]
+type = Turn
+triggerall = (var(54) = 1)
+trigger1 = (StateNo = 50) && (P2Dist X < 0)
+
+;---------------------------------------------------------------------------
+; 崩れＫＯ用処理
+;---------------------------------------------------------------------------
+[State -2, 崩れＫＯ]
+type = ChangeState
+trigger1 = (PrevStateNo = [120,131]) || (PrevStateNo = [150,153])
+trigger1 = (StateNo = 5000) || (StateNo = 5010)
+trigger1 = (!Alive) || (Life <= 0) || (Lose)
+value = 10004
+IgnoreHitPause = 1
+
+;---------------------------------------------------------------------------
+; ヘルパー
+;---------------------------------------------------------------------------
+[State -2, ヘルパーを出す];ゲージ類
+type = Helper
+triggerall = (RoundState < 3) && (NumEnemy != 0)
+trigger1 = (NumHelper(30000) = 0)
+name = "Sub-Gauge"
+stateno = 30000
+ID = 30000
+pos = 0,100
+keyctrl = 0
+postype = p1ownpal = 1
+IgnoreHitPause = 1
+Persistent = 0
+
+;===========================================================================
+;---------------------------------------------------------------------------
+;===========================================================================
+;---------------------------------------------------------------------------
+; P11,12用 特殊設定
+;---------------------------------------------------------------------------
+
+;１１Ｐ、１２Ｐ共通部分
+[State -2,power常時1000以上]
+type = powerset
+trigger1 = (PalNo = 11) || (PalNo = 12)
+trigger1 = (power < 1000)
+value = 1000
+
+[State -2, きまぐれな星1]
+type = Helper
+TriggerAll = Alive
+triggerall = (RoundState = 2)
+triggerall = numHelper(666) = 0
+trigger1 = (helper(12345),var(8)>=1)
+trigger1 = (PalNo = 11) || (PalNo = 12)
+trigger2 = (helper(12345),var(8)=2) && (power>2999)
+name = "star"
+stateno = 666
+ID = 666
+pos = -12,55
+keyctrl = 0
+postype = p1
+ownpal = 1
+IgnoreHitPause = 1
+size.xscale = 0.2
+size.yscale = 0.2
+
+[State -2, きまぐれな星2]
+type = Helper
+TriggerAll = Alive
+triggerall = (RoundState = 2)
+triggerall = numHelper(668) = 0
+trigger1 = (helper(12345),var(8)>=1)
+trigger1 = (PalNo = 11) || (PalNo = 12)
+trigger2 = (helper(12345),var(8)=2) && (power>2999)
+name = "star"
+stateno = 668
+ID = 668
+pos = 0,0
+keyctrl = 0
+postype = p1
+ownpal = 1
+IgnoreHitPause = 1
+size.xscale = 0.3
+size.yscale = 0.3
+
+[State -2, きまぐれな星3]
+type = Helper
+TriggerAll = Alive
+triggerall = (RoundState = 2)
+triggerall = numHelper(669) = 0
+trigger1 = (helper(12345),var(8)>=1)
+trigger1 = (PalNo = 11) || (PalNo = 12)
+trigger2 = (helper(12345),var(8)=2) && (power>2999)
+name = "star"
+stateno = 669
+ID = 669
+pos = 12,-55
+keyctrl = 0
+postype = p1
+ownpal = 1
+IgnoreHitPause = 1
+size.xscale = 0.1
+size.yscale = 0.1
+
+;１１Ｐ
+[State -2, 防御力set]
+type = DefenceMulSet
+trigger1 = (PalNo = 11)
+value = 0.1
+
+[State -2, 攻撃力set]
+type = AttackMulSet
+trigger1 = (PalNo = 11)
+value = 2
+
+;[State -2,life常時回復]
+;type = lifeadd
+;triggerall = MoveType != H
+;triggerall = (RoundState = 2)
+;trigger1 = (PalNo = 11)
+;trigger1 = (time %7) = 0
+;value = 1
+
+;ゴールドカラー（１２Ｐ）
+[State -2,life常時回復]
+type = lifeadd
+triggerall = MoveType != H
+triggerall = (RoundState = 2)
+trigger1 = (PalNo = 12)
+trigger1 = (time %3) = 0
+value = 1
+
+[State -2, 防御力set]
+type = DefenceMulSet
+trigger1 = (PalNo = 12)
+value = 0.05
+
+[State -2, 攻撃力set]
+type = AttackMulSet
+trigger1 = (PalNo = 12)
+value = 1.8
+;-----------------------------------------------------------------------------
+;ダメージボイス
+;-----------------------------------------------------------------------------
+
+[State -2]
+type = PlaySnd
+triggerall = (RoundState = 2)
+triggerall = movetype = H
+triggerall = time = 0
+triggerall = Alive
+triggerall = Random <= 600
+triggerall = stateno != [120,159]
+triggerall = prevstateno != [120,159]
+triggerall = Anim != 9020;ブリス時停止
+triggerall = stateNo > 4999
+trigger1 = GetHitvar(damage)
+;trigger1 = GetHitvar(animtype) = 0
+;trigger2 = GetHitvar(animtype) = 1
+;trigger3 = GetHitvar(animtype) = 2
+;trigger4 = GetHitvar(animtype) = 3
+;trigger5 = GetHitvar(animtype) = 4
+value = 7,0
+;;volume = 200
+persistent = 0
+channel = 9
+lowpriority = 1 ;ボイス上書き防止
+
+;---------------------------------------------------------------------------
+; 特殊対応
+;---------------------------------------------------------------------------
+;獣を焦がす
+[State -2]
+Type = LifeAdd
+TriggerAll = Enemy,AuthorName = "⑨" && Enemy,Name = "Akiha_Vermilion"
+Trigger1 = Enemy,Var(47) = 1
+Value = -5
+Kill = 0
+
+[State -2]
+Type = PowerAdd
+TriggerAll = Enemy,AuthorName = "⑨" && Enemy,Name = "Akiha_Vermilion"
+Trigger1 = Enemy,Var(47) = 1
+Value = -26
+
+;獣を焦がす(黒秋葉) 相手ステータス変化
+[State -2]
+Type = LifeAdd
+TriggerAll = Enemy,AuthorName = "tukemon&HAL" && Enemy,Name = "Akiha"
+Trigger1 = Enemy,Var(56) = 1
+Value = -8
+Kill = 0
+
+[State -2]
+Type = PowerAdd
+TriggerAll = Enemy,AuthorName = "tukemon&HAL" && Enemy,Name = "Akiha"
+Trigger1 = Enemy,Var(56) = 1
+Value = -33
+
+;========================================================================================
+;■西行寺幽々子　霊符及び寿命相手ステート
+;========================================================================================
+[State -2, LifeAdd]
+Type       = LifeAdd
+TriggerAll = NumEnemy           >= 1
+TriggerAll = Enemy,AuthorName    = "Souki" && Enemy,Name   = "Yuyuko Saigyouji"
+Trigger1   = Enemy,Var(3)        = 1       || Enemy,Var(3) = 2
+Trigger1   = GameTime%6          = 0
+Value      = IfElse(Enemy,Var(3) = 1, -2, -3)
+Kill       = 0
+
+
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------

@@ -1,0 +1,3316 @@
+;===========================================================================
+; エフェクト用ヘルパー
+;===========================================================================
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;ネメシスlv2
+[Statedef 2001]
+type     = A
+movetype = A
+physics  = N
+ctrl     = 0
+anim     = 3025
+SprPriority = 4
+
+[State 2001, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 2
+
+[State 2001, 食らい上書き];分身バグ対策
+type = HitOverRide
+trigger1 = (Time >= 0)
+attr = SCA, NA, SA, HA, NP, SP, HP, NT, ST, HT, AA, AT, AP
+time = -1
+stateno = 9999
+IgnoreHitPause = 1
+
+[State 2001, 特殊効果]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow ;自分の影を消す
+IgnoreHitPause = 1
+Persistent = 1
+
+;***********************************
+[State 2001, 移動速度]
+type = VelSet
+trigger1 = (Root,var(53) != 0)
+x = 5
+y = -8
+
+[State 2001, 角度]
+type = AngleSet
+trigger1 = (Root,var(53) != 0)
+value = 60
+
+[State 2001, 移動速度]
+type = VelSet
+trigger1 = (Root,var(53) = 0)
+x = 8
+y = -5
+
+[State 2001, 角度]
+type = AngleSet
+trigger1 = (Root,var(53) = 0)
+value = 30
+
+[State 2001, 角度を有効にする]
+type = AngleDraw
+trigger1 = 1
+
+[State 2001, 透過処理]
+type = Trans
+trigger1 = 1
+Trans = AddAlpha
+Alpha = 200,256
+
+;***********************************
+[State 2001, 飛び道具]
+type = Projectile
+trigger1 = (Time = 0)
+attr             = A, HP
+damage           = ifelse(root,palNo<=10,120,240),5
+getpower         = 70,15
+guardflag         = MA
+animtype         = Back
+pausetime        = 0,10
+;-----------------------------------
+offset           = 0,0
+velocity         = ifelse((Root,var(53) = 0),8,5),ifelse((Root,var(53) = 0),-5,-8)
+accel            = 0,0
+projID           = 3026
+projanim         = 3026  ;透明の「攻撃判定専用アニメ」を設定してる
+projhitanim      = 3027
+projremanim      = 20000
+projscale        = 1,1
+projshadow       = 0,0,0
+projhits         = 1
+projmisstime     = 0
+projpriority     = 5
+projremovetime   = 100
+projsprpriority  = -1
+;-----------------------------------
+priority         = 4
+sparkno          = s(Root,var(44))
+sparkxy          = ceil(ifelse((P2Dist X<0),0+Random/40,60-Random/40)),ceil(ifelse(Random<500,0+Random/70,0-Random/70))
+guard.sparkno    = s4216
+hitsound         = s1,103
+guardsound       = s0,30
+ground.type      = High
+ground.slidetime = 16
+ground.hittime   = 19
+ground.velocity  = -2.4,-12
+guard.velocity   = -7
+air.velocity     = -2.4,-10
+airguard.velocity= -6,-4.5
+yaccel           = 0.6
+fall             = 1
+fall.recovertime = 55
+envshake.time    = 12
+envshake.ampl    = 6
+envshake.freq    = 100
+fall.recover     = 0
+palfx.time       = 15
+palfx.add        = 60,60,256      ;色合い赤,色合い緑,色合い青
+palfx.sinadd     = 100,100,180,3  ;振幅赤,振幅緑,振幅青,周期
+palfx.invertall  = 1              ;色反転
+
+[State 2001, ヘルパーを消す] 
+type = DestroySelf
+trigger1 = (FrontEdgeDist <= -50)
+trigger2 = (Time > 1000)
+trigger3 = (Root,ProjContactTime(3026) = 1)
+
+
+;マシンガンlv2-1
+[Statedef 2002]
+type     = A
+movetype = A
+physics  = N
+ctrl     = 0
+anim     = 3028
+SprPriority = 4
+
+[State 2002, 残像]
+type = AfterImage
+trigger1 = Time = 0
+Time = 52
+PalBright   = 0,0,250
+PalContrast = 0,80,250
+Trans = Add
+TimeGap  = 3
+FrameGap = 1
+length = 6
+
+[State 2002, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 2
+
+[State 2002, 食らい上書き];分身バグ対策
+type = HitOverRide
+trigger1 = (Time >= 0)
+attr = SCA, NA, SA, HA, NP, SP, HP, NT, ST, HT, AA, AT, AP
+time = -1
+stateno = 9999
+IgnoreHitPause = 1
+
+[State 2002, 特殊効果]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow ;自分の影を消す
+IgnoreHitPause = 1
+Persistent = 1
+
+;***********************************
+[State 2002, 移動速度]
+type = VelSet
+trigger1 = root,var(53)=1
+x = 18
+y = -1
+
+[State 2002, 移動速度]
+type = VelSet
+trigger1 = root,var(53)!=1
+x = 18
+y = 1
+
+;***********************************
+[State 2002, 飛び道具]
+type = Projectile
+trigger1 = (Time = 0)
+attr             = A, SP
+damage           = ifelse(root,palNo<=10,30,60),5
+getpower         = 25,12
+guardflag         = MA
+hitflag           = MAFD
+animtype         = Back
+pausetime        = 0,10
+;-----------------------------------
+offset           = 0,0
+velocity         = 18,ifelse(root,var(53)=1,-1,1)
+accel            = 0,0
+projID           = 3029
+projanim         = 3029  ;透明の「攻撃判定専用アニメ」を設定してる
+projhitanim      = 20000
+projremanim      = 20000
+projscale        = 1,1
+projshadow       = 0,0,0
+projhits         = 1
+projmisstime     = 0
+projpriority     = 5
+projremovetime   = 100
+projsprpriority  = -1
+;-----------------------------------
+priority         = 4
+sparkno          = s(Root,var(43))
+sparkxy          = ceil(ifelse((P2Dist X<0),0+Random/40,20-Random/40)),ceil(ifelse(Random<500,0+Random/70,0-Random/70))
+guard.sparkno    = s4216
+hitsound         = s1,100
+guardsound       = s0,30
+ground.type      = Low
+ground.slidetime = 16
+ground.hittime   = 19
+ground.velocity  = -6,0
+air.velocity     = -4.2,-4
+air.juggle       = 1
+envshake.time = 8
+envshake.ampl = 2
+
+[State 2002, ヘルパーを消す] 
+type = DestroySelf
+trigger1 = (FrontEdgeDist <= -150)
+trigger2 = (Time > 1000)
+trigger3 = (Root,ProjContactTime(3029) = 1)
+trigger3 = p2bodydist x < 0
+
+;マシンガンlv2-2
+[Statedef 2003]
+type     = A
+movetype = A
+physics  = N
+ctrl     = 0
+anim     = 3028
+SprPriority = 4
+
+[State 2003, 残像]
+type = AfterImage
+trigger1 = Time = 0
+Time = 52
+PalBright   = 0,0,250
+PalContrast = 0,80,250
+Trans = Add
+TimeGap  = 3
+FrameGap = 1
+length = 6
+
+[State 2002, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 2
+
+[State 2003, 食らい上書き];分身バグ対策
+type = HitOverRide
+trigger1 = (Time >= 0)
+attr = SCA, NA, SA, HA, NP, SP, HP, NT, ST, HT, AA, AT, AP
+time = -1
+stateno = 9999
+IgnoreHitPause = 1
+
+[State 2003, 特殊効果]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow ;自分の影を消す
+IgnoreHitPause = 1
+Persistent = 1
+
+;***********************************
+[State 2002, 移動速度]
+type = VelSet
+trigger1 = root,var(53)=1
+x = 18
+y = -1
+
+[State 2002, 移動速度]
+type = VelSet
+trigger1 = root,var(53)!=1
+x = 18
+y = 1
+
+;***********************************
+[State 2003, 飛び道具]
+type = Projectile
+trigger1 = (Time = 0)
+attr             = A, SP
+damage           = ifelse(root,palNo<=10,30,60),5
+getpower         = 25,12
+guardflag         = MA
+hitflag           = MAFD
+animtype         = Back
+pausetime        = 0,10
+;-----------------------------------
+offset           = 0,0
+velocity         = 18,ifelse(root,var(53)=1,-1,1)
+accel            = 0,0
+projID           = 3029
+projanim         = 3029  ;透明の「攻撃判定専用アニメ」を設定してる
+projhitanim      = 20000
+projremanim      = 20000
+projscale        = 1,1
+projshadow       = 0,0,0
+projhits         = 1
+projmisstime     = 0
+projpriority     = 5
+projremovetime   = 100
+projsprpriority  = -1
+;-----------------------------------
+priority         = 4
+sparkno          = s(Root,var(43))
+sparkxy          = ceil(ifelse((P2Dist X<0),0+Random/40,20-Random/40)),ceil(ifelse(Random<500,0+Random/70,0-Random/70))
+guard.sparkno    = s4216
+hitsound         = s1,100
+guardsound       = s0,30
+ground.type      = High
+ground.slidetime = 16
+ground.hittime   = 19
+ground.velocity  = -6,0
+air.velocity     = -4.2,-4
+air.juggle       = 1
+envshake.time = 8
+envshake.ampl = 2
+
+[State 2003, ヘルパーを消す] 
+type = DestroySelf
+trigger1 = (FrontEdgeDist <= -150)
+trigger2 = (Time > 1000)
+trigger3 = (Root,ProjContactTime(3029) = 1)
+trigger3 = p2bodydist x < 0
+
+;マシンガンlv2-3_空中
+[Statedef 2004]
+type     = A
+movetype = A
+physics  = N
+ctrl     = 0
+anim     = 3028
+SprPriority = 4
+
+[State 2004, 角度]
+type = AngleSet
+trigger1 = 1
+value = ifelse((Root,var(53) != 0),-60,-45)
+
+[State 2004, 角度を有効にする]
+type = AngleDraw
+trigger1 = 1
+
+[State 2004, 残像]
+type = AfterImage
+trigger1 = Time = 0
+Time = 52
+PalBright   = 0,0,250
+PalContrast = 0,80,250
+Trans = Add
+TimeGap  = 2
+FrameGap = 1
+length = 3
+
+[State 2004, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 2
+
+[State 2004, 食らい上書き];分身バグ対策
+type = HitOverRide
+trigger1 = (Time >= 0)
+attr = SCA, NA, SA, HA, NP, SP, HP, NT, ST, HT, AA, AT, AP
+time = -1
+stateno = 9999
+IgnoreHitPause = 1
+
+[State 2004, 特殊効果]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow ;自分の影を消す
+IgnoreHitPause = 1
+Persistent = 1
+
+;***********************************
+[State 2004, 移動速度]
+type = VelSet
+trigger1 = 1
+x = ifelse((Root,var(53) != 0),7,10)
+y = ifelse((Root,var(53) != 0),15,12)
+
+;***********************************
+[State 2004, 飛び道具]
+type = Projectile
+trigger1 = (Time = 0)
+attr             = S, SP
+damage           = ifelse(root,palNo<=10,30,60),5
+getpower         = 25,12
+guardflag         = MA
+hitflag           = MAFD
+animtype         = Back
+pausetime        = 0,10
+;-----------------------------------
+offset           = 0,0
+velocity         = ifelse((Root,var(53) != 0),7,10),ifelse(root,var(53)=1,15,12)
+accel            = 0,0
+projID           = 3030
+projanim         = 3030  ;透明の「攻撃判定専用アニメ」を設定してる
+projhitanim      = 20000
+projremanim      = 20000
+projscale        = 1,1
+projshadow       = 0,0,0
+projhits         = 1
+projmisstime     = 0
+projpriority     = 5
+projremovetime   = 100
+projsprpriority  = -1
+;-----------------------------------
+priority         = 4
+sparkno          = s(Root,var(43))
+sparkxy          = ceil(ifelse((P2Dist X<0),0+Random/40,20-Random/40)),ceil(ifelse(Random<500,0+Random/70,0-Random/70))
+guard.sparkno    = s4216
+hitsound         = s1,100
+guardsound       = s0,30
+ground.type      = Low
+ground.slidetime = 16
+ground.hittime   = 19
+ground.velocity  = -6,0
+air.velocity     = -4.2,-4
+air.juggle       = 1
+envshake.time = 8
+envshake.ampl = 2
+
+[State 2004, ヘルパーを消す] 
+type = DestroySelf
+trigger1 = (FrontEdgeDist <= -150)
+trigger2 = (Time > 1000)
+trigger3 = (Root,ProjContactTime(3030) = 1)
+trigger3 = p2bodydist x < 0
+trigger4 = pos Y > 0
+
+;マシンガンlv2-3_空中
+[Statedef 2005]
+type     = A
+movetype = A
+physics  = N
+ctrl     = 0
+anim     = 3028
+SprPriority = 4
+
+[State 2005, 角度]
+type = AngleSet
+trigger1 = 1
+value = ifelse((Root,var(53) != 0),-60,-45)
+
+[State 2005, 角度を有効にする]
+type = AngleDraw
+trigger1 = 1
+
+[State 2005, 残像]
+type = AfterImage
+trigger1 = Time = 0
+Time = 52
+PalBright   = 0,0,250
+PalContrast = 0,80,250
+Trans = Add
+TimeGap  = 2
+FrameGap = 1
+length = 3
+
+[State 2005, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 2
+
+[State 2005, 食らい上書き];分身バグ対策
+type = HitOverRide
+trigger1 = (Time >= 0)
+attr = SCA, NA, SA, HA, NP, SP, HP, NT, ST, HT, AA, AT, AP
+time = -1
+stateno = 9999
+IgnoreHitPause = 1
+
+[State 2004, 特殊効果]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow ;自分の影を消す
+IgnoreHitPause = 1
+Persistent = 1
+
+;***********************************
+[State 2005, 移動速度]
+type = VelSet
+trigger1 = 1
+x = ifelse((Root,var(53) != 0),7,10)
+y = ifelse((Root,var(53) != 0),15,12)
+
+;***********************************
+[State 2005, 飛び道具]
+type = Projectile
+trigger1 = (Time = 0)
+attr             = S, SP
+damage           = ifelse(root,palNo<=10,30,60),5
+getpower         = 25,12
+guardflag         = MA
+hitflag           = MAFD
+animtype         = Back
+pausetime        = 0,10
+;-----------------------------------
+offset           = 0,0
+velocity         = ifelse((Root,var(53) != 0),7,10),ifelse(root,var(53)=1,15,12)
+accel            = 0,0
+projID           = 3030
+projanim         = 3030  ;透明の「攻撃判定専用アニメ」を設定してる
+projhitanim      = 20000
+projremanim      = 20000
+projscale        = 1,1
+projshadow       = 0,0,0
+projhits         = 1
+projmisstime     = 0
+projpriority     = 5
+projremovetime   = 100
+projsprpriority  = -1
+;-----------------------------------
+priority         = 4
+sparkno          = s(Root,var(43))
+sparkxy          = ceil(ifelse((P2Dist X<0),0+Random/40,20-Random/40)),ceil(ifelse(Random<500,0+Random/70,0-Random/70))
+guard.sparkno    = s4216
+hitsound         = s1,100
+guardsound       = s0,30
+ground.type      = high
+ground.slidetime = 16
+ground.hittime   = 19
+ground.velocity  = -6,0
+air.velocity     = -4.2,-4
+air.juggle       = 1
+envshake.time = 8
+envshake.ampl = 2
+
+[State 2005, ヘルパーを消す] 
+type = DestroySelf
+trigger1 = (FrontEdgeDist <= -150)
+trigger2 = (Time > 1000)
+trigger3 = (Root,ProjContactTime(3030) = 1)
+trigger3 = p2bodydist x < 0
+trigger4 = pos Y > 0
+
+;マシンガンlv3-1
+[Statedef 2006]
+type     = A
+movetype = A
+physics  = N
+ctrl     = 0
+anim     = 3004
+SprPriority = 4
+
+[State 2006, ヒット判定用]
+type = VarSet
+trigger1 = Time = 0
+v = 25
+value = random
+
+[State 2006, 残像]
+type = AfterImage
+trigger1 = Time = 0
+Time = 52
+PalBright   = 0,0,0
+PalContrast = 0,80,250
+Trans = Add
+TimeGap  = 3
+FrameGap = 1
+length = 3
+
+[State 2006, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 2
+
+[State 2006, 食らい上書き];分身バグ対策
+type = HitOverRide
+trigger1 = (Time >= 0)
+attr = SCA, NA, SA, HA, NP, SP, HP, NT, ST, HT, AA, AT, AP
+time = -1
+stateno = 9999
+IgnoreHitPause = 1
+
+[State 2006, 特殊効果]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow ;自分の影を消す
+IgnoreHitPause = 1
+Persistent = 1
+
+;***********************************
+[State 2006, 移動速度]
+type = VelSet
+trigger1 = 1
+x = 9
+y = 0+ifelse(random<500,1.5,-1.5)
+
+[State 2006, 飛び道具]
+type = Projectile
+trigger1 = (Time = 0)
+attr             = A, HP
+damage           = ifelse(root,palNo<=10,20,40),5
+guardflag         = MA
+hitflag           = MAF
+animtype         = Heavy
+pausetime        = 0,10
+;-----------------------------------
+offset           = 0,0
+velocity         = 9,0
+accel            = 0,0
+projID           = (var(25))
+projanim         = 3006  ;透明の「攻撃判定専用アニメ」を設定してる
+projhitanim      = 20000
+projremanim      = 20000
+projscale        = 1,1
+projshadow       = 0,0,0
+projhits         = 1
+projmisstime     = 0
+projpriority     = 5
+projremovetime   = 100
+projsprpriority  = -1
+;-----------------------------------
+priority         = 4
+sparkno          = s(Root,var(44))
+sparkxy          = ceil(ifelse((P2Dist X<0),45+Random/40,75-Random/40)),ceil(ifelse(Random<500,10+Random/70,-10-Random/70))
+guard.sparkno    = s4216
+hitsound         = s1,102
+guardsound       = s0,30
+ground.type      = Low
+ground.slidetime = 16
+ground.hittime   = 19
+ground.velocity  = -4.5,ifelse((root,stateNo=3000)&&(root,time>=35),-3,0)
+guard.velocity   = -3
+air.velocity     = -7,-5
+airguard.velocity= -3,-4
+yaccel           = 0.4
+air.fall         = 1
+fall.recover     = 0
+envshake.time    = 4
+envshake.ampl    = 6
+envshake.freq    = 45
+palfx.time       = 15
+palfx.add        = 150,60,10      ;色合い赤,色合い緑,色合い青
+palfx.sinadd     = 250,180,10  ;振幅赤,振幅緑,振幅青,周期
+;palfx.invertall  = 1              ;色反転
+
+[State 2006, ヘルパーを消す] 
+type = DestroySelf
+trigger1 = (FrontEdgeDist <= -150)
+trigger2 = (Time > 1000)
+trigger3 = (Root,ProjContactTime((var(25))) = 1)
+;trigger3 = p2bodydist x < 0
+;trigger3 = p2bodydist y > 0
+;trigger3 = p2stateType != L
+
+;マシンガンlv3-2
+[Statedef 2007]
+type     = A
+movetype = A
+physics  = N
+ctrl     = 0
+anim     = 3004
+SprPriority = 4
+
+[State 2007, ヒット判定用]
+type = VarSet
+trigger1 = Time = 0
+v = 25
+value = random
+
+[State 2007, 残像]
+type = AfterImage
+trigger1 = Time = 0
+Time = 52
+PalBright   = 0,0,0
+PalContrast = 0,80,250
+Trans = Add
+TimeGap  = 3
+FrameGap = 1
+length = 3
+
+[State 2007, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 2
+
+[State 2007, 食らい上書き];分身バグ対策
+type = HitOverRide
+trigger1 = (Time >= 0)
+attr = SCA, NA, SA, HA, NP, SP, HP, NT, ST, HT, AA, AT, AP
+time = -1
+stateno = 9999
+IgnoreHitPause = 1
+
+[State 2007, 特殊効果]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow ;自分の影を消す
+IgnoreHitPause = 1
+Persistent = 1
+
+;***********************************
+[State 2007, 移動速度]
+type = VelSet
+trigger1 = 1
+x = 9
+y = 0+ifelse(random<500,1.5,-1.5)
+
+[State 2007, 飛び道具]
+type = Projectile
+trigger1 = (Time = 0)
+attr             = A, HP
+damage           = ifelse(root,palNo<=10,20,40),5
+guardflag         = MA
+hitflag           = MAF
+animtype         = Heavy
+pausetime        = 0,10
+;-----------------------------------
+offset           = 0,0
+velocity         = 9,0
+accel            = 0,0
+projID           = (var(25))
+projanim         = 3006  ;透明の「攻撃判定専用アニメ」を設定してる
+projhitanim      = 20000
+projremanim      = 20000
+projscale        = 1,1
+projshadow       = 0,0,0
+projhits         = 1
+projmisstime     = 0
+projpriority     = 5
+projremovetime   = 100
+projsprpriority  = -1
+;-----------------------------------
+priority         = 4
+sparkno          = s(Root,var(44))
+sparkxy          = ceil(ifelse((P2Dist X<0),45+Random/40,75-Random/40)),ceil(ifelse(Random<500,0+Random/70,0-Random/70))
+guard.sparkno    = s4216
+hitsound         = s1,102
+guardsound       = s0,30
+ground.type      = High
+ground.slidetime = 16
+ground.hittime   = 19
+ground.velocity  = -4.5,ifelse((root,stateNo=3000)&&(root,time>=35),-3,0)
+guard.velocity   = -3
+air.velocity     = -7,-5
+airguard.velocity= -3,-4
+yaccel           = 0.4
+air.fall         = 1
+fall.recover     = 0
+envshake.time    = 4
+envshake.ampl    = 6
+envshake.freq    = 45
+palfx.time       = 15
+palfx.add        = 200,60,60      ;色合い赤,色合い緑,色合い青
+palfx.sinadd     = 180,100,100,3  ;振幅赤,振幅緑,振幅青,周期
+;palfx.invertall  = 1              ;色反転
+
+[State 2007, ヘルパーを消す] 
+type = DestroySelf
+trigger1 = (FrontEdgeDist <= -150)
+trigger2 = (Time > 1000)
+trigger3 = (Root,ProjContactTime((var(25))) = 1)
+;trigger3 = p2bodydist y > 0
+;trigger3 = p2stateType != L
+
+
+;マシンガンlv3-3_空中
+[Statedef 2008]
+type     = A
+movetype = A
+physics  = N
+ctrl     = 0
+anim     = 3004
+SprPriority = 4
+
+[State 2008, ヒット判定用]
+type = VarSet
+trigger1 = Time = 0
+v = 25
+value = random
+
+[State 2008, 残像]
+type = AfterImage
+trigger1 = Time = 0
+Time = 52
+PalBright   = 0,0,0
+PalContrast = 0,80,250
+Trans = Add
+TimeGap  = 3
+FrameGap = 1
+length = 3
+
+[State 2008, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 2
+
+[State 2008, 食らい上書き];分身バグ対策
+type = HitOverRide
+trigger1 = (Time >= 0)
+attr = SCA, NA, SA, HA, NP, SP, HP, NT, ST, HT, AA, AT, AP
+time = -1
+stateno = 9999
+IgnoreHitPause = 1
+
+[State 2008, 特殊効果]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow ;自分の影を消す
+IgnoreHitPause = 1
+Persistent = 1
+;***********************************
+[State 2008, 角度]
+type = AngleSet
+trigger1 = 1
+value = -51
+
+
+[State 2008, 角度を有効にする]
+type = AngleDraw
+trigger1 = 1
+
+[State 2008, 透過処理]
+type = Trans
+trigger1 = 1
+Trans = AddAlpha
+Alpha = 200,256
+
+;***********************************
+[State 2008, 移動速度]
+type = VelSet
+trigger1 = 1
+x = 1.8
+y = 6
+
+[State 2008, 飛び道具]
+type = Projectile
+trigger1 = (Time = 0)
+attr             = A, HP
+damage           = ifelse(root,palNo<=10,20,40),5
+guardflag         = MA
+hitflag           = MAFD
+animtype         = Heavy
+pausetime        = 0,10
+;-----------------------------------
+offset           = 0,0
+velocity         = 1.8,6
+accel            = 0,0
+projID           = (var(25))
+projanim         = 3032  ;透明の「攻撃判定専用アニメ」を設定してる
+projhitanim      = 20000
+projremanim      = 20000
+projscale        = 1,1
+projshadow       = 0,0,0
+projhits         = 1
+projmisstime     = 0
+projpriority     = 5
+projremovetime   = 100
+projsprpriority  = -1
+;-----------------------------------
+priority         = 4
+sparkno          = s(Root,var(44))
+sparkxy          = ceil(ifelse((P2Dist X<0),30+Random/40,30-Random/40)),ceil(ifelse(Random<500,60+Random/70,60-Random/70))
+guard.sparkno    = s4216
+hitsound         = s1,102
+guardsound       = s0,30
+ground.type      = High
+ground.slidetime = 16
+ground.hittime   = 19
+ground.velocity  = -4.5,ifelse((root,stateNo=3000)&&(root,time>=35),-3,0)
+guard.velocity   = -3
+air.velocity     = -4.5,-5
+airguard.velocity= -3,-4
+yaccel           = 0.4
+air.fall         = 1
+fall.recover     = 0
+envshake.time    = 4
+envshake.ampl    = 6
+envshake.freq    = 45
+palfx.time       = 15
+palfx.add        = 150,60,10      ;色合い赤,色合い緑,色合い青
+palfx.sinadd     = 250,180,10  ;振幅赤,振幅緑,振幅青,周期
+
+[State 2008, ヘルパーを消す] 
+type = DestroySelf
+trigger1 = (FrontEdgeDist <= -150)
+trigger2 = (Time > 1000)
+trigger3 = (Root,ProjContactTime(var(25)) = 1)
+trigger4 = pos y > 0
+
+;マシンガンlv3-4_空中
+[Statedef 2009]
+type     = A
+movetype = A
+physics  = N
+ctrl     = 0
+anim     = 3004
+SprPriority = 4
+
+[State 2009, ヒット判定用]
+type = VarSet
+trigger1 = Time = 0
+v = 25
+value = random
+
+[State 2009, 残像]
+type = AfterImage
+trigger1 = Time = 0
+Time = 52
+PalBright   = 0,0,0
+PalContrast = 0,80,250
+Trans = Add
+TimeGap  = 3
+FrameGap = 1
+length = 3
+
+[State 2009, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 2
+
+[State 2009, 食らい上書き];分身バグ対策
+type = HitOverRide
+trigger1 = (Time >= 0)
+attr = SCA, NA, SA, HA, NP, SP, HP, NT, ST, HT, AA, AT, AP
+time = -1
+stateno = 9999
+IgnoreHitPause = 1
+
+[State 2009, 特殊効果]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow ;自分の影を消す
+IgnoreHitPause = 1
+Persistent = 1
+;***********************************
+[State 2009, 角度]
+type = AngleSet
+trigger1 = 1
+value = -51
+
+[State 2009, 角度を有効にする]
+type = AngleDraw
+trigger1 = 1
+
+[State 2009, 透過処理]
+type = Trans
+trigger1 = 1
+Trans = AddAlpha
+Alpha = 200,256
+
+;***********************************
+[State 2009, 移動速度]
+type = VelSet
+trigger1 = 1
+x = 3
+y = 6
+
+[State 2009, 飛び道具]
+type = Projectile
+trigger1 = (Time = 0)
+attr             = A, HP
+damage           = ifelse(root,palNo<=10,20,40),5
+guardflag         = MA
+hitflag           = MAFD
+animtype         = Heavy
+pausetime        = 0,10
+;-----------------------------------
+offset           = 0,0
+velocity         = 3,6
+accel            = 0,0
+projID           = (var(25))
+projanim         = 3032  ;透明の「攻撃判定専用アニメ」を設定してる
+projhitanim      = 20000
+projremanim      = 20000
+projscale        = 1,1
+projshadow       = 0,0,0
+projhits         = 1
+projmisstime     = 0
+projpriority     = 5
+projremovetime   = 100
+projsprpriority  = -1
+;-----------------------------------
+priority         = 4
+sparkno          = s(Root,var(44))
+sparkxy          = ceil(ifelse((P2Dist X<0),30+Random/40,30-Random/40)),ceil(ifelse(Random<500,60+Random/70,60-Random/70))
+guard.sparkno    = s4216
+hitsound         = s1,102
+guardsound       = s0,30
+ground.type      = High
+ground.slidetime = 16
+ground.hittime   = 19
+ground.velocity  = -4.5,ifelse((root,stateNo=3000)&&(root,time>=35),-3,0)
+guard.velocity   = -3
+air.velocity     = -4.5,-5
+airguard.velocity= -3,-4
+yaccel           = 0.4
+air.fall         = 1
+fall.recover     = 0
+envshake.time    = 4
+envshake.ampl    = 6
+envshake.freq    = 45
+palfx.time       = 15
+palfx.add        = 150,60,10      ;色合い赤,色合い緑,色合い青
+palfx.sinadd     = 250,180,10  ;振幅赤,振幅緑,振幅青,周期
+
+[State 2009, ヘルパーを消す] 
+type = DestroySelf
+trigger1 = (FrontEdgeDist <= -150)
+trigger2 = (Time > 1000)
+trigger3 = (Root,ProjContactTime(var(25)) = 1)
+trigger4 = pos y > 0
+;===========================================================================
+;ネメシスlv1
+[Statedef 2010]
+type     = A
+movetype = A
+physics  = N
+ctrl     = 0
+anim     = 3034
+SprPriority = 4
+
+[State 2010];色
+type = PalFX
+trigger1 = (time%6) = 0
+;add = -256,-256,256
+;mul = -256,-256,256
+invertall = 1
+time = 3
+
+[State 2010, 残像]
+type = AfterImage
+trigger1 = Time = 0
+Time = 52
+PalBright   = 0,0,0
+PalContrast = 0,80,250
+Trans = Add
+TimeGap  = 3
+FrameGap = 1
+length = 3
+
+[State 2010, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 2
+
+[State 2010, 食らい上書き];分身バグ対策
+type = HitOverRide
+trigger1 = (Time >= 0)
+attr = SCA, NA, SA, HA, NP, SP, HP, NT, ST, HT, AA, AT, AP
+time = -1
+stateno = 9999
+IgnoreHitPause = 1
+
+[State 2010, 特殊効果]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow ;自分の影を消す
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 2010, 中心];爆発エフェクト
+type = helper
+trigger1 = (time%7) = 0
+name = "baku"
+id=2012
+pos = 60,ceil(ifelse(Random<500,20+Random/70,-20-Random/70))
+postype = p1
+stateno = 2012
+helpertype = normal
+ownpal = 1
+keyctrl = 0
+size.yscale = 0.5
+size.xscale = 0.5
+
+;***********************************
+[State 2010, 移動速度]
+type = VelSet
+trigger1 = 1
+x = 9
+y = 0+ifelse(random<500,1.5,-1.5)
+
+;当たり判定　属性なしでpause0で時間停止無視で当身されないらしい
+[State 2010]
+type = HitDef
+trigger1 = (Time = 0)
+attr             = , HP;属性
+damage           = ifelse(root,palNo<=10,39,78),10
+guardflag         = MA
+hitflag           = MAFP
+animtype         = Heavy
+pausetime        = 0,10
+sparkno          = s(Root,var(46))
+;sparkxy          = ceil((p2bodydist x)+ifelse((P2bodyDist X<60),0+Random/40,-30-Random/40)),ceil(ifelse(Random<500,10+Random/70,-10-Random/70))
+sparkxy          = ceil(ifelse(Random<500,6+Random/50,-6-Random/50)),ceil(ifelse(Random<500,10+Random/70,-10-Random/70))
+guard.sparkno    = s4216
+hitsound         = s1,103
+guardsound       = s0,30
+ground.type      = Low
+ground.slidetime = 16
+ground.hittime   = 19
+ground.velocity  = -4.5,ifelse((root,stateNo=3100)&&(root,time>=35),-3,0)
+guard.velocity   = -3
+air.velocity     = -7,-5
+airguard.velocity= -3,-4
+yaccel           = 0.4
+air.fall         = 1
+fall.recover     = 0
+palfx.time       = 15
+palfx.add        = 60,60,256      ;色合い赤,色合い緑,色合い青
+palfx.sinadd     = 100,100,180,3  ;振幅赤,振幅緑,振幅青,周期
+palfx.invertall  = 1              ;色反転
+air.juggle       = 1
+envshake.time    = 5
+envshake.ampl    = 9
+envshake.freq    = 50
+supermovetime = 99999999
+pausemovetime = 99999999
+
+[State 2010, ヘルパーを消す] 
+type = DestroySelf
+trigger1 = (FrontEdgeDist <= -300)
+trigger2 = (Time > 1000)
+trigger3 = (Root,ProjContactTime((var(25))) = 6)
+;trigger3 = p2bodydist x < 0
+;trigger3 = p2bodydist y > 0
+;trigger3 = p2stateType != L
+
+
+;マシンガン_ムーンサルトショット用1
+[Statedef 2011]
+type     = A
+movetype = A
+physics  = N
+ctrl     = 0
+anim     = 3028
+SprPriority = 4
+
+[State 2011, 角度]
+type = AngleSet
+triggerall = time = 0
+trigger1 = root,animElem = 9
+value = -60
+
+[State 2011, 角度]
+type = AngleSet
+triggerall = (Time = 0)
+trigger1 = (Root,var(53) != 0)
+trigger1 = root,animElem = 11
+trigger2 = (Root,var(53) = 0)
+trigger2 = root,animElem = 13
+value = -67
+
+[State 2011, 角度]
+type = AngleSet
+triggerall = (Time = 0)
+trigger1 = root,animElem = 13
+trigger1 = (Root,var(53) != 0)
+value = -81
+
+[State 2011, 角度を有効にする]
+type = AngleDraw
+trigger1 = 1
+
+[State 2011, 残像]
+type = AfterImage
+trigger1 = Time = 0
+Time = 52
+PalBright   = 0,0,250
+PalContrast = 0,80,250
+Trans = Add
+TimeGap  = 2
+FrameGap = 1
+length = 2
+
+[State 2011, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 2
+
+[State 2011, 食らい上書き];分身バグ対策
+type = HitOverRide
+trigger1 = (Time >= 0)
+attr = SCA, NA, SA, HA, NP, SP, HP, NT, ST, HT, AA, AT, AP
+time = -1
+stateno = 9999
+IgnoreHitPause = 1
+
+[State 20011, 特殊効果]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow ;自分の影を消す
+IgnoreHitPause = 1
+Persistent = 1
+
+;***********************************
+[State 2001, 移動速度]
+type = VelSet
+triggerall = time = 0
+trigger1 = root,animElem = 9
+x = 12
+y = 15
+
+[State 2001, 移動速度]
+type = VelSet
+triggerall = (Time = 0)
+trigger1 = (Root,var(53) != 0)
+trigger1 = root,animElem = 11
+trigger2 = (Root,var(53) = 0)
+trigger2 = root,animElem = 13
+x = 7
+y = 15
+
+[State 2001, 移動速度]
+type = VelSet
+triggerall = (Time = 0)
+trigger1 = root,animElem = 13
+trigger1 = (Root,var(53) != 0)
+x = 3
+y = 15
+
+;***********************************
+[State 2011, 飛び道具]
+type = Projectile
+triggerall = (Time = 0)
+trigger1 = root,animElem = 9
+attr             = S, SP
+damage           = ifelse(root,palNo<=10,45,70),6
+getpower         = 25,12
+guardflag         = MA
+hitflag           = MAFD
+animtype         = medium
+pausetime        = 0,10
+;-----------------------------------
+offset           = 0,0
+velocity         = 12,15
+accel            = 0,0
+projID           = 3030
+projanim         = 3030  ;透明の「攻撃判定専用アニメ」を設定してる
+projhitanim      = 20000
+projremanim      = 20000
+projscale        = 1,1
+projshadow       = 0,0,0
+projhits         = 1
+projmisstime     = 0
+projpriority     = 5
+projremovetime   = 100
+projsprpriority  = -1
+;-----------------------------------
+priority         = 4
+sparkno          = s(Root,var(43))
+sparkxy          = ceil(ifelse((P2Dist X<0),0+Random/40,20-Random/40)),ceil(ifelse(Random<500,0+Random/70,0-Random/70))
+guard.sparkno    = s4216
+hitsound         = s1,100
+guardsound       = s0,30
+ground.type      = High
+ground.slidetime = 16
+ground.hittime   = 19
+ground.velocity  = -6,0
+air.velocity     = -4.2,-4
+air.juggle       = 1
+envshake.time = 8
+envshake.ampl = 2
+
+[State 2011, 飛び道具]
+type = Projectile
+triggerall = (Time = 0)
+trigger1 = (Root,var(53) != 0)
+trigger1 = root,animElem = 11
+trigger2 = (Root,var(53) = 0)
+trigger2 = root,animElem = 13
+attr             = S, SP
+damage           = ifelse(root,palNo<=10,45,70),6
+getpower         = 25,12
+guardflag         = MA
+hitflag           = MAFD
+animtype         = medium
+pausetime        = 0,10
+;-----------------------------------
+offset           = 0,0
+velocity         = 7,15
+accel            = 0,0
+projID           = 3030
+projanim         = 3037  ;透明の「攻撃判定専用アニメ」を設定してる
+projhitanim      = 20000
+projremanim      = 20000
+projscale        = 1,1
+projshadow       = 0,0,0
+projhits         = 1
+projmisstime     = 0
+projpriority     = 5
+projremovetime   = 100
+projsprpriority  = -1
+;-----------------------------------
+priority         = 4
+sparkno          = s(Root,var(43))
+sparkxy          = ceil(ifelse((P2Dist X<0),0+Random/40,20-Random/40)),ceil(ifelse(Random<500,0+Random/70,0-Random/70))
+guard.sparkno    = s4216
+hitsound         = s1,100
+guardsound       = s0,30
+ground.type      = High
+ground.slidetime = 16
+ground.hittime   = 19
+ground.velocity  = -6,0
+air.velocity     = -4.2,-4
+air.juggle       = 1
+envshake.time = 8
+envshake.ampl = 2
+
+[State 2011, 飛び道具]
+type = Projectile
+triggerall = (Time = 0)
+trigger1 = root,animElem = 13
+trigger1 = (Root,var(53) != 0)
+attr             = S, SP
+damage           = ifelse(root,palNo<=10,45,70),6
+getpower         = 25,12
+guardflag         = MA
+hitflag           = MAFD
+animtype         = Heavy
+pausetime        = 0,10
+;-----------------------------------
+offset           = 0,0
+velocity         = 3,15
+accel            = 0,0
+projID           = 3030
+projanim         = 3038  ;透明の「攻撃判定専用アニメ」を設定してる
+projhitanim      = 20000
+projremanim      = 20000
+projscale        = 1,1
+projshadow       = 0,0,0
+projhits         = 1
+projmisstime     = 0
+projpriority     = 5
+projremovetime   = 100
+projsprpriority  = -1
+;-----------------------------------
+priority         = 4
+sparkno          = s(Root,var(43))
+sparkxy          = ceil(ifelse((P2Dist X<0),0+Random/40,20-Random/40)),ceil(ifelse(Random<500,0+Random/70,0-Random/70))
+guard.sparkno    = s4216
+hitsound         = s1,100
+guardsound       = s0,30
+ground.type      = High
+ground.slidetime = 16
+ground.hittime   = 23
+ground.velocity  = ifelse((FrontEdgeBodyDist<20),12.5,6),0
+air.velocity     = 3,-4
+air.juggle       = 1
+envshake.time = 8
+envshake.ampl = 2
+
+[State 2011, ヘルパーを消す] 
+type = DestroySelf
+trigger1 = (FrontEdgeDist <= -150)
+trigger2 = (Time > 1000)
+trigger3 = (Root,ProjContactTime(3030) = 1)
+trigger3 = p2bodydist x < 0
+trigger4 = pos Y > 0
+
+[Statedef 2012, 爆発エフェクト]
+type     = S
+movetype = I
+physics  = N
+ctrl     = 0
+anim     = 3036
+
+[State 2012, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 1
+
+[State 2012, 特殊効果]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow ;自分の影を消す
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 2012, 色]
+type = Palfx
+trigger1 = 1
+time = 7
+color = 0
+;invertall = 1
+
+[State 2012, このヘルパーを消す]
+type = DestroySelf
+trigger1 = animtime = 0
+;---------------------------------------------------------------------------
+
+[Statedef 2020];クォート飛び降り
+type     = A
+movetype = I
+physics  = N
+anim     = 2601
+ctrl     = 0
+velset   = 3.5,-3
+sprpriority = -1
+
+[State 2020, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 2
+
+[State 2020, 速度加算]
+type = VelAdd
+trigger1 = (Time > 0)
+y = 1.2
+
+[State 2020, ステート変更]
+type = ChangeState
+triggerall = root,stateNo = 3100
+trigger1 = pos y > 4
+value = 2021
+
+[Statedef 2021];クォートcatch
+type     = S
+movetype = I
+physics  = N
+anim     = 2602
+ctrl     = 0
+velset   = 0,0
+sprpriority = -1
+
+[State 2021, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 2
+
+[State 2021, 軸位置]
+type = PosSet
+trigger1 = 1
+x = (root,pos x)
+y = 0
+
+[State 2020, ステート変更]
+type = ChangeState
+triggerall = anim = 2602
+trigger1 = root,gethitvar(damage)
+trigger2 = time > 200
+value = 2022
+
+[State 2010, ヘルパーを消す] 
+type = DestroySelf
+trigger1 = root,stateNo != 3100
+trigger2 = root,stateNo = 3100
+trigger2 = root,anim != 2500
+
+[Statedef 2022];クォートbackstep
+type     = S
+movetype = I
+physics  = N
+anim     = 2610
+ctrl     = 0
+velset   = 0,0
+sprpriority = -1
+
+[State 2022, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 2
+
+[State 2022, 軸位置]
+type = PosSet
+trigger1 = time = 0
+x = (root,pos x)-4
+y = 0
+
+[State 2022, 速度]
+type = Velset
+trigger1 = animelem = 5
+x = 9
+
+[State 2022, 速度加算]
+type = Veladd
+trigger1 = animelem >= 5
+trigger1 = 1
+x = 1.5
+
+;[State 2022, 透過処理]
+;type = Trans
+;trigger1 = time > 32
+;Trans = AddAlpha
+;Alpha = 300-((time)*6),256
+
+[State 2022, ヘルパーを消す] 
+type = DestroySelf
+trigger1 = time > 90
+
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;===========================================================================
+; システムエフェクト用ヘルパー
+;===========================================================================
+;---------------------------------------------------------------------------
+;スーパーアーツ発動（メイン）
+[Statedef 2300]
+type     = A
+movetype = I
+physics  = N
+ctrl     = 0
+anim     = 20000
+
+
+;***********************************
+[State 2300, カットイン];通常
+type = Explod
+triggerall = numhelper(12345)=1
+triggerall = (helper(12345),var(4)=1)
+triggerall = root,stateNo != 3100
+trigger1 = time = 0
+anim = 4900
+scale = 0.5,0.5
+postype = back
+pos = 0,0
+sprpriority = -1
+supermovetime = 99999999
+pausemovetime = 99999999
+bindtime = -1
+removetime = 47
+ownpal = 1
+ID = 4900
+
+[State 2300, カットイン];鉄の絆
+type = Explod
+triggerall = numhelper(12345)=1
+triggerall = (helper(12345),var(4)=1)
+triggerall = root,stateNo = 3100
+trigger1 = time = 0
+anim = 4901
+scale = 0.5,0.5
+postype = back
+pos = 0,0
+sprpriority = -1
+supermovetime = 99999999
+pausemovetime = 99999999
+bindtime = -1
+removetime = 47
+ownpal = 1
+ID = 4901
+
+[State 2300, エフェクトを消す]
+type = RemoveExplod
+triggerall = numhelper(12345)=1
+trigger1 = (Time > 41)
+ID = 2333
+IgnoreHitPause = 1
+Persistent = 1
+
+;***********************************
+
+[State 2300, 変数]
+type = VarSet
+trigger1 = (Time = 0)
+trigger2 = (Time >= 141)
+fv = 38
+value = 0
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 2300, 変数]
+type = VarAdd
+trigger1 = (Time = [1,140])
+fv = 38
+value = 0.01
+IgnoreHitPause = 1
+Persistent = 1
+
+;+++++++++++++++++++++++++++++++++
+[State 2300, 変数]
+type = VarSet
+trigger1 = (Time = 0)
+trigger2 = (Time >= 141)
+fv = 39
+value = 0
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 2300, 変数]
+type = VarAdd
+trigger1 = (Time = [10,140])
+fv = 39
+value = 0.01
+IgnoreHitPause = 1
+Persistent = 1
+
+;*********************************
+[State 2300, 特殊効果]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 2300, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 2
+
+[State 2300, 食らい上書き]
+type = HitOverRide
+trigger1 = (Time >= 0)
+attr = SCA, NA, SA, HA, NP, SP, HP, NT, ST, HT, AA, AT, AP
+time = -1
+stateno = 9999
+IgnoreHitPause = 1
+
+[State 2300, 押し判定]
+type = PlayerPush
+trigger1 = 1
+value = 0
+IgnoreHitPause = 1
+Persistent = 1
+
+;*********************************
+[State 2300, ヘルパー]
+type = Helper
+triggerall = NumHelper(2301) = 0
+triggerall = root,StateNo != 3901
+trigger1 = Time = 1
+name = "Rolling-Effect"
+stateno = 2301
+ID = 2301
+pos = 0,0
+keyctrl = 0
+postype = p1
+supermovetime = 99999999
+pausemovetime = 99999999
+ownpal = 1
+IgnoreHitPause = 1
+Persistent = 0
+
+;*********************************
+;airで１フレームしか表示しない１枚絵のアニメを毎フレーム表示
+[State 2300, エフェクト]
+type = Explod
+trigger1 = (Time = [1,140])
+triggerall = root,StateNo != 3901
+anim = 4009
+postype = p1
+pos = 0,0
+sprpriority = 10
+ownpal = 0
+ontop = 1
+bindtime = -1
+supermovetime = 99999999
+pausemovetime = 99999999
+IgnoreHitPause = 1
+ID = 4009
+
+[State 2300, エフェクト操作];ここでその１枚絵の伸縮と透過フェードアウトを行う
+type = ModifyExplod
+trigger1 = (Time = [1,140])
+scale = 0.1+(fvar(38)*4.2),0.1+(fvar(38)*4.2)
+supermovetime = 99999999
+pausemovetime = 99999999
+Trans = AddAlpha
+Alpha = ceil(200-fvar(39)*120),256
+ID = 4009
+
+[State 2300, エフェクトを消す];消えない場合の補正処理
+type = RemoveExplod
+trigger1 = (Time > 149)
+ID = 4009
+
+;+++++++++++++++++++++++++++++++++
+[State 2300, エフェクト]
+type = Explod
+trigger1 = (Time = [1,140])
+anim = 4009
+postype = p1
+pos = 0,0
+sprpriority = 7
+ownpal = 1
+ontop = 1
+bindtime = -1
+supermovetime = 99999999
+pausemovetime = 99999999
+IgnoreHitPause = 1
+ID = 2300
+
+[State 2300, エフェクト操作]
+type = ModifyExplod
+trigger1 = (Time = [1,140])
+scale = 0.1+(fvar(38)*2),0.1+(fvar(38)*2)
+supermovetime = 99999999
+pausemovetime = 99999999
+Trans = AddAlpha
+Alpha = ceil(200-fvar(39)*1000),256
+ID = 2300
+
+[State 2300, エフェクトを消す]
+type = RemoveExplod
+trigger1 = (Time > 141)
+ID = 2300
+
+;+++++++++++++++++++++++++++++++++
+
+
+[State 2300]
+type = PalFX
+trigger1 =time =  [0,140]
+add = -100,0,200
+supermovetime = 99999999
+pausemovetime = 99999999
+time = 1
+
+[State 2300, エフェクト]
+type = Explod
+trigger1 = (Time = [1,140])
+anim = 4001
+postype = p1
+pos = 0,0
+sprpriority = 7
+ownpal = 0
+bindtime = -1
+supermovetime = 99999999
+pausemovetime = 99999999
+IgnoreHitPause = 1
+ID = 4001
+
+[State 2300, エフェクト操作]
+type = ModifyExplod
+trigger1 = (Time = [1,140])
+scale = 0.1+(fvar(38)*1.5),0.1+(fvar(38)*1.5)
+supermovetime = 99999999
+pausemovetime = 99999999
+Trans = AddAlpha
+Alpha = ceil(256-fvar(39)*650),256
+ID = 4001
+
+[State 2300, エフェクトを消す]
+type = RemoveExplod
+trigger1 = (Time > 140)
+ID = 4001
+
+;*********************************
+[State 2300, このヘルパーを消す]
+type = DestroySelf
+trigger1 = (Time > 100)
+
+;---------------------------------------------------------------------------
+;スーパーアーツ発動（回転部分）
+[Statedef 2301]
+type     = A
+movetype = I
+physics  = N
+ctrl     = 0
+anim     = 4002
+SprPriority = 6
+
+[State 2301]
+type = PalFX
+trigger1 = 1
+add = -0,-50,200
+supermovetime = 99999999
+pausemovetime = 99999999
+time = 1
+
+[State 2301, 変数]
+type = VarSet
+trigger1 = (Time = 0)
+trigger2 = (Time > 25)
+fv = 38
+value = 0
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 2301, 変数]
+type = VarAdd
+trigger1 = (Time = [1,25])
+fv = 38
+value = 0.01
+IgnoreHitPause = 1
+Persistent = 1
+
+;+++++++++++++++++++++++++++++++++
+[State 2301, 変数]
+type = VarSet
+trigger1 = (Time = 0)
+trigger2 = (Time > 25)
+fv = 39
+value = 0
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 2301, 変数]
+type = VarAdd
+trigger1 = (Time = [9,25])
+fv = 39
+value = 0.01
+IgnoreHitPause = 1
+Persistent = 1
+
+;*********************************
+[State 2301, 特殊効果]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 2301, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 2
+
+[State 2301, 食らい上書き]
+type = HitOverRide
+trigger1 = (Time >= 0)
+attr = SCA, NA, SA, HA, NP, SP, HP, NT, ST, HT, AA, AT, AP
+time = -1
+stateno = 9999
+IgnoreHitPause = 1
+
+[State 2301, 押し判定]
+type = PlayerPush
+trigger1 = 1
+value = 0
+IgnoreHitPause = 1
+Persistent = 1
+
+;*********************************
+[State 2301, 角度を有効にする]
+type = AngleDraw
+trigger1 = 1
+scale = 0.1+(fvar(38)*7.25),0.1+(fvar(38)*7.25)
+
+[State 2301, 角度]
+type = AngleSet
+trigger1 = Time = 0
+value = 0
+
+[State 2301, 角度を加える]
+type = AngleAdd
+trigger1 = (Time > 0)
+value = 1
+
+[State 2301, 透過処理]
+type = Trans
+trigger1 = 1
+Trans = AddAlpha
+Alpha = ceil(200-fvar(39)*2000),256
+
+[State 2301, エフェクト]
+type = Explod
+trigger1 = (Time = [1,25])
+anim = 4003
+postype = p1
+pos = 0,0
+sprpriority = 6
+ownpal = 0
+ontop = 1
+bindtime = -1
+supermovetime = 99999999
+pausemovetime = 99999999
+IgnoreHitPause = 1
+ID = 4003
+
+[State 2301, エフェクト操作]
+type = ModifyExplod
+trigger1 = (Time = [1,25])
+scale = 0.1+(fvar(38)*3.2),0.1+(fvar(38)*3.2)
+supermovetime = 99999999
+pausemovetime = 99999999
+Trans = AddAlpha
+Alpha = ceil(200-fvar(39)*2000),256
+ID = 4003
+
+[State 2301, エフェクトを消す]
+type = RemoveExplod
+trigger1 = (Time > 25)
+ID = 4003
+
+;*********************************
+[State 2301, このヘルパーを消す]
+type = DestroySelf
+trigger1 = (Time > 25)
+
+;---------------------------------------------------------------------------
+;スーパーアーツ発動（ストⅢタイプの閃光）
+[Statedef 2302]
+type     = A
+movetype = I
+physics  = N
+ctrl     = 0
+anim     = 20000
+
+[State 2302, 変数]
+type = VarSet
+trigger1 = (Time = 0)
+trigger2 = (Time > 14)
+fv = 38
+value = 0
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 2302, 変数]
+type = VarAdd
+trigger1 = (Time = [1,14])
+fv = 38
+value = 0.01
+IgnoreHitPause = 1
+Persistent = 1
+
+;+++++++++++++++++++++++++++++++++
+[State 2302, 変数]
+type = VarSet
+trigger1 = (Time = 0)
+trigger2 = (Time > 14)
+fv = 39
+value = 0
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 2302, 変数]
+type = VarAdd
+trigger1 = (Time = [9,14])
+fv = 39
+value = 0.01
+IgnoreHitPause = 1
+Persistent = 1
+
+;*********************************
+[State 2302, 特殊効果]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 2302, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 2
+
+[State 2302, 食らい上書き]
+type = HitOverRide
+trigger1 = (Time >= 0)
+attr = SCA, NA, SA, HA, NP, SP, HP, NT, ST, HT, AA, AT, AP
+time = -1
+stateno = 9999
+IgnoreHitPause = 1
+
+[State 2302, 押し判定]
+type = PlayerPush
+trigger1 = 1
+value = 0
+IgnoreHitPause = 1
+Persistent = 1
+
+;*********************************
+[State 2302, 本体に付く位置]
+type = BindToRoot
+trigger1 = (Time >= 0)
+pos = 0,-60
+;pos = ceil(((Root,Pos X)-(Root,ScreenPos X))+160),ceil(Root,Pos Y-60)
+IgnoreHitPause = 1
+Persistent = 1
+
+;*********************************
+[State 2302, 角度を有効にする]
+type = AngleDraw
+trigger1 = 1
+scale = 0.1+(fvar(38)*7.25),0.1+(fvar(38)*7.25)
+
+[State 2302, 透過処理]
+type = Trans
+trigger1 = 1
+Trans = AddAlpha
+Alpha = ceil(256-fvar(39)*2000),256
+
+;*********************************
+[State 2302, エフェクト]
+type = Explod
+trigger1 = (Time = [1,14])
+anim = ifelse(IsHelper(4006),4006,4004)
+postype = p1
+pos = 0,0
+sprpriority = 6
+ownpal = 1
+ontop = 1
+bindtime = -1
+supermovetime = 99999999
+pausemovetime = 99999999
+IgnoreHitPause = 1
+ID = 4005
+
+[State 2302, エフェクト操作]
+type = ModifyExplod
+trigger1 = (Time = [1,14])
+scale = ifelse(IsHelper(4006),1-(fvar(38)*1.2),1+(fvar(38)*1.2)),ifelse(IsHelper(4006),1+(fvar(38)*1.2),1-(fvar(38)*1.2))
+supermovetime = 99999999
+pausemovetime = 99999999
+Trans = AddAlpha
+Alpha = ceil(256-fvar(39)*4000),256
+ID = 4005
+
+[State 2302, エフェクトを消す]
+type = RemoveExplod
+trigger1 = (Time > 14)
+ID = 4005
+
+;+++++++++++++++++++++++++++++++++
+[State 2302, エフェクト]
+type = Explod
+trigger1 = (Time = [1,14])
+anim = ifelse(IsHelper(4006),4007,4005)
+postype = p1
+pos = 0,0
+sprpriority = 7
+ownpal = 1
+ontop = 1
+bindtime = -1
+supermovetime = 99999999
+pausemovetime = 99999999
+IgnoreHitPause = 1
+ID = 4006
+
+[State 2302, エフェクト操作]
+type = ModifyExplod
+trigger1 = (Time = [1,14])
+scale = ifelse(IsHelper(4006),0.5-(fvar(38)*1.2),1+(fvar(38)*1.2)),ifelse(IsHelper(4006),1+(fvar(38)*1.2),0.5-(fvar(38)*1.2))
+supermovetime = 99999999
+pausemovetime = 99999999
+Trans = AddAlpha
+Alpha = ceil(236-fvar(39)*3000),256
+ID = 4006
+
+[State 2302, エフェクトを消す]
+type = RemoveExplod
+trigger1 = (Time > 14)
+ID = 4006
+
+;*********************************
+[State 2302, このヘルパーを消す]
+type = DestroySelf
+trigger1 = (Time > 14)
+
+
+;===========================================================================
+;---------------------------------------------------------------------------
+;ガードキャンセルエフェクト
+[Statedef 2304]
+type     = A
+movetype = I
+physics  = N
+ctrl     = 0
+anim     = 4010
+SprPriority = 7
+
+[State 2304, 変数]
+type = VarSet
+trigger1 = (Time = 0)
+trigger2 = (Time > 14)
+fv = 38
+value = 0
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 2304, 変数]
+type = VarAdd
+trigger1 = (Time = [1,14])
+fv = 38
+value = 0.01
+IgnoreHitPause = 1
+Persistent = 1
+
+;+++++++++++++++++++++++++++++++++
+[State 2304, 変数]
+type = VarSet
+trigger1 = (Time = 0)
+trigger2 = (Time > 14)
+fv = 39
+value = 0
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 2304, 変数]
+type = VarAdd
+trigger1 = (Time = [9,14])
+fv = 39
+value = 0.01
+IgnoreHitPause = 1
+Persistent = 1
+
+;*********************************
+[State 2304, 特殊効果]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 2304, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 2
+
+[State 2304, 食らい上書き]
+type = HitOverRide
+trigger1 = (Time >= 0)
+attr = SCA, NA, SA, HA, NP, SP, HP, NT, ST, HT, AA, AT, AP
+time = -1
+stateno = 9999
+IgnoreHitPause = 1
+
+[State 2304, 押し判定]
+type = PlayerPush
+trigger1 = 1
+value = 0
+IgnoreHitPause = 1
+Persistent = 1
+
+;*********************************
+[State 2304, 角度を有効にする]
+type = AngleDraw
+trigger1 = 1
+scale = 1+(fvar(38)*24.8),1-(fvar(38)*5.8)
+
+[State 2304, 透過処理]
+type = Trans
+trigger1 = 1
+Trans = AddAlpha
+Alpha = ceil(256-fvar(39)*4000),256
+
+;*********************************
+[State 2304, エフェクト]
+type = Explod
+trigger1 = (Time = [1,14])
+anim = 4010
+postype = p1
+pos = 0,0
+sprpriority = 7
+ownpal = 1
+ontop = 1
+bindtime = -1
+supermovetime = 99999999
+pausemovetime = 99999999
+IgnoreHitPause = 1
+ID = 4010
+
+[State 2304, エフェクト操作]
+type = ModifyExplod
+trigger1 = (Time = [1,14])
+scale = 0.5-(fvar(38)*2.2),0.5-(fvar(38)*2.2)
+supermovetime = 99999999
+pausemovetime = 99999999
+Trans = AddAlpha
+Alpha = ceil(256-fvar(39)*4000),256
+ID = 4010
+
+[State 2304, エフェクトを消す]
+type = RemoveExplod
+trigger1 = (Time > 14)
+ID = 4010
+
+;*********************************
+[State 2304, エフェクト]
+type = Explod
+trigger1 = (Time = [1,14])
+anim = 4011
+postype = p1
+pos = 0,0
+sprpriority = 7
+ownpal = 1
+ontop = 1
+bindtime = -1
+supermovetime = 99999999
+pausemovetime = 99999999
+IgnoreHitPause = 1
+ID = 4011
+
+[State 2304, エフェクト操作]
+type = ModifyExplod
+trigger1 = (Time = [1,14])
+scale = 0.1+(fvar(38)*5.2),0.1+(fvar(38)*5.2)
+supermovetime = 99999999
+pausemovetime = 99999999
+Trans = AddAlpha
+Alpha = ceil(256-fvar(39)*4000),256
+ID = 4011
+
+[State 2304, エフェクトを消す]
+type = RemoveExplod
+trigger1 = (Time > 14)
+ID = 4011
+
+;*********************************
+[State 2304, エフェクト]
+type = Explod
+trigger1 = (Time = [1,14])
+anim = 4012
+postype = p1
+pos = 0,0
+sprpriority = 7
+ownpal = 1
+ontop = 1
+bindtime = -1
+supermovetime = 99999999
+pausemovetime = 99999999
+IgnoreHitPause = 1
+ID = 4012
+
+[State 2304, エフェクト操作]
+type = ModifyExplod
+trigger1 = (Time = [1,14])
+scale = 0.1+(fvar(38)*4.8),0.1+(fvar(38)*4.8)
+supermovetime = 99999999
+pausemovetime = 99999999
+Trans = AddAlpha
+Alpha = ceil(256-fvar(39)*4000),256
+ID = 4012
+
+[State 2304, エフェクトを消す]
+type = RemoveExplod
+trigger1 = (Time > 14)
+ID = 4012
+
+;*********************************
+[State 2304, このヘルパーを消す]
+type = DestroySelf
+trigger1 = (Time > 14)
+
+;===========================================================================
+;---------------------------------------------------------------------------
+;投げ抜けエフェクト
+[Statedef 2305]
+type     = A
+movetype = I
+physics  = N
+ctrl     = 0
+anim     = 4013
+SprPriority = 7
+
+[State 2305, 変数]
+type = VarSet
+trigger1 = (Time = 0)
+trigger2 = (Time > 14)
+fv = 38
+value = 0
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 2305, 変数]
+type = VarAdd
+trigger1 = (Time = [1,14])
+fv = 38
+value = 0.01
+IgnoreHitPause = 1
+Persistent = 1
+
+;+++++++++++++++++++++++++++++++++
+[State 2305, 変数]
+type = VarSet
+trigger1 = (Time = 0)
+trigger2 = (Time > 14)
+fv = 39
+value = 0
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 2305, 変数]
+type = VarAdd
+trigger1 = (Time = [9,14])
+fv = 39
+value = 0.01
+IgnoreHitPause = 1
+Persistent = 1
+
+;*********************************
+[State 2305, 特殊効果]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 2305, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 2
+
+[State 2305, 食らい上書き]
+type = HitOverRide
+trigger1 = (Time >= 0)
+attr = SCA, NA, SA, HA, NP, SP, HP, NT, ST, HT, AA, AT, AP
+time = -1
+stateno = 9999
+IgnoreHitPause = 1
+
+[State 2305, 押し判定]
+type = PlayerPush
+trigger1 = 1
+value = 0
+IgnoreHitPause = 1
+Persistent = 1
+
+;*********************************
+[State 2305, 角度を有効にする]
+type = AngleDraw
+trigger1 = 1
+scale = 1-(fvar(38)*2.4),1-(fvar(38)*2.4)
+
+[State 2305, 透過処理]
+type = Trans
+trigger1 = 1
+Trans = AddAlpha
+Alpha = ceil(256-fvar(39)*4000),256
+
+;*********************************
+[State 2305, エフェクト]
+type = Explod
+trigger1 = (Time = [1,14])
+anim = 4014
+postype = p1
+pos = 0,0
+sprpriority = 7
+ownpal = 1
+ontop = 1
+bindtime = -1
+supermovetime = 99999999
+pausemovetime = 99999999
+IgnoreHitPause = 1
+ID = 4014
+
+[State 2305, エフェクト操作]
+type = ModifyExplod
+trigger1 = (Time = [1,14])
+scale = 0.1+(fvar(38)*3.2),0.1+(fvar(38)*3.2)
+supermovetime = 99999999
+pausemovetime = 99999999
+Trans = AddAlpha
+Alpha = ceil(256-fvar(39)*4000),256
+ID = 4014
+
+[State 2305, エフェクトを消す]
+type = RemoveExplod
+trigger1 = (Time > 14)
+ID = 4014
+
+;*********************************
+[State 2305, このヘルパーを消す]
+type = DestroySelf
+trigger1 = (Time > 14)
+
+
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;===========================================================================
+; 背景効果用ヘルパー
+;===========================================================================
+;---------------------------------------------------------------------------
+; 最初にスパⅡＸで「あけぼのフィニッシュ」と呼ばれた、
+;『超必殺技などで相手をＫＯした時に変わる背景』も、
+; Explodやヘルパーを駆使すれば実現出来る。
+;
+; ↓はオリコンや瞬獄殺でフィニッシュすれば色も変わるようになってるよ！
+; って言っても別スプライトなんだけどね。３枚分の容量を食った（苦笑
+; 瞬獄殺の場合、おなじみの「天」の文字も。
+;---------------------------------------------------------------------------
+;スーパーアーツフィニッシュ背景（オリジナルコンボフィニッシュも含む）
+[Statedef 2500]
+type     = A
+movetype = I
+physics  = N
+ctrl     = 0
+anim     = 20000
+
+[State 2500, 変数]
+type = VarSet
+trigger1 = (Time >= 50)
+trigger2 = (fvar(39) < 0)
+fv = 39
+value = 0
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 2500, 変数]
+type = VarSet
+trigger1 = (fvar(39) > 255)
+fv = 39
+value = 255
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 2500, 変数]
+type = VarAdd
+trigger1 = (Time > 0)
+fv = 39
+value = 0.01
+IgnoreHitPause = 1
+Persistent = 1
+
+;***********************************
+[State 2500, 特殊効果]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+flag2= NoBG  ;ステージの奥の画像を非表示にし、真っ黒の背景にする
+flag3= NoFG  ;ステージの手前の画像を非表示にする
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 2500, 特殊効果]
+type = AssertSpecial
+trigger1 = 1
+flag = NoBarDisplay  ;ライフバーを非表示にする
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 2500, 特殊効果]
+type = AssertSpecial
+trigger1 = (Root,var(53) > 1)
+flag = NoMusic  ;演奏しているＢＧＭを止める（プラグインによってはＢＧＭがバグるので要注意）
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 2500, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 2
+
+[State 2500, 食らい上書き]
+type = HitOverRide
+trigger1 = (Time >= 0)
+attr = SCA, NA, SA, HA, NP, SP, HP, NT, ST, HT, AA, AT, AP
+time = -1
+stateno = 9999
+IgnoreHitPause = 1
+
+[State 2500, 押し判定]
+type = PlayerPush
+trigger1 = 1
+value = 0
+IgnoreHitPause = 1
+Persistent = 1
+
+;***********************************
+[State 2500, 画像の色];Explodのフェード処理はこれでしか出来ない
+type = PalFX
+trigger1 = (Time > 0)
+add = ceil(-255+(fvar(39)*1300)),ceil(-255+(fvar(39)*1300)),ceil(-255+(fvar(39)*1300))
+time = 1
+IgnoreHitPause = 1
+Persistent = 1
+
+;***********************************
+[State 2500, エフェクト]
+type = Explod
+trigger1 = (Time = [2,49])
+anim = ifelse(((Root,stateNo=3100)||(Root,prevstateNo=3100)),4016,4015)
+postype = left
+pos = 160,120
+scale = 0.5,0.5
+sprpriority = -7
+bindtime = -1 ;postypeをleftに、かつbindtimeを-1にしてるので、常に画面を基準に動かなくなる
+ownpal = 0 ;これでヘルパーの色が変化した時に一緒に変色（フェード処理に使ってる）
+supermovetime = 99999999
+pausemovetime = 99999999
+ID = 4015
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 2500, エフェクトを消す]
+type = RemoveExplod
+trigger1 = (Time >= 50)
+trigger2 = (RoundState = [0,1])
+ID = 4015
+
+;*********************************** 瞬獄殺用の「天」
+[State 2500, エフェクト]
+type = Explod
+triggerall = (Root,var(53) > 1)
+trigger1 = (Time = [2,49])
+anim = ifelse((Root,PalNo=7),3018,3017)
+postype = left
+pos = 160,120
+sprpriority = -6
+bindtime = -1
+ownpal = 1
+supermovetime = 99999999
+pausemovetime = 99999999
+ID = 3017
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 2500, エフェクト操作]
+type = ModifyExplod
+trigger1 = (Time >= 3)
+scale = 1+(fvar(39)*0.2),1+(fvar(39)*0.2)
+supermovetime = 99999999
+pausemovetime = 99999999
+ID = 3017
+
+[State 2500, エフェクトを消す]
+type = RemoveExplod
+trigger1 = (Time >= 50)
+trigger2 = (RoundState = [0,1])
+ID = 3017
+
+;***********************************
+[State 2500, 音を鳴らす]
+type = PlaySnd
+trigger1 = Time = 0
+value = 0,ifelse((Root,var(53)>1),27,26)
+
+;***********************************
+[State 2500, ステート変更]
+type = ChangeState
+trigger1 = (Time >= 50)
+value = 2501
+
+;---------------------------------------------------------------------------
+;終了後「RoundState = 4」まで待機＆消去用
+[Statedef 2501]
+type     = A
+movetype = I
+physics  = N
+ctrl     = 0
+
+[State 2501, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 2
+
+[State 2501, 食らい上書き]
+type = HitOverRide
+trigger1 = (Time >= 0)
+attr = SCA, NA, SA, HA, NP, SP, HP, NT, ST, HT, AA, AT, AP
+time = -1
+stateno = 9999
+IgnoreHitPause = 1
+
+[State 2501, エフェクトを消す]
+type = RemoveExplod
+trigger1 = 1
+ID = 4015
+
+[State 2501, エフェクトを消す]
+type = RemoveExplod
+trigger1 = 1
+ID = 3017
+
+[State 2501, このヘルパーを消す]
+type = DestroySelf
+trigger1 = (RoundState = [0,1])
+trigger2 = (RoundState > 3)
+trigger3 = (Time > 200)
+
+;===========================================================================
+;薬莢
+[Statedef 7000]
+type = A
+ctrl = 0
+anim = ifelse(random<600,4218,4219)
+velset = 0,0
+movetype = I
+physics =N
+sprpriority = 3
+
+[State 7000, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 2
+
+[state 7000]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+[State 7000, 4]
+type = Gravity
+trigger1 = 1
+
+;---------------------[速度]
+[state 7000]
+type = velset
+trigger1 = time = 0
+x = 1.5+(Random%10)/7
+y = -4.5-(Random%20)/7
+
+[state 7000]
+type = posset
+trigger1 = pos Y > 0
+y = 0
+
+[state 7000]
+type = velset
+trigger1 = pos Y = 0
+y = -3-ceil(random%20)/9
+
+[state 7000]
+type = velAdd
+trigger1 = pos Y = 0
+x = -ceil(random%25)/12
+
+;---------------------[透過]
+;[state 7000]
+;type = Trans
+;trigger1 = 1
+;trans = addalpha
+;alpha = 256,232
+
+[State 7000, 音を鳴らす]
+type = PlaySnd
+triggerall = numhelper(12345)
+triggerall = (helper(12345),var(5) = 1)
+trigger1 = pos Y = 0
+value = 1,203
+
+[state 7000]
+type = destroyself
+triggerall = pos Y = 0
+trigger1 = time >= 45
+;trigger2 = pos y > 0
+
+
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;===========================================================================
+; サブシステム用ヘルパー
+;===========================================================================
+;常駐ヘルパー（ＡＩ用）
+[Statedef 30000]
+type     = A
+movetype = I
+physics  = N
+ctrl     = 0
+anim     = 20000
+
+;*********************************** 総合処理
+[State 30000, 特殊効果]
+type = AssertSpecial
+trigger1 = 1
+flag = Invisible   ;姿を消す（しかし残像は消せない）
+flag2= NoAutoTurn
+flag3= NoShadow
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 30000, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 2
+
+[State 30000, 食らい上書き]
+type = HitOverRide
+trigger1 = (Time >= 0)
+attr = SCA, NA, SA, HA, NP, SP, HP, NT, ST, HT, AA, AT, AP
+time = -1
+stateno = 9999
+IgnoreHitPause = 1
+
+;***********************************『擬似ＡＩプログラム』がＯＮになったら表示
+[State 30000, エフェクト]
+type = Explod
+triggerall = (Root,var(0) = 1)
+triggerall = (RoundState = 2)
+triggerall = !(Root,NumPartner)
+triggerall = (NumExplod(21003) = 0)
+trigger1 = 1
+anim = 21003
+scale = 0.5,0.5
+postype = left ;文字なので位置属性はこれで
+pos = ifelse((Root,TeamSide=2),295,25),200 ;「TeamSide」は「１」なら『１Ｐ側』、
+sprpriority = 6                            ;「２」なら『２Ｐ側』を判断するトリガー
+OnTop = 1
+supermovetime = 99999999
+pausemovetime = 99999999
+bindtime = -1
+removetime = -1
+ownpal = 1
+ID = 21003
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 30000, エフェクトを消す]
+type = RemoveExplod
+trigger1 = (RoundState != 2)
+trigger2 = (Root,var(0) != 1)
+trigger3 = (PrevStateNo = [30001,30002]) && (Time = 0)
+ID = 21003
+IgnoreHitPause = 1
+Persistent = 1
+
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;ＡＩ表示
+[Statedef 30002]
+type     = A
+movetype = I
+physics  = N
+ctrl     = 0
+anim     = 20000
+
+[State 30002, クリップボード]
+type = DisplayToClipboard
+trigger1 = 1
+text = "Tengu-Flag=%d, Tengu-Gauge=%f \n"
+params = (Root,var(34)),(Root,fvar(13))
+
+[State 30002, クリップボード（追加専用）]
+type = AppendToClipboard
+trigger1 = 1
+text = "K.F.M.C. - Tengu-Ishi Mode"
+
+;*********************************** 総合処理
+[State 30002, 特殊効果]
+type = AssertSpecial
+trigger1 = 1
+flag = Invisible
+flag2= NoAutoTurn
+flag3= NoShadow
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 30002, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 2
+
+[State 30002, 食らい上書き]
+type = HitOverRide
+trigger1 = (Time >= 0)
+attr = SCA, NA, SA, HA, NP, SP, HP, NT, ST, HT, AA, AT, AP
+time = -1
+stateno = 9999
+IgnoreHitPause = 1
+
+;*********************************** ゲージ伸縮処理
+[State 30002, ゲージ最小限界]
+type = ParentVarSet
+trigger1 = (Root,fvar(13) <= 0)
+fv = 13
+value = 0
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 30002, ゲージ最大限界]
+type = ParentVarSet
+trigger1 = (Root,fvar(13) >= 0.5)
+fv = 13
+value = 0.5
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 30002, ゲージ処理]
+type = ParentVarAdd
+triggerall = (RoundState = 2)
+triggerall = (Root,var(34) = 1)
+trigger1 = (Time % 2 = 0)
+fv = 13
+value = -0.004
+IgnoreHitPause = 1
+Persistent = 1
+
+;*********************************** ＡＩ表示
+[State 30002, エフェクト]
+type = Explod
+triggerall = (Root,var(0) = 1)
+triggerall = (RoundState = 2)
+triggerall = !(Root,NumPartner)
+triggerall = (NumExplod(21003) = 0)
+trigger1 = 1
+anim = 21003
+scale = 0.5,0.5
+postype = left
+pos = ifelse((Root,TeamSide=2),295,25),200
+sprpriority = 6
+OnTop = 1
+supermovetime = 99999999
+pausemovetime = 99999999
+bindtime = -1
+removetime = -1
+ownpal = 1
+ID = 21003
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 30002, エフェクトを消す]
+type = RemoveExplod
+trigger1 = (RoundState != 2)
+trigger2 = (Root,var(0) != 1)
+trigger3 = (PrevStateNo = 30000) && (Time = 0)
+ID = 21003
+IgnoreHitPause = 1
+Persistent = 1
+
+;***********************************
+[State 30002, ステート変更]
+type = ChangeState
+triggerall = (Time > 0)
+trigger1 = (Root,fvar(13) <= 0)
+value = 30000
+
+;===========================================================================
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+[Statedef 666, きまぐれな星]
+type     = A
+movetype = A
+physics  = N
+ctrl     = 0
+anim     = 3039
+sprpriority = 1
+
+[State 666]
+type = AttackDist
+trigger1 = 1
+value = 60
+
+[State 666, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 2
+
+[State 666, 食らい上書き];分身バグ対策
+type = HitOverRide
+trigger1 = (Time >= 0)
+attr = SCA, NA, SA, HA, NP, SP, HP, NT, ST, HT, AA, AT, AP
+time = -1
+stateno = 9999
+IgnoreHitPause = 1
+
+[State 666, 角度]
+type = AngleAdd
+trigger1 = 1
+value = -6
+
+[State 666, 角度を有効にする]
+type = AngleDraw
+trigger1 = 1
+
+[State 2001, 透過処理]
+type = Trans
+trigger1 = 1
+Trans = AddAlpha
+Alpha = 200,256
+
+[State 666];色
+type = PalFX
+trigger1 = 1
+add = 30,60,30
+mul = 150,256,120
+;invertall = 1
+time = 2
+
+[State 666]
+type = SprPriority
+trigger1 = RootDist X > 5
+trigger2 = RootDist X < 5
+value = ifelse(random<500,-2,2)
+
+[state 666]
+type = velSet
+trigger1 = RootDist X = [-5,10]
+x = ifelse(vel x > 0,abs(random%3)+4,-6)
+
+[state 666]
+type = velAdd
+trigger1 = RootDist X > 6
+x = 0.25
+
+[state 666]
+type = velAdd
+trigger1 = RootDist X < 6
+x = -0.25
+
+[state 666]
+type = velSet
+trigger1 = RootDist y = [30,60]
+y = ifelse(vel y > 0,abs(random%5)+1,-5)
+
+[state 666]
+type = velAdd
+trigger1 = RootDist y > 30
+y = 0.3
+
+[state 666]
+type = velAdd
+trigger1 = RootDist y < 30
+y = -0.3
+
+[State 666, ヒット定義]
+type = HitDef
+trigger1 = ifelse(prevStateNo=667,(time > 30),1)
+attr             = , NA
+animtype         = light
+damage           = 10,0
+getpower         = 30,10
+hitflag          = MAP;MAFP
+guardflag        = MA
+priority         = 1
+pausetime        = 0,0
+sparkno          = s(3040)
+sparkxy          = ceil(ifelse((P2Dist X<0),0+Random/60,0-Random/60)),0
+guard.sparkno    = s4216
+hitsound         = s1,106
+guardsound       = s0,30
+ground.type      = Low
+ground.slidetime = 16
+ground.hittime   = 19
+ground.velocity  = -0.4,0
+guard.velocity   = -0.2
+air.velocity     = -0.6,-2
+airguard.velocity= -6,-4.5
+p1stateno = 667
+
+[State 666, ステート変更]
+type = ChangeState
+trigger1 = movecontact
+value = 667
+
+[State 666, ヘルパーを消す] 
+type = DestroySelf
+trigger1 = (RoundState > 3)
+trigger2 = (root,palNo < 11) && (power<3000)
+trigger2 = root,gethitvar(damage)
+trigger2 = root,numhelper(668) = 0
+Trigger3 = !Alive
+IgnoreHitPause = 1
+Persistent = 1
+
+;---------------
+
+[Statedef 667, きまぐれな星_待機時間]
+type     = A
+movetype = A
+physics  = N
+ctrl     = 0
+anim     = 3039
+sprpriority = 1
+
+[State 667, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 2
+
+[State 667, 食らい上書き];分身バグ対策
+type = HitOverRide
+trigger1 = (Time >= 0)
+attr = SCA, NA, SA, HA, NP, SP, HP, NT, ST, HT, AA, AT, AP
+time = -1
+stateno = 9999
+IgnoreHitPause = 1
+
+[State 667, 角度]
+type = AngleAdd
+trigger1 = 1
+value = -6
+
+[State 667, 角度を有効にする]
+type = AngleDraw
+trigger1 = 1
+
+[State 667, 透過処理]
+type = Trans
+trigger1 = 1
+Trans = AddAlpha
+Alpha = 200,256
+
+[State 667];色
+type = PalFX
+trigger1 = 1
+add = 30,60,30
+mul = 150,256,120
+;invertall = 1
+time = 2
+
+[State 667]
+type = SprPriority
+trigger1 = RootDist X > 25
+trigger2 = RootDist X < 25
+value = ifelse(random<500,-2,2)
+
+[state 667]
+type = velSet
+trigger1 = RootDist X = [-5,10]
+x = ifelse(vel x > 0,abs(random%3)+4,-6)
+
+[state 667]
+type = velAdd
+trigger1 = RootDist X > 5
+x = 0.25
+
+[state 667]
+type = velAdd
+trigger1 = RootDist X < 5
+x = -0.25
+
+[state 667]
+type = velSet
+trigger1 = RootDist y = [30,60]
+y = ifelse(vel y > 0,abs(random%5)+1,-5)
+
+[state 667]
+type = velAdd
+trigger1 = RootDist y > 30
+y = 0.3
+
+[state 667]
+type = velAdd
+trigger1 = RootDist y < 30
+y = -0.3
+
+[State 667, ステート変更]
+type = ChangeState
+trigger1 = 1
+value = ifelse(prevStateNo=666,666,ifelse(prevStateNo=668,668,669))
+
+;---------------
+
+[Statedef 668, きまぐれな星2]
+type     = A
+movetype = A
+physics  = N
+ctrl     = 0
+anim     = 3039
+sprpriority = 1
+
+[State 668]
+type = AttackDist
+trigger1 = 1
+value = 60
+
+[State 668, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 2
+
+[State 668, 食らい上書き];分身バグ対策
+type = HitOverRide
+trigger1 = (Time >= 0)
+attr = SCA, NA, SA, HA, NP, SP, HP, NT, ST, HT, AA, AT, AP
+time = -1
+stateno = 9999
+IgnoreHitPause = 1
+
+[State 668, 角度]
+type = AngleAdd
+trigger1 = 1
+value = -6
+
+[State 668, 角度を有効にする]
+type = AngleDraw
+trigger1 = 1
+
+[State 2001, 透過処理]
+type = Trans
+trigger1 = 1
+Trans = AddAlpha
+Alpha = 200,256
+
+[State 668];色
+type = PalFX
+trigger1 = 1
+add = 30,60,30
+mul = 150,256,120
+;invertall = 1
+time = 2
+
+[State 668]
+type = SprPriority
+trigger1 = RootDist X > 5
+trigger2 = RootDist X < 5
+value = ifelse(random<500,-2,2)
+
+[State 668]
+type = velSet
+trigger1 = RootDist X = [-5,10]
+x = ifelse(vel x > 0,abs(random%3)+4,-6)
+
+[State 668]
+type = velAdd
+trigger1 = RootDist X > 6
+x = 0.25
+
+[State 668]
+type = velAdd
+trigger1 = RootDist X < 6
+x = -0.25
+
+[State 668]
+type = velSet
+trigger1 = RootDist y = [30,60]
+y = ifelse(vel y > 0,abs(random%5)+1,-5)
+
+[State 668]
+type = velAdd
+trigger1 = RootDist y > 30
+y = 0.3
+
+[State 668]
+type = velAdd
+trigger1 = RootDist y < 30
+y = -0.3
+
+[State 668, ヒット定義]
+type = HitDef
+trigger1 = ifelse(prevStateNo=667,(time > 30),1)
+attr             = , NA
+animtype         = light
+damage           = 10,0
+getpower         = 30,10
+hitflag          = MAP;MAFP
+guardflag        = MA
+priority         = 1
+pausetime        = 0,0
+sparkno          = s(3040)
+sparkxy          = ceil(ifelse((P2Dist X<0),0+Random/60,0-Random/60)),0
+guard.sparkno    = s4216
+hitsound         = s1,106
+guardsound       = s0,30
+ground.type      = Low
+ground.slidetime = 16
+ground.hittime   = 19
+ground.velocity  = -0.4,0
+guard.velocity   = -0.2
+air.velocity     = -0.6,-2
+airguard.velocity= -6,-4.5
+p1stateno = 667
+
+[State 668, ステート変更]
+type = ChangeState
+trigger1 = movecontact
+value = 667
+
+[State 668, ヘルパーを消す] 
+type = DestroySelf
+trigger1 = (RoundState > 3)
+trigger2 = (root,palNo < 11) && (power<3000)
+trigger2 = root,gethitvar(damage)
+trigger2 = root,numhelper(669) = 0
+Trigger3 = !Alive
+IgnoreHitPause = 1
+Persistent = 1
+
+;---------------
+
+[Statedef 669, きまぐれな星3]
+type     = A
+movetype = A
+physics  = N
+ctrl     = 0
+anim     = 3039
+sprpriority = 1
+
+[State 669]
+type = AttackDist
+trigger1 = 1
+value = 60
+
+[State 669, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 2
+
+[State 669, 食らい上書き];分身バグ対策
+type = HitOverRide
+trigger1 = (Time >= 0)
+attr = SCA, NA, SA, HA, NP, SP, HP, NT, ST, HT, AA, AT, AP
+time = -1
+stateno = 9999
+IgnoreHitPause = 1
+
+[State 669, 角度]
+type = AngleAdd
+trigger1 = 1
+value = -6
+
+[State 669, 角度を有効にする]
+type = AngleDraw
+trigger1 = 1
+
+[State 669, 透過処理]
+type = Trans
+trigger1 = 1
+Trans = AddAlpha
+Alpha = 200,256
+
+[State 669];色
+type = PalFX
+trigger1 = 1
+add = 30,60,30
+mul = 150,256,120
+;invertall = 1
+time = 2
+
+[State 669]
+type = SprPriority
+trigger1 = RootDist X > 5
+trigger2 = RootDist X < 5
+value = ifelse(random<500,-2,2)
+
+[State 669]
+type = velSet
+trigger1 = RootDist X = [-5,10]
+x = ifelse(vel x > 0,abs(random%3)+4,-6)
+
+[State 669]
+type = velAdd
+trigger1 = RootDist X > 6
+x = 0.25
+
+[State 669]
+type = velAdd
+trigger1 = RootDist X < 6
+x = -0.25
+
+[State 669]
+type = velSet
+trigger1 = RootDist y = [30,60]
+y = ifelse(vel y > 0,abs(random%5)+1,-5)
+
+[State 669]
+type = velAdd
+trigger1 = RootDist y > 30
+y = 0.3
+
+[State 669]
+type = velAdd
+trigger1 = RootDist y < 30
+y = -0.3
+
+[State 669, ヒット定義]
+type = HitDef
+trigger1 = ifelse(prevStateNo=667,(time > 30),1)
+attr             = , NA
+animtype         = light
+damage           = 10,0
+getpower         = 30,10
+hitflag          = MAP;MAFP
+guardflag        = MA
+priority         = 1
+pausetime        = 0,0
+sparkno          = s(3040)
+sparkxy          = ceil(ifelse((P2Dist X<0),0+Random/60,0-Random/60)),0
+guard.sparkno    = s4216
+hitsound         = s1,106
+guardsound       = s0,30
+ground.type      = Low
+ground.slidetime = 16
+ground.hittime   = 19
+ground.velocity  = -0.4,0
+guard.velocity   = -0.2
+air.velocity     = -0.6,-2
+airguard.velocity= -6,-4.5
+p1stateno = 667
+
+[State 669, ステート変更]
+type = ChangeState
+trigger1 = movecontact
+value = 667
+
+[State 669, ヘルパーを消す] 
+type = DestroySelf
+trigger1 = (RoundState > 3)
+trigger2 = (root,palNo < 11) && (power<3000)
+trigger2 = root,gethitvar(damage)
+Trigger3 = !Alive
+IgnoreHitPause = 1
+Persistent = 1
+;===========================================================================
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;分身バグ対策用
+[Statedef 9999]
+[State 9999, ヘルパーを消す] 
+type = DestroySelf
+trigger1 = (Time >= 0)
+IgnoreHitPause = 1
+Persistent = 1
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------

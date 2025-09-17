@@ -1,0 +1,31 @@
+;■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+;	仮面ライダーゼロワン　キャラクターデータセッティング
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;━|　 　　基本情報 　　　|━━━━━━━━━━━━━━━━━━━━━━━━
+[Info]
+name		= "仮面ライダーゼロワン"	;キャラの名前
+displayname	= "Kamen Rider Zero-One"	;表示されるキャラの名前
+versiondate	= 03,10,2014			;キャラの更新情報
+mugenversion	= 1.0		        	;キャラが動くmugenのバージョン
+author		= "飛電インテリジェンス"	;キャラの製作者名
+pal.defaults	= 1,2,3,4			;敵としてでるキャラのパレット
+
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;━| 必要なファイルの設定 |━━━━━━━━━━━━━━━━━━━━━━━━
+
+[Files]
+cmd	= 01.cmd
+cns     = 01.cns
+st      = 01.cns 
+st1     = izu.cns 
+st2     = config.cns 
+stcommon = common1.cns 
+sprite  = 01.sff
+anim    = 01.air
+sound   = 01.snd
+pal1    = 01.act
+pal2    = 1gata.act
+pal3    = vulcan.act
+pal4    = valkyrie.act
+

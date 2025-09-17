@@ -193,9 +193,6 @@
  ;
  ;Insert your characters below.
 
-;-------------------------------------------------------------------------------
-;SELECTION 01
-;-------------------------------------------------------------------------------
 slot={ ; KUNG FU MAN (START)
 	kfm_zss, stages\kfm.def, previous=d, next=w
 	kfm_zaxis, stages\kfm.def, previous=d, next=w
@@ -208,18 +205,37 @@ slot={ ; AKUMA/GOUKI
 Bison ; NOT DICTATOR
 cammy_pots
 nash_pots ; CHARLIE NASH
+slot={ ; CJ
+	cj, previous=d, next=w
+	Carl CJ Johnson GTA San Andreas, previous=d, next=w
+}
+slot={ ; CURLY BRACE
+	Curly_Brace, previous=d, next=w
+	Curly Brace, previous=d, next=w
+}
 dan_pots
+slot={ ; DONALD MCDONALD (YES IT SHOULD BE RONALD)
+	Donald, previous=d, next=w
+	D-Donald, previous=d, next=w
+}
 DukiNuki ; DUKE NUKEM
 geese_pots
+Gengar
 guy_pots
 honda_pots
 karin_pots
 lei-lei_pots ; HSIEN-KO/LEI-LEI
+01 ; KAMEN RIDER ZERO-ONE
 BestestKenVTE ; KEN MASTERS
 WannaKOF ; KYO KUSANAGI
+LowTierGod
 vega_pots ; M.BISON/DICTATOR
 morrigan_pots
 nakoruru_pots
+slot={ ; NIKO BELLIC
+	Niko Bellic, previous=d, next=w
+	Niko Bellic GTA IV, previous=d, next=w
+}
 pepsimen
 ryu_pots
 sakura_pots
@@ -227,11 +243,9 @@ Spinto
 TerranceBongo ; TERRY BOGARD
 ghettowar/ghettowar10 ; WAR MACHINE
 yuri_pots
+Zeroai
 randomselect
 randomselect
-;-------------------------------------------------------------------------------
-;SELECTION 02
-;-------------------------------------------------------------------------------
 randomselect
 randomselect
 randomselect
@@ -258,9 +272,6 @@ randomselect
 randomselect
 randomselect
 randomselect
-;-------------------------------------------------------------------------------
-;SELECTION 03
-;-------------------------------------------------------------------------------
 randomselect
 randomselect
 randomselect
@@ -287,9 +298,6 @@ randomselect
 randomselect
 randomselect
 randomselect
-;-------------------------------------------------------------------------------
-;SELECTION 04
-;-------------------------------------------------------------------------------
 randomselect
 randomselect
 randomselect
@@ -316,9 +324,6 @@ randomselect
 randomselect
 randomselect
 randomselect
-;-------------------------------------------------------------------------------
-;SELECTION 05
-;-------------------------------------------------------------------------------
 randomselect
 randomselect
 randomselect
@@ -345,9 +350,6 @@ randomselect
 randomselect
 randomselect
 randomselect
-;-------------------------------------------------------------------------------
-;SELECTION 06
-;-------------------------------------------------------------------------------
 randomselect
 randomselect
 randomselect
@@ -374,9 +376,6 @@ randomselect
 randomselect
 randomselect
 randomselect
-;-------------------------------------------------------------------------------
-;SELECTION 07
-;-------------------------------------------------------------------------------
 randomselect
 randomselect
 randomselect
@@ -403,9 +402,6 @@ randomselect
 randomselect
 randomselect
 randomselect
-;-------------------------------------------------------------------------------
-;SELECTION 08
-;-------------------------------------------------------------------------------
 randomselect
 randomselect
 randomselect
@@ -432,9 +428,6 @@ randomselect
 randomselect
 randomselect
 randomselect
-;-------------------------------------------------------------------------------
-;SELECTION 09
-;-------------------------------------------------------------------------------
 randomselect
 randomselect
 randomselect
@@ -461,9 +454,6 @@ randomselect
 randomselect
 randomselect
 randomselect
-;-------------------------------------------------------------------------------
-;SELECTION 10
-;-------------------------------------------------------------------------------
 randomselect
 randomselect
 randomselect
@@ -490,9 +480,6 @@ randomselect
 randomselect
 randomselect
 randomselect
-;-------------------------------------------------------------------------------
-;SELECTION 11
-;-------------------------------------------------------------------------------
 randomselect
 randomselect
 randomselect
@@ -519,9 +506,6 @@ randomselect
 randomselect
 randomselect
 randomselect
-;-------------------------------------------------------------------------------
-;SELECTION 12
-;-------------------------------------------------------------------------------
 randomselect
 randomselect
 randomselect
@@ -548,9 +532,6 @@ randomselect
 randomselect
 randomselect
 randomselect
-;-------------------------------------------------------------------------------
-;SELECTION 13
-;-------------------------------------------------------------------------------
 randomselect
 randomselect
 randomselect
@@ -577,10 +558,6 @@ randomselect
 randomselect
 randomselect
 randomselect
-;-------------------------------------------------------------------------------
-;SELECTION 14
-;-------------------------------------------------------------------------------
-randomselect; LEAVE THIS AS RANDOM SELECT
 randomselect
 randomselect
 randomselect
@@ -606,9 +583,6 @@ randomselect
 randomselect
 randomselect
 randomselect
-;-----------------------------------------------------------------^go upwards---
-;SELECTION 15
-;---------------------------------------------------------------vgo downwards---
 randomselect
 randomselect
 randomselect
@@ -634,10 +608,6 @@ randomselect
 randomselect
 randomselect
 randomselect
-randomselect; LEAVE THIS AS RANDOM SELECT
-;-------------------------------------------------------------------------------
-;SELECTION 16
-;-------------------------------------------------------------------------------
 randomselect
 randomselect
 randomselect
@@ -664,9 +634,6 @@ randomselect
 randomselect
 randomselect
 randomselect
-;-------------------------------------------------------------------------------
-;SELECTION 17
-;-------------------------------------------------------------------------------
 randomselect
 randomselect
 randomselect
@@ -693,9 +660,6 @@ randomselect
 randomselect
 randomselect
 randomselect
-;-------------------------------------------------------------------------------
-;SELECTION 18
-;-------------------------------------------------------------------------------
 randomselect
 randomselect
 randomselect
@@ -722,9 +686,6 @@ randomselect
 randomselect
 randomselect
 randomselect
-;-------------------------------------------------------------------------------
-;SELECTION 19
-;-------------------------------------------------------------------------------
 randomselect
 randomselect
 randomselect
@@ -751,9 +712,6 @@ randomselect
 randomselect
 randomselect
 randomselect
-;-------------------------------------------------------------------------------
-;SELECTION 20
-;-------------------------------------------------------------------------------
 randomselect
 randomselect
 randomselect
@@ -780,9 +738,6 @@ randomselect
 randomselect
 randomselect
 randomselect
-;-------------------------------------------------------------------------------
-;SELECTION 21
-;-------------------------------------------------------------------------------
 randomselect
 randomselect
 randomselect
@@ -809,9 +764,6 @@ randomselect
 randomselect
 randomselect
 randomselect
-;-------------------------------------------------------------------------------
-;SELECTION 22
-;-------------------------------------------------------------------------------
 randomselect
 randomselect
 randomselect
@@ -838,9 +790,6 @@ randomselect
 randomselect
 randomselect
 randomselect
-;-------------------------------------------------------------------------------
-;SELECTION 23
-;-------------------------------------------------------------------------------
 randomselect
 randomselect
 randomselect
@@ -867,9 +816,6 @@ randomselect
 randomselect
 randomselect
 randomselect
-;-------------------------------------------------------------------------------
-;SELECTION 24
-;-------------------------------------------------------------------------------
 randomselect
 randomselect
 randomselect
@@ -896,9 +842,6 @@ randomselect
 randomselect
 randomselect
 randomselect
-;-------------------------------------------------------------------------------
-;SELECTION 25
-;-------------------------------------------------------------------------------
 randomselect
 randomselect
 randomselect
@@ -925,9 +868,6 @@ randomselect
 randomselect
 randomselect
 randomselect
-;-------------------------------------------------------------------------------
-;SELECTION 26
-;-------------------------------------------------------------------------------
 randomselect
 randomselect
 randomselect
@@ -954,9 +894,6 @@ randomselect
 randomselect
 randomselect
 randomselect
-;-------------------------------------------------------------------------------
-;SELECTION 27
-;-------------------------------------------------------------------------------
 randomselect
 randomselect
 randomselect
@@ -977,15 +914,6 @@ randomselect
 randomselect
 randomselect
 randomselect
-randomselect
-randomselect
-randomselect
-randomselect
-randomselect
-randomselect
-;-------------------------------------------------------------------------------
-;SELECTION 28
-;-------------------------------------------------------------------------------
 randomselect
 randomselect
 randomselect
@@ -1017,7 +945,7 @@ suave, stages\kfm.def ; END
 ;-------------------------------------------------------------------------------
 
 slot={
-kfmZ,stages/kfm.def,bonus=1,single=1,ai=8,hidden=2
+kfm_zss,stages/kfm.def,bonus=1,single=1,ai=8,hidden=2
 }
 
 ;-------------------------------------------------------------------------------
@@ -1082,6 +1010,7 @@ stages/kfm.def
 stages/stage1.def
 stages/stage3d.def
 stages/stageZ.def
+stages/STAGE DARK ASH.def
 ;-------------------------------------------------------------------------------
 [Options]
  ;Here you set the maximum number of matches to fight before game ends in arcade

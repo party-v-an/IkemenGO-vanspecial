@@ -1,0 +1,38 @@
+;====================<DEFINITION>====================
+
+[Info]
+name = "LowTierGod"
+displayName = "LowTierGod"
+versionDate = 10,14,2011;edited in 2,20,2019
+mugenVersion = 1.0
+author = "Froz";Edited by Proud of Ragequittin
+pal.defaults = 3,1,2
+localCoord = 320,240
+
+[Files]
+cmd = Command.cmd
+cns = Constants.cns
+st = States/System.st
+st1 = States/Normal.st
+st2 = States/Special.st
+st3 = States/Super.st
+st4 = States/Helpers.st
+st5 = Config.txt
+stCommon = common1.cns
+sprite = Sprite.sff
+anim = Anim.air
+sound = Sound.snd
+
+[Palette Keymap]
+a = 3;1
+b = 3;2
+c = 3
+x = 3;4
+y = 3;5
+z = 3;6
+a2 = 3;7
+b2 = 3;8
+c2 = 3;9
+x2 = 3;10
+y2 = 3;11
+z2 = 3;12

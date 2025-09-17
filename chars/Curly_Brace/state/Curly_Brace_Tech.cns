@@ -1,0 +1,1038 @@
+;===========================================================================
+; 特殊技
+;===========================================================================
+;===========================================================================
+; サブシステム
+;===========================================================================
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;===========================================================================
+;---------------------------------------------------------------------------
+;回り込み
+[Statedef 702]
+type     = S
+movetype = I
+physics  = N
+poweradd = 0
+ctrl     = 0
+anim     = 706
+velset   = 0,0
+
+[State 702, 相手の特定の攻撃属性無効];（※１）
+type = NotHitBy
+trigger1 = 1
+value = ,AA,AP
+value2= A ,NT,ST
+time = 1
+
+[State 702, 押し判定]
+type = PlayerPush
+trigger1 = (Time = [0,20])
+value = 0
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 702, 残像]
+type = AfterImage
+trigger1 = Time = 0
+Time = 29
+PalContrast = 120,120,120
+Trans = Add1
+TimeGap  = 4
+FrameGap = 1
+length = 3
+
+[State 702, 埃]
+type = MakeDust
+trigger1 = Time = 20
+pos = 0,0
+spacing = 1
+
+[State 702, 軸位置]
+type = PosSet
+trigger1 = 1
+y = 0
+
+[State 702, 移動速度]
+type = VelSet
+trigger1 = 1
+y = 0
+
+[State 702, 移動速度]
+type = VelSet
+trigger1 = Time = 4
+x = 6
+
+[State 702, 移動速度]
+type = VelSet
+trigger1 = Time = 20
+x = 0
+
+[State 702, 音を鳴らす]
+type = PlaySnd
+trigger1 = Time = 1
+trigger2 = Time = 3
+trigger3 = Time = 5
+trigger4 = Time = 7
+value = 0,29
+
+[State 702, ステート変更]
+type = ChangeState
+trigger1 = (Time > 28)
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
+; ※１：NotHitBy
+;
+; 　通常は「無敵状態」を設定するけど、本当は
+;　『相手の「特定の属性を設定しているHitDef」を当たらなくする』コントローラ。
+; 　特定の属性はHitDefの「attr」のパラメータが該当する。テンプレート参照。
+; 　まぁvalueに与える値を見れば早い。
+;
+; 　value = (相手のattrの状態), (相手のattrの属性１)(相手のattrの属性２),・・・
+;
+; 　これが本来の記述方法。
+;　「value2」を増やす事により、もう一つ無敵にしたい属性を指定出来る。
+; 　(属性１)と(属性２)を省略して書けば
+; 　相手の(状態)のみを判断して攻撃を当たらなくする事が出来る。（「SC」など）
+; 　逆に(状態)に関係無く特定の(属性１)と(属性２)に対して無敵にしたい場合は、
+;　『(状態)を省略して(属性１)と(属性２)を設定する』。
+; 　というか全ての状態（SとCとA全部の場合）で属性を実行したい時、
+; 　SCAを加えてしまうと(属性１)と(属性２)が機能しない（苦笑
+;
+; 　(例)　：　value = , AA,AP,AT
+; 　もしくは　value = , NA,SA,HA,NP,SP,HP,NT,ST,HT
+;
+; 　実はSCAじゃなくても、この記述でも「無敵状態」になれる。
+; 　例に挙げた見慣れない属性（AA・AP・AT）の意味は以下の通り。
+;
+; 　AA = 相手の「全ての打撃」が当たらなくなる　　　　（All Attack）
+; 　AP = 相手の「全てのProjectile」が当たらなくなる　（All Projectile）
+; 　AT = 相手の「全ての投げ」が当たらなくなる　　　　（All Throw）
+;
+; 　この３つは「HitBy」「ReversalDef」「HitOverRide」のコントローラと、
+;　「HitDefAttr」のトリガーにも使える。
+;===========================================================================
+;---------------------------------------------------------------------------
+;ガードキャンセル
+[Statedef 703]
+type     = U
+movetype = I
+physics  = U
+poweradd = -1000
+ctrl     = 0
+velset   = 0,0
+
+[State 703, 強弱]
+type = VarSet
+trigger1 = Time = 0
+v = 53
+value = ifelse((command="counter_k"),1,0)
+IgnoreHitPause = 1
+
+;[State 703, パワーゲージ増減];ゲージを消費させる別の方法
+;type = PowerAdd
+;trigger1 = Time = 1
+;value = -1000
+
+[State 703, 時間停止]
+type = Pause
+trigger1 = Time = 0
+time = 15
+movetime = 15
+IgnoreHitPause = 1
+
+[State 703, 状態変更]
+type = StateTypeSet
+trigger1 = (Time > 15)
+MoveType = A
+IgnoreHitPause = 1
+
+[State 703, アニメ変更]
+type = ChangeAnim
+trigger1 = Time = 15
+value = ifelse(var(53)=1,440,241)
+Persistent = 0
+
+[State 703, 無敵]
+type = NotHitBy
+trigger1 = (Time = [0,15])
+value = SCA
+time = 2
+
+[State 703, 残像]
+type = AfterImage
+trigger1 = Time = 0
+Time = 30
+PalContrast = 120,120,120
+Trans = Add1
+TimeGap  = 4
+FrameGap = 1
+length = 3
+
+[State 703, 軸位置]
+type = PosSet
+trigger1 = 1
+y = 0
+
+[State 703, 速度加算]
+type = VelSet
+trigger1 = anim = 241
+trigger1 = animElemTime(3) = 0
+x = 6
+
+[State 703, 速度加算]
+type = VelAdd
+trigger1 = anim = 241
+trigger1 = animElem = 4
+x = -1.5
+
+[State 703, 速度加算]
+type = VelAdd
+trigger1 = anim = 440
+trigger1 = animElemTime(4) = 0
+x = 1
+
+[State 703, 速度]
+type = VelSet
+trigger1 = anim = 241
+trigger1 = animElemTime(5) = 3
+trigger2 = anim = 440
+trigger2 = animElemTime(5) = 0
+x = 0
+
+;***********************************
+[State 703, ヘルパーを出す]
+type = Helper
+triggerall = NumHelper(2304) = 0
+trigger1 = Time = 1
+name = "Guard-Cancel"
+stateno = 2304
+ID = 2304
+pos = 14,ifelse(Anim=151,-35,-65)
+keyctrl = 0
+postype = p1
+supermovetime = 99999999
+pausemovetime = 99999999
+ownpal = 1
+size.xscale = 0.5
+size.yscale = 0.5
+IgnoreHitPause = 1
+Persistent = 0
+
+[State 703, 音を鳴らす]
+type = PlaySnd
+trigger1 = Time = 1
+value = 0,15
+
+[State 703, 音を鳴らす]
+type = PlaySnd
+trigger1 = (Anim = 241) && (AnimElemTime(2) = 0)
+trigger2 = (Anim = 440) && (AnimElemTime(4) = 1)
+value = 0,1
+
+;***********************************
+[State 703, ヒット定義]
+type = HitDef
+triggerall = (Anim = 241)
+trigger1 = animElem = 5
+attr              = S, SA
+animtype          = Hard
+damage            = 100,10
+getpower          = 0,0
+guardflag         = MA
+priority          = 4
+pausetime         = 0,10
+sparkno           = s(var(45))
+sparkxy           = -10,-70
+guard.sparkno     = s4216
+hitsound          = s0,5
+guardsound        = s0,10
+ground.type       = High
+ground.slidetime  = 13
+ground.hittime    = 14
+ground.velocity   = -7.8,-3.4
+guard.velocity    = -3
+air.velocity      = -6.5,-3.2
+airguard.velocity = -3,-2.5
+fall              = 1
+air.juggle        = 6
+
+[State 703, ヒット定義]
+type = HitDef
+triggerall = (Anim = 440)
+trigger1 = AnimElem = 4
+attr              = C, SA
+animtype          = DiagUp
+damage            = 100,10
+getpower          = 0,0
+hitflag           = MAFD
+guardflag         = L
+priority          = 4
+pausetime         = 10,10
+sparkno           = s(var(45))
+sparkxy           = -5,-10
+guard.sparkno     = s4216
+hitsound          = s0,5
+guardsound        = s0,10
+ground.type       = High
+ground.slidetime  = 13
+ground.hittime    = 15
+ground.velocity   = -1.8,-5.6
+guard.velocity    = -5
+air.velocity      = -1.4,-5.6
+yaccel            = 0.6
+fall              = 1
+air.juggle        = 6
+
+;***********************************
+[State 703, ステート変更]
+type = ChangeState
+triggerall = (Anim = 241) || (Anim = 440)
+trigger1 = AnimTime = 0
+value = ifelse(Anim=440,11,0)
+ctrl = 1
+
+;===========================================================================
+; キー入れ特殊攻撃技
+;===========================================================================
+;---------------------------------------------------------------------------
+;踏みつけ
+[Statedef 750]
+type     = A
+movetype = A
+physics  = N
+juggle   = 5
+ctrl     = 0
+anim     = 750
+poweradd = 60
+velset   = 0,0
+
+[State 750, 残像]
+type = AfterImage
+trigger1 = Time = 0
+Time = 30
+PalBright   = 100,0,0
+PalContrast = 250,80,20
+Trans = Sub
+TimeGap  = 3
+FrameGap = 1
+length = 6
+
+[State 750, 残像表示時間]
+type = AfterImageTime
+trigger1 = (Time > 5) && (Pos Y >= 0)
+time = 0
+
+[State 750, 移動速度]
+type = VelSet
+trigger1 = Time = 5
+x = 5
+y = 10
+
+[State 750, 音を鳴らす]
+type = PlaySnd
+trigger1 = Time = 4
+value = 0,1
+
+[State 750, ヒット定義]
+type = HitDef
+trigger1 = Time = 0
+attr              = A, NA
+animtype          = Hard
+damage            = 60,0
+getpower          = 30,10
+hitflag           = MAFD
+guardflag         = HA
+priority          = 4
+pausetime         = 10,10
+sparkno           = s(var(45))
+sparkxy           = -3,-6
+guard.sparkno     = s4216
+hitsound          = s0,5
+guardsound        = s0,10
+ground.type       = High
+ground.slidetime  = 16
+ground.hittime    = 17
+ground.velocity   = -4.5,0
+air.velocity      = -3,-4
+envshake.time     = 10 
+envshake.ampl     = 6
+envshake.freq     = 100
+
+[State 750, ステート変更]
+type = ChangeState
+trigger1 = (Time > 5) && (Pos Y >= 0)
+value = 52
+
+;===========================================================================
+; 投げ技
+;===========================================================================
+;---------------------------------------------------------------------------
+; エレクバイトが「作るのが退屈と感じる時もあるよ」って言ってるけど、
+; 作り出したら意外とハマって楽しくなる投げ技。
+; 投げる相手の正確な座標取りは面倒臭いけどね（コラ
+; 投げ用のHitDefはテンプレートと見比べて確認すればわかるはず。
+;
+; ノーマルと違い、kfmcでは空中でも投げられるようにした上に、
+; 相手がシビアなタイミングで『投げ抜け』も出来るように改造してみた。
+; 自分と相手の位置が逆になるのは仕様。作ってみて面白かったから（爆
+;---------------------------------------------------------------------------
+;投げ
+[Statedef 800]
+type     = U
+movetype = A
+physics  = N
+juggle   = 0
+anim     = 800
+ctrl     = 0
+velset   = 0,0
+sprpriority = 2
+
+;[State 800, 移動速度]
+;type = VelSet
+;trigger1 = (StateType = A)
+;x = 0
+;y = 0
+
+[State 800, ヒット定義（投げ用）];地上
+type = HitDef
+triggerall = (StateType != A)
+trigger1 = Time = 0
+attr = S, NT
+hitflag = M-  ;マイナスが付加されてるので相手が食らい中の時は掴めない
+priority = 1, Miss
+sparkno = -1  ;-1だからヒットスパークは表示しない
+sprpriority = 1
+p1facing = ifelse(command="holdfwd",-1,1)
+p2facing = 1
+p1stateno = 801
+p2stateno = 803
+guard.dist = 0 ;相手のガード態勢に入る距離を０にしてるので、ガード不可
+fall = 1
+
+[State 800, ヒット定義（投げ用）];空中
+type = HitDef
+triggerall = (StateType = A)
+trigger1 = Time = 0
+attr = A, NT
+hitflag = A-
+priority = 1, Miss
+sparkno = -1
+sprpriority = 1
+p1facing = ifelse(command="holdfwd",-1,1)
+p2facing = 1
+p1stateno = 801
+p2stateno = 803
+guard.dist = 0
+fall = 1
+
+[State 800, ステート変更]
+type = ChangeState
+trigger1 = (StateType != A) && (AnimTime = 0)
+trigger2 = (StateType = A) && (Time > 2)
+value = ifelse(StateType=A,51,0)
+ctrl = ifelse(StateType=A,0,1)
+
+;---------------------------------------------------------------------------
+;成功（放り投げる）
+[Statedef 801]
+type     = U
+movetype = A
+physics  = N
+anim     = 801
+ctrl     = 0
+poweradd = 60
+velset   = 0,0
+
+[State 801, 変数]
+type = VarSet
+trigger1 = Time = 0
+v = 29
+value = 0
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 801, 変数];投げ抜けフラグ・相手が特定のコマンドを入力した事を記憶
+type = VarSet
+triggerall = (NumTarget)
+triggerall = (var(29) = 0) && (Time = [1,7])
+trigger1 = (Target,command = "holdfwd") && (Target,command = "a")
+trigger2 = (Target,command = "holdback") && (Target,command = "a")
+trigger3 = (Target,command = "holdfwd") && (Target,command = "b")
+trigger4 = (Target,command = "holdback") && (Target,command = "b")
+trigger5 = (Target,command = "holdfwd") && (Target,command = "c")
+trigger6 = (Target,command = "holdback") && (Target,command = "c")
+trigger7 = (Target,command = "holdfwd") && (Target,command = "x")
+trigger8 = (Target,command = "holdback") && (Target,command = "x")
+trigger9 = (Target,command = "holdfwd") && (Target,command = "y")
+trigger10= (Target,command = "holdback") && (Target,command = "y")
+trigger11= (Target,command = "holdfwd") && (Target,command = "z")
+trigger12= (Target,command = "holdback") && (Target,command = "z")
+v = 29
+value = 1
+IgnoreHitPause = 1
+Persistent = 1
+
+;*********************************
+[State 801, 物理的なキャラの幅]
+type = Width
+trigger1 = (AnimElemTime(2) >= 0) && (AnimElemTime(12) < 0)
+edge = 60,0
+
+[State 801, 振り返る]
+type = Turn
+trigger1 = AnimElem = 12
+
+[State 801, 軸位置移動]
+type = PosAdd
+triggerall = (StateType != A)
+trigger1 = AnimElem = 15
+x = -10
+
+[State 801, 軸位置]
+type = PosSet
+triggerall = (StateType = A)
+trigger1 = (Pos Y > 0)
+y = 0
+
+[State 801, 移動速度]
+type = VelSet
+triggerall = (StateType = A)
+trigger1 = AnimElemTime(11) = 1
+x = 1.5
+y = -4
+
+[State 801, 速度加算]
+type = VelAdd
+triggerall = (StateType = A)
+trigger1 = AnimElemTime(11) > 1
+y = 0.4
+
+;*********************************
+[State 801, 音を鳴らす]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = 0,9
+channel = 1
+
+[State 801, 音を鳴らす]
+type = PlaySnd
+trigger1 = AnimElem = 7
+value = 0,2
+
+;*********************************
+[State 801, 掴んだ相手の位置１];TargetBindで相手を一時的に拘束
+type = TargetBind
+trigger1 = AnimElemTime(2) < 0
+pos = 51, 0  ;自分の軸位置から相手の軸をX=28・Y=0の位置にする
+
+[State 801, 掴んだ相手の位置２]
+type = TargetBind
+trigger1 = (AnimElemTime(2) >= 0) && (AnimElemTime(5) < 0)
+pos = 51, -51
+
+[State 801, 掴んだ相手の位置３]
+type = TargetBind
+trigger1 = (AnimElemTime(5) >= 0) && (AnimElemTime(6) < 0)
+pos = 27, -51
+
+[State 801, 掴んだ相手の位置４]
+type = TargetBind
+trigger1 = (AnimElemTime(6) >= 0) && (AnimElemTime(7) < 0)
+pos = 21, -41
+
+[State 801, 掴んだ相手の位置５]
+type = TargetBind
+trigger1 = (AnimElemTime(7) >= 0) && (AnimElemTime(8) < 0)
+pos = 15, -46
+
+[State 801, 掴んだ相手の位置６]
+type = TargetBind
+trigger1 = (AnimElemTime(8) >= 0) && (AnimElemTime(9) < 0)
+pos = 15, -50
+
+[State 801, 掴んだ相手の位置７]
+type = TargetBind
+trigger1 = (AnimElemTime(9) >= 0) && (AnimElemTime(10) < 0)
+pos = -12, -56
+
+[State 801, 掴んだ相手の位置８]
+type = TargetBind
+trigger1 = (AnimElemTime(10) >= 0) && (AnimElemTime(11) < 0)
+pos = -14, -60
+
+[State 801, 掴んだ相手の位置９]
+type = TargetBind
+trigger1 = AnimElem = 11
+pos = -20, -50
+
+;********************************* 相手が食らい状態の時のみ機能するTarget系コントローラ
+[State 801, 掴んだ相手のライフ増減]
+type = TargetLifeAdd
+trigger1 = AnimElem = 11
+value = ifelse(palNo<=10,-120,-240)
+
+[State 801, 掴んだ相手のステート変更]
+type = TargetState
+trigger1 = AnimElem = 11
+value = 804
+
+;*********************************
+[State 801, ステート変更]
+type = ChangeState
+triggerall = (Time = [1,7])
+trigger1 = var(29) = 1
+value = 802
+
+[State 801]
+type = changeanim
+triggerall = (StateType = A)
+trigger1 = animelemtime(12) = 0
+value = 600
+elem = 6
+
+[State 801, ステート変更]
+type = ChangeState
+trigger1 = (StateType != A) && (AnimTime = 0)
+trigger2 = (StateType = A) && (AnimElemTime(15) >= 0)
+value = ifelse(StateType=A,51,0)
+ctrl = ifelse(StateType=A,0,1)
+
+;---------------------------------------------------------------------------
+;投げ抜け（こちら側）
+[Statedef 802]
+type     = U
+movetype = I
+physics  = N
+anim     = 802
+ctrl     = 0
+
+[State 802, 状態変更]
+type = StateTypeSet
+trigger1 = (StateType = A)
+Physics = A
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 802, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 1
+
+[State 802, 押し判定]
+type = PlayerPush
+trigger1 = 1
+value = 1
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 802, 移動速度]
+type = VelSet
+trigger1 = Time = 1
+x = -2
+
+[State 802, ヘルパーを出す]
+type = Helper
+triggerall = NumHelper(2305) = 0
+trigger1 = Time = 1
+name = "Nage-Nuke"
+stateno = 2305
+ID = 2305
+pos = 30,-70
+keyctrl = 0
+postype = p1
+ownpal = 0
+size.xscale = 0.5
+size.yscale = 0.5
+IgnoreHitPause = 1
+Persistent = 0
+
+[State 802, 音を鳴らす]
+type = PlaySnd
+trigger1 = Time = 1
+value = 0,16
+channel = 1
+
+[State 802, 掴んだ相手のステート変更]
+type = TargetState
+trigger1 = Time = 1
+value = 805
+
+[State 802, ステート変更]
+type = ChangeState
+trigger1 = (Time > 20)
+value = ifelse(StateType=A,51,0)
+ctrl = ifelse(StateType=A,0,1)
+
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+; kfmc.cnsの「相手側ステート」の欄で説明した事と意味は同様。
+; 解説はそっちを見てね。
+;---------------------------------------------------------------------------
+;相手側１（掴まれて放り投げられるまで）
+[Statedef 803]
+type     = U
+movetype = H
+physics  = N
+ctrl     = 0
+velset   = 0,0
+
+[State 803, 相手のアニメ変更]
+type = ChangeAnim2
+trigger1 = Time = 0
+value = 803
+
+[State 803, 相手ステートに戻す];停止バグ対策
+type = SelfState
+trigger1 = (!GetHitVar(IsBound)) && (Time > 60) ;（※２）
+value = 5050
+
+;---------------------------------------------------------------------------
+; ※２：GetHitVar
+;
+; 　食らってしまった『相手の攻撃の効果』を
+; 　自分側が「特殊な変数」に変換して判断するトリガー。
+;　「GetHitVar(**)」の『**』に該当する、予め決められているパラメータを全て紹介。
+;
+; 　大概「相手のHitDefとProjectileのパラメータ」から引き出すので、かなり多い（苦笑
+;
+;
+; 　XVelAdd             = 自分が負けて吹っ飛んだ時の「Ｘ軸方向の加速度(float)」を計測する
+; 　YVelAdd             = 自分が負けて吹っ飛んだ時の「Ｙ軸方向の加速度(float)」を計測する
+; 　Type                = 自分の「食らいアニメの種類」。（0=None・1=High・2=Low・3=Trip）
+; 　AnimType            = 相手のHitDefに設定されている「animtype」を判断する
+;                        （0=Light・1=Medium・2=Hard・3=Back・4=Up・5=DiagUp）
+; 　GroundType          = 相手のHitDefに設定されている「ground.type」を判断する
+; 　AirType             = 相手のHitDefに設定されている「air.type」を判断する
+;
+; 　Damage              = 相手から食らってしまった「ダメージ量」を計測する
+; 　HitCount            = 相手の「現在のヒット数」を計測する
+; 　FallCount           = 自分が「地面に激突した回数」を判断する
+; 　HitShakeTime        = 自分の「ヒット硬直時間」を計測する
+; 　HitTime             = 自分の「食らい時間」を計測する
+; 　SlideTime           = 相手のHitDefに設定されている「slidetime」を判断する
+; 　CtrlTime            = 相手のHitDefに設定されている「(air)guard.ctrltime」を判断する
+; 　RecoverTime         = 横に倒れている時の「起き上がるまでの時間」を判断する
+;
+; 　XOff                = 相手のHitDefに設定されている「"snap"のＸ軸」を判断する（非推奨）
+; 　YOff                = 相手のHitDefに設定されている「"snap"のＹ軸」を判断する（非推奨）
+; 　ZOff                = 相手のHitDefに設定されている「"snap"のＺ軸」を判断する？（存在しないので無意味）
+;
+; 　XVel                = 相手のHitDefに設定されている「Ｘ軸の食らい状態の移動速度」を判断する
+; 　YVel                = 相手のHitDefに設定されている「Ｙ軸の食らい状態の移動速度」を判断する
+; 　YAccel              = 相手のHitDefに設定されている「yaccel」を判断する
+; 　chainID             = 相手のHitDefに設定されている「chainID」を判断する
+; 　Guarded             =「相手のコンボでの最後の攻撃をガードした場合」を判断する
+; 　IsBound             =「TargetBindで掴まれてる状態」を判断する
+;
+; 　Fall                = 相手のHitDefに設定されている「fall」を判断する
+; 　Fall.Damage         = 相手のHitDefに設定されている「fall.damage」を判断する
+; 　Fall.XVel           = 相手のHitDefに設定されている「fall.xvelocity」を判断する
+; 　Fall.YVel           = 相手のHitDefに設定されている「fall.yvelocity」を判断する
+; 　Fall.Recover        = 相手のHitDefに設定されている「fall.recover」を判断する
+; 　Fall.RecoverTime    = 相手のHitDefに設定されている「fall.recovertime」を判断する
+; 　Fall.Kill           = 相手のHitDefに設定されている「fall.kill」を判断する
+; 　Fall.EnvShake.Time  = 相手のHitDefに設定されている「fall.envshake.time」を判断する
+; 　Fall.EnvShake.Freq  = 相手のHitDefに設定されている「fall.envshake.freq」を判断する
+; 　Fall.EnvShake.Ampl  = 相手のHitDefに設定されている「fall.envshake.ampl」を判断する
+; 　Fall.EnvShake.Phase = 相手のHitDefに設定されている「fall.envshake.phase」を判断する
+;
+;---------------------------------------------------------------------------
+;相手側２（放り投げられた）
+[Statedef 804]
+type     = A
+movetype = H
+physics  = N
+ctrl     = 0
+velset   = 4.1,-4.5
+poweradd = 40
+
+[State 804, 速度加算];重力
+type = VelAdd
+trigger1 = 1
+y = 0.4
+
+[State 804, ステート変更]
+type = ChangeState
+triggerall = (Vel Y > 5)
+triggerall = (Pos Y >= -20)
+triggerall = (Alive)      ;生きている時
+triggerall = (CanRecover) ;空中受け身が可能な時
+trigger1 = command = "recovery"
+value = 5200
+
+[State 804, 相手ステートに戻す]
+type = SelfState
+triggerall = (Vel Y > 5)
+triggerall = (Alive)
+triggerall = (CanRecover)
+trigger1 = command = "recovery"
+value = 5210
+
+[State 804, 相手ステートに戻す]
+type = SelfState
+trigger1 = (Vel Y > 0) && (Pos Y >= 0)
+value = 5100
+
+;---------------------------------------------------------------------------
+;投げ抜け（相手側）
+[Statedef 805]
+type     = U
+movetype = H
+physics  = N
+ctrl     = 0
+facing   = (Enemy,Facing)
+
+[State 805, 状態変更]
+type = StateTypeSet
+trigger1 = (Time > 0)
+MoveType = I
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 805, アニメ変更]
+type = ChangeAnim
+triggerall = SelfAnimExist(5005)
+trigger1 = Time = 0
+value = 5005
+
+[State 805, 相手のアニメ変更]
+type = ChangeAnim2
+triggerall = !SelfAnimExist(5005)
+trigger1 = Time = 0
+value = 802
+
+[State 805, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 1
+
+[State 805, 押し判定]
+type = PlayerPush
+trigger1 = 1
+value = 1
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 805, 軸位置]
+type = PosSet
+triggerall = (StateType = A)
+trigger1 = (Pos Y >= 0)
+y = 0
+
+[State 805, 軸位置]
+type = PosSet
+triggerall = (StateType != A)
+trigger1 = 1
+y = 0
+
+[State 805, 移動速度]
+type = VelSet
+trigger1 = Time = 0
+x = -2
+
+[State 805, 移動速度]
+type = VelSet
+triggerall = (StateType = A)
+trigger1 = (Pos Y >= 0)
+y = 0
+
+[State 805, 速度加算]
+type = VelAdd
+triggerall = (StateType = A)
+trigger1 = (Time > 0)
+y = 0.25
+
+[State 805, 相手ステートに戻す]
+type = SelfState
+trigger1 = (Time > 20)
+value = ifelse(StateType=A,5040,0)
+ctrl = 1
+;------------------------------------------------------------------------------------------
+;パワー溜め
+[Statedef 850]
+type    = S
+physics = S
+movetype= I
+anim = 850
+ctrl = 0
+velset = 0,0
+
+[State 850, Voice];点滅
+type = palFx
+triggerall = !(var(1)=1) || (PalNo = 11) || (PalNo = 12)
+triggerall = anim = 850
+trigger1 = time %5 < 4
+add = 30,20,30
+time = 1         
+
+[State 850,色]
+type = Palfx
+triggerall = (var(1)=1)
+triggerall = !(PalNo = 11) && !(PalNo = 12)
+trigger1 = time %5 = 0
+add = 0,30,80
+mul = 256,256,256
+time = 100
+
+;***********************************
+
+[State 850, エフェクト];しぶき1
+type = Explod
+triggerall = NumExplod(3012) = 0
+trigger1 = anim = 850
+anim = 3012
+postype = p1
+pos = 20,0
+scale = 0.35,0.3
+sprpriority = 4
+ownpal = 1
+IgnoreHitPause = 1
+ID = 3012
+facing = -1
+
+[State 850, エフェクト];しぶき1
+type = Explod
+triggerall = NumExplod(30120) = 0
+trigger1 = anim = 850
+anim = 3012
+postype = p1
+pos = -20,0
+scale = 0.30,0.2
+sprpriority = -1
+ownpal = 1
+IgnoreHitPause = 1
+ID = 30120
+
+
+[State 850, エフェクト];電流
+type = Explod
+triggerall = (Time > 3)
+trigger1 = (Time % 6 = 0)
+anim = 3011
+postype = p1
+facing = ifelse(Random<500,-1,1)
+vfacing = ifelse(Random<500,-1,1)
+pos = 0,-35
+scale = const(size.xscale)*0.3,const(size.yscale)*0.3
+sprpriority = 4
+supermovetime = 99999999
+pausemovetime = 99999999
+ownpal = 1
+random = 40,70
+ID = 3007
+IgnoreHitPause = 1
+
+;***********************************
+[State 850, Voice]
+type = Playsnd
+triggerall = roundstate = 2
+trigger1 = power >= 1000
+trigger1 = power <= 1010
+trigger2 = power >= 2000
+trigger2 = power <= 2010
+trigger3 = power >= 3000
+trigger3 = power <= 3010
+trigger4 = power >= 4000
+trigger4 = power <= 4010
+trigger5 = power >= 5000
+trigger5 = power <= 5010
+trigger6 = power >= 6000
+trigger6 = power <= 6010
+value = 1,201
+channel = 1
+lowpriority =  1
+
+[State 850]
+type = Playsnd
+triggerall = anim = 850
+trigger1 = (time %21) = 0
+value = 1,200
+
+[State 850];風
+type = Playsnd
+triggerall = anim = 850
+trigger1 = time >= 5
+value = 1,202
+channel = 0
+lowpriority =  1
+
+[State 850, Voice]
+type = Stopsnd
+trigger1 = anim = 851
+channel = 0
+persistent = 0
+
+[State 850, PowerAdd]
+type = PowerAdd
+triggerall = anim = 850
+triggerall = ((var(0) != 1) && (Command = "chargec" && Command = "chargez")) || (var(0) = 1)
+trigger1 = 1
+value = ifelse(palNo >= 11, 5, 4)
+
+[State 850, PowerAdd]
+type = PowerAdd
+triggerall = anim = 850
+triggerall = ((var(0) != 1) && (Command = "chargec" && Command = "chargez")) || (var(0) = 1)
+trigger1 = Time >= 60
+value = ifelse((palNo >= 11), 5, 4)
+
+[State 850, PowerAdd]
+type = PowerAdd
+triggerall = anim = 850
+triggerall = ((var(0) != 1) && (Command = "chargec" && Command = "chargez")) || (var(0) = 1)
+trigger1 = Time >= 120
+value = ifelse((palNo >= 11), 5, 4)
+
+[State 850, PowerAdd]
+type = PowerAdd
+triggerall = anim = 850
+triggerall = ((var(0) != 1) && (Command = "chargec" && Command = "chargez")) || (var(0) = 1)
+trigger1 = Time >= 150
+value = ifelse((palNo >= 11), 5, 4)
+
+[State 850, PowerAdd]
+type = PowerAdd
+triggerall = anim = 850
+triggerall = (var(0) != 1) && (Command = "chargec" && Command = "chargez") || (var(0) = 1)
+trigger1 = Time >= 240
+value = ifelse((palNo >= 11), 5, 4)
+
+[State 850, Anim]
+type = ChangeAnim
+triggerall = (var(0) != 1)
+trigger1 = (Command != "chargec" || Command != "chargez") || (power >= 3000)
+value = 851
+persistent = 0
+
+[State 850, 8]
+type = ChangeAnim
+triggerall = Time >= 2
+triggerall = (var(0) = 1)
+trigger1 = (power >= 3000)
+trigger2 = win
+value = 851
+persistent = 0
+
+;***********************************
+
+[State 850, ctrlset]
+type = ctrlset
+triggerall = !ctrl
+trigger1 = anim = 851
+value = 1
+
+[State 850, StateChange]
+type = ChangeState
+trigger1 = anim = 851 && AnimTime = 0
+value = 0
+ctrl = 1
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------

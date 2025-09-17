@@ -1,0 +1,130 @@
+;====================<CONSTANTS>====================
+[Data]
+life = 1075
+power = 3000
+attack = 100
+defence = 100
+fall.defence_up = 0
+lieDown.time = 60
+airJuggle = 0
+sparkNo = s8010
+guard.sparkNo = s8000
+KO.echo = 0
+volumescale = 100;128
+IntPersistIndex = 0
+FloatPersistIndex = 0
+
+[Size]
+xScale = 0.83333;.90
+yScale = 0.96754;1.05
+ground.back = 20;15
+ground.front = 20;15
+air.back = 17;15
+air.front = 15
+height = 62;60
+attack.dist = 160
+proj.attack.dist = 90
+proj.doScale = 0
+head.pos = 10,-110;-6, -90
+mid.pos = 11,-80;-5, -60
+shadowOffset = 0
+draw.offset = 0,0
+
+[Velocity]
+walk.fwd = 2.88
+walk.back = -2.23
+run.fwd = 4.85, 0
+run.back = -6.8,-4.8
+jump.neu = 0, -8.16
+jump.fwd = 3.36
+jump.back = -3.87
+runJump.fwd = 5.04,-11.5
+runJump.back = -5.81,-11.5
+airjump.neu = 0,-6.5
+airjump.back = -2.8
+airjump.fwd = 2.8
+
+[Movement]
+airJump.num = 0
+airJump.height = 0
+yAccel = 0.5
+stand.friction = 0.85
+crouch.friction = 0.82
+stand.friction.threshold = 1.0
+crouch.friction.threshold = 1.0
+air.gethit.groundLevel = 25
+air.gethit.groundRecover.ground.threshold = -20
+air.gethit.groundRecover.groundLevel = 10
+air.gethit.airRecover.threshold = -1
+air.gethit.airRecover.yAccel = 0.35
+air.gethit.trip.groundLevel = 15
+down.bounce.offset = 0, 20
+down.bounce.yAccel = 0.32
+down.bounce.groundLevel = 12
+down.friction.threshold = 0.5
+
+[Quotes]
+;winquotes
+victory0 = "Get that ass banned!"
+victory1 = "GIMME YOUR MOTHERFUCKIN POINTS!!"
+victory2 = "I know you guys want to see me lose well fuck you. you Wanna see me lose? Fuck you."
+victory3 = "Get the fuck off my shit!"
+victory4 = "Camera off! Mic muted!"
+victory5 = "I'm tired of motherfuckers talking shit and not backin it up!"
+victory6 = "If I ever find out who you are in a tournament Imma beat the living dog shit out of you!"
+victory7 = "I'm the sexiest gamer on the planet."
+victory8 = "Evolve motherfucker!"
+victory9 = "I know when people are good and I know when they suck and that guy sucked!"
+victory10 = "I'M ANGRY BECAUSE HUMANS ARE STUPID!!"
+victory11 = "Say what you want but I look better than you, my physique looks better than yours, everything about me is better."
+victory12 = "Anybody talking shit send me an invite, I will body your ass in a first to five."
+victory13 = "Mods ban anyone saying shit I don't like!"
+victory14 = "SKILL!! Overprevails derpness!"
+victory15 = "This is low ... tier ... GAWD!!"
+victory16 = "Takes skill to use this character! This isn't a character that any motherfucker can just pick up and play!"
+victory17 = "Time is revenue, revenue is time."
+victory18 = "Hope you're all jacking off to my voice, sucking dick!"
+victory19 = "Look at this fucking idiot! Another scrub!"
+victory20 = "Youtube we are back with another ... fucking ... victory."
+victory21 = "More words can describe my presence ... but let's not be selfish."
+victory22 = "You guys are talking so much. You don't have pictures to your profiles, you're worthless."
+victory23 = "Eat a dick and watch in silence, cuck!"
+victory24 = "YOU DON'T LIKE WHAT THE FUCK I'M SAYIN!? THEN FUCK YOU!!"
+victory25 = "You're a waste of space! you serve no purpose on this planet!"
+victory26 = "I'll take these chickenlegs over being a faceless internet drone!"
+victory27 = "I'm not gonna respect your garbage ass."
+victory28 = "This whole world was a mistake from the beginning."
+victory29 = "The camera's not even on and you motherfuckers still gettin horny!"
+victory30 = "That shit's funny to you? Get that ass banned BITCH!!"
+victory31 = "You can call me a bitch online all you want, but in real life this isn't a fucking game!"
+
+;vs. twinks(excluding Remy)
+victory32 = "I'm a fuckin alpha male, I'm not one of you noodle-armed skinny motherfuckers!"
+victory33 = "You guys aren't men, you're the type of motherfuckers that couldn't protect your girl if a if a dude grabbed her ass in public!"
+victory34 = "GO LIFT SOME WEIGHTS, GO PUMP YOUR CHEST, GO DO SOMETHING TO PUMP SOME FUCKING TESTOSTERONE IN YOUR BODY SO IT SPEWS OUT ALL THE ESTROGEN!!"
+victory35 = "You're just a shrimp, weenie fuck! YOU ARE NOT A FUCKING MAN!!"
+
+;vs. Shotos
+victory49 = "My gawd! Graduate, you stupid fuck!"
+victory50 = "Everyone still picking shotos because people refuse to fucking evolve!"
+victory51 = "You got low points, you're playing a fucking shoto and you're joinning my shit!"
+
+;vs. Grapple chars
+victory52 = "I can't win without hard knockdowns. I don't even know what footsies are."
+victory53 = "THROWS, THROWS, THROWS!! NO FOOTSIES, NO BUTTONS, NOTHING!!"
+victory54 = "Not happenin, you didn't use footsies, you just spammed hard knockdowns and kept throwin me. Yer not gettin shit off me you worthless fuck!"
+
+;DSP
+victory55 = "Don't ever mention me and DSP in the same sentence. I'm light years ahead, I actually know how to play the game."
+
+;vs. Boss fights
+victory59 = "Motivated ... determined ... confident ... resillient ... mentally untouchable."
+
+;vs. charge characters
+victory60 = "Did you see what I had to do? Did you see how much work I gotta put in while this bitch can just sit there & hold downback!"
+victory61 = "You're not taking my points for making work me for DERP SHIT!! I GOTTA WORK IN THAT MATCH-UP!! Banned!"
+victory62 = "YOU'RE NOT TALENTED, I'M TALENTED!! I GOTTA WORK, YOU DON'T!!"
+
+;LTG mirror
+victory73 = "How dare you use the naked...thong Urien when your Urien SUCKS!!"
+victory74 = "WHY THE FUCK ARE YOU COPYING MY CHARACTERS, COPYING MY NAME WHEN YOU SUCK AND YOU'RE FUCKING LAGGING!!"

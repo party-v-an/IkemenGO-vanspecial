@@ -1,0 +1,1085 @@
+;===========================================================================
+; 必殺技
+;===========================================================================
+;---------------------------------------------------------------------------
+;マシンガンlv2
+[Statedef 1000]
+type     = U
+movetype = A
+physics  = N
+poweradd = 60
+ctrl     = 0
+anim     = ifelse(StateType=A,1001,1000)
+
+[State 1000, 強弱]
+type = VarSet
+triggerall = (var(0) = 0)
+trigger1 = Time = 0
+v = 53
+value = ifelse((command="y"),1,0) ;Ｙボタンが押されたら１、それ以外なら０
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 1000, 強弱];ＡＩ用
+type = VarSet
+trigger1 = (StateType != A)
+triggerall = (var(0) = 1)
+trigger1 = Time = 0
+v = 53
+value = ifelse(((p2dist Y <= -50)||(p2StateType=A)),1,0)
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 1000, 強弱];ＡＩ用
+type = VarSet
+trigger1 = (StateType = A)
+triggerall = (var(0) = 1)
+trigger1 = Time = 0
+v = 53
+value = ifelse((p2bodydist x > 66)||((p2bodydist x = [25,66])&&(random<300)),0,1)
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 1000]
+type = changeAnim
+triggerall = anim = 1001
+triggerall = var(53) = 1
+trigger1 = animElem = 1
+value = 1002
+;***********************************
+[State 1000, 状態変更]
+type = StateTypeSet
+trigger1 = (StateType = A)
+Physics = A
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 1000, 物理的なキャラの幅]
+type = Width
+triggerall = (StateType != A)
+trigger1 = (AnimElemTime(5) > 0) && (AnimElemTime(16) < 0)
+player = 30,0 ;相手を押す幅を変える（黄緑の線）
+edge = 45,0   ;画面端を押す幅を変える（オレンジの線）
+
+[State 1000, 埃]
+type = MakeDust
+triggerall = (StateType != A)
+trigger1 = Time = 10
+pos = 40,0
+spacing = 1
+
+;***********************************
+[State 1000, 軸位置]
+type = PosSet
+trigger1 = (StateType != A)
+y = 0
+
+[State 1000, 移動速度]
+type = VelSet
+trigger1 = (StateType != A)
+x = 0
+y = 0
+
+[State 1001, 移動速度]
+type = VelSet
+triggerall = StateType = A
+trigger1 = animElem <= 3
+y = 0
+
+[State 1001, 移動速度]
+type = VelSet
+triggerall = StateType = A
+triggerall = prevStateNo != 101
+triggerall = prevStateNo != 106
+trigger1 = animElemTime(3) = 0
+x = -2
+y = -3
+
+[State 1001, 移動速度]
+type = VelAdd
+triggerall = StateType = A
+triggerall = prevStateNo = 101
+trigger1 = animElemTime(3) = 0
+x = -1.5
+
+;***********************************
+[State 1000, マズルフラッシュ]
+type = Explod
+triggerall = StateType = A
+trigger1 = animElemTime(3) = 0
+trigger2 = animElemTime(6) = 0
+trigger3 = animElemTime(9) = 0
+trigger4 = animElemTime(12) = 0
+anim = 4024
+postype = p1
+pos = ifelse(var(53)=1,30,35),ifelse(var(53)=1,-33,-45)
+scale = 0.5,0.5
+sprpriority = 4
+ownpal = 1
+IgnoreHitPause = 1
+Persistent = 1
+ID = 4024
+
+[State 1000, マズルフラッシュ]
+type = Explod
+triggerall = StateType != A
+trigger1 = animElemTime(6) = 0
+trigger2 = animElemTime(8) = 0
+trigger3 = animElemTime(10) = 0
+trigger4 = animElemTime(12) = 0
+anim = 4024
+postype = p1
+pos = 29,-65
+scale = 0.5,0.5
+sprpriority = 4
+ownpal = 1
+IgnoreHitPause = 1
+Persistent = 1
+ID = 4024
+
+;***********************************
+
+[State 1000, 音を鳴らす]
+type = PlaySnd
+triggerall = StateType = A
+trigger1 = animElem = 4
+trigger2 = animElem = 7
+trigger3 = animElem = 10
+trigger4 = animElem = 13
+value = 1,1
+
+[State 1000, 音を鳴らす]
+type = PlaySnd
+triggerall = StateType != A
+trigger1 = animElem = 7
+trigger2 = animElem = 9
+trigger3 = animElem = 11
+trigger4 = animElem = 13
+value = 1,1
+
+[State 1000,ＥＸ用(地上)]
+type = AttackDist
+triggerall = StateType != A
+trigger1 = 1
+value = 200
+
+;***********************************
+[State 1000, ヘルパーを出す];薬莢
+type = Helper
+triggerall = StateType = A
+trigger1 = animElemtime(3) = 0
+trigger2 = animElemtime(6) = 0
+trigger3 = animElemtime(9) = 0
+trigger4 = animElemtime(12) = 0
+name = "bullet"
+stateno = 7000
+ID = 7000
+pos = 12,-55
+keyctrl = 0
+postype = p1
+ownpal = 0
+ontop = 1
+IgnoreHitPause = 1
+size.xscale = 0.25
+size.yscale = 0.25
+
+[State 1000, ヘルパーを出す];薬莢
+type = Helper
+triggerall = StateType != A
+trigger1 = animElem = 7
+trigger2 = animElem = 9
+trigger3 = animElem = 11
+trigger4 = animElem = 13
+name = "bullet"
+stateno = 7000
+ID = 7000
+pos = 0,-63
+keyctrl = 0
+postype = p1
+ownpal = 0
+ontop = 1
+IgnoreHitPause = 1
+size.xscale = 0.25
+size.yscale = 0.25
+
+;***********************************
+[State 1000, ヘルパーを出す];弾
+type = Helper
+triggerall = StateType = A
+trigger1 = animElemtime(6) = 0
+trigger2 = animElemtime(9) = 0
+name = "msngn2b"
+stateno = 2004
+ID = 2004
+pos = 27,ifelse(var(53)=1,-42,-55)
+keyctrl = 0
+postype = p1
+ownpal = 0
+ontop = 1
+IgnoreHitPause = 1
+size.xscale = 0.5
+size.yscale = 0.5
+
+[State 1000, ヘルパーを出す];弾
+type = Helper
+triggerall = StateType = A
+trigger1 = animElemtime(3) = 0
+trigger2 = animElemtime(12) = 0
+name = "msngn2b"
+stateno = 2005
+ID = 2005
+pos = 27,ifelse(var(53)=1,-42,-55)
+keyctrl = 0
+postype = p1
+ownpal = 0
+ontop = 1
+IgnoreHitPause = 1
+size.xscale = 0.5
+size.yscale = 0.5
+
+[State 1000, ヘルパーを出す];弾
+type = Helper
+triggerall = StateType != A
+trigger1 = animElem = 9
+trigger2 = animElem = 11
+name = "msngn2"
+stateno = 2002
+ID = 2002
+pos = 17,ifelse(var(53)=1,-63,-65)
+keyctrl = 0
+postype = p1
+ownpal = 0
+ontop = 1
+IgnoreHitPause = 1
+size.xscale = 0.5
+size.yscale = 0.5
+
+[State 1000, ヘルパーを出す];弾
+type = Helper
+triggerall = StateType != A
+trigger1 = animElem = 7
+trigger2 = animElem = 13
+name = "msngn2"
+stateno = 2003
+ID = 2002
+pos = 17,ifelse(var(53)=1,-63,-65)
+keyctrl = 0
+postype = p1
+ownpal = 0
+ontop = 1
+IgnoreHitPause = 1
+size.xscale = 0.5
+size.yscale = 0.5
+;***********************************
+[State 1000, ステート変更]
+type = ChangeState
+triggerall = (StateType != A)
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+
+;===========================================================================
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;ネメシスlv2
+[Statedef 1005]
+type     = S
+movetype = A
+physics  = N
+juggle   = 5
+poweradd = 60
+ctrl     = 0
+anim     = 1008
+velset   = 0,0
+
+[State 1005, 強弱]
+type = VarSet
+triggerall = (var(0) = 0)
+trigger1 = Time = 0
+v = 53
+value = ifelse((command="y"),1,0)
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 1005, 強弱];ＡＩ用
+type = VarSet
+triggerall = (var(0) = 1)
+trigger1 = Time = 0
+v = 53
+value = ifelse((p2stateType=A)&&(p2bodydist x<=72)&&(random<500),1,0)
+IgnoreHitPause = 1
+Persistent = 1
+
+;***********************************
+[State 1005, 無敵]
+type = NotHitBy
+trigger1 = Time = 0
+value = SCA
+time = 9
+
+[State 1005, 物理的なキャラの幅]
+type = Width
+trigger1 = (AnimElemTime(3) >= 0) && (AnimElemTime(14) < 0)
+edge = 5,0
+
+[State 1005, 軸位置]
+type = PosSet
+trigger1 = 1
+y = 0
+
+
+;***********************************
+
+[State 1000, ヘルパーを出す];薬莢
+type = Helper
+trigger1 = Time = 12
+name = "bullet"
+stateno = 7000
+ID = 7000
+pos = 1,-48
+keyctrl = 0
+postype = p1
+ownpal = 0
+ontop = 1
+IgnoreHitPause = 1
+size.xscale = 0.25
+size.yscale = 0.25
+
+;***********************************
+
+[State 2002, ヘルパーを出す];弾
+type = Helper
+triggerall = (var(53) != 0)
+trigger1 = Time = 12
+name = "nm2"
+stateno = 2001
+ID = 2001
+pos = 17,-66
+keyctrl = 0
+postype = p1
+ownpal = 0
+ontop = 1
+IgnoreHitPause = 1
+Persistent = 0
+size.xscale = 0.7
+size.yscale = 0.7
+
+[State 2002, ヘルパーを出す];弾
+type = Helper
+triggerall = (var(53) = 0)
+trigger1 = Time = 12
+name = "nm2"
+stateno = 2001
+ID = 2001
+pos = 10,-55
+keyctrl = 0
+postype = p1
+ownpal = 0
+ontop = 1
+IgnoreHitPause = 1
+Persistent = 0
+size.xscale = 0.7
+size.yscale = 0.7
+
+;***********************************
+[State 1005, エフェクト]
+type = Explod
+trigger1 = Time = 3
+anim = 3010
+postype = p1
+pos = 15,-51
+sprpriority = 3
+ownpal = 1
+ID = 10000
+scale = 0.25,0.25
+
+[State 1005, エフェクト]
+type = Explod
+trigger1 = Time = 14
+anim = 3011
+postype = p1
+pos = 7,-45
+sprpriority = 3
+ownpal = 1
+ID = 10000
+scale = 0.1,0.1
+
+[State 1005, エフェクト];発射
+type = Explod
+triggerall = (var(53) != 0)
+trigger1 = Time = 11
+anim = 4216
+postype = p1
+pos = 20,-66
+sprpriority = 3
+ownpal = 1
+ID = 10000
+scale = 0.3,0.2
+
+[State 1005, エフェクト];発射
+type = Explod
+triggerall = (var(53) = 0)
+trigger1 = Time = 12
+anim = 4216
+postype = p1
+pos = 20,-63
+sprpriority = 3
+ownpal = 1
+ID = 10000
+scale = 0.3,0.2
+
+;***********************************
+[State 1005, 音を鳴らす]
+type = PlaySnd
+trigger1 = Time = 6
+value = 0,17
+
+[State 1005, 音を鳴らす]
+type = PlaySnd
+trigger1 = Time = 12
+value = 1,6
+
+;***********************************
+[State 1005, ヒット定義]
+type = HitDef
+trigger1 = Time = 10
+attr             = S, SA
+animtype         = Back
+damage           = 5,2
+getpower         = 30,10
+guardflag        = M
+priority         = 5
+pausetime        = 3,6
+sparkno          = s(var(43))
+sparkxy          = -10,-48
+guard.sparkno    = s4216
+hitsound         = s0,4
+guardsound       = s0,30
+ground.type      = Low
+ground.slidetime = 16
+ground.hittime   = 19
+ground.velocity  = -0.4,0
+guard.velocity   = -0.2
+air.velocity     = -0.6,-2
+airguard.velocity= -6,-4.5
+envshake.time    = 3
+envshake.ampl    = 3
+envshake.freq    = 30
+
+
+;***********************************
+
+[State 1005, ステート変更]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;バレットステップ
+[Statedef 1007]
+type     = S
+movetype = A
+physics  = S
+juggle   = 5
+poweradd = 60
+ctrl     = 0
+anim     = 1010
+velset   = 0,0
+
+[State 1007, 強弱]
+type = VarSet
+triggerall = (var(0) = 0)
+trigger1 = Time = 0
+v = 53
+value = ifelse((command="y"),1,0)
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 1007, 強弱];ＡＩ用
+type = VarSet
+triggerall = (var(0) = 1)
+trigger1 = Time = 0
+v = 53
+value = ifelse(((p2movetype!=H)&&(p2bodydist X < 90)),0,1)
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 1007]
+type = changeAnim
+triggerall = var(53) != 1
+trigger1 = AnimElemTime(4) = 2
+value = 1010
+elem = 6
+
+[State 1007]
+type = changeAnim
+triggerall = var(53) != 1
+trigger1 = AnimElemTime(14) = 0
+value = 1010
+elem = 24
+
+;***********************************
+[State 1007, 埃]
+type = MakeDust
+trigger1 = AnimElemTime(3) = 0
+trigger2 = AnimElemTime(8) = 0
+trigger3 = AnimElemTime(15) = 0
+trigger4 = AnimElemTime(24) = 0
+pos = 12,0
+spacing = 1
+
+[State 1007, マズルフラッシュ]
+type = Explod
+trigger1 = AnimElemTime(7) = 0
+trigger2 = AnimElemTime(10) = 0
+anim = 4024
+postype = p1
+pos = 39,-49
+scale = 0.5,0.5
+sprpriority = 4
+ownpal = 1
+IgnoreHitPause = 1
+Persistent = 1
+ID = 4024
+
+[State 1007, マズルフラッシュ]
+type = Explod
+trigger1 = AnimElemTime(15) = 0
+trigger2 = AnimElemTime(18) = 0
+anim = 4024
+postype = p1
+pos = 47,-28
+scale = 0.5,0.5
+sprpriority = 4
+ownpal = 1
+IgnoreHitPause = 1
+Persistent = 1
+ID = 4024
+
+[State 1007, 銃撃の波紋]
+type = Explod
+trigger1 = AnimElem = 8
+trigger2 = AnimElem = 11
+anim = 3033
+postype = p1
+pos = 39,-49
+scale = 0.3,0.3
+sprpriority = 4
+ownpal = 1
+IgnoreHitPause = 1
+Persistent = 1
+ID = 3033
+;vel = 2,0
+accel = 1,0
+
+[State 1007, 銃撃の波紋]
+type = Explod
+trigger1 = AnimElem = 15
+trigger2 = AnimElem = 18
+anim = 3033
+postype = p1
+pos = 45,-28
+scale = 0.3,0.3
+sprpriority = 4
+ownpal = 1
+IgnoreHitPause = 1
+Persistent = 1
+ID = 3033
+;vel = 2,0
+accel = 1,0
+;***********************************
+[State 1000, ヘルパーを出す];薬莢
+type = Helper
+triggerall = StateType != A
+trigger1 = animElemtime(7) = 0
+trigger2 = animElemtime(10) = 0
+name = "bullet"
+stateno = 7000
+ID = 7000
+pos = 12,-43
+keyctrl = 0
+postype = p1
+ownpal = 0
+ontop = 1
+IgnoreHitPause = 1
+size.xscale = 0.25
+size.yscale = 0.25
+
+[State 1000, ヘルパーを出す];薬莢
+type = Helper
+triggerall = StateType != A
+trigger1 = animElemtime(14) = 0
+trigger2 = animElemtime(17) = 0
+name = "bullet"
+stateno = 7000
+ID = 7000
+pos = 30,-22
+keyctrl = 0
+postype = p1
+ownpal = 0
+ontop = 1
+IgnoreHitPause = 1
+size.xscale = 0.25
+size.yscale = 0.25
+;***********************************
+[State 1007, 音を鳴らす]
+type = PlaySnd
+trigger1 = AnimElem = 3
+trigger2 = AnimElem = 14
+trigger3 = AnimElem = 25
+value = 0,17
+
+[State 1007, 音を鳴らす]
+type = PlaySnd
+trigger1 = AnimElem = 8
+trigger2 = AnimElem = 11
+value = 1,1
+
+[State 1007, 音を鳴らす]
+type = PlaySnd
+trigger1 = AnimElem = 15
+trigger2 = AnimElem = 18
+value = 1,0
+
+[State 1007, 音を鳴らす]
+type = PlaySnd
+trigger1 = AnimElem = 25
+value = 0,1
+
+;***********************************
+[State 1007, 物理的なキャラの幅]
+type = Width
+;trigger1 = (AnimElemTime(3) >= 0) && (AnimElemTime(4) < 0)
+trigger1 = (AnimElem = 3) || (AnimElem = 4)
+value = 15,0 
+
+[State 1007, 物理的なキャラの幅]
+type = Width
+trigger1 = AnimElem >= 5
+value = 18,0 
+
+
+[State 1007, 軸位置]
+type = PosAdd
+triggerall = (Anim = 1010)
+trigger1 = AnimElem = 4
+x = 33
+
+[State 1007, 軸位置]
+type = PosSet
+trigger1 = 1
+y = 0
+
+[State 1007, 移動速度]
+type = VelSet
+trigger1 = AnimElem = 3
+x = ifelse(var(53)=1,12,6)
+
+[State 1007, 速度加算]
+type = VelAdd
+trigger1 = AnimElem = 14
+trigger2 = AnimElem = 25
+x = 6
+
+;***********************************
+[State 1007, ヒット定義]
+type = HitDef
+trigger1 = AnimElem = 8
+attr              = S, SA
+damage            = 30,3
+animtype          = Medium
+getpower          = 10,3
+guardflag         = MA
+hitflag           = MAFP
+pausetime         = 3,10
+sparkno           = s(var(44))
+sparkxy           = -20,ceil(ifelse(Random<500,0+Random/70,0-Random/70))-50
+guard.sparkno     = s4216
+hitsound          = s1,100
+guardsound        = s0,30
+ground.type       = low
+ground.slidetime  = 6
+ground.hittime    = 10
+ground.velocity   = -3.8,0
+air.velocity      = -1.5,-3
+envshake.time = 8
+envshake.ampl = 2
+
+[State 1007, ヒット定義]
+type = HitDef
+trigger1 = AnimElem = 11
+attr              = S, SA
+damage            = 30,3
+animtype          = Medium
+getpower          = 10,3
+guardflag         = MA
+hitflag           = MAFP
+pausetime         = 3,10
+sparkno           = s(var(44))
+sparkxy           = -20,ceil(ifelse(Random<500,0+Random/70,0-Random/70))-50
+guard.sparkno     = s4216
+hitsound          = s1,100
+guardsound        = s0,30
+ground.type       = High
+ground.slidetime  = 6
+ground.hittime    = 10
+ground.velocity   = -3.8,0
+air.velocity      = -1.5,-3
+envshake.time = 8
+envshake.ampl = 2
+
+[State 410, 2発目のヒット定義]
+type = HitDef
+trigger1 = (AnimElem = 15)
+attr              = C, SA
+damage            = 30,0
+animtype          = Medium
+getpower          = 10,3
+hitflag           = MAF
+guardflag         = M
+pausetime         = 2,10
+sparkno           = s(var(44))
+sparkxy           = -30,ceil(ifelse(Random<500,0+Random/70,0-Random/70))-18
+guard.sparkno     = s4216
+hitsound          = s1,100
+guardsound        = s0,30
+ground.type       = Low
+ground.slidetime  = 6
+ground.hittime    = 10
+ground.velocity   = -4
+air.velocity      = -1.2,-3
+envshake.time = 8
+envshake.ampl = 2
+
+[State 410, 2発目のヒット定義]
+type = HitDef
+trigger1 = (AnimElem = 18)
+attr              = C, SA
+damage            = 30,3
+animtype          = Heavy
+getpower          = 10,3
+hitflag           = MAF
+guardflag         = M
+pausetime         = 2,10
+sparkno           = s(var(44))
+sparkxy           = -30,ceil(ifelse(Random<500,0+Random/70,0-Random/70))-18
+guard.sparkno     = s4216
+hitsound          = s1,100
+guardsound        = s0,30
+ground.type       = Low
+ground.slidetime  = 6
+ground.hittime    = 10
+ground.velocity   = -4
+air.velocity      = -1.2,-3
+envshake.time = 8
+envshake.ampl = 2
+
+[State 1007, ヒット定義]
+type = HitDef
+trigger1 = AnimElem = 26
+attr              = S, SA
+damage            = 30,3
+animtype          = up
+getpower          = 20,3
+guardflag         = MA
+hitflag           = MAF
+pausetime         = 12,12
+sparkno           = s(var(45))
+sparkxy           = -15,-65
+guard.sparkno     = s4216
+hitsound          = s0,5
+guardsound        = s0,10
+ground.type       = High
+ground.slidetime  = 13
+ground.hittime    = 14
+ground.velocity   = -3.5,-5
+air.velocity      = -3.5,-5
+guard.velocity    = -5
+fall              = 1
+air.velocity      = -2.5,-4
+fall.recover = 0
+envshake.time = 9
+envshake.ampl = 5
+
+;***********************************
+[State 1007, ステート変更]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
+;サマーソルトショット
+[Statedef 1008]
+type     = A
+movetype = A
+physics  = N
+juggle   = 5
+poweradd = 60
+ctrl     = 0
+anim     = 1003
+velset   = 0,0
+
+
+[State 1008, 強弱]
+type = VarSet
+triggerall = (var(0) = 0)
+trigger1 = Time = 0
+v = 53
+value = ifelse((command="b"),1,0)
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 1008, 強弱];ＡＩ用
+type = VarSet
+triggerall = (var(0) = 1)
+trigger1 = Time = 0
+v = 53
+value = ifelse((backEdgeBodyDist < 10)&&(random<600),1,ifelse((p2bodydist x<=55)&&(enemynear,vel x > -1)&&(random<500),0,1))
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 1008, 物理的なキャラの幅]
+type = Width
+triggerall = time = [8,13]
+trigger1 = var(53) = 1
+;player = 30,0
+edge = 19,0
+
+[State 1008, 物理的なキャラの幅]
+type = Width
+triggerall = time = [14,19]
+trigger1 = var(53) = 1
+;player = 30,0
+edge = 17,0
+
+[State 1008, 物理的なキャラの幅]
+type = Width
+triggerall = time = [20,30]
+trigger1 = var(53) = 1
+;player = 30,0
+edge = 15,0
+
+[State 1008, 物理的なキャラの幅]
+type = Width
+triggerall = time = [31,33]
+trigger1 = var(53) = 1
+;player = 30,0
+edge = 18,0
+
+[State 1008]
+type = changeAnim
+triggerall = var(53) != 1
+trigger1 = AnimElemTime(3) = 0
+value = 1003
+elem = 5
+
+[State 1008]
+type = changeAnim
+triggerall = var(53) != 1
+trigger1 = AnimElem = 10
+value = 1003
+elem = 12
+
+;***********************************
+
+[State 1008]
+type = PlayerPush
+triggerall = var(53) = 1
+;trigger1 = animElem <= 20
+trigger1 = 1
+value = 0
+
+;***********************************
+[State 1008, マズルフラッシュ]
+type = Explod
+trigger1 = AnimElem = 9
+anim = 4024
+postype = p1
+pos = 25,-3
+scale = 0.5,0.5
+sprpriority = 4
+ownpal = 1
+IgnoreHitPause = 1
+Persistent = 1
+ID = 4024
+
+[State 1008, マズルフラッシュ]
+type = Explod
+trigger1 = AnimElem = 11
+anim = 4024
+postype = p1
+pos = 25,-2
+scale = 0.5,0.5
+sprpriority = 4
+ownpal = 1
+IgnoreHitPause = 1
+Persistent = 1
+ID = 4024
+
+[State 1008, マズルフラッシュ]
+type = Explod
+trigger1 = AnimElem = 13
+anim = 4024
+postype = p1
+pos = 12,-1
+scale = 0.5,0.5
+sprpriority = 4
+ownpal = 1
+IgnoreHitPause = 1
+Persistent = 1
+ID = 4024
+;***********************************
+[State 1008, ヘルパーを出す];薬莢
+type = Helper
+trigger1 = AnimElem = 9
+name = "bullet"
+stateno = 7000
+ID = 7000
+pos = 25,-25
+keyctrl = 0
+postype = p1
+ownpal = 0
+ontop = 1
+IgnoreHitPause = 1
+size.xscale = 0.25
+size.yscale = 0.25
+
+[State 1008, ヘルパーを出す];薬莢
+type = Helper
+trigger1 = AnimElem = 11
+name = "bullet"
+stateno = 7000
+ID = 7000
+pos = 21,-23
+keyctrl = 0
+postype = p1
+ownpal = 0
+ontop = 1
+IgnoreHitPause = 1
+size.xscale = 0.25
+size.yscale = 0.25
+
+[State 1008, ヘルパーを出す];薬莢
+type = Helper
+trigger1 = AnimElem = 13
+name = "bullet"
+stateno = 7000
+ID = 7000
+pos = 6,-21
+keyctrl = 0
+postype = p1
+ownpal = 0
+ontop = 1
+IgnoreHitPause = 1
+size.xscale = 0.25
+size.yscale = 0.25
+;***********************************
+[State 1008, 音を鳴らす]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = 0,17
+
+[State 1008, 音を鳴らす]
+type = PlaySnd
+trigger1 = AnimElem = 9
+trigger2 = AnimElem = 11
+trigger3 = AnimElem = 13
+value = 1,1
+
+;***********************************
+
+[State 1008, 移動速度];ジャンプ
+type = VelSet
+trigger1 = AnimElem = 2
+;x = ifelse(var(53)=1,4.5,2)
+x = ifelse(var(53)=1,4.5,2.5)
+y = ifelse(var(53)=1,-10.5,-6.6)
+;y = ifelse(var(53)=1,-8.5,-6.6)
+
+[State 1008, 移動速度]
+type = VelSet
+triggerall = var(53) = 0
+trigger1 = AnimElem = 14
+x = 1.7
+
+[State 1008, 速度加算]
+type = VelAdd
+trigger1 = time > 5
+y = ifelse(var(53)=1,0.5,0.45)
+
+[State 1008, 速度加算]
+type = VelAdd
+triggerall = var(53) = 1
+triggerall = vel x >= 1.5
+trigger1 = time > 35
+x = -0.05
+
+;***********************************
+[State 1008, ヘルパーを出す];弾
+type = Helper
+trigger1 = AnimElem = 9
+name = "loop"
+stateno = 2011
+ID = 2011
+pos = 25,-15
+keyctrl = 0
+postype = p1
+ownpal = 0
+ontop = 1
+IgnoreHitPause = 1
+size.xscale = 0.5
+size.yscale = 0.5
+
+[State 1008, ヘルパーを出す];弾
+type = Helper
+trigger1 = AnimElem = 11
+name = "loop"
+stateno = 2011
+ID = 2011
+pos = 23,-13
+keyctrl = 0
+postype = p1
+ownpal = 0
+ontop = 1
+IgnoreHitPause = 1
+size.xscale = 0.5
+size.yscale = 0.5
+
+[State 1008, ヘルパーを出す];弾
+type = Helper
+trigger1 = AnimElem = 13
+name = "loop"
+stateno = 2011
+ID = 2011
+pos = 12,-11
+keyctrl = 0
+postype = p1
+ownpal = 0
+ontop = 1
+IgnoreHitPause = 1
+size.xscale = 0.5
+size.yscale = 0.5
+;***********************************
+
+[State 1008, 軸位置]
+type = PosSet
+triggerall = animElem >= 20
+trigger1 = pos Y > 0
+y = 0
+
+[State 1008, ステート変更]
+type = ChangeState
+triggerall = time > 10
+trigger1 = pos Y >= 0
+value = 52
+ctrl = 1
+
+;===========================================================================
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------

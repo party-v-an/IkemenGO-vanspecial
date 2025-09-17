@@ -1,0 +1,43 @@
+;***************************************************************************;
+;******************* Created in Fighter Factory Ultimate *******************;
+;*******************      http://www.virtualltek.com     *******************;
+;***************************************************************************;
+
+[Info]
+name = "Donald"
+displayname = "Dark Donald"
+versiondate = 4,08,2011
+mugenversion = 04,14,2002
+author = "kishio&&Donalddesu"
+pal.defaults = 1
+
+[Files]
+sprite = Donald.sff
+anim = Donald.air
+sound = Donald.snd
+cmd = Donald.cmd
+cns = Donald.cns
+stcommon = common1.cns
+st = Donald.cns
+st2 = Donald.cns
+st3 = Donald1.cns
+st4 = Donald2.cns
+st5 = Donald3.cns
+st6 = AI.cns
+st7 = OPTION.txt
+pal1 = Donald1.act
+pal2 = Donald2.act
+pal3 = Donald3.act
+pal4 = Donald4.act
+pal5 = Donald5.act
+pal6 = Donald6.act
+pal7 = Donald1.act
+pal8 = Donald2.act
+pal9 = Donald3.act
+pal10 = Donald1.act
+pal11 = Donald12.act
+pal12 = Donald11.act
+
+[Arcade]
+;intro.storyboard = 
+;ending.storyboard = 

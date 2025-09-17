@@ -1,0 +1,32 @@
+; Definition file for Carl CJ Johnson GTA San Andreas
+; Contains all the filenames needed for the character
+
+; Player information
+[Info]
+name ="Carl CJ Johnson GTA San Andreas"
+displayname ="Carl CJ Johnson"
+author ="Son Bra Is Good"
+pal.defaults =1,2,3,4,5,6
+versiondate=02/10/2017
+mugenversion=
+
+; Files for the player
+[Files]
+cmd     =CJ.cmd
+cns     =CJ.cns
+st      =CJ.cns
+stcommon =common1.cns
+sprite  =CJ.sff
+anim    =CJ.air
+sound   =CJ.snd
+pal.default = default.act ;Palettes (can have up to 12)
+pal1=CJ.act
+pal2=Negro.act
+pal3=Verde.act
+pal4=Rojo.act
+pal5=Balla.act
+pal6=Amarillo.act
+pal7=Balla.act
+[Arcade]
+intro.storyboard=
+ending.storyboard=

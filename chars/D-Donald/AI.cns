@@ -1,0 +1,1178 @@
+;このＡＩはニセモノだ・・・
+;いじっても意味無い・・・かもしれない・・・
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+[Statedef -3]
+;------------------------------------------------------------------------------
+;AI
+;------------------------------------------------------------------------------
+
+[State -3]
+type = Varset
+triggerall = var(59) = 0
+triggerall = RoundState = [1,2]
+triggerall = stateno != 42731
+triggerall = prevstateno != 42731
+trigger1 = Command = "AI0"
+trigger2 = Command = "AI1"
+trigger3 = Command = "AI2"
+trigger4 = Command = "AI3"
+trigger5 = Command = "AI4"
+trigger6 = Command = "AI5"
+trigger7 = Command = "AI6"
+trigger8 = Command = "AI7"
+trigger9 = Command = "AI8"
+trigger10 = Command = "AI9"
+trigger11 = Command = "AI10"
+trigger12 = Command = "AI11"
+trigger13 = Command = "AI12"
+trigger14 = Command = "AI13"
+trigger15 = Command = "AI14"
+trigger16 = Command = "AI15"
+trigger17 = Command = "AI16"
+trigger18 = Command = "AI17"
+trigger19 = Command = "AI18"
+trigger20 = Command = "AI19"
+trigger21 = Command = "AI20"
+trigger22 = Command = "AI21"
+trigger23 = Command = "AI22"
+trigger24 = Command = "AI23"
+trigger25 = Command = "AI24"
+trigger26 = Command = "AI25"
+trigger27 = Command = "AI26"
+trigger28 = Command = "AI27"
+trigger29 = Command = "AI28"
+trigger30 = Command = "AI29"
+trigger31 = Command = "AI30"
+trigger32 = Command = "AI31"
+trigger33 = Command = "AI32"
+trigger34 = Command = "AI33"
+trigger35 = Command = "AI34"
+trigger36 = Command = "AI35"
+trigger37 = Command = "AI36"
+trigger38 = Command = "AI37"
+trigger39 = Command = "AI38"
+trigger40 = Command = "AI39"
+trigger41 = Command = "AI40"
+trigger42 = Command = "AI41"
+trigger43 = Command = "AI42"
+trigger44 = Command = "AI43"
+trigger45 = Command = "AI44"
+trigger46 = Command = "AI45"
+trigger47 = Command = "AI46"
+trigger48 = Command = "AI47"
+trigger49 = Command = "AI48"
+trigger50 = Command = "AI49"
+trigger51 = Command = "AI50"
+trigger52 = Command = "AI51"
+trigger53 = Command = "AI52"
+trigger54 = Command = "AI53"
+trigger55 = Command = "AI54"
+trigger56 = Command = "AI55"
+trigger57 = Command = "AI56"
+trigger58 = Command = "AI57"
+trigger59 = Command = "AI58"
+trigger60 = Command = "AI59"
+trigger61 = Command = "AI60"
+var(59) = 11
+ignorehitpause = 1
+pausemovetime = 99990000000
+supermovetime = 99990000000
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;アンハッピーセット2
+[State -3]
+type = ChangeState
+value = 3300
+triggerall = var(59) != 0
+triggerall = statetype != A
+triggerall = power >= 3000
+triggerall = NumHelper(2100) = 0 
+triggerall = NumHelper(2200) = 0
+triggerall = NumHelper(3500) = 0 
+triggerall = NumHelper(2301) = 0 
+triggerall = ctrl = 1
+triggerall = p2statetype != L
+triggerall = P2life >= 100
+triggerall = p2bodydist X <= 25
+triggerall = p2bodydist Y >= -20
+trigger1 = p2movetype = A
+trigger2 = P2Stateno >= 3000
+trigger2 = P2Stateno <= 4999
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;アンハッピーセット1
+[State -3]
+type = ChangeState
+value = 3300
+triggerall = var(59) != 0 && random <= 100
+triggerall = statetype != A
+triggerall = power >= 3000
+triggerall = NumHelper(2100) = 0 
+triggerall = NumHelper(2200) = 0
+triggerall = NumHelper(3500) = 0 
+triggerall = NumHelper(2301) = 0 
+triggerall = ctrl = 1
+triggerall = p2statetype != L
+triggerall = P2life >= 100
+triggerall = p2bodydist X <= 25
+triggerall = p2bodydist Y >= -20
+trigger1 = p2movetype = A
+trigger1 = Random <= 400
+trigger2 = P2Stateno >= 3000
+trigger2 = P2Stateno <= 4999
+trigger2 = Random <= 400
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;投げ2
+[State -3]
+type = ChangeState
+value = 800
+triggerall = var(59) != 0
+triggerall = statetype != A
+triggerall = ctrl
+triggerall = p2bodydist X <= 5
+triggerall = (p2statetype = S) || (p2statetype = C)
+triggerall = p2movetype != H
+trigger1 = p2movetype = A
+trigger1 = Random <= 800
+trigger2 = p2movetype = I
+
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;切り返しドナサイドカッター2
+[state -3]
+type = ChangeState
+value = 1050
+triggerall = var(59) != 0
+triggerall = statetype != A
+triggerall = p2statetype != L
+triggerall = p2bodydist X <= 45
+triggerall = ctrl = 1
+trigger1 = p2movetype = A
+trigger1 = Random <= 700
+trigger2 = P2Stateno >= 3000
+trigger2 = Pos Y <= -8
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;しゃがみ弱　ダウン追い討ち
+[state -3]
+type = ChangeState
+value = 400
+triggerall = var(59) != 0
+triggerall = statetype != A
+triggerall = p2statetype != A
+triggerall = Pos Y <= 0
+triggerall = ctrl = 1
+trigger1 = p2statetype = L
+trigger1 = p2bodydist X <= 50
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;しゃがみ弱2
+[state -3]
+type = ChangeState
+value = 400
+triggerall = var(59) != 0
+triggerall = statetype != A
+triggerall = p2statetype != A
+triggerall = p2bodydist Y >= -1
+triggerall = Pos Y <= 0
+triggerall = ctrl = 1
+trigger1 = p2movetype != H
+trigger1 = p2bodydist X <= 70
+trigger1 = p2bodydist X >= 3
+trigger2 = P2Stateno = 52
+trigger2 = p2bodydist X <= 70
+trigger2 = p2bodydist X >= 3
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;しゃがみ弱1
+[state -3]
+type = ChangeState
+value = 400
+triggerall = var(59) != 0 && random <= 100
+triggerall = statetype != A
+triggerall = p2statetype != A
+triggerall = p2bodydist Y >= -1
+triggerall = Pos Y <= 0
+triggerall = ctrl = 1
+trigger1 = p2movetype != H
+trigger1 = p2bodydist X <= 75
+trigger1 = p2bodydist X >= 5
+trigger1 = Random <= 300
+trigger2 = P2Stateno = 52
+trigger2 = p2bodydist X <= 75
+trigger2 = p2bodydist X >= 5
+trigger2 = Random <= 300
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;ドナルドマジック2
+[state -3]
+type = ChangeState
+value = 3200
+triggerall = var(59) != 0
+triggerall = statetype != A
+triggerall = power >= 2000
+triggerall = ctrl = 1
+triggerall = p2statetype = S
+triggerall = p2bodydist X >= 100
+triggerall = Pos Y <= 0
+trigger1 = p2movetype = A
+trigger1 = Random <= 700
+trigger2 = P2Stateno >= 3000
+trigger2 = P2Stateno <= 4999
+trigger3 = P2Stateno = 100
+trigger4 = P2Stateno = 195
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;ドナルドマジック1
+[state -3]
+type = ChangeState
+value = 3200
+triggerall = var(59) != 0 && random <= 100
+triggerall = statetype != A
+triggerall = power >= 2000
+triggerall = ctrl = 1
+triggerall = p2statetype = S
+triggerall = p2bodydist X >= 100
+triggerall = Pos Y <= 0
+trigger1 = p2movetype = A
+trigger1 = Random <= 200
+trigger2 = P2Stateno >= 3000
+trigger2 = P2Stateno <= 4999
+trigger3 = P2Stateno = 100
+trigger3 = Random <= 200
+trigger4 = P2Stateno = 195
+trigger4 = Random <= 200
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;空中ガード2
+[State -3]
+type = ChangeState
+value = 132
+triggerall = var(59) != 0
+triggerall = ctrl = 1
+triggerall = p2movetype = A
+triggerall = Statetype = A
+trigger1 = p2statetype = A
+trigger2 = p2statetype != A
+
+;------------------------------------------------------------------------------
+
+;------------------------------------------------------------------------------
+;しゃがみガード2
+[State -3]
+type = ChangeState
+value = 131
+triggerall = var(59) != 0
+triggerall = Statetype != A
+triggerall = p2movetype = A
+triggerall = ctrl = 1
+triggerall = Pos Y >= 0
+trigger1 = p2statetype = S
+trigger1 = p2statetype = C
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;立ちガード2
+[State -3]
+type = ChangeState
+value = 130
+triggerall = var(59) != 0
+triggerall = Statetype != A
+triggerall = p2movetype = A
+triggerall = ctrl = 1
+triggerall = Pos Y >= 0
+trigger1 = p2statetype = A
+
+
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;リカバー1
+[State -3]
+type = ChangeState
+value = 5200
+triggerall = var(59) != 0
+triggerall = Statetype = A
+triggerall = movetype = H
+triggerall = Pos Y >= -10
+trigger1 = Stateno != 132
+trigger1 = Stateno != 154
+trigger1 = Stateno != 155
+trigger1 = ctrl = 1
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;リカバー2
+[State -3]
+type = ChangeState
+value = 5210
+triggerall = var(59) != 0
+triggerall = Statetype = A
+triggerall = movetype = H
+triggerall = Pos Y >= -10
+trigger1 = Stateno != 132
+trigger1 = Stateno != 154
+trigger1 = Stateno != 155
+trigger1 = ctrl = 1
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;投げ1
+[State -3]
+type = ChangeState
+value = 800
+triggerall = var(59) != 0 && random <= 100
+triggerall = statetype != A
+triggerall = ctrl
+triggerall = p2bodydist X <= 5
+triggerall = (p2statetype = S) || (p2statetype = C)
+triggerall = p2movetype != H
+trigger1 = p2movetype = A
+trigger1 = Random <= 300
+trigger2 = p2movetype = I
+trigger2 = Random <= 300
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;切り返しドナサイドカッター1
+[state -3]
+type = ChangeState
+value = 1050
+triggerall = var(59) != 0 && random <= 100
+triggerall = statetype != A
+triggerall = p2statetype != L
+triggerall = p2bodydist X <= 65
+triggerall = ctrl = 1
+trigger1 = p2movetype = A
+trigger1 = Random <= 300
+trigger2 = P2Stateno >= 3000
+trigger2 = Pos Y <= -8
+trigger2 = Random <= 300
+
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;ダッシュ2
+[State -3]
+type = ChangeState
+value = 100
+triggerall = var(59) != 0
+triggerall = ctrl
+triggerall = statetype != A
+trigger1 = p2movetype != A
+trigger1 = p2bodydist X >= 80
+trigger1 = Random <= 200
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;ダッシュ1
+[State -3]
+type = ChangeState
+value = 100
+triggerall = var(59) != 0 && random <= 100
+triggerall = ctrl
+triggerall = statetype != A
+trigger1 = p2movetype != A
+trigger1 = p2bodydist X >= 80
+trigger1 = Random <= 500
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;ジャンプ2
+[State -3]
+type = ChangeState
+value = 40
+triggerall = var(59) != 0
+triggerall = ctrl
+triggerall = statetype != A
+trigger1 = p2bodydist X >= 50
+trigger1 = p2bodydist X <= 150
+trigger1 = p2statetype != L
+trigger1 = Random <= 100
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;ジャンプ1
+[State -3]
+type = ChangeState
+value = 40
+triggerall = var(59) != 0 && random <= 100
+triggerall = ctrl
+triggerall = statetype != A
+trigger1 = p2bodydist X >= 0
+trigger1 = p2bodydist X <= 250
+trigger1 = p2statetype != L
+trigger1 = Random <= 300
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;しゃがみ強
+[state -3]
+type = ChangeState
+value = 430
+triggerall = var(59) != 0
+triggerall = statetype != A
+triggerall = p2statetype != A
+triggerall = p2bodydist X <= 60
+triggerall = p2bodydist X >= 10
+triggerall = Pos Y <= 0
+triggerall = ctrl = 1
+trigger1 = p2statetype = S
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;前強攻撃
+[state -3]
+type = ChangeState
+value = 250
+triggerall = var(59) != 0
+triggerall = statetype != A
+triggerall = p2statetype != L
+triggerall = p2bodydist X <= 100
+triggerall = p2bodydist X >= 2
+triggerall = Pos Y <= 0
+triggerall = ctrl = 1
+trigger1 = p2movetype = I
+trigger1 = p2statetype != A
+trigger2 = p2bodydist Y >= -40
+trigger2 = p2statetype = A
+trigger2 = p2movetype != H
+trigger3 = p2movetype = H
+trigger3 = p2statetype != A
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;前強攻撃1
+[state -3]
+type = ChangeState
+value = 250
+triggerall = var(59) != 0 && random <= 100
+triggerall = statetype != A
+triggerall = p2statetype != L
+triggerall = p2bodydist X <= 130
+triggerall = p2bodydist X >= 2
+triggerall = Pos Y <= 0
+triggerall = ctrl = 1
+trigger1 = p2movetype = I
+trigger1 = p2statetype != A
+trigger1 = Random <= 300
+trigger2 = p2bodydist Y >= -40
+trigger2 = p2statetype = A
+trigger2 = p2movetype != H
+trigger2 = Random <= 300
+trigger3 = p2movetype = H
+trigger3 = p2statetype != A
+trigger3 = Random <= 300
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;ぶちまけポテト2
+[state -3]
+type = ChangeState
+value = 1600
+triggerall = var(59) != 0
+triggerall = NumProjID(1600) = 0
+triggerall = statetype != A
+triggerall = ctrl = 1
+triggerall = Pos Y <= 0
+trigger1 = p2statetype != A
+trigger1 = p2statetype = L
+trigger1 = p2bodydist X <= 70
+trigger1 = p2bodydist X >= 30
+trigger2 = p2statetype = A
+trigger2 = p2bodydist X <= 60
+trigger2 = p2bodydist X >= 10
+trigger2 = p2bodydist Y <= -40
+trigger2 = p2movetype = H
+trigger2 = Random <= 900
+trigger3 = p2bodydist X >= 90
+trigger3 = p2bodydist X <= 140
+trigger3 = Random <= 600
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;ぶちまけポテト1
+[state -3]
+type = ChangeState
+value = 1600
+triggerall = var(59) != 0 && random <= 100
+triggerall = NumProjID(1600) = 0
+triggerall = statetype != A
+triggerall = ctrl = 1
+triggerall = Pos Y <= 0
+trigger1 = p2statetype != A
+trigger1 = p2statetype = L
+trigger1 = p2bodydist X <= 70
+trigger1 = p2bodydist X >= 20
+trigger1 = Random <= 400
+trigger2 = p2statetype = A
+trigger2 = p2bodydist X <= 100
+trigger2 = p2bodydist X >= 10
+trigger2 = p2bodydist Y <= -40
+trigger2 = Random <= 400
+trigger3 = p2bodydist X >= 90
+trigger3 = p2bodydist X <= 140
+trigger3 = Random <= 100
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;バックステップ2
+[State -3]
+type = ChangeState
+value = 105
+triggerall = var(59) != 0
+triggerall = ctrl
+triggerall = statetype != A
+trigger1 = p2bodydist X >= 0
+trigger1 = p2bodydist X <= 100
+trigger1 = p2statetype = L
+trigger1 = ScreenPos X !=  [0,20]
+trigger2 = p2statetype = A
+trigger2 = p2bodydist X >= 0
+trigger2 = p2bodydist X <= 100
+trigger2 = p2bodydist Y >= -7
+trigger2 = p2movetype = H
+trigger2 = Random <= 500
+trigger3 = p2bodydist X >= 20
+trigger3 = p2bodydist X <= 120
+trigger3 = Random <= 300
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;バックステップ1
+[State -3]
+type = ChangeState
+value = 105
+triggerall = var(59) != 0 && random <= 100
+triggerall = ctrl
+triggerall = statetype != A
+trigger1 = p2bodydist X >= 0
+trigger1 = p2bodydist X <= 100
+trigger1 = p2statetype = L
+trigger1 = ScreenPos X !=  [0,20]
+trigger2 = p2statetype = A
+trigger2 = p2bodydist X >= 0
+trigger2 = p2bodydist X <= 100
+trigger2 = p2bodydist Y >= -7
+trigger2 = p2movetype = H
+trigger2 = Random <= 300
+trigger3 = p2bodydist X >= 20
+trigger3 = p2bodydist X <= 120
+trigger3 = Random <= 200
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;空中投げ
+[State -3]
+type = ChangeState
+value = 850
+triggerall = var(59) != 0
+triggerall = statetype = A
+triggerall = ctrl
+trigger1 = p2bodydist X <= 5
+trigger1 = p2statetype = A
+trigger1 = p2movetype != H
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;空中切り返しドナサイドカッター）
+[state -3]
+type = ChangeState
+value = 1053
+triggerall = var(59) != 0
+triggerall = statetype = A
+trigger1 = p2statetype != L
+trigger1 = p2bodydist X <= 25
+trigger1 = p2bodydist Y <= -1
+trigger1 = p2movetype = A
+trigger1 = ctrl = 1
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;空中弱2
+[state -3]
+type = ChangeState
+value = 600
+triggerall = var(59) != 0
+triggerall = statetype = A
+triggerall = p2statetype != L
+triggerall = p2bodydist X <= 30
+triggerall = p2bodydist Y <= 5
+trigger1 = ctrl = 1
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;空中弱1
+[state -3]
+type = ChangeState
+value = 600
+triggerall = var(59) != 0 && random <= 100
+triggerall = statetype = A
+triggerall = p2statetype != L
+triggerall = p2bodydist X <= 30
+triggerall = p2bodydist Y <= 5
+trigger1 = ctrl = 1
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;空中強々2
+[state -3]
+type = ChangeState
+value = 640
+triggerall = var(59) != 0
+triggerall = statetype = A
+triggerall = p2statetype != L
+trigger1 = p2bodydist X <= 50
+trigger1 = p2bodydist Y <= 8
+trigger1 = ctrl = 1
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;空中強々1
+[state -3]
+type = ChangeState
+value = 640
+triggerall = var(59) != 0 && random <= 100
+triggerall = statetype = A
+triggerall = p2statetype != L
+trigger1 = p2bodydist X <= 50
+trigger1 = p2bodydist Y <= 8
+trigger1 = ctrl = 1
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;立ち強々2
+[state -3]
+type = ChangeState
+value = 240
+triggerall = var(59) != 0
+triggerall = statetype != A
+triggerall = p2statetype != L
+trigger1 = p2bodydist X <= 60
+trigger1 = p2bodydist X >= 8
+trigger1 = p2bodydist Y <= -40
+trigger1 = Pos Y <= 0
+trigger1 = ctrl = 1
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;立ち強々1
+[state -3]
+type = ChangeState
+value = 240
+triggerall = var(59) != 0 && random <= 100
+triggerall = statetype != A
+triggerall = p2statetype != L
+trigger1 = p2bodydist X <= 60
+trigger1 = p2bodydist X >= 8
+trigger1 = p2bodydist Y <= -40
+trigger1 = Pos Y <= 0
+trigger1 = ctrl = 1
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;しゃがみ中
+[state -3]
+type = ChangeState
+value = 410
+triggerall = var(59) != 0
+triggerall = statetype != A
+triggerall = p2statetype != L
+triggerall = p2bodydist X <= 50
+triggerall = p2bodydist X >= 2
+triggerall = Pos Y <= 0
+triggerall = ctrl = 1
+trigger1 = p2statetype = C
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;立ち中
+[state -3]
+type = ChangeState
+value = 210
+triggerall = var(59) != 0
+triggerall = statetype != A
+triggerall = p2statetype != L
+triggerall = p2bodydist X <= 70
+triggerall = p2bodydist X >= 8
+triggerall = Pos Y <= 0
+triggerall = p2bodydist Y >= -30
+triggerall = p2statetype != C
+triggerall = ctrl = 1
+trigger1 = p2statetype = S
+trigger2 = p2statetype = A
+trigger2 = p2movetype = H
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;立ち弱
+[state -3]
+type = ChangeState
+value = 200
+triggerall = var(59) != 0
+triggerall = statetype != A
+trigger1 = p2statetype != L
+trigger1 = p2statetype = A
+trigger1 = p2bodydist X <= 50
+trigger1 = p2bodydist X >= 8
+trigger1 = p2bodydist Y >= -12
+trigger1 = Pos Y <= 0
+trigger1 = ctrl = 1
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;GO ACTIVE（弱）2
+[state -3]
+type = ChangeState
+value = 1000
+triggerall = var(59) != 0
+triggerall = statetype != A
+trigger1 = p2statetype != L
+trigger1 = p2statetype != A
+trigger1 = p2bodydist X <= 80
+trigger1 = p2bodydist X >= 30
+trigger1 = ctrl = 1
+trigger1 = Pos Y <= 0
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;GO ACTIVE（弱）1
+[state -3]
+type = ChangeState
+value = 1000
+triggerall = var(59) != 0 && random <= 100
+triggerall = statetype != A
+trigger1 = p2statetype != L
+trigger1 = p2statetype != A
+trigger1 = p2bodydist X <= 80
+trigger1 = p2bodydist X >= 30
+trigger1 = ctrl = 1
+trigger1 = Pos Y <= 0
+trigger1 = Random <= 300
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;しゃがみ強々
+[state -3]
+type = ChangeState
+value = 440
+triggerall = var(59) != 0
+triggerall = statetype != A
+trigger1 = p2statetype = A
+trigger1 = p2bodydist X <= 20
+trigger1 = p2bodydist X >= 5
+trigger1 = p2bodydist Y >= -10
+trigger1 = Pos Y <= 0
+trigger1 = ctrl = 1
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;ドナルドガールラッシュ2
+[state -3]
+type = ChangeState
+value = 3050
+triggerall = var(59) != 0
+triggerall = power >= 2000
+triggerall = NumHelper(2100) = 0 
+triggerall = NumHelper(2200) = 0
+triggerall = NumHelper(3500) = 0 
+triggerall = NumHelper(2301) = 0 
+triggerall = statetype != A
+trigger1 = ScreenPos X =  [0,80]
+trigger1 = p2bodydist X <= 120
+trigger1 = p2bodydist X >= 60
+trigger1 = p2statetype = L
+trigger1 = ctrl = 1
+trigger1 = Pos Y <= 0
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;ドナルドガールラッシュ1
+[state -3]
+type = ChangeState
+value = 3050
+triggerall = var(59) != 0 && random <= 100
+triggerall = power >= 2000
+triggerall = NumHelper(2100) = 0 
+triggerall = NumHelper(2200) = 0
+triggerall = NumHelper(3500) = 0 
+triggerall = NumHelper(2301) = 0 
+triggerall = statetype != A
+trigger1 = ScreenPos X =  [0,80]
+trigger1 = p2bodydist X <= 120
+trigger1 = p2bodydist X >= 60
+trigger1 = p2statetype = L
+trigger1 = ctrl = 1
+trigger1 = Pos Y <= 0
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;ドナルドガール呼び出し2
+[state -3]
+type = ChangeState
+value = 1060
+triggerall = var(59) != 0
+triggerall = NumHelper(1810) = 0
+triggerall = NumHelper(2100) = 0 
+triggerall = NumHelper(2200) = 0
+triggerall = NumHelper(3500) = 0 
+triggerall = NumHelper(2301) = 0 
+triggerall = statetype != A
+trigger1 = ScreenPos X =  [0,100]
+trigger1 = p2bodydist X <= 120
+trigger1 = p2bodydist X >= 90
+trigger1 = ctrl = 1
+trigger1 = Pos Y <= 0
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;ドナルドガール呼び出し1
+[state -3]
+type = ChangeState
+value = 1060
+triggerall = var(59) != 0 && random <= 100
+triggerall = NumHelper(1810) = 0
+triggerall = NumHelper(2100) = 0 
+triggerall = NumHelper(2200) = 0
+triggerall = NumHelper(3500) = 0 
+triggerall = NumHelper(2301) = 0 
+triggerall = statetype != A
+trigger1 = ScreenPos X =  [0,100]
+trigger1 = p2bodydist X <= 120
+trigger1 = p2bodydist X >= 90
+trigger1 = ctrl = 1
+trigger1 = Pos Y <= 0
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;犯ヴァーガーだッ!!2
+[State -3,]
+type = ChangeState
+value = 3100
+triggerall = var(59) != 0
+triggerall = power >= 3000
+triggerall = statetype != A
+triggerall = life <= 500
+triggerall = NumHelper(1810) = 0
+triggerall = NumHelper(2100) = 0 
+triggerall = NumHelper(2200) = 0
+triggerall = NumHelper(3500) = 0 
+triggerall = NumHelper(2301) = 0 
+trigger1 = p2statetype != L
+trigger1 = ScreenPos X =  [0,80]
+trigger1 = p2bodydist X <= 250
+trigger1 = p2bodydist X >= 100
+trigger1 = p2bodydist Y >= -10
+trigger1 = ctrl = 1
+trigger1 = P2life >= 100
+trigger1 = Pos Y <= 0
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;犯ヴァーガーだッ!!1
+[State -3,]
+type = ChangeState
+value = 3100
+triggerall = var(59) != 0 && random <= 100
+triggerall = power >= 3000
+triggerall = statetype != A
+triggerall = life <= 500
+triggerall = NumHelper(1810) = 0
+triggerall = NumHelper(2100) = 0 
+triggerall = NumHelper(2200) = 0
+triggerall = NumHelper(3500) = 0 
+triggerall = NumHelper(2301) = 0 
+trigger1 = p2statetype != L
+trigger1 = ScreenPos X =  [0,80]
+trigger1 = p2bodydist X <= 250
+trigger1 = p2bodydist X >= 100
+trigger1 = p2bodydist Y >= -10
+trigger1 = ctrl = 1
+trigger1 = P2life >= 100
+trigger1 = Pos Y <= 0
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;リンゴ爆弾2
+[state -3]
+type = ChangeState
+value = 1800
+triggerall = var(59) != 0
+triggerall = NumHelper(1810) = 0 ;ＩＤナンバー1200のヘルパーが画面中に１個も出てない時
+triggerall = NumHelper(2100) = 0 
+triggerall = NumHelper(2200) = 0
+triggerall = NumHelper(3500) = 0 
+triggerall = NumHelper(2301) = 0 
+triggerall = statetype != A
+triggerall = ctrl = 1
+triggerall = Pos Y <= 0
+trigger1 = p2bodydist X <= 100
+trigger1 = p2bodydist X >= 50
+trigger2 = p2statetype = L
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;リンゴ爆弾1
+[state -3]
+type = ChangeState
+value = 1800
+triggerall = var(59) != 0 && random <= 100
+triggerall = NumHelper(1810) = 0 ;ＩＤナンバー1200のヘルパーが画面中に１個も出てない時
+triggerall = NumHelper(2100) = 0 
+triggerall = NumHelper(2200) = 0
+triggerall = NumHelper(3500) = 0 
+triggerall = NumHelper(2301) = 0 
+triggerall = statetype != A
+triggerall = ctrl = 1
+triggerall = Pos Y <= 0
+trigger1 = p2bodydist X <= 100
+trigger1 = p2bodydist X >= 50
+trigger1 = Random <= 300
+trigger2 = p2statetype = L
+trigger2 = Random <= 300
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;GO ACTIVE（強）2
+[state -3]
+type = ChangeState
+value = 1020
+triggerall = var(59) != 0
+triggerall = statetype != A
+triggerall = p2statetype != L
+triggerall = p2bodydist X <= 230
+triggerall = p2bodydist X >= 170
+triggerall = Pos Y <= 0
+triggerall = ctrl = 1
+trigger1 = p2statetype = S
+trigger1 = Random <= 700
+trigger2 = p2bodydist Y <= -50
+trigger2 = p2bodydist Y >= -150
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;GO ACTIVE（強）1
+[state -3]
+type = ChangeState
+value = 1020
+triggerall = var(59) != 0 && random <= 100
+triggerall = statetype != A
+triggerall = p2statetype != L
+triggerall = p2bodydist X <= 230
+triggerall = p2bodydist X >= 170
+triggerall = Pos Y <= 0
+triggerall = ctrl = 1
+trigger1 = p2statetype = S
+trigger1 = Random <= 300
+trigger2 = p2bodydist Y <= -50
+trigger2 = p2bodydist Y >= -150
+trigger2 = Random <= 300
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;犯ヴァーガー4個分2
+[state -3]
+type = ChangeState
+value = 1205
+triggerall = var(59) != 0
+triggerall = NumHelper(1200) = 0 ;ＩＤナンバー1200のヘルパーが画面中に１個も出てない時
+triggerall = NumProjID(1200) = 0 ;ＩＤナンバー1200の飛び道具が画面中に１個も出てない時
+triggerall = statetype != A
+trigger1 = p2statetype != A
+trigger1 = p2statetype != L
+trigger1 = p2bodydist X >= 230
+trigger1 = ctrl = 1
+trigger1 = Pos Y <= 0
+trigger1 = Random <= 300
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;犯ヴァーガー4個分1
+[state -3]
+type = ChangeState
+value = 1205
+triggerall = var(59) != 0 && random <= 100
+triggerall = NumHelper(1200) = 0 ;ＩＤナンバー1200のヘルパーが画面中に１個も出てない時
+triggerall = NumProjID(1200) = 0 ;ＩＤナンバー1200の飛び道具が画面中に１個も出てない時
+triggerall = statetype != A
+trigger1 = p2statetype != A
+trigger1 = p2statetype != L
+trigger1 = p2bodydist X >= 230
+trigger1 = ctrl = 1
+trigger1 = Pos Y <= 0
+trigger1 = Random <= 100
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;犯ヴァーガー2
+[state -3]
+type = ChangeState
+value = 1200
+triggerall = var(59) != 0
+triggerall = NumHelper(1200) = 0 ;ＩＤナンバー1200のヘルパーが画面中に１個も出てない時
+triggerall = NumProjID(1200) = 0 ;ＩＤナンバー1200の飛び道具が画面中に１個も出てない時
+triggerall = statetype != A
+trigger1 = p2bodydist X >= 100
+trigger1 = p2bodydist X <= 200
+trigger1 = ctrl = 1
+trigger1 = Pos Y <= 0
+trigger1 = Random <= 300
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;犯ヴァーガー1
+[state -3]
+type = ChangeState
+value = 1200
+triggerall = var(59) != 0 && random <= 100
+triggerall = NumHelper(1200) = 0 ;ＩＤナンバー1200のヘルパーが画面中に１個も出てない時
+triggerall = NumProjID(1200) = 0 ;ＩＤナンバー1200の飛び道具が画面中に１個も出てない時
+triggerall = statetype != A
+trigger1 = p2bodydist X >= 100
+trigger1 = p2bodydist X <= 200
+trigger1 = ctrl = 1
+trigger1 = Pos Y <= 0
+trigger1 = Random <= 100
+;------------------------------------------------------------------------------
+;===========================================================================
+;犯ヴァーガーがぁこれくらい
+[State -3]
+type = ChangeState
+value = 3400
+triggerall = var(59) != 0
+triggerall = command = "korekurai"
+triggerall = power >= 1000
+triggerall = NumHelper(1200) = 0 ;ＩＤナンバー1200のヘルパーが画面中に１個も出てない時
+triggerall = NumProjID(1200) = 0 ;ＩＤナンバー1200の飛び道具が画面中に１個も出てない時
+trigger1 = statetype = A
+trigger1 = p2statetype != L
+trigger1 = p2movetype = H
+trigger1 = p2bodydist X <= 80
+trigger1 = p2bodydist Y >= 10
+trigger1 = ctrl = 1
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;空中犯ヴァーガー4個分
+[state -3]
+type = ChangeState
+value = 1100
+triggerall = var(59) != 0
+triggerall = NumHelper(1200) = 0 ;ＩＤナンバー1200のヘルパーが画面中に１個も出てない時
+triggerall = NumProjID(1200) = 0 ;ＩＤナンバー1200の飛び道具が画面中に１個も出てない時
+triggerall = statetype = A
+trigger1 = p2statetype != L
+trigger1 = p2bodydist X <= 80
+trigger1 = p2bodydist Y >= 15
+trigger1 = ctrl = 1
+trigger1 = Random <= 700
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;空中犯ヴァーガー2
+[state -3]
+type = ChangeState
+value = 1110
+triggerall = var(59) != 0
+triggerall = NumHelper(1200) = 0 ;ＩＤナンバー1200のヘルパーが画面中に１個も出てない時
+triggerall = NumProjID(1200) = 0 ;ＩＤナンバー1200の飛び道具が画面中に１個も出てない時
+triggerall = statetype = A
+triggerall = ctrl = 1
+trigger1 = p2bodydist X <= 170
+trigger1 = p2bodydist X >= 100
+trigger1 = p2bodydist Y >= 10
+trigger1 = Random <= 700
+trigger2 = p2bodydist X <= 100
+trigger2 = p2bodydist X >= 60
+trigger2 = p2bodydist Y >= 10
+trigger2 = Vel X < -1
+
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;空中犯ヴァーガー1
+[state -3]
+type = ChangeState
+value = 1110
+triggerall = var(59) != 0 && random <= 100
+triggerall = NumHelper(1200) = 0 ;ＩＤナンバー1200のヘルパーが画面中に１個も出てない時
+triggerall = NumProjID(1200) = 0 ;ＩＤナンバー1200の飛び道具が画面中に１個も出てない時
+triggerall = statetype = A
+triggerall = ctrl = 1
+trigger1 = p2bodydist X <= 170
+trigger1 = p2bodydist X >= 140
+trigger1 = p2bodydist Y >= 10
+trigger1 = Random <= 400
+trigger2 = p2bodydist X <= 100
+trigger2 = p2bodydist X >= 80
+trigger2 = p2bodydist Y >= 10
+trigger2 = Vel X < -1
+trigger2 = Random <= 400
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;挑発2
+[state -3]
+type = ChangeState
+value = 195
+triggerall = var(59) != 0
+triggerall = statetype != A
+trigger1 = p2statetype = L
+trigger1 = p2bodydist X <= 320
+trigger1 = p2bodydist X >= 8
+trigger1 = Pos Y <= 0
+trigger1 = ctrl = 1
+trigger1 = Random <= 200
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;挑発1
+[state -3]
+type = ChangeState
+value = 195
+triggerall = var(59) != 0 && random <= 100
+triggerall = statetype != A
+trigger1 = p2statetype = L
+trigger1 = p2bodydist X <= 320
+trigger1 = p2bodydist X >= 8
+trigger1 = Pos Y <= 0
+trigger1 = ctrl = 1
+trigger1 = Random <= 700
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;空中ガード1
+[State -3]
+type = ChangeState
+value = 132
+triggerall = var(59) != 0 && random <= 100
+triggerall = ctrl = 1
+triggerall = p2movetype = A
+triggerall = Statetype = A
+trigger1 = p2statetype = A
+trigger2 = p2statetype != A
+
+;------------------------------------------------------------------------------
+
+;------------------------------------------------------------------------------
+;しゃがみガード1
+[State -3]
+type = ChangeState
+value = 131
+triggerall = var(59) != 0 && random <= 100
+triggerall = Statetype != A
+triggerall = p2movetype = A
+triggerall = ctrl = 1
+triggerall = Pos Y >= 0
+trigger1 = p2statetype = S
+trigger1 = p2statetype = C
+
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;立ちガード1
+[State -3]
+type = ChangeState
+value = 130
+triggerall = var(59) != 0 && random <= 100
+triggerall = Statetype != A
+triggerall = p2movetype = A
+triggerall = ctrl = 1
+triggerall = Pos Y >= 0
+trigger1 = p2statetype = A
