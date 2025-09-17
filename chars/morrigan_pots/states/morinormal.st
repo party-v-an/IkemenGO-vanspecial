@@ -3619,7 +3619,7 @@ type = targetbind
 trigger1 = animelemtime(8) >= 0 && animelemtime(9) < 0
 pos = 112 * const(size.xscale), -66
 
-[State 820, claw]
+[State 820, Claw]
 type = helper
 trigger1 = animelem = 8
 helpertype = normal
@@ -3627,7 +3627,7 @@ stateno = 825
 ID = 825
 name = "Claw"
 postype = p1
-pos = ceil(105 * const(size.xscale)), -65
+pos = 105 * const(size.xscale), -65
 size.ground.front = (target, const(size.ground.back))
 
 [State 820, HitSound]
@@ -3676,11 +3676,6 @@ type = targetstate
 trigger1 = animelem = 9
 value = 822
 
-[State 825, syncvar]
-type = varset
-trigger1 = numtarget
-var(0) = (target, stateno)
-
 [State 820, End]
 type = changestate
 trigger1 = !animtime
@@ -3724,7 +3719,7 @@ velset = 0, 0
 type = screenbound
 trigger1 = 1
 value = 1
-movecamera = (abs(pos x) + abs(p2dist x) < 290), 0
+movecamera = abs(stateowner, pos x - pos x) < 200, 0
 
 [State 822, Vel]
 type = veladd
@@ -3736,7 +3731,7 @@ type = velset
 trigger1 = !time
 x = -6
 
-[State 822, Hitwall]
+[State 822, Hit Wall]
 type = changestate
 trigger1 = backedgebodydist <= 0
 trigger2 = time >= 180
@@ -3766,7 +3761,7 @@ value = 823
 type = screenbound
 trigger1 = 1
 value = 1
-movecamera = (abs(pos x) + abs(p2dist x) < 290), 0
+movecamera = abs(stateowner, pos x - pos x) < 200, 0
 
 [State 823, Sound]
 type = playsnd
@@ -3842,7 +3837,7 @@ value = 5062
 type = screenbound
 trigger1 = 1
 value = 1
-movecamera = (abs(pos x) + abs(p2dist x) < 290), 0
+movecamera = abs(stateowner, pos x - pos x) < 200, 0
 
 [State 824, Accel]
 type = veladd

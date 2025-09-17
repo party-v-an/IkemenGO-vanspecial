@@ -106,7 +106,7 @@ trigger1 = 1
 air.juggle = 0 * (map(juggle_start) := 1 || map(juggle_increase) := 1 || map(juggle_limit) := 1)
 priority = 4, Hit
 attr = S, SP
-damage = 60, 15
+damage = 70, 18
 dizzypoints = 100 * !(root, map(darkforce))
 guard.dist = const(size.proj.attack.dist)
 animtype = Hard
@@ -381,7 +381,7 @@ trigger1 = 1
 air.juggle = 0 * (map(juggle_start) := 1 || map(juggle_increase) := 1 || map(juggle_limit) := 1)
 priority = 4, Hit
 attr = A, SP
-damage = 60, 15
+damage = 70, 18
 dizzypoints = 100 * !(root, map(darkforce))
 guard.dist = const(size.proj.attack.dist)
 animtype = Hard
@@ -604,10 +604,10 @@ ignorehitpause = 1
 [State 1015, Hit]
 type = hitdef
 trigger1 = 1
-air.juggle = 0 * (map(juggle_start) := 1 || map(juggle_increase) := 1 || map(juggle_limit) := 1)
+air.juggle = 0 * (map(juggle_start) := 1 || map(juggle_increase) := 1 || map(juggle_limit) := 2)
 priority = 4, Hit
 attr = S, SP
-damage = 80, 20
+damage = 90, 23
 dizzypoints = 100 * !(root, map(darkforce))
 guard.dist = const(size.proj.attack.dist)
 animtype = Hard
@@ -817,10 +817,10 @@ ignorehitpause = 1
 [State 1065, Hit]
 type = hitdef
 trigger1 = 1
-air.juggle = 0 * (map(juggle_start) := 1 || map(juggle_increase) := 1 || map(juggle_limit) := 1)
+air.juggle = 0 * (map(juggle_start) := 1 || map(juggle_increase) := 1 || map(juggle_limit) := 2)
 priority = 4, Hit
 attr = A, SP
-damage = 80, 20
+damage = 90, 23
 dizzypoints = 100 * !(root, map(darkforce))
 guard.dist = const(size.proj.attack.dist)
 animtype = Hard
@@ -1080,6 +1080,18 @@ type = removeexplod
 trigger1 = numexplod(3008)
 ID = 3008
 
+[State 3006, Bats]
+type = helper
+trigger1 = time <= 2
+helpertype = normal
+stateno = 6110
+ID = 6110
+name = "Bat"
+postype = p1
+size.xscale = 1
+size.yscale = 1
+ownpal = 1
+
 [State 3006, Trade Sound]
 type = playsnd
 trigger1 = !time
@@ -1125,10 +1137,22 @@ type = removeexplod
 trigger1 = numexplod(3008)
 ID = 3008
 
+[State 3007, Bats]
+type = helper
+trigger1 = time <= 2
+helpertype = normal
+stateno = 6110
+ID = 6110
+name = "Bat"
+postype = p1
+size.xscale = 1
+size.yscale = 1
+ownpal = 1
+
 [State 3007, Shrink]
 type = angledraw
 trigger1 = 1
-scale = const(size.xscale) -time * (const(size.xscale) / 15), const(size.yscale) -time * (const(size.yscale) / 15)
+scale = const(size.xscale) - time * (const(size.xscale) / 15), const(size.yscale) - time * (const(size.yscale) / 15)
 
 [State 3007, Trans]
 type = trans
@@ -1712,6 +1736,7 @@ envshake.freq = 180
 envshake.ampl = ifelse((gametime % 2), -4, 4)
 envshake.mul = 0.667
 forcestand = 1
+p2facing = ifelse(p2, facing = facing && random < 666, 1, -1)
 
 [State 4015, Hit Low Ground]
 type = hitdef
@@ -1747,6 +1772,7 @@ envshake.freq = 180
 envshake.ampl = ifelse((gametime % 2), -4, 4)
 envshake.mul = 0.667
 forcestand = 1
+p2facing = ifelse(p2, facing = facing && random < 666, 1, -1)
 
 [State 4015, Hit Up Ground]
 type = hitdef
@@ -1786,6 +1812,7 @@ fall.recover = 0
 down.recover = 0; cannot mash
 down.recovertime = 30
 forcestand = 1
+p2facing = -1
 
 [State 4015, Hit Midair]
 type = hitdef
@@ -1827,6 +1854,7 @@ fall.recover = 0
 down.recover = 0; cannot mash
 down.recovertime = 30
 forcestand = 1
+p2facing = ifelse(p2, facing = facing && random < 666, 1, -1)
 
 [State 4015, Hit Final]
 type = hitdef
@@ -1866,6 +1894,7 @@ fall.recover = 0
 down.recover = 0; cannot mash
 down.recovertime = 30
 forcestand = 1
+p2facing = -1
 
 [State 4015, FX]
 type = explod
@@ -2076,6 +2105,7 @@ fall.recover = 0
 down.recover = 0; cannot mash
 down.recovertime = 30
 yaccel = 0.4850
+p2facing = ifelse(p2, facing = facing && random < 666, 1, -1)
 
 [State 4065, Hit Low]
 type = hitdef
@@ -2118,6 +2148,7 @@ fall.recover = 0
 down.recover = 0; cannot mash
 down.recovertime = 30
 yaccel = 0.4850
+p2facing = ifelse(p2, facing = facing && random < 666, 1, -1)
 
 [State 4065, Hit Final]
 type = hitdef
@@ -2168,6 +2199,7 @@ yaccel = 0.4850
 forcestand = 1
 fall.xvelocity = 0
 fall.yvelocity = -4
+p2facing = -1
 
 [State 4065, End]
 type = changestate
@@ -2389,6 +2421,13 @@ physics = N
 anim = 4190
 sprpriority = 10
 
+; Doing this would break the silhouette effect
+;[State 4190, Layering]
+;type = sprpriority
+;trigger1 = !time
+;value = 10
+;layerno = 1
+
 [State 4190, Pos Var]
 type = angledraw
 trigger1 = 1
@@ -2491,7 +2530,7 @@ persistent = 0
 ;time = 1
 ;add = 255, 255, 255
 
-[State 8520, Assert]
+[State 4190, Assert]
 type = assertspecial
 trigger1 = root, stateno = 4110 && root, anim = 4110
 trigger1 = root, animelemtime(3) >= 0
@@ -2523,12 +2562,17 @@ trigger1 = root, numtarget(800)
 x = root, target(800), pos x
 y = -65
 
+[State 825, Vel]
+type = velset
+trigger1 = root, numtarget(800)
+x = ifelse(root, numtarget(800), 0, 12)
+
 [State 825, Bind]
 type = bindtoroot
 trigger1 = root, stateno = 820
 trigger1 = root, anim = 820
 trigger1 = root, animelemtime(9) < 0
-pos = (105 * root, const(size.xscale)), -65
+pos = 105 * root, const(size.xscale), -65
 
 [State 825, Camera]
 type = screenbound
@@ -2540,11 +2584,6 @@ movecamera = 0, 0
 type = posset
 trigger1 = 1
 y = -65
-
-[State 825, Vel]
-type = velset
-trigger1 = 1
-x = 12
 
 [State 825, Jet]
 type = explod
@@ -2585,7 +2624,7 @@ sprpriority = 3
 type = trans
 trigger1 = 1
 trans = addalpha
-alpha = 256, 256
+alpha = ifelse(time < 16, 16 * time, 256), 256
 ignorehitpause = 1
 
 [State 3303, Turn]
@@ -2595,7 +2634,7 @@ trigger1 = facing = (root, facing)
 [State 3303, Bind]
 type = posset
 trigger1 = 1
-x = ceil(root, pos x)
+x = root, pos x
 y = 0
 
 [State 3303, End]
@@ -2706,6 +2745,7 @@ pos = 0, 0
 scale = (root, const(size.xscale)), (root, const(size.yscale))
 sprpriority = 2
 removetime = -1
+ownpal = 1
 removeongethit = 1
 
 [State 6010, Bat 2 - Top Right]
@@ -2718,6 +2758,7 @@ pos = 0, 0
 scale = (root, const(size.xscale)), (root, const(size.yscale))
 sprpriority = 0
 removetime = -1
+ownpal = 1
 removeongethit = 1
 
 [State 6010, Bat 3 - Circling]
@@ -2730,6 +2771,7 @@ pos = 0, 0
 scale = (root, const(size.xscale)), (root, const(size.yscale))
 sprpriority = 2
 removetime = -1
+ownpal = 1
 removeongethit = 1
 
 [State 6010, Bat 4 - Circling]
@@ -2742,6 +2784,7 @@ pos = 0, 0
 scale = (root, const(size.xscale)), (root, const(size.yscale))
 sprpriority = 2
 removetime = -1
+ownpal = 1
 removeongethit = 1
 
 [State 6010, Bat 1 - Top Left]
@@ -2963,17 +3006,24 @@ trigger1 = anim != 6025
 trigger1 = root, anim = 3400 || root, anim = 4000 || root, anim = 4050
 value = 6025
 
-[State 6020, Afterimage]
-type = afterimage
-trigger1 = !time
-time = 999
-timegap = 1
-framegap = 1
-length = 12
-palcontrast = 128, 256, 128
-paladd = 0, 0, 0
-palmul = 0.75, 0.75, 0.75
-trans = add
+[State 6020, Fake Afterimage]
+type = explod
+trigger1 = 1
+ID = 6020
+anim = anim
+animfreeze = 1
+animelem = animelemno(0)
+postype = p1
+vel = root, vel x, root, vel y
+friction = 0.5, 0.5
+sprpriority = sprpriority - 1
+removetime = 8
+trans = addalpha
+alpha = 128, 256
+scale = const(size.xscale), const(size.yscale)
+interpolation.time = 8
+interpolation.alpha = 0, 256
+ownpal = 0
 
 [State 6020, End]
 type = changestate
@@ -2999,6 +3049,10 @@ velset = 0, 0
 anim = 6026
 sprpriority = 3
 
+[State 6026, Pos]
+type = bindtoroot
+trigger1 = 1
+
 [State 6026, Trans]
 type = trans
 trigger1 = 1
@@ -3006,9 +3060,22 @@ trans = addalpha
 alpha = 256, 256
 ignorehitpause = 1
 
-[State 6026, Pos]
-type = bindtoroot
+[State 6026, Fake Afterimage]
+type = explod
 trigger1 = 1
+ID = 6020
+anim = anim
+animfreeze = 1
+animelem = animelemno(0)
+postype = p1
+sprpriority = sprpriority - 1
+removetime = 8
+trans = addalpha
+alpha = 128, 256
+scale = const(size.xscale), const(size.yscale)
+interpolation.time = 8
+interpolation.alpha = 0, 256
+ownpal = 0
 
 [State 6026, Anim]
 type = changeanim
@@ -3041,18 +3108,6 @@ type = sndpan
 trigger1 = 1
 channel = 0
 pan = 0
-
-[State 6026, Afterimage]
-type = afterimage
-trigger1 = !time
-time = 999
-timegap = 1
-framegap = 1
-length = 12
-palcontrast = 128, 256, 128
-paladd = 0, 0, 0
-palmul = 0.75, 0.75, 0.75
-trans = add
 
 [State 6026, End]
 type = changestate
@@ -3128,7 +3183,7 @@ channel = 0
 
 [State 6029, End]
 type = destroyself
-trigger1 = time >= 8
+trigger1 = !numexplod
 
 
 ;========================<BATS>=============================
@@ -3625,8 +3680,9 @@ ctrl = 0
 
 [State 6110, Sound]
 type = playsnd
-trigger1 = time = 5
+trigger1 = time = 8
 value = 6, (random < 500)
+volumescale = cond(numhelper(6110) > 1, ifelse(helper(6110, 0), ID != ID, 50, 100), 100)
 
 [State 6110, Vel]
 type = velset
@@ -3653,24 +3709,38 @@ y = -5 + (random / 100.0)
 
 [State 6110, Accel]
 type = veladd
-trigger1 = time > 10 && vel x < ifelse(rootdist x < 25, 2.5, 5) && rootdist x >= 0
+trigger1 = time > 10
+trigger1 = rootdist x >= 0
+trigger1 = vel x < ifelse(rootdist x < 25, 2.5, 5)
 x = ifelse((rootdist y = [0, 160]), 0.5, 0.25)
 
 [State 6110, Accel]
 type = veladd
-trigger1 = time > 10 && vel x > ifelse(rootdist x > -25, -2.5, -5) && rootdist x < 0
+trigger1 = time > 10
+trigger1 = rootdist x < 0
+trigger1 = vel x > ifelse(rootdist x > -25, -2.5, -5)
 x = ifelse((rootdist y = [0, 160]), -0.5, -0.25)
 
 [State 6110, Accel]
 type = veladd
-trigger1 = time > 10 && root, statetype != C && vel y < ifelse((rootdist y < 80 && rootdist y > 40), 2.5, 5) && rootdist y >= 65
-trigger2 = time > 10 && root, statetype = C && vel y < ifelse((rootdist y < 50 && rootdist y > 0), 2.5, 5) && rootdist y >= 25
+triggerall = time > 10
+trigger1 = root, statetype != C
+trigger1 = rootdist y >= 65
+trigger1 = vel y < ifelse((rootdist y < 80 && rootdist y > 40), 2.5, 5)
+trigger2 = root, statetype = C
+trigger2 = rootdist y >= 25
+trigger2 = vel y < ifelse((rootdist y < 50 && rootdist y > 0), 2.5, 5)
 y = ifelse((rootdist x = [-80, 80]), 0.5, 0.25)
 
 [State 6110, Accel]
 type = veladd
-trigger1 = time > 10 && root, statetype != C && vel y > ifelse((rootdist y < 80 && rootdist y > 40), -2.5, -5) && rootdist y < 65
-trigger2 = time > 10 && root, statetype = C && vel y > ifelse((rootdist y < 50 && rootdist y > 0), -2.5, -5) && rootdist y < 25
+triggerall = time > 10
+trigger1 = root, statetype != C
+trigger1 = rootdist y < 65
+trigger1 = vel y > ifelse((rootdist y < 80 && rootdist y > 40), -2.5, -5)
+trigger2 = root, statetype = C
+trigger2 = rootdist y < 25
+trigger2 = vel y > ifelse((rootdist y < 50 && rootdist y > 0), -2.5, -5)
 y = ifelse((rootdist x = [-80, 80]), -0.5, -0.25)
 
 [State 6110, Vel]
@@ -3686,10 +3756,11 @@ trigger1 = vel x < 0
 [State 6110, End]
 type = destroyself
 triggerall = root, alive
+triggerall = rootdist x = [-10, 10]
 trigger1 = root, statetype != C
-trigger1 = (rootdist x = [-10, 10]) && (rootdist y = [55, 75])
+trigger1 = rootdist y = [25, 75]
 trigger2 = root, statetype = C
-trigger2 = (rootdist x = [-10, 10]) && (rootdist y = [15, 35])
+trigger2 = rootdist y = [0, 50]
 
 
 ;----- VIUDA NEGRA -----
@@ -4037,7 +4108,7 @@ trigger1 = !(time % 6)
 anim = 7105
 sprpriority = -3
 postype = p1
-pos = 0, -ceil(pos y)
+pos = 0, -pos y
 scale = 0.5, 0.5
 pausemovetime = -1
 supermovetime = -1
@@ -4164,7 +4235,7 @@ anim = 7251
 ID = 2
 sprpriority = -2
 postype = p1
-pos = 0, -ceil(pos y)
+pos = 0, -pos y
 supermovetime = -1
 ownpal = 1
 

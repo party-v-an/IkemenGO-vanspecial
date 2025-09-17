@@ -800,7 +800,7 @@ trigger3 = (stateno = [400, 420]) || (stateno = [430, 445])
 
 [State -1, SHP]
 type = changestate
-value = ifelse((abs(map(truebodydistx)) <= (const(size.xscale) * 16)) && stateno != [200, 499], 221, 220);14 Hunter
+value = ifelse((abs(map(truebodydistx)) <= (const(size.xscale) * 16)), 221, 220); 14 Hunter
 triggerall = !AIlevel
 triggerall = map(cmd_z)
 triggerall = statetype != A && command != "holddown"
@@ -1356,9 +1356,9 @@ triggerall = p2bodydist x <= 75 && p2dist y = [-50, 60] && !(p2, hitfall)
 triggerall = map(ai_neutral) || map(ai_attackwindow) >= 9
 trigger1 = ctrl
 trigger1 = random < map(ai_confirm) * 50
-trigger2 = (movecontact + movereversed) = [1, 4]
-trigger2 = random < map(ai_confirm) * 100
-trigger2 = stateno = [210, 211] || stateno = 240 || stateno = 410 || stateno = [440, 445]
+;trigger2 = (movecontact + movereversed) = [1, 4]
+;trigger2 = random < map(ai_confirm) * 100
+;trigger2 = stateno = [210, 211] || stateno = 240 || stateno = 410 || stateno = [440, 445]
 
 [State -1, SLK]
 type = changestate
@@ -2074,6 +2074,7 @@ triggerall = map(ai_randompass)
 triggerall = numenemy && !isasserted(noinput)
 triggerall = statetype != A
 triggerall = life >= 0.5 * lifemax
+triggerall = p2, lifemax != 0; Avoid division by 0
 triggerall = (1.0 * p2life / p2, lifemax) < (0.5 * life / lifemax)
 triggerall = prevstateno != [170, 199]
 trigger1 = ctrl

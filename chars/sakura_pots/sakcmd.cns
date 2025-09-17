@@ -711,6 +711,7 @@ value = 1050
 triggerall = !AIlevel
 triggerall = map(cmd_root236p)
 triggerall = roundstate = 2 && statetype = A
+triggerall = map(jumptype) != [1, 2]
 triggerall = !map(projflag)
 triggerall = map(dark)
 trigger1 = ctrl
@@ -2341,6 +2342,7 @@ triggerall = map(ai_randompass)
 triggerall = numenemy && !isasserted(noinput)
 triggerall = statetype != A
 triggerall = life >= 0.5 * lifemax
+triggerall = p2, lifemax != 0; Avoid division by 0
 triggerall = (1.0 * p2life / p2, lifemax) < (0.5 * life / lifemax)
 triggerall = prevstateno != [170, 199]
 trigger1 = ctrl

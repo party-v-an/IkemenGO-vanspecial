@@ -159,25 +159,25 @@ trigger1 = 1
 value = root, map(damagescaling)
 ignorehitpause = 1
 
-[State 775, No Light Loops]
-type = varadd
-trigger1 = var(0) > 0
-var(0) = 1
-ignorehitpause = 1
-
-[State 775, No Light Loops]
-type = varset
-triggerall = !var(0)
-triggerall = numtarget
-trigger1 = anim = 200 || anim = 201 || anim = 230
-trigger2 = anim = 400 || anim = 430 || anim = 431
-var(0) = 1
-ignorehitpause = 1
-
-[State 775, No Light Loops]
-type = varset
-trigger1 = !numtarget
-var(0) = 0
+;[State 775, No Light Loops]
+;type = varadd
+;trigger1 = var(0) > 0
+;var(0) = 1
+;ignorehitpause = 1
+;
+;[State 775, No Light Loops]
+;type = varset
+;triggerall = !var(0)
+;triggerall = numtarget
+;trigger1 = anim = 200 || anim = 201 || anim = 230
+;trigger2 = anim = 400 || anim = 430 || anim = 431
+;var(0) = 1
+;ignorehitpause = 1
+;
+;[State 775, No Light Loops]
+;type = varset
+;trigger1 = !numtarget
+;var(0) = 0
 
 [State 775, Juggle Properties]
 type = null
@@ -1474,6 +1474,7 @@ anim = 1004
 ID = 1004
 sprpriority = 3
 postype = p1
+scale = 0.5 * const(size.xscale), 0.5 * const(size.yscale)
 ownpal = 1
 
 [State 775, SoulFist]
@@ -1485,7 +1486,7 @@ stateno = 1005
 ID = 1005
 name = "Soul Fist"
 postype = p1
-pos = ceil(6 * const(size.xscale)), ceil(-50 * const(size.yscale))
+pos = 6 * const(size.xscale), -50 * const(size.yscale)
 size.xscale = 0.5
 size.yscale = 0.5
 ownpal = 1
@@ -1498,6 +1499,7 @@ anim = 1004
 ID = 1004
 sprpriority = 3
 postype = p1
+scale = 0.5 * const(size.xscale), 0.5 * const(size.yscale)
 ownpal = 1
 
 [State 775, EX SoulFist]
@@ -1522,6 +1524,7 @@ anim = 1054
 ID = 1054
 sprpriority = 3
 postype = p1
+scale = 0.5 * const(size.xscale), 0.5 * const(size.yscale)
 bindtime = -1
 removeongethit = 1
 ownpal = 1
@@ -1548,6 +1551,7 @@ anim = 1054
 ID = 1054
 sprpriority = 3
 postype = p1
+scale = 0.5 * const(size.xscale), 0.5 * const(size.yscale)
 bindtime = -1
 removeongethit = 1
 ownpal = 1
@@ -1575,6 +1579,7 @@ anim = 3004
 ID = 3004
 sprpriority = 3
 postype = p1
+scale = 0.5 * const(size.xscale), 0.5 * const(size.yscale)
 bindtime = -1
 removeongethit = 1
 ownpal = 1
@@ -1602,6 +1607,7 @@ anim = 1054
 ID = 1054
 sprpriority = 3
 postype = p1
+scale = 0.5 * const(size.xscale), 0.5 * const(size.yscale)
 bindtime = -1
 removeongethit = 1
 ownpal = 1

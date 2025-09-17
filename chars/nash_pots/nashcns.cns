@@ -83,7 +83,7 @@ default.ignoredefeatedenemies = 0
 super.targetdefencemul = 1.0
 default.lifetodizzypointsmul = 0
 super.lifetodizzypointsmul = 0
-input.pauseonhitpause = 0
+;input.pauseonhitpause = 0; not necessary with current input code
 animtagenteringscreen = 5600
 animtagleavingscreen = 5610
 
@@ -95,7 +95,7 @@ victory4 = "You've got some talent. Uncle Sam could use you."
 victory5 = "Fighting skill depends on one's ability to anticipate visually."
 victory6 = "Tracking a target precisely is a basic skill, critical to victory!"
 victory7 = "You don't have the mettle to be a fighter."
-victory8 = "Didn't even scratch my lens."
+victory8 = "Didn't even scratch my lenses."
 victory9 = "Hmph, I could've kept the glasses on."
 victory10 = "The ambulance is on its way."
 victory11 = "I break the sound barrier on a daily basis."

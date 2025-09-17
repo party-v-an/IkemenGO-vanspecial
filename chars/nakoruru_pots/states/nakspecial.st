@@ -1523,7 +1523,7 @@ value = 7697
 type = veladd
 trigger1 = hitshakeover
 trigger1 = statetype = A
-y = gethitvar(yaccel)
+y = max(0.35, gethitvar(yaccel))
 
 [State 7697, Vel]
 type = hitvelset

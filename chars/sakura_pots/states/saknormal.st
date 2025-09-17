@@ -3162,7 +3162,7 @@ value = -1
 [State 820, Too Short]
 type = changestate
 trigger1 = numtarget
-trigger1 = target, const(size.head.pos.y) > -60
+trigger1 = target, const(size.head.pos.y) > -70
 value = 830
 
 [State 820, Camera]
@@ -3274,19 +3274,19 @@ edge = ceil(20 * const(size.xscale)), 0
 type = bindtotarget
 trigger1 = numtarget
 trigger1 = anim = 820 && animelemtime(2) >= 0 && animelemtime(3) < 0
-pos = -(0.5 * target, const(size.ground.back)), 10, head
+pos = 0, 10, head
 
 [State 820]; 5000, 10
 type = bindtotarget
 trigger1 = numtarget
 trigger1 = (anim = 820 && animelemtime(3) >= 0) || (anim = 821 && animelemtime(5) >= 0)
-pos = -(1 * target, const(size.ground.back)), 10, head
+pos = -1.0 * target, const(size.ground.back), 10, head
 
 [State 820]; 5000, 20
 type = bindtotarget
 trigger1 = numtarget
 trigger1 = (anim = 821 && animelemtime(5) < 0) || (anim = 821 && animelemtime(6) >= 6)
-pos = -(1.5 * target, const(size.ground.back)), 10, head
+pos = -1.618 * target, const(size.ground.back), 10, head
 
 [State 820, Bind Sakura]
 type = bindtotarget

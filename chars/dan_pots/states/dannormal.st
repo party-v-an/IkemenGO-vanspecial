@@ -2014,7 +2014,7 @@ type = hitdef
 trigger1 = animelem = 3
 air.juggle = 0 * (map(juggle_start) := 1 || map(juggle_increase) := 1 || map(juggle_limit) := 1)
 attr = A, NA
-damage = 95, 0
+damage = 90, 0
 dizzypoints = 200 * !map(customcombo)
 animtype = Hard
 air.animtype = Back
@@ -2326,7 +2326,7 @@ type = hitdef
 trigger1 = animelem = 3
 air.juggle = 0 * (map(juggle_start) := 1 || map(juggle_increase) := 1 || map(juggle_limit) := 1)
 attr = A, NA
-damage = 100, 0
+damage = 90, 0
 dizzypoints = 200 * !map(customcombo)
 animtype = Hard
 air.animtype = Back
@@ -2880,12 +2880,17 @@ pos = 30 * const(size.xscale), 0
 [State 820, Bind 4]
 type = targetbind
 trigger1 = animelemtime(4) >= 0 && animelemtime(5) < 0
-pos = 30 * const(size.xscale), -73 * const(size.yscale)
+pos = 30 * const(size.xscale), -80 * const(size.yscale)
 
 [State 820, Bind 5]
 type = targetbind
 trigger1 = animelemtime(5) >= 0 && animelemtime(6) < 0
-pos = 48 * const(size.xscale), -93 * const(size.yscale)
+pos = 48 * const(size.xscale), -100 * const(size.yscale)
+
+[State 820, Bind 10]
+type = targetbind
+trigger1 = animelem = 10
+pos = 48 * const(size.xscale), 0
 
 [State 820, Sprite Priority]
 type = sprpriority
@@ -2999,10 +3004,10 @@ trigger1 = 1
 value = SCA
 time = 1
 
-[State 826, Pos]
-type = posadd
-trigger1 = !time
-y = -const(size.mid.pos.y)
+;[State 826, Pos]
+;type = posadd
+;trigger1 = !time
+;y = -const(size.head.pos.y)
 
 [State 826, Accel]
 type = veladd
@@ -3012,8 +3017,8 @@ y = 0.4850; yaccel
 [State 826, Vel]
 type = velset
 trigger1 = !time
-x = -2
-y = -10
+x = -2.0
+y = -10.5
 
 [State 826, Camera]
 type = screenbound

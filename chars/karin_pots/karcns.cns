@@ -85,7 +85,7 @@ default.ignoredefeatedenemies = 0
 super.targetdefencemul = 1.0
 default.lifetodizzypointsmul = 0
 super.lifetodizzypointsmul = 0
-input.pauseonhitpause = 0
+;input.pauseonhitpause = 0; not necessary with current input code
 animtagenteringscreen = 5600
 animtagleavingscreen = 5610
 

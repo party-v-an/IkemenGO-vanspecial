@@ -165,17 +165,12 @@ p1sprpriority = sprpriority
 forcestand = 1
 
 [State 1000, Anim]
-type = changeanim
+type = assertspecial
 trigger1 = anim = [1000, 1002]
-trigger1 = hitpausetime
-trigger1 = movecontact = 1 || movereversed = 1
-trigger1 = animelemtime(9) >= 0 && animelemtime(10) < 0
-trigger1 = hitpausetime <= 10
-value = anim
-elem = 10
+trigger1 = hitpausetime > 0
+trigger1 = animelemtime(9) >= 1 && animelemtime(10) <= 0
+flag = animatehitpause
 ignorehitpause = 1
-;channel = 1
-stopongethit = 1
 
 [State 1000, FX]
 type = explod
@@ -694,7 +689,7 @@ scale = const(size.xscale), const(size.yscale)
 interpolation.time = 6
 interpolation.alpha = 0, 256
 removeonchangestate = 1
-ownpal = 1
+ownpal = 0
 
 [State 1100, Sound]
 type = playsnd

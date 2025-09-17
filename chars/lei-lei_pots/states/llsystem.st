@@ -2687,7 +2687,7 @@ value = 5050
 [State 5200, Accel]
 type = veladd
 trigger1 = time > 0
-y = gethitvar(yaccel)
+y = max(0.35, gethitvar(yaccel))
 
 [State 5200, End]
 type = selfstate
@@ -3063,9 +3063,12 @@ ignorehitpause = 1
 [State -2, Dark Force BG]
 type = bgpalfx
 trigger1 = stateno = 770 || map(darkforce) != 0
-time = 8
-color = 0
-mul = 192 + ceil(cos(gametime / 20.0) * 64), 64 + ceil(cos(gametime / 20.0) * 16), 0
+time = 1
+;color = 0
+;mul = 192 + ceil(cos(gametime / 20.0) * 64), 64 + ceil(cos(gametime / 20.0) * 16), 0
+color = -256
+hue = 64 * cos(gametime / 120.0 * pi)
+mul = 192 + 64 * cos(gametime / 60.0 * pi), 192 + 64 * cos(gametime / 60.0 * pi), 192 + 64 * cos(gametime / 60.0 * pi)
 ignorehitpause = 1
 
 [State -2, Dark Force Warning]
@@ -3168,20 +3171,17 @@ ignorehitpause = 1
 
 [State -2, Unthrowable Flag - Hurt]
 type = mapset
-triggerall = numenemy
+triggerall = p2, ctrl = 0
 triggerall = p2, anim != 5300
 triggerall = p2stateno != p2, const(statedizzy)
 trigger1 = p2stateno = [150, 155]
-trigger2 = p2stateno = 51
-trigger2 = p2, prevstateno = [140, 155]
-trigger3 = p2stateno = 5040
-trigger4 = p2stateno = 5120;just in case
-trigger5 = p2stateno = 5201
-trigger6 = p2movetype = H
-trigger6 = p2statetype != A
-trigger7 = p2movetype = H
-trigger7 = p2statetype = A
-trigger7 = p2, hitfall = 0
+trigger2 = p2stateno = 5120; Just in case
+trigger3 = p2stateno = 5201
+trigger4 = p2movetype = H
+trigger4 = p2statetype != A
+trigger5 = p2movetype = H
+trigger5 = p2statetype = A
+trigger5 = p2, hitfall = 0
 map = "unthrowable"
 value = 3
 ignorehitpause = 1
@@ -3480,6 +3480,17 @@ trigger5 = stateno = 1330
 trigger5 = animelemtime(5) < 12 && map(projcontact) = [1, 12]
 map = "supercancel"
 value = 1
+ignorehitpause = 1
+
+[State -3, Throw Cancel Fix]; Because first frame of a throw has movehit and Custom Combo has so much freedom
+type = null
+trigger1 = numtarget
+trigger1 = movehitvar(frame)
+trigger1 = hitdefattr != SCA, AA
+trigger1 = target, gethitvar(frame)
+trigger1 = target, stateowner, ID = ID
+trigger1 = time <= 0 && target, time <= 0
+trigger1 = map(normalcancel) := 0 || map(specialcancel) := 0 || map(supercancel) := 0 || map(hypercancel) := 0
 ignorehitpause = 1
 
 [State -3, Super Cancel Flag Reset]

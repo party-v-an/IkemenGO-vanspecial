@@ -2139,7 +2139,7 @@ channel = 2
 type = playsnd
 trigger1 = numtarget
 trigger1 = !time
-value = 7, 14
+value = 7, 2
 
 [State 3112, Sound]
 type = playsnd

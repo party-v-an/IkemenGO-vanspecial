@@ -190,7 +190,7 @@ value = 5030
 [State 7697, Accel]
 type = veladd
 trigger1 = 1
-y = gethitvar(yaccel)
+y = max(0.35, gethitvar(yaccel))
 
 [State 7697, Vel]
 type = hitvelset
@@ -948,7 +948,7 @@ stateno = 3510
 ID = 3510
 name = "Bowling Ball"
 postype = p1
-pos = ceil(94 * const(size.xscale)), 0
+pos = 94 * const(size.xscale), 0
 facing = 1
 ownpal = 1
 persistent = 0
@@ -982,7 +982,7 @@ stateno = 3511
 ID = 351110
 name = "Pin"
 postype = back
-pos = ceil(308 * (gamewidth / 320.0)), 16
+pos = 308 * (gamewidth / 320.0), 16
 size.xscale = 0.625
 size.yscale = 0.75
 size.shadowoffset = 12
@@ -997,7 +997,7 @@ stateno = 3511
 ID = 351109
 name = "Pin"
 postype = back
-pos = ceil(305 * (gamewidth / 320.0)), 6
+pos = 305 * (gamewidth / 320.0), 6
 size.xscale = 0.625
 size.yscale = 0.75
 size.shadowoffset = 2
@@ -1012,7 +1012,7 @@ stateno = 3511
 ID = 351108
 name = "Pin"
 postype = back
-pos = ceil(303 * (gamewidth / 320.0)), -6
+pos = 303 * (gamewidth / 320.0), -6
 size.xscale = 0.625
 size.yscale = 0.75
 size.shadowoffset = -10
@@ -1027,7 +1027,7 @@ stateno = 3511
 ID = 351107
 name = "Pin"
 postype = back
-pos = ceil(302 * (gamewidth / 320.0)), -16
+pos = 302 * (gamewidth / 320.0), -16
 size.xscale = 0.625
 size.yscale = 0.75
 size.shadowoffset = -20
@@ -1042,7 +1042,7 @@ stateno = 3511
 ID = 351106
 name = "Pin"
 postype = back
-pos = ceil(280 * (gamewidth / 320.0)), 12
+pos = 280 * (gamewidth / 320.0), 12
 size.xscale = 0.625
 size.yscale = 0.75
 size.shadowoffset = 8
@@ -1057,7 +1057,7 @@ stateno = 3511
 ID = 351105
 name = "Pin"
 postype = back
-pos = ceil(279 * (gamewidth / 320.0)), 0
+pos = 279 * (gamewidth / 320.0), 0
 size.xscale = 0.625
 size.yscale = 0.75
 size.shadowoffset = -4
@@ -1072,7 +1072,7 @@ stateno = 3511
 ID = 351104
 name = "Pin"
 postype = back
-pos = ceil(278 * (gamewidth / 320.0)), -12
+pos = 278 * (gamewidth / 320.0), -12
 size.xscale = 0.625
 size.yscale = 0.75
 size.shadowoffset = -16
@@ -1087,7 +1087,7 @@ stateno = 3511
 ID = 351103
 name = "Pin"
 postype = back
-pos = ceil(252 * (gamewidth / 320.0)), 6
+pos = 252 * (gamewidth / 320.0), 6
 size.xscale = 0.625
 size.yscale = 0.75
 size.shadowoffset = 2
@@ -1102,7 +1102,7 @@ stateno = 3511
 ID = 351102
 name = "Pin"
 postype = back
-pos = ceil(251 * (gamewidth / 320.0)), -6
+pos = 251 * (gamewidth / 320.0), -6
 size.xscale = 0.625
 size.yscale = 0.75
 size.shadowoffset = -10
@@ -1117,7 +1117,7 @@ stateno = 3511
 ID = 351101
 name = "Pin"
 postype = back
-pos = ceil(224 * (gamewidth / 320.0)), 0
+pos = 224 * (gamewidth / 320.0), 0
 size.xscale = 0.625
 size.yscale = 0.75
 size.shadowoffset = -4
@@ -1276,7 +1276,6 @@ type = A
 physics = N
 movetype = H
 velset = 0, 0
-anim = 5030
 
 [State 3508, Bound]
 type = screenbound
@@ -1292,15 +1291,14 @@ time = 6
 
 [State 3508, Anim]
 type = changeanim
-trigger1 = anim != 5052
-trigger1 = selfanimexist(5052)
-value = 5052
+trigger1 = !time
+value = ifelse(selfanimexist(5052), 5052, 5030)
 
 [State 3508, Anim]
 type = changeanim
-trigger1 = vel y >= const240p(2)
 trigger1 = anim = 5052
 trigger1 = selfanimexist(5062)
+trigger1 = vel y >= const240p(2)
 value = 5062
 
 [State 3508, Anim]

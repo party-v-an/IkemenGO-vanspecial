@@ -2121,6 +2121,30 @@ type = destroyself
 trigger1 = !animtime || root, stateno != 3300 || root, movetype = H
 
 
+;========================<MISOGI CAMERA>=============================
+[Statedef 4199]
+physics = N
+velset = 0, 0
+anim = 9999
+
+[State 4199, Screen]
+type = screenbound
+trigger1 = 1
+value = 0
+movecamera = 1, 1
+
+[State 4199, Accel]
+type = posadd
+trigger1 = time > 0
+x = rootdist x * 0.05
+y = rootdist y * ifelse(rootdist y < 0, 0.5, 0.05)
+
+[State 4199, End]
+type = destroyself
+trigger1 = root, movetype = H
+trigger2 = root, stateno != 4100
+
+
 ;========================<AURA>=============================
 [Statedef 6000]
 physics = N
@@ -2919,7 +2943,7 @@ trigger1 = !(time % 6)
 anim = 7105
 sprpriority = -3
 postype = p1
-pos = 0, -ceil(pos y)
+pos = 0, -pos y
 scale = 0.5, 0.5
 pausemovetime = -1
 supermovetime = -1
@@ -3046,7 +3070,7 @@ anim = 7251
 ID = 2
 sprpriority = -2
 postype = p1
-pos = 0, -ceil(pos y)
+pos = 0, -pos y
 supermovetime = -1
 ownpal = 1
 

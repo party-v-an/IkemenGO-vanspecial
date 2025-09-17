@@ -2379,6 +2379,8 @@ attr = S, HA
 damage = 0, 0
 dizzypoints = 0
 animtype = Light
+air.animtype = Light
+fall.animtype = Light
 hitflag = MAF
 guardflag = M
 priority = 4, Hit
@@ -2990,7 +2992,7 @@ type = posset
 trigger1 = 1
 y = 0
 
-[State 4120, fall]
+[State 4120, Hitfall]
 type = hitfallset
 trigger1 = 1
 value = 0

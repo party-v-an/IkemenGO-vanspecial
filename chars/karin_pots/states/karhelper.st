@@ -456,7 +456,7 @@ trigger1 = !(time % 9)
 anim = 8105
 sprpriority = -5
 postype = p1
-pos = 0, -ceil(pos y)
+pos = 0, -pos y
 scale = 0.5, 0.5
 ownpal = 1
 
@@ -466,7 +466,7 @@ trigger1 = !(time % 12)
 anim = 8105
 sprpriority = -5
 postype = p1
-pos = 0, -ceil(pos y)
+pos = 0, -pos y
 scale = 1, 1
 ownpal = 1
 
@@ -476,7 +476,7 @@ trigger1 = !(time % 15)
 anim = 8105
 sprpriority = -5
 postype = p1
-pos = 0, -ceil(pos y)
+pos = 0, -pos y
 scale = 1.5, 1.5
 ownpal = 1
 
@@ -512,7 +512,7 @@ trigger1 = !time || time = 12
 anim = 8105
 sprpriority = -5
 postype = p1
-pos = 0, -ceil(pos y)
+pos = 0, -pos y
 scale = ifelse(!time, 0.5, 1), ifelse(!time, 0.5, 1)
 ownpal = 1
 
@@ -546,6 +546,12 @@ anim = 6010
 velset = 0, 0
 ctrl = 0
 sprpriority = -1
+
+[State 6010, Snd]
+type = playsnd
+trigger1 = animelem = 4 || animelem = 7
+value = 1, 0
+volumescale = 50
 
 [State 6010, End]
 type = changestate
@@ -591,6 +597,7 @@ sprpriority = -1
 [State 6012, Turn]
 type = turn
 trigger1 = !time
+
 [State 6012, Vel]
 type = velset
 trigger1 = !time
@@ -599,6 +606,7 @@ x = 4
 [State 6012, End]
 type = destroyself
 trigger1 = frontedgedist < -80 || backedgedist < -80
+trigger2 = time >= 300
 
 
 ;----- Drink -----
@@ -731,7 +739,7 @@ y = 0.0625
 type = velset
 trigger1 = !time
 trigger1 = numhelper(6010)
-x = facing * (helper(6010), pos x - pos x -(20 * facing)) / 16.0
+x = facing * (helper(6010), pos x - pos x - (20 * facing)) / 16.0
 y = -1
 
 [State 6015, Sound]
@@ -763,18 +771,14 @@ y = 0.25
 [State 6016, Vel]
 type = velset
 trigger1 = !time
-x = 1
+x = -0.5
 y = -6.0
-
-[State 6016, Trans]
-type = trans
-trigger1 = time >= 32
-trans = addalpha
-alpha = 256 - 16 * (time - 32), 16 * (time - 32)
 
 [State 6016, End]
 type = destroyself
-trigger1 = time >= 48
+trigger1 = time >= 60
+trigger2 = numhelper(6010)
+trigger2 = helper(6010), stateno = 6012
 
 
 ;========================<DOG>=============================
@@ -846,7 +850,7 @@ trigger1 = !(time % 6)
 anim = 8105
 sprpriority = -3
 postype = p1
-pos = 0, -ceil(pos y)
+pos = 0, -pos y
 scale = 0.5, 0.5
 pausemovetime = -1
 supermovetime = -1
@@ -1709,7 +1713,7 @@ anim = 8350
 ID = 8350
 sprpriority = -2
 postype = p1
-pos = 0, -ceil(pos y)
+pos = 0, -pos y
 supermovetime = -1
 ownpal = 1
 

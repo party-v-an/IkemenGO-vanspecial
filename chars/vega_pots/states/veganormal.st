@@ -893,15 +893,15 @@ fall.recover = 1
 fall.recovertime = 120
 forcenofall = !map(customcombo)
 
-[State 225, Pos]
-type = posadd
-trigger1 = animelem = 12 || animtime = 0
-x = 2
-
-[State 225, Pos]
-type = posadd
-trigger1 = animelem = 13
-x = 12
+; These were added when the move was made plus. As an overhead they no longer make sense
+;[State 225, Pos]
+;type = posadd
+;trigger1 = animelem = 12 || animtime = 0
+;x = 2
+;[State 225, Pos]
+;type = posadd
+;trigger1 = animelem = 13
+;x = 12
 
 [State Idle]
 type = statetypeset

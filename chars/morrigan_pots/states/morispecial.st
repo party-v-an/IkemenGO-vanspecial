@@ -78,7 +78,7 @@ stateno = 1005
 ID = 1005
 name = "Soul Fist"
 postype = p1
-pos = ceil(6 * const(size.xscale)), -50
+pos = 6 * const(size.xscale), -50
 size.xscale = 0.5
 size.yscale = 0.5
 ownpal = 1
@@ -143,7 +143,7 @@ trigger1 = 1 || map(exflash) := 30
 anim = 7210
 sprpriority = 3
 postype = p1
-pos = ceil(5 * const(size.xscale)), ceil(-51 * const(size.yscale))
+pos = 5 * const(size.xscale), -51 * const(size.yscale)
 scale = 0.5, 0.5
 pausemovetime = -1
 supermovetime = -1
@@ -176,7 +176,7 @@ stateno = 1015
 ID = 1015
 name = "EX Soul Fist"
 postype = p1
-pos = ceil(6 * const(size.xscale)), -50
+pos = 6 * const(size.xscale), -50
 size.xscale = 0.5
 size.yscale = 0.5
 ownpal = 1
@@ -277,7 +277,7 @@ stateno = 1055
 ID = 1055
 name = "Air Soul Fist"
 postype = p1
-pos = ceil(60 * const(size.xscale)), -48
+pos = 60 * const(size.xscale), -48
 size.xscale = 0.5
 size.yscale = 0.5
 ownpal = 1
@@ -400,7 +400,7 @@ trigger1 = 1 || map(exflash) := 30
 anim = 7210
 sprpriority = 3
 postype = p1
-pos = ceil(-6 * const(size.xscale)), ceil(-77 * const(size.yscale))
+pos = -6 * const(size.xscale), -77 * const(size.yscale)
 scale = 0.5, 0.5
 pausemovetime = -1
 supermovetime = -1
@@ -438,7 +438,7 @@ stateno = 1065
 ID = 1065
 name = "EX Air Soul Fist"
 postype = p1
-pos = ceil(60 * const(size.xscale)), -48
+pos = 60 * const(size.xscale), -48
 size.xscale = 0.5
 size.yscale = 0.5
 ownpal = 1
@@ -824,7 +824,7 @@ trigger1 = 1 || map(exflash) := 30
 anim = 7210
 sprpriority = 3
 postype = p1
-pos = ceil(18 * const(size.xscale)), ceil(-38 * const(size.yscale))
+pos = 18 * const(size.xscale), -38 * const(size.yscale)
 scale = 0.5, 0.5
 pausemovetime = -1
 supermovetime = -1
@@ -1117,12 +1117,14 @@ stopongethit = 1
 
 [State 1205, Dust]
 type = explod
-trigger1 = !(time % 6) && abs(vel x) >= 1
+trigger1 = !(time % 3) && abs(vel x) >= 1
 anim = 7103
 sprpriority = 3
 postype = p1
-pos = ceil(-8 * const(size.xscale)), 0
+pos = -8 * const(size.xscale), 0
 scale = 0.5, 0.5
+trans = addalpha
+alpha = 96, 256
 pausemovetime = -1
 supermovetime = -1
 ownpal = 1
@@ -1180,21 +1182,6 @@ type = modifyhitdef
 trigger1 = animelem = 4 || animelem = 10 || animelem = 16
 trigger1 = p2, anim = [5010, 5019]
 ground.type = High
-
-[State 1205, Sparkles]
-type = explod
-trigger1 = !(gametime % 4)
-trigger1 = numexplod(6000) < 16
-anim = 6000 + (random % 3)
-ID = 6000
-sprpriority = ifelse(random < 333, -1, 3)
-postype = p1
-pos = ceil(-8 * const(size.xscale)), 0
-random = 16, 8
-vel = 0, -1
-scale = 0.417, 0.500
-ownpal = 1
-ignorehitpause = 1
 
 [State 1205, End]
 type = changestate
@@ -1261,7 +1248,7 @@ trigger1 = 1 || map(exflash) := 30
 anim = 7210
 sprpriority = 3
 postype = p1
-pos = ceil(19 * const(size.xscale)), ceil(-51 * const(size.yscale))
+pos = 19 * const(size.xscale), -51 * const(size.yscale)
 scale = 0.5, 0.5
 pausemovetime = -1
 supermovetime = -1
@@ -1309,12 +1296,14 @@ stopongethit = 1
 
 [State 1251, Dust]
 type = explod
-trigger1 = !(time % 6) && abs(vel x) >= 1
+trigger1 = !(time % 3) && abs(vel x) >= 1
 anim = 7103
 sprpriority = 3
 postype = p1
-pos = ceil(-8 * const(size.xscale)), 0
+pos = -8 * const(size.xscale), 0
 scale = 0.5, 0.5
+trans = addalpha
+alpha = 96, 256
 pausemovetime = -1
 supermovetime = -1
 ownpal = 1
@@ -1372,21 +1361,6 @@ type = modifyhitdef
 trigger1 = !((movecontact + movereversed) % 8)
 trigger1 = p2, anim = [5010, 5019]
 ground.type = High
-
-[State 1251, Sparkles]
-type = explod
-trigger1 = !(gametime % 4)
-trigger1 = numexplod(6000) < 16
-anim = 6000 + (random % 3)
-ID = 6000
-sprpriority = ifelse(random < 333, -1, 3)
-postype = p1
-pos = ceil(-8 * const(size.xscale)), 0
-random = 16, 8
-vel = 0, -1
-scale = 0.417, 0.500
-ownpal = 1
-ignorehitpause = 1
 
 [State 1251, End]
 type = changestate
@@ -1553,6 +1527,8 @@ stateno = 6026
 ID = 6020
 name = "Jets"
 postype = p1
+size.xscale = 0.5 * const(size.xscale)
+size.yscale = 0.5 * const(size.yscale)
 ownpal = 1
 
 [State 1310, Dust]
@@ -1562,7 +1538,7 @@ anim = 7102
 ID = 7102
 sprpriority = -2
 postype = p1
-pos = ceil(-54 * const(size.xscale)), -ceil(pos y)
+pos = -54 * const(size.xscale), -pos y
 scale = 0.33, 0.33
 ownpal = 1
 persistent = 0
@@ -1625,14 +1601,17 @@ stopongethit = 1
 
 [State 1310, Spiral]
 type = explod
+trigger1 = vel y > 0
+trigger1 = pos y >= -160; stay visible
 trigger1 = animelemtime(12) >= 0
-trigger1 = vel y > 5
 anim = 1315
 ID = 1315
 sprpriority = 4
 postype = p1
 facing = -1
-bindtime = -1
+vel = 0, vel y
+friction = 0.66, 0.66
+scale = 0.5, 0.5
 ownpal = 1
 persistent = 0
 
@@ -1665,7 +1644,7 @@ pos = 42 * const(size.xscale), -81
 [State 1310, Bind 8]
 type = targetbind
 trigger1 = animelemtime(8) >= 0 && animelemtime(9) < 0
-pos = ceil(25 * const(size.xscale)), -95
+pos = 25 * const(size.xscale), -95
 
 [State 1310, Bind 9]
 type = targetbind
@@ -2049,7 +2028,7 @@ trigger1 = 1 || map(exflash) := 30
 anim = 7210
 sprpriority = 3
 postype = p1
-pos = ceil(33 * const(size.xscale)), ceil(-69 * const(size.yscale))
+pos = 33 * const(size.xscale), -69 * const(size.yscale)
 scale = 0.5, 0.5
 pausemovetime = -1
 supermovetime = -1
@@ -2139,14 +2118,16 @@ persistent = 0
 
 [State 1900, Jet]
 type = helper
-trigger1 = !numhelper(6020)
 trigger1 = animelemtime(2) >= 1
 trigger1 = animelemtime(9) < 0
+trigger1 = !numhelper(6020)
 helpertype = normal
 stateno = 6020
 ID = 6020
 name = "Jets"
 postype = p1
+size.xscale = 0.5 * const(size.xscale)
+size.yscale = 0.5 * const(size.yscale)
 ownpal = 1
 
 [State 1900, Sound]
@@ -2419,7 +2400,7 @@ trigger1 = 1 || map(exflash) := 30
 anim = 7210
 sprpriority = 3
 postype = p1
-pos = ceil(5 * const(size.xscale)), ceil(-55 * const(size.yscale))
+pos = 5 * const(size.xscale), -55 * const(size.yscale)
 scale = 0.5, 0.5
 pausemovetime = -1
 supermovetime = -1
@@ -2427,14 +2408,16 @@ ownpal = 1
 
 [State 1930, Jet]
 type = helper
-trigger1 = !numhelper(6020)
 trigger1 = animelemtime(2) >= 1
 trigger1 = animelemtime(9) < 0
+trigger1 = !numhelper(6020)
 helpertype = normal
 stateno = 6020
 ID = 6020
 name = "Jets"
 postype = p1
+size.xscale = 0.5 * const(size.xscale)
+size.yscale = 0.5 * const(size.yscale)
 ownpal = 1
 
 [State 1930, Sound]

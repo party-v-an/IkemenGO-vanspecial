@@ -3014,6 +3014,17 @@ type = sprpriority
 trigger1 = anim != 4100
 value = -1
 
+;[State 4100, Camera]
+;type = helper
+;trigger1 = anim = 4101
+;trigger1 = animelem = 1
+;helpertype = normal
+;stateno = 4199
+;ID = 4199
+;name = "Misogi Camera"
+;postype = p1
+;supermovetime = 60
+
 [State 4100, Teleport]
 type = posadd
 trigger1 = anim = 4101
@@ -3859,7 +3870,7 @@ stateno = 4305
 ID = 4305
 name = "Tenshou Kaireki Jin"
 postype = p1
-pos = 40, -ceil(pos y)
+pos = 40, -pos y
 supermovetime = cond(numenemy, (p2, pausetime), 60)
 size.xscale = 0.5
 size.yscale = 0.5
@@ -3869,11 +3880,15 @@ ownpal = 1
 type = explod
 trigger1 = animelem = 6
 anim = 7106
-sprpriority = 3
 postype = p1
-pos = 0, -ceil(pos y)
+pos = 0, -pos y
+sprpriority = 3
+scale = 1.0, 0.5
 facing = 1
 ownpal = 1
+bindtime = 0; Ikemen fix?
+pausemovetime = p2, pausetime
+supermovetime = p2, pausetime
 
 [State 4300, Type]
 type = statetypeset

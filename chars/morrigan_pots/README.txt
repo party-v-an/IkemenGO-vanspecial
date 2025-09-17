@@ -1,6 +1,6 @@
                           ____________________________________________
 =========================| Morrigan Aensland by Phantom.of.the.Server |========================
-                          ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯       [22.02.2025]
+                          ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯       [13.09.2025]
 
  - Contact: potsmugen@gmail.com
  - Website: https://network.mugenguild.com/pots/
@@ -253,6 +253,12 @@ C or Z -> Morrigan flips back and changes to a random outfit. Says one of three 
 
 
 ==========< VERSION HISTORY >==========
+
+<13.09.2025>
+ - Jet colors now vary with palette chosen
+ - Cosmetic updates
+ - Adjusted Dark Force damage scaling. It is higher at first but scales twice as fast
+ - Ikemen GO compatibility update
 
 <22.02.2025>
  - Minor fixes

@@ -2825,7 +2825,7 @@ trigger1 = !(time % 6)
 anim = 7105
 sprpriority = -3
 postype = p1
-pos = 0, -ceil(pos y)
+pos = 0, -pos y
 scale = 0.5, 0.5
 pausemovetime = -1
 supermovetime = -1
@@ -2952,7 +2952,7 @@ anim = 7251
 ID = 2
 sprpriority = -2
 postype = p1
-pos = 0, -ceil(pos y)
+pos = 0, -pos y
 supermovetime = -1
 ownpal = 1
 

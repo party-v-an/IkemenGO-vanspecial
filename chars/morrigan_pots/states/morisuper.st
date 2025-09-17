@@ -423,7 +423,7 @@ value = 7697
 type = veladd
 trigger1 = hitshakeover
 trigger1 = statetype = A
-y = gethitvar(yaccel)
+y = max(0.35, gethitvar(yaccel))
 
 [State 7697, Vel]
 type = hitvelset
@@ -862,7 +862,7 @@ stateno = 3303
 ID = 3303
 name = "Finishing Shower Dust"
 postype = p1
-pos = 0, -ceil(pos y)
+pos = 0, -pos y
 ownpal = 1
 size.xscale = 0.5
 size.yscale = 0.5
@@ -1066,12 +1066,15 @@ channel = 0
 
 [State 3400, Jet]
 type = helper
-trigger1 = time = 43 && !numhelper(6020)
+trigger1 = time = 43
+trigger1 = !numhelper(6020)
 helpertype = normal
 stateno = 6020
 ID = 6020
 name = "Jets"
 postype = p1
+size.xscale = 0.5 * const(size.xscale)
+size.yscale = 0.5 * const(size.yscale)
 ownpal = 1
 supermovetime = cond(numenemy, (p2, pausetime), 60)
 
@@ -1090,7 +1093,8 @@ supermovetime = cond(numenemy, (p2, pausetime), 60)
 
 [State 3400, Particles]
 type = explod
-trigger1 = time >= 43 && numhelper(6020)
+trigger1 = time >= 43
+trigger1 = numhelper(6020)
 vel = -1 + (random / 1000.0), 0
 accel = 0, 0.05
 anim = 3407
@@ -1383,12 +1387,15 @@ x = 7.5
 
 [State 4000, Jet]
 type = helper
-trigger1 = animelemtime(4) >= 0 && !numhelper(6020)
+trigger1 = animelemtime(4) >= 0
+trigger1 = !numhelper(6020)
 helpertype = normal
 stateno = 6020
 ID = 6020
 name = "Jets"
 postype = p1
+size.xscale = 0.5 * const(size.xscale)
+size.yscale = 0.5 * const(size.yscale)
 ownpal = 1
 
 [State 4000, Width]
@@ -1400,6 +1407,7 @@ edge = 20, 0
 type = hitdef
 trigger1 = animelem = 3
 air.juggle = 0 * (map(juggle_start) := 1 || map(juggle_increase) := 1 || map(juggle_limit) := 1)
+ID = 4000
 attr = S, HA
 damage = 0, 0
 dizzypoints = 0
@@ -1446,10 +1454,20 @@ time = 0
 anim = -1
 p2defmul = 1
 
+[State 4000, Drop Others]
+type = targetdrop
+trigger1 = movehit
+trigger1 = numtarget > 1
+trigger1 = numtarget(4000)
+excludeID = 4000
+ignorehitpause = 1
+
 [State 4000, P2 State]
 type = targetstate
-trigger1 = movehit && numtarget
-trigger1 = (target, stateno = 5000) || (target, stateno = 5010) || (target, stateno = 5020)
+trigger1 = movehit
+trigger1 = numtarget(4000)
+trigger1 = target(4000), stateno = 5000 || target(4000), stateno = 5010 || target(4000), stateno = 5020
+ID = 4000
 value = 1114010
 
 [State 4000, P1 State]
@@ -1521,11 +1539,6 @@ velset = 0, 0
 sprpriority = 2
 
 [State Throw]
-type = targetstate
-trigger1 = !time
-value = 1114010
-
-[State Throw]
 type = targetfacing
 trigger1 = !time
 value = -1
@@ -1571,9 +1584,9 @@ value = 4002
 type = targetbind
 trigger1 = anim = 4010
 trigger1 = animelemtime(48) < 0
+trigger1 = movehit >= (moveguarded + movereversed)
 trigger1 = numtarget
-trigger1 = (moveguarded + movereversed) <= movehit
-trigger1 = (target, stateno = [5000, 5050]) || (target, stateno = 1114010)
+trigger1 = target, stateno = [5000, 5050] || target, stateno = 1114010
 pos = 80 * const(size.xscale), 0
 ignorehitpause = 1
 
@@ -1882,12 +1895,15 @@ y = -9
 
 [State 4010, Jet]
 type = helper
-trigger1 = anim = 4010 && animelemtime(56) >= 0 && !numhelper(6020)
+trigger1 = anim = 4010 && animelemtime(56) >= 0
+trigger1 = !numhelper(6020)
 helpertype = normal
 stateno = 6020
 ID = 6020
 name = "Jets"
 postype = p1
+size.xscale = 0.5 * const(size.xscale)
+size.yscale = 0.5 * const(size.yscale)
 ownpal = 1
 
 [State 4010, Sound]
@@ -2194,12 +2210,15 @@ x = 6.75
 
 [State 4050, Jet]
 type = helper
-trigger1 = animelemtime(4) >= 0 && !numhelper(6020)
+trigger1 = animelemtime(4) >= 0
+trigger1 = !numhelper(6020)
 helpertype = normal
 stateno = 6020
 ID = 6020
 name = "Jets"
 postype = p1
+size.xscale = 0.5 * const(size.xscale)
+size.yscale = 0.5 * const(size.yscale)
 ownpal = 1
 
 [State 4050, Width]
@@ -2258,11 +2277,20 @@ time = 0
 anim = -1
 p2defmul = 1
 
+[State 4050, Drop Others]
+type = targetdrop
+trigger1 = movehit
+trigger1 = numtarget > 1
+trigger1 = numtarget(4050)
+excludeID = 4050
+ignorehitpause = 1
+
 [State 4050, P2 State]
 type = targetstate
-trigger1 = movehit && numtarget
-trigger1 = (target, stateno = 5000) || (target, stateno = 5010) || (target, stateno = 5020)
-value = 1114010
+trigger1 = movehit
+trigger1 = numtarget(4050)
+trigger1 = target(4050), stateno = 5000 || target(4050), stateno = 5010 || target(4050), stateno = 5020
+value = 1114060
 
 [State 4050, P1 State]
 type = changestate
@@ -2291,11 +2319,6 @@ anim = 4060
 ctrl = 0
 velset = 0, 0
 sprpriority = 2
-
-[State Throw]
-type = targetstate
-trigger1 = !time
-value = 1114060
 
 [State Throw]
 type = targetfacing
@@ -2342,7 +2365,6 @@ trigger1 = animelemtime(3) < 0
 trigger1 = (moveguarded + movereversed) <= movehit
 trigger1 = target, stateno = 1114060
 pos = 64 * const(size.xscale), -75 - target, const(size.mid.pos.y)
-ID = 4050
 ignorehitpause = 1
 
 [State 4060, Bind]
@@ -2777,6 +2799,12 @@ trigger1 = helper(4105), stateno = 4105
 value = 4100
 elem = 8
 
+[State 4100, Drop Others]
+type = targetdrop
+trigger1 = numtarget > 1
+trigger1 = numtarget(4105)
+excludeID = 4105
+
 [State 4100, Throw]
 type = targetstate
 trigger1 = numtarget(4105)
@@ -3020,13 +3048,22 @@ kill = animelem = 17
 type = targetdizzypointsadd
 trigger1 = numtarget(4105)
 trigger1 = animelem = 17
+ID = 4105
 value = floor(-600 * map(damagescaling))
+
+;[State 4107, Damage]
+;type = targetpoweradd
+;trigger1 = numtarget(4105)
+;trigger1 = animelem = 17
+;ID = 4105
+;value = floor(-1000 * map(damagescaling))
 
 [State 4107, givepower]
 type = targetpoweradd
 triggerall = numtarget(4105)
 trigger1 = animelem = 3 || animelem = 5 || animelem = 7 || animelem = 9
 trigger2 = animelem = 11 || animelem = 13 || animelem = 15 || animelem = 17
+ID = 4105
 value = 40; givepower
 
 [State 4107, Hit add]
@@ -3034,6 +3071,7 @@ type = hitadd
 triggerall = numtarget(4105)
 trigger1 = animelem = 3 || animelem = 5 || animelem = 7 || animelem = 9
 trigger2 = animelem = 11 || animelem = 13 || animelem = 15 || animelem = 17
+ID = 4105
 value = 1
 
 [State 4110, End]
@@ -3057,6 +3095,7 @@ sprpriority = 2
 type = targetstate
 trigger1 = !animtime
 trigger1 = numtarget(4105)
+ID = 4105
 value = 4121
 
 [State 4111, Sound]
@@ -3073,6 +3112,8 @@ x = -32 * facing
 [State 4111, Bind]
 type = targetbind
 trigger1 = !time
+trigger1 = numtarget(4105)
+ID = 4105
 pos = 64, 0
 
 [State 4111, Pos]

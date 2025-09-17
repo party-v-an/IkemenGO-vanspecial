@@ -1556,7 +1556,7 @@ triggerall = numenemy && !isasserted(noinput)
 triggerall = !map(ai_p2unhittable)
 triggerall = statetype != A && roundstate = 2
 triggerall = p2statetype = S || p2statetype = C
-triggerall = (p2bodydist x = [60, 120] || p2bodydist x < 0) && p2dist y = [-50, 60] && !(p2, hitfall)
+triggerall = p2bodydist x = [60, 120] && p2dist y = [-50, 60] && !(p2, hitfall)
 triggerall = map(ai_neutral) || map(ai_attackwindow) >= 5
 trigger1 = ctrl
 trigger1 = random < map(ai_confirm) * 50
@@ -2061,6 +2061,7 @@ triggerall = map(ai_randompass)
 triggerall = numenemy && !isasserted(noinput)
 triggerall = statetype != A
 triggerall = life >= 0.5 * lifemax
+triggerall = p2, lifemax != 0; Avoid division by 0
 triggerall = (1.0 * p2life / p2, lifemax) < (0.5 * life / lifemax)
 triggerall = prevstateno != [170, 199]
 trigger1 = ctrl

@@ -432,6 +432,8 @@ stateno = 6020
 ID = 6020
 name = "Jets"
 postype = p1
+size.xscale = 0.5 * const(size.xscale)
+size.yscale = 0.5 * const(size.yscale)
 ownpal = 1
 
 [State 100, Change]
@@ -574,6 +576,8 @@ stateno = 6020
 ID = 6020
 name = "Jets"
 postype = p1
+size.xscale = 0.5 * const(size.xscale)
+size.yscale = 0.5 * const(size.yscale)
 ownpal = 1
 
 [State 105, Change]
@@ -1299,11 +1303,12 @@ trigger1 = 1 || map(parry_helper_ID) := gethitvar(ID)
 
 [State Freeze Parried Helper]
 redirectID = map(parry_helper_ID)
-type = modifyplayer
-trigger1 = !time
+type = posadd
 trigger1 = playerIDexist(map(parry_helper_ID))
 trigger1 = playerID(map(parry_helper_ID)), movetype = A
-hitpausetime = 15
+trigger1 = playerID(map(parry_helper_ID)), hitpausetime = 0
+x = -1 * playerID(map(parry_helper_ID)), vel x
+y = -1 * playerID(map(parry_helper_ID)), vel y
 
 [State 700, Consecutive Parries]
 type = posadd
@@ -1394,11 +1399,12 @@ trigger1 = 1 || map(parry_helper_ID) := gethitvar(ID)
 
 [State Freeze Parried Helper]
 redirectID = map(parry_helper_ID)
-type = modifyplayer
-trigger1 = !time
+type = posadd
 trigger1 = playerIDexist(map(parry_helper_ID))
 trigger1 = playerID(map(parry_helper_ID)), movetype = A
-hitpausetime = 15
+trigger1 = playerID(map(parry_helper_ID)), hitpausetime = 0
+x = -1 * playerID(map(parry_helper_ID)), vel x
+y = -1 * playerID(map(parry_helper_ID)), vel y
 
 [State 701, Freeze]
 type = posfreeze
@@ -1482,11 +1488,12 @@ trigger1 = 1 || map(parry_helper_ID) := gethitvar(ID)
 
 [State Freeze Parried Helper]
 redirectID = map(parry_helper_ID)
-type = modifyplayer
-trigger1 = !time
+type = posadd
 trigger1 = playerIDexist(map(parry_helper_ID))
 trigger1 = playerID(map(parry_helper_ID)), movetype = A
-hitpausetime = 15
+trigger1 = playerID(map(parry_helper_ID)), hitpausetime = 0
+x = -1 * playerID(map(parry_helper_ID)), vel x
+y = -1 * playerID(map(parry_helper_ID)), vel y
 
 [State 702, Freeze]
 type = posfreeze
@@ -1650,7 +1657,7 @@ value = 9999
 type = reversaldef
 trigger1 = !var(0)
 trigger1 = anim = 705 || anim = 707
-trigger1 = (root, stateno != 5120) || !(root, animtime)
+trigger1 = root, hitbyattr(SCA, AA, AP)
 reversal.attr = SCA, AA
 p1stateno = 706
 pausetime = 0, 15
@@ -1661,6 +1668,7 @@ numhits = 0
 type = reversaldef
 trigger1 = !var(0)
 trigger1 = anim = 706
+trigger1 = root, hitbyattr(SC, AA, AP); no air
 reversal.attr = SC, AA
 p1stateno = 706
 pausetime = 0, 15
@@ -3109,7 +3117,7 @@ value = 5050
 [State 5200, Accel]
 type = veladd
 trigger1 = time > 0
-y = gethitvar(yaccel)
+y = max(0.35, gethitvar(yaccel))
 
 [State 5200, End]
 type = selfstate
@@ -3372,34 +3380,6 @@ value = 5110
 ;==================================================================================================
 [Statedef -2]
 
-[State -2, Juggle Increase]
-type = null; mapadd
-trigger1 = movehit = 1
-trigger1 = numtarget
-trigger1 = target, gethitvar(frame)
-trigger1 = target, hitfall
-trigger1 = target, movetype = H
-trigger1 = target, gethitvar(ID) = ID
-map = "juggle_count"
-value = 1
-ignorehitpause = 1
-
-[State -2, Juggle Reset]
-type = null; mapset
-triggerall = map(juggle_count)
-triggerall = p2, time >= 1
-trigger1 = p2movetype != H
-trigger2 = p2, hitfall = 0
-trigger3 = p2statetype = S || p2statetype = C
-trigger4 = p2statetype = L && p2, pos y = 0 && p2, vel y = 0
-trigger5 = p2stateno = [120, 155] || p2stateno = 5201 || p2stateno = 5210
-trigger6 = moveguarded = 1 || movereversed = 1
-trigger7 = roundstate != 2
-trigger8 = p2, ctrl
-map = "juggle_count"
-value = 0
-ignorehitpause = 1
-
 [State -2, Reset Combo Limits]
 type = null
 trigger1 = numenemy
@@ -3439,8 +3419,11 @@ ignorehitpause = 1
 type = bgpalfx
 trigger1 = stateno = 770 || map(darkforce) > 0
 time = 1
-color = 0
-mul = 192 + ceil(cos(gametime / 20.0) * 64), 64 + ceil(cos(gametime / 20.0) * 16), 0
+;color = 0
+;mul = 192 + ceil(cos(gametime / 20.0) * 64), 64 + ceil(cos(gametime / 20.0) * 16), 0
+color = -256
+hue = 64 * cos(gametime / 120.0 * pi)
+mul = 192 + 64 * cos(gametime / 60.0 * pi), 192 + 64 * cos(gametime / 60.0 * pi), 192 + 64 * cos(gametime / 60.0 * pi)
 ignorehitpause = 1
 
 [State -2, Dark Force Warning]
@@ -3481,20 +3464,17 @@ ignorehitpause = 1
 
 [State -2, Unthrowable Flag - Hurt]
 type = mapset
-triggerall = numenemy
+triggerall = p2, ctrl = 0
 triggerall = p2, anim != 5300
 triggerall = p2stateno != p2, const(statedizzy)
 trigger1 = p2stateno = [150, 155]
-trigger2 = p2stateno = 51
-trigger2 = p2, prevstateno = [140, 155]
-trigger3 = p2stateno = 5040
-trigger4 = p2stateno = 5120;just in case
-trigger5 = p2stateno = 5201
-trigger6 = p2movetype = H
-trigger6 = p2statetype != A
-trigger7 = p2movetype = H
-trigger7 = p2statetype = A
-trigger7 = p2, hitfall = 0
+trigger2 = p2stateno = 5120; Just in case
+trigger3 = p2stateno = 5201
+trigger4 = p2movetype = H
+trigger4 = p2statetype != A
+trigger5 = p2movetype = H
+trigger5 = p2statetype = A
+trigger5 = p2, hitfall = 0
 map = "unthrowable"
 value = 3
 ignorehitpause = 1
@@ -3539,7 +3519,8 @@ ignorehitpause = 1
 type = mapset
 trigger1 = map(darkforce)
 map = "damagescaling"
-value = 0.67 * map(damagescaling)
+;value = 0.67 * map(damagescaling)
+value = 0.75 * ifelse(map(combototal) * 2 <= 0, 1, ifelse(map(combototal) * 2 >= 9, 0.1, 1 - 0.1 * map(combototal) * 2))
 ignorehitpause = 1
 
 [State -2, Damage Scaling - Minimum Super Damage]
@@ -3944,6 +3925,17 @@ map = "hypercancel"
 value = 1
 ignorehitpause = 1
 
+[State -3, Throw Cancel Fix]; Because first frame of a throw has movehit and Custom Combo has so much freedom
+type = null
+trigger1 = numtarget
+trigger1 = movehitvar(frame)
+trigger1 = hitdefattr != SCA, AA
+trigger1 = target, gethitvar(frame)
+trigger1 = target, stateowner, ID = ID
+trigger1 = time <= 0 && target, time <= 0
+trigger1 = map(normalcancel) := 0 || map(specialcancel) := 0 || map(supercancel) := 0 || map(hypercancel) := 0
+ignorehitpause = 1
+
 [State -3, Super Cancel Flag Reset]
 type = mapset
 trigger1 = map(supercancelflag)
@@ -3960,39 +3952,74 @@ map = "hypercancel_flag"
 value = 0
 ignorehitpause = 1
 
-[State -3, Sparkles]
+[State -3, Sparkle Timer]
+type = mapadd
+trigger1 = 1
+map = "sparkle_timer"
+value = 1.0 + (random / 1000.0)
+
+[State -3, Sparkles Back]
 type = explod
-trigger1 = (gametime % 10) = 5
-trigger1 = random < 250
+trigger1 = random < 15
+trigger1 = movetype != H
+trigger1 = statetype != A || stateno = 183 || stateno = 195
+trigger1 = stateno != [5900, 5902] && stateno != [190, 192]
+trigger1 = systemVar(pausetime) = 0 && systemVar(superpausetime) = 0
 trigger1 = numexplod(6000) < 6
-trigger1 = (statetype != A || stateno = 183 || stateno = 195) && movetype != H
-trigger1 = stateno != 5902 && stateno != 190 && stateno != 192
-anim = 6000 + (random % 3)
+anim = 6000
 ID = 6000
 sprpriority = -1
 postype = p1
-pos = 0, -ceil(pos y) - 2
+pos = 0, -pos y - 2
 random = 40, 4
-vel = 0, -1
-scale = 0.417, 0.500
+vel = 0, (-0.80 - (random / 5000.0)) * ifelse(statetype = C, 0.66, 1.00)
+scale = 0.50 * const(size.xscale), 0.50 * const(size.yscale)
+palfx.time = -1
+palfx.hue = -256 + 4 * (ceil(map(sparkle_timer)) % 128); randomRange(-256, 256)
 ownpal = 1
 
-[State -3, Sparkles]
+[State -3, Sparkles Front]
 type = explod
-trigger1 = (gametime % 10) = 0
-trigger1 = random < 500
+trigger1 = random < 30
+trigger1 = movetype != H
+trigger1 = statetype != A || stateno = 183 || stateno = 195
+trigger1 = stateno != [5900, 5902] && stateno != [190, 192]
+trigger1 = systemVar(pausetime) = 0 && systemVar(superpausetime) = 0
 trigger1 = numexplod(6000) < 6
-trigger1 = (statetype != A || stateno = 183 || stateno = 195) && movetype != H
-trigger1 = stateno != 5902 && stateno != 190 && stateno != 192
-anim = 6000 + (random % 3)
+anim = 6000
 ID = 6000
 sprpriority = 3
 postype = p1
-pos = 0, -ceil(pos y) + 2
+pos = 0, -pos y + 2
 random = 52, 4
-vel = 0, -1
-scale = 0.417, 0.500
+vel = 0, (-1.00 - (random / 4000.0)) * ifelse(statetype = C, 0.66, 1.00)
+scale = 0.50 * const(size.xscale), 0.50 * const(size.yscale)
+palfx.time = -1
+palfx.hue = -256 + 4 * (ceil(map(sparkle_timer)) % 128); randomRange(-256, 256)
 ownpal = 1
+
+[State -3, Sparkles Parasite Roll]
+type = explod
+trigger1 = movetype != H
+trigger1 = !(gametime % 4)
+trigger1 = stateno = 1205 || stateno = 1251
+trigger1 = numexplod(6000) < 16
+anim = 6001
+ID = 6000
+sprpriority = ifelse(random < 333, -1, 3)
+postype = p1
+pos = -8 * const(size.xscale), 0
+random = 16, 8
+vel = -1.50 - (random / 3000.0), -1.50 - (random / 3000.0)
+friction = 0.95, 1
+scale = 0.50 * const(size.xscale), 0.50 * const(size.yscale)
+angle = 45
+interpolation.time = 30
+interpolation.angle = 0
+palfx.time = -1
+palfx.hue = -256 + 4 * (ceil(map(sparkle_timer)) % 128); randomRange(-256, 256)
+ownpal = 1
+ignorehitpause = 1
 
 [State -3, Lie Down Bats]
 type = helper
@@ -4266,19 +4293,4 @@ ignorehitpause = 1
 type = attackmulset
 trigger1 = ishelper
 value = root, map(damagescaling)
-ignorehitpause = 1
-
-[State -4, Helper Juggle Increase]
-type = null; rootmapadd
-trigger1 = ishelper
-trigger1 = !ishelper(775); Astral Vision
-trigger1 = movehit = 1
-trigger1 = pausetime = 0
-trigger1 = numtarget
-trigger1 = target, gethitvar(frame)
-trigger1 = target, hitfall
-trigger1 = target, movetype = H
-trigger1 = target, gethitvar(ID) = ID
-map = "juggle_count"
-value = 1
 ignorehitpause = 1

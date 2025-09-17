@@ -572,13 +572,11 @@ fall.recovertime = 120
 forcenofall = !map(customcombo)
 
 [State 215, Anim]
-type = changeanim
+type = assertspecial
 trigger1 = anim = 215
-trigger1 = hitpausetime = [1, 8]
-trigger1 = movecontact = 1 || movereversed = 1
-trigger1 = animelemtime(6) >= 0 && animelemtime(7) <= 0
-value = 215
-elem = 7
+trigger1 = hitpausetime > 0
+trigger1 = animelemtime(6) >= 1 && animelemtime(7) <= 0
+flag = animatehitpause
 ignorehitpause = 1
 
 [State Idle]

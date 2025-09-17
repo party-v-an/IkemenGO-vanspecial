@@ -1194,7 +1194,7 @@ attr = A, SA
 hitflag = MAF
 guardflag = MA
 priority = 4, Hit
-damage = ifelse(map(strength) = 2, 100, ifelse(map(strength) = 1, 90, 80)), ifelse(map(strength) = 2, 25, ifelse(map(strength) = 1, 23, 20))
+damage = ifelse(map(strength) = 2, 60, ifelse(map(strength) = 1, 50, 40)), ifelse(map(strength) = 2, 15, ifelse(map(strength) = 1, 13, 10))
 dizzypoints = 100 * !map(customcombo)
 getpower = ifelse(movehit, 25, 100) * map(meterscaling), ifelse(moveguarded, 25, 50) * map(meterscaling)
 givepower = 40, 40
@@ -1247,7 +1247,7 @@ attr = A, SA
 hitflag = MAFD
 guardflag = HA
 priority = 4, Hit
-damage = ifelse(map(strength) = 2, 120, ifelse(map(strength) = 1, 110, 100)), ifelse(map(strength) = 2, 28, ifelse(map(strength) = 1, 25, 19))
+damage = ifelse(map(strength) = 2, 100, ifelse(map(strength) = 1, 90, 80)), ifelse(map(strength) = 2, 25, ifelse(map(strength) = 1, 23, 20))
 dizzypoints = 150 * !map(customcombo)
 getpower = ifelse(movehit, 25, 100) * map(meterscaling), ifelse(moveguarded, 25, 50) * map(meterscaling)
 givepower = 40, 40
@@ -1666,7 +1666,7 @@ attr = A, SA
 hitflag = MAFD
 guardflag = HA
 priority = 4, Hit
-damage = 80, 20
+damage = 100, 25
 dizzypoints = 100 * !map(customcombo)
 getpower = 0, 0
 givepower = 40, 40

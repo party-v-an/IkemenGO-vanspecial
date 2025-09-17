@@ -3494,7 +3494,7 @@ anim = 7103
 ID = 7103
 sprpriority = 3
 postype = p1
-pos = -10, -ceil(pos y)
+pos = -10, -pos y
 scale = 0.5, 0.5
 
 [State 3510, End]
@@ -3973,7 +3973,7 @@ trigger1 = !(time % 6)
 anim = 7105
 sprpriority = -3
 postype = p1
-pos = 0, -ceil(pos y)
+pos = 0, -pos y
 scale = 0.5, 0.5
 pausemovetime = -1
 supermovetime = -1
@@ -4100,7 +4100,7 @@ anim = 7251
 ID = 2
 sprpriority = -2
 postype = p1
-pos = 0, -ceil(pos y)
+pos = 0, -pos y
 supermovetime = -1
 ownpal = 1
 
@@ -4924,26 +4924,24 @@ type = playsnd
 trigger1 = anim = 6010 && animelem = 9
 value = 6, 1
 
-[State 6010, Afterimage]
-type = afterimage
-trigger1 = !time
-time = 999
-timegap = 1
-framegap = 1
-length = 8
-palcolor = 0
-palbright = 0, 0, 0
-palcontrast = 256, 256, 0
-palpostbright = 0, 0, 0
-paladd = 0, 0, 0
-palmul = 0.5, 0.5, 0.5
-trans = add
-
-[State 6010, Afterimage]
-type = afterimagetime
-trigger1 = anim = 6010
-persistent = 0
-time = 0
+[State 6010, Fake Afterimage]
+type = explod
+trigger1 = anim != 6010
+ID = 6000
+anim = anim
+animfreeze = 1
+animelem = animelemno(0)
+postype = p1
+sprpriority = sprpriority - 1
+removetime = 8
+trans = addalpha
+alpha = 256, 0
+scale = const(size.xscale), const(size.yscale)
+interpolation.time = 8
+interpolation.alpha = 0, 256
+ownpal = 0
+;palfx.time = -1
+;palfx.hue = -256 + 2 * (gametime % 256)
 
 
 ;----- INTRO 1 - STANDING -----
@@ -5004,21 +5002,22 @@ pos = 0, -64
 scale = 0.5, 0.5
 ownpal = 1
 
-[State 6015, Afterimage]
-type = afterimage
+[State 6015, Fake Afterimage]
+type = explod
 trigger1 = anim = 6001
-persistent = 0
-time = 999
-timegap = 1
-framegap = 1
-length = 8
-palcolor = 0
-palbright = 0, 0, 0
-palcontrast = 256, 256, 0
-palpostbright = 0, 0, 0
-paladd = 0, 0, 0
-palmul = 0.5, 0.5, 0.5
-trans = add
+ID = 6000
+anim = anim
+animfreeze = 1
+animelem = animelemno(0)
+postype = p1
+sprpriority = sprpriority - 1
+removetime = 8
+trans = addalpha
+alpha = 256, 0
+scale = const(size.xscale), const(size.yscale)
+interpolation.time = 8
+interpolation.alpha = 0, 256
+ownpal = 0
 
 [State 6015, Sprite Priority]
 type = sprpriority
@@ -5092,21 +5091,22 @@ pos = 0, -64
 scale = 0.5, 0.5
 ownpal = 1
 
-[State 6027, Afterimage]
-type = afterimage
+[State 6027, Fake Afterimage]
+type = explod
 trigger1 = anim = 6001
-persistent = 0
-time = 999
-timegap = 1
-framegap = 1
-length = 8
-palcolor = 0
-palbright = 0, 0, 0
-palcontrast = 256, 256, 0
-palpostbright = 0, 0, 0
-paladd = 0, 0, 0
-palmul = 0.5, 0.5, 0.5
-trans = add
+ID = 6000
+anim = anim
+animfreeze = 1
+animelem = animelemno(0)
+postype = p1
+sprpriority = sprpriority - 1
+removetime = 8
+trans = addalpha
+alpha = 256, 0
+scale = const(size.xscale), const(size.yscale)
+interpolation.time = 8
+interpolation.alpha = 0, 256
+ownpal = 0
 
 [State 6027, Sprite Priority]
 type = sprpriority
@@ -5172,30 +5172,22 @@ type = posset
 trigger1 = animelemtime(8) >= 0
 y = 0
 
-[State 6044, Offset]
-type = offset
-trigger1 = animelemtime(8) >= 0
-y = -8
-
-[State 6040, Afterimage]
-type = afterimage
-trigger1 = !time
-time = 999
-timegap = 1
-framegap = 1
-length = 8
-palcolor = 0
-palbright = 0, 0, 0
-palcontrast = 256, 256, 0
-palpostbright = 0, 0, 0
-paladd = 0, 0, 0
-palmul = 0.5, 0.5, 0.5
-trans = add
-
-[State 6040, Afterimage]
-type = afterimagetime
-trigger1 = animelem = 8
-time = 0
+[State 6040, Fake Afterimage]
+type = explod
+trigger1 = animelemtime(8) < 0
+ID = 6000
+anim = anim
+animfreeze = 1
+animelem = animelemno(0)
+postype = p1
+sprpriority = sprpriority - 1
+removetime = 8
+trans = addalpha
+alpha = 256, 0
+scale = const(size.xscale), const(size.yscale)
+interpolation.time = 8
+interpolation.alpha = 0, 256
+ownpal = 0
 
 [State 6040, Turn]
 type = turn
@@ -5211,6 +5203,11 @@ value = -4
 type = changestate
 trigger1 = !animtime
 value = 6041
+
+[State 6040, Offset]
+type = offset
+trigger1 = animelemtime(8) >= 0
+y = -8
 
 
 ;----- Dark Force Active -----
@@ -5261,11 +5258,6 @@ type = turn
 trigger1 = animelem = 1
 trigger1 = rootdist x < 0
 
-[State 6041, Offset]
-type = offset
-trigger1 = 1
-y = -8
-
 [State 6041, Sound]
 type = playsnd
 trigger1 = !time
@@ -5282,6 +5274,11 @@ type = changestate
 trigger1 = !(root, alive)
 trigger2 = !(root, map(darkforce))
 value = 6045
+
+[State 6041, Offset]
+type = offset
+trigger1 = 1
+y = -8
 
 
 ;----- Dark Force Ends -----
@@ -5324,25 +5321,32 @@ type = velset
 trigger1 = rootdist y >= 80
 y = 0
 
+[State 6044, Offset]
+type = offset
+trigger1 = animelemtime(11) < 0
+y = -8
+
 [State 6044, Pos]
 type = offset
 trigger1 = animelemtime(11) >= 0
 y = ceil(4 * sin((time / 8.0 ) * pi))
 
-[State 6044, Afterimage]
-type = afterimage
-trigger1 = animelem = 10
-time = 999
-timegap = 1
-framegap = 1
-length = 8
-palcolor = 0
-palbright = 0, 0, 0
-palcontrast = 256, 256, 0
-palpostbright = 0, 0, 0
-paladd = 0, 0, 0
-palmul = 0.5, 0.5, 0.5
-trans = add
+[State 6044, Fake Afterimage]
+type = explod
+trigger1 = animelemtime(10) >= 0
+ID = 6000
+anim = anim
+animfreeze = 1
+animelem = animelemno(0)
+postype = p1
+sprpriority = sprpriority - 1
+removetime = 8
+trans = addalpha
+alpha = 256, 0
+scale = const(size.xscale), const(size.yscale)
+interpolation.time = 8
+interpolation.alpha = 0, 256
+ownpal = 0
 
 [State 6044, Turn]
 type = turn

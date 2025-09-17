@@ -10,18 +10,18 @@
 [Function P2ClosestFireball()]
 
 # Check helpers
-if p2, numhelper {
-	for i = 1; p2, numhelper; 1 {
-		if playerIDexist(p2, helperindex($i), ID) {
-			if p2, helperindex($i), hitdefattr = SCA, AP {
+if p2, numhelper > 0 {
+	for i = 0; p2, numhelper - 1; 1 {
+		if playerIDexist(p2, helper(-1, $i), ID) {
+			if p2, helper(-1, $i), hitdefattr = SCA, AP {
 				if !playerIDexist(map(ai_p2fireball_ID))
-				|| abs(p2, helperindex($i), pos x - pos x) < abs(map(ai_p2fireball_distx)) {
-					map(ai_p2fireball_ID) := p2, helperindex($i), ID;
-					map(ai_p2fireball_super) := (p2, helperindex($i), hitdefattr = SCA, HP);
-					map(ai_p2fireball_distx) := ((p2, helperindex($i), pos x) - pos x) * facing;
-					map(ai_p2fireball_disty) := ((p2, helperindex($i), pos y) - pos y);
-					if p2, helperindex($i), vel x != 0 {
-						map(ai_p2fireball_eta) := (map(ai_p2fireball_distx) - 20) / p2, helperindex($i), vel x; # Good enough estimate
+				|| abs(p2, helper(-1, $i), pos x - pos x) < abs(map(ai_p2fireball_distx)) {
+					map(ai_p2fireball_ID) := p2, helper(-1, $i), ID;
+					map(ai_p2fireball_super) := (p2, helper(-1, $i), hitdefattr = SCA, HP);
+					map(ai_p2fireball_distx) := ((p2, helper(-1, $i), pos x) - pos x) * facing;
+					map(ai_p2fireball_disty) := ((p2, helper(-1, $i), pos y) - pos y);
+					if p2, helper(-1, $i), vel x != 0 {
+						map(ai_p2fireball_eta) := (map(ai_p2fireball_distx) - 20) / p2, helper(-1, $i), vel x; # Good enough estimate
 					}
 				}
 			}
@@ -636,7 +636,7 @@ ignorehitpause if !ishelper {
 	if !AIlevel {
 		displaytoclipboard{
 			text: "Damage = %.1f%% Juggle = %d Unthrowable = %d";
-			params: attack, ceil(map(juggle_count)), (map(unthrowable) != 0);
+			params: attack, ceil(map(juggle_count)), ceil(map(unthrowable));
 		}
 	} else {
 		displaytoclipboard{
@@ -1087,7 +1087,7 @@ ignorehitpause if AIlevel && alive && !standby && roundstate = 2 {
 	if AIlevelF >= 6 && !inGuardDist && stateType = S && ctrl {
 		# Set spacing
 		# Unique to each char
-		if p2MoveType = H {
+		if p2MoveType = H || p2, dizzy {
 			map(ai_spacing) := 10;
 		} else {
 			map(ai_spacing) := 150;
@@ -1182,9 +1182,9 @@ ignorehitpause {
 	&& p2, gethitvar(frame)
 	&& (p2, gethitvar(ID) = ID || movehitvar(ID) = p2, ID) {
 		if map(juggle_timer) <= 0 {
-			mapset{map: "juggle_count"; value: map(juggle_start); redirectID: cond(ishelper, root, ID, ID)}
+			mapAdd{map: "juggle_count"; value: map(juggle_start); redirectID: cond(ishelper, root, ID, ID)}
 		} else {
-			mapadd{map: "juggle_count"; value: map(juggle_increase); redirectID: cond(ishelper, root, ID, ID)}
+			mapAdd{map: "juggle_count"; value: map(juggle_increase); redirectID: cond(ishelper, root, ID, ID)}
 		}
 	}
 	# Juggle Timer
@@ -1208,26 +1208,26 @@ ignorehitpause if pausetime = 0
 && movehitvar(frame) && movehit = 1
 && (movecountered = 1 || map(counterhit_buffer)) # MoveCountered has limits against multiple enemies
 && cond(ishelper, root, movetype != H, movetype != H) {
-	for i = 1; playercount; 1 {
-		if playerindexexist($i)
-		&& playerindex($i), gethitvar(frame)
-		&& (playerindex($i), gethitvar(ID) = ID || playerindex($i), ID = movehitvar(ID))
-		&& playerindex($i), movetype = H
-		&& playerindex($i), prevmovetype = A
-		&& playerindex($i), gethitvar(guarded) = 0 {
-			let time = playerindex($i), gethitvar(hittime);
+	for i = 0; numPlayer - 1; 1 {
+		if playerIndexExist($i)
+		&& playerIndex($i), gethitvar(frame)
+		&& (playerIndex($i), gethitvar(ID) = ID || playerIndex($i), ID = movehitvar(ID))
+		&& playerIndex($i), movetype = H
+		&& (playerIndex($i), prevmovetype = A || playerIndex($i), receivedhits > 1) # Just countered or counter buffer active
+		&& playerIndex($i), gethitvar(guarded) = 0 {
+			let time = playerIndex($i), gethitvar(hittime);
 			gethitvarset{
 				hittime: $time + ifelse($time < 16, 2, ifelse($time < 19, 3, 4));
-				redirectID: playerindex($i), ID;
+				redirectID: playerIndex($i), ID;
 			}
 			lifeadd{
-				value: -0.20 * playerindex($i), gethitvar(damage);
-				kill: playerindex($i), gethitvar(kill);
-				redirectID: playerindex($i), ID;
+				value: -0.20 * playerIndex($i), gethitvar(damage);
+				kill: playerIndex($i), gethitvar(kill);
+				redirectID: playerIndex($i), ID;
 			}
 			dizzypointsadd{
-				value: -0.20 * playerindex($i), gethitvar(dizzypoints);
-				redirectID: playerindex($i), ID;
+				value: -0.20 * playerIndex($i), gethitvar(dizzypoints);
+				redirectID: playerIndex($i), ID;
 			}
 			# Sweep hard knockdown
 			if stateno = 450 {
@@ -1235,7 +1235,7 @@ ignorehitpause if pausetime = 0
 					fall.recover: 0;
 					down.recover: 0;
 					down.recovertime: 30;
-					redirectID: playerindex($i), ID;
+					redirectID: playerIndex($i), ID;
 				}
 			}
 		}
@@ -1257,24 +1257,24 @@ ignorehitpause if movehitvar(frame)
 		}
 		let spark_y = map(sparky) * $spark_scaleoffset_y;
 		# Find the appropriate enemies
-		for i = 1; playercount; 1 {
-			if playerindexexist($i)
-			&& playerindex($i), gethitvar(frame)
-			&& (playerindex($i), gethitvar(ID) = ID || playerindex($i), ID = movehitvar(ID)) { # Latter in case partner hits them as well
-				let spark_no = ifelse(playerindex($i), gethitvar(guarded), map(guard.sparkno), map(sparkno));
-				let getterdist = (playerindex($i), pos x - pos x) * facing;
+		for i = 0; numPlayer - 1; 1 {
+			if playerIndexExist($i)
+			&& playerIndex($i), gethitvar(frame)
+			&& (playerIndex($i), gethitvar(ID) = ID || playerIndex($i), ID = movehitvar(ID)) { # Latter in case partner hits them as well
+				let spark_no = ifelse(playerIndex($i), gethitvar(guarded), map(guard.sparkno), map(sparkno));
+				let getterdist = (playerIndex($i), pos x - pos x) * facing;
 				let spark_x = cond($getterdist > (map(sparkx.max) * $spark_scaleoffset_x), (map(sparkx.max) * $spark_scaleoffset_x), cond($getterdist > (map(sparkx.min) * $spark_scaleoffset_x), $getterdist, (map(sparkx.min) * $spark_scaleoffset_x)));
-				if !ishelper || playerindex($i), hitoverridden = 0 {
+				if !ishelper || playerIndex($i), hitoverridden = 0 {
 					call HitSparks($spark_no, $spark_x, $spark_y);
 				}
 				# Counter hit spark
 				if movehit = 1
 				&& (movecountered = 1 || map(counterhit_buffer)) # MoveCountered has limits against multiple enemies
 				&& cond(ishelper, root, movetype != H, movetype != H)
-				&& (!ishelper || playerindex($i), hitoverridden = 0)
-				&& playerindex($i), movetype = H
-				&& playerindex($i), prevmovetype = A
-				&& playerindex($i), gethitvar(guarded) = 0
+				&& (!ishelper || playerIndex($i), hitoverridden = 0)
+				&& playerIndex($i), movetype = H
+				&& (playerIndex($i), prevmovetype = A || playerIndex($i), receivedhits > 1) # Just countered or counter buffer active
+				&& playerIndex($i), gethitvar(guarded) = 0
 				&& map(sparkno) = [8010, 8099] {
 					explod{
 						ID: 8000;

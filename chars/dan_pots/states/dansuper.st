@@ -1363,12 +1363,14 @@ value = 0, 102
 [State 3301, Dust]
 type = explod
 trigger1 = animelemtime(2) >= 0
-trigger1 = !(animelemtime(2) % 4)
+trigger1 = !(animelemtime(2) % 3)
 anim = 7103
 sprpriority = 3
 postype = p1
 vel = -1, 0
 scale = 0.5, 0.5
+trans = addalpha
+alpha = 192, 256
 ownpal = 1
 
 [State 3301, End]
@@ -2547,7 +2549,7 @@ movetype = H
 [State 3591, Accel]
 type = veladd
 trigger1 = 1
-y = gethitvar(yaccel)
+y = max(0.35, gethitvar(yaccel))
 
 [State 3591, Vel]
 type = hitvelset
@@ -3764,12 +3766,15 @@ value = 0, 102
 
 [State 4130, Dust]
 type = explod
-trigger1 = animelemtime(2) >= 0 && animelemtime(14) < 0 && !(time % 4)
+trigger1 = !(time % 3)
+trigger1 = animelemtime(2) >= 0 && animelemtime(14) < 0
 anim = 7103
 sprpriority = 3
 postype = p1
 vel = -1, 0
 scale = 0.5, 0.5
+trans = addalpha
+alpha = 192, 256
 ownpal = 1
 
 [State 4130, Sound]
@@ -3863,12 +3868,15 @@ value = 0, 105
 
 [State 4131, Dust]
 type = explod
-trigger1 = animelemtime(2) >= 0 && animelemtime(14) < 0 && !(time % 4)
+trigger1 = !(time % 3)
+trigger1 = animelemtime(2) >= 0 && animelemtime(14) < 0
 anim = 7103
 sprpriority = 3
 postype = p1
 vel = 1, 0
 scale = 0.5, 0.5
+trans = addalpha
+alpha = 192, 256
 ownpal = 1
 
 [State 4131, Sound]

@@ -1,6 +1,6 @@
                                 ______________________________
 ===============================| Guy by Phantom.of.the.Server |================================
-                                ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯           [22.02.2025]
+                                ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯           [13.09.2025]
 
  - Contact: potsmugen@gmail.com
  - Website: https://network.mugenguild.com/pots/
@@ -285,6 +285,9 @@ Bushin Musou Renge                 Bushin Unparallelled Rapid Reap
 
 
 ==========< VERSION HISTORY >==========
+
+<13.09.2025>
+ - Ikemen GO compatibility update
 
 <22.02.2025>
  - Minor fixes

@@ -1992,16 +1992,18 @@ trigger1 = vel y > 0
 value = 5, 6
 persistent = 0
 
-[State 3212, Dust]
+[State 3212, Spiral]
 type = explod
 trigger1 = vel y > 8
+trigger1 = pos y >= -160; stay visible
 anim = 3219
 ID = 3219
-sprpriority = 3
+sprpriority = 4
 postype = p1
-pos = 0, 0
+facing = -1
+vel = 0, vel y
+friction = 0.66, 0.66
 scale = 0.5, 0.5
-bindtime = 60
 ownpal = 1
 persistent = 0
 
@@ -2522,7 +2524,8 @@ type = zoom
 trigger1 = numtarget(4000)
 trigger1 = animelemtime(11) < 0
 scale = 1.20 / camerazoom
-pos = (pos x + target(4000), pos x) / 2.0 * camerazoom, 0
+;pos = (pos x + target(4000), pos x) / 2.0 * camerazoom, 0
+pos = target(4000), pos x * camerazoom, 0
 camerabound = 0
 stagebound = 1
 lag = ifelse(animelemtime(2) < 0, 0.90, 0)

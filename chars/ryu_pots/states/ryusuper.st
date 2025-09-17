@@ -2121,7 +2121,7 @@ value = 4120
 [State 4120, Accel]
 type = veladd
 trigger1 = hitshakeover
-y = gethitvar(yaccel)
+y = max(0.35, gethitvar(yaccel))
 
 [State 4120, Vel]
 type = hitvelset
@@ -3335,7 +3335,7 @@ type = posset
 trigger1 = 1
 y = 0
 
-[State 4160, fall]
+[State 4160, Hitfall]
 type = hitfallset
 trigger1 = 1
 value = 0
@@ -4697,9 +4697,10 @@ p2defmul = 1
 
 [State 3310, Width]
 type = width
-trigger1 = animelemtime(6) >= -1
+;trigger1 = frontedgedist < 60
+trigger1 = animelemtime(2) >= 0
 trigger1 = animelemtime(27) < 0
-edge = 80, 0
+edge = 60, 0
 
 [State 3310, Sound]
 type = playsnd
@@ -4839,14 +4840,23 @@ ownpal = 1
 pausemovetime = 255
 supermovetime = 255
 
+;[State 3310, Horizontal Shake]
+;type = zoom
+;trigger1 = animelemtime(6) = [1, 18]
+;scale = 1
+;pos = 3 * cos(pi * animelemtime(6)), 0
+;lag = 0
+;stagebound = 1
+;camerabound = 0
+
 [State 3310, Horizontal Shake]
-type = zoom
-trigger1 = animelemtime(6) = [1, 18]
-scale = 1
-pos = 3 * cos(pi * animelemtime(6)), 0
-lag = 0
-stagebound = 1
-camerabound = 0
+type = envshake
+trigger1 = animelemtime(6) = 1
+time = 18
+freq = 180
+ampl = 4
+mul = 0.9
+dir = 90 * facing
 
 [State 3310, Throw]
 type = targetfacing
@@ -4854,9 +4864,9 @@ trigger1 = animelem = 6
 ID = 3300
 value = -1
 
-[State 3310, Bind]
+[State 3310, Fix Overlap]
 type = targetbind
-trigger1 = !time;animelem = 2
+trigger1 = animelem = 2; !time
 trigger1 = numtarget(3300)
 trigger1 = target(3300), pos y >= 0
 trigger1 = (((target(3300), pos x) - pos x) * facing) < 60

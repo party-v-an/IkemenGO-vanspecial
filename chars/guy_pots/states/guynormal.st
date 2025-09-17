@@ -494,7 +494,7 @@ priority = 4, Hit
 pausetime = 10, 10
 sparkno = -1 + 0 * (map(sparkno) := 8011)
 guard.sparkno = -1 + 0 * (map(guard.sparkno) := 8000)
-sparkxy = -10 + 0 * (map(sparkx.min) := 55) * (map(sparkx.max) := 80), map(sparky) := -62
+sparkxy = -10 + 0 * (map(sparkx.min) := 40) * (map(sparkx.max) := 65), map(sparky) := -62
 hitsound = s2, 2
 hitsound.channel = 2
 guardsound = s2, 0
@@ -535,7 +535,7 @@ priority = 4, Hit
 pausetime = 10, 10
 sparkno = -1 + 0 * (map(sparkno) := 8011)
 guard.sparkno = -1 + 0 * (map(guard.sparkno) := 8000)
-sparkxy = -10 + 0 * (map(sparkx.min) := 80) * (map(sparkx.max) := 105), map(sparky) := -50
+sparkxy = -10 + 0 * (map(sparkx.min) := 50) * (map(sparkx.max) := 70), map(sparky) := -50
 hitsound = s2, 2
 hitsound.channel = 2
 guardsound = s2, 0
@@ -801,7 +801,7 @@ hitsound = s2, 3
 hitsound.channel = 2
 guardsound = s2, 0
 guardsound.channel = 2
-ground.type = Low
+ground.type = High
 ground.hittime = 1 + 18; + 4 * map(counterhit_buffer)
 ground.slidetime = 18
 ground.velocity = ifelse(map(customcombo), -5.77, -10.52), 0
@@ -904,7 +904,7 @@ hitsound = s2, 3
 hitsound.channel = 2
 guardsound = s2, 0
 guardsound.channel = 2
-ground.type = Low
+ground.type = High
 ground.hittime = 1 + 18; + 4 * map(counterhit_buffer)
 ground.slidetime = 18
 ground.velocity = ifelse(map(customcombo), -5.77, -10.52), 0

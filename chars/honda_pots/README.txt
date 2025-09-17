@@ -1,6 +1,6 @@
                             _______________________________________
 ===========================| Edmond Honda by Phantom.of.the.Server |===========================
-                            ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯         [22.02.2025]
+                            ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯         [13.09.2025]
 
  - Contact: potsmugen@gmail.com
  - Website: https://network.mugenguild.com/pots/
@@ -230,6 +230,11 @@ FALL RECOVERY
 
 
 ==========< VERSION HISTORY >==========
+
+<13.09.2025>
+ - Increased Orochi Kudaki recovery time
+ - Fixed the super portrait's edges
+ - Ikemen GO compatibility update
 
 <22.02.2025>
  - Minor fixes

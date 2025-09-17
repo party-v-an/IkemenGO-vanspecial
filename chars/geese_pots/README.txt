@@ -1,6 +1,6 @@
                             _______________________________________
 ===========================| Geese Howard by Phantom.of.the.Server |===========================
-                            ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯          [22.02.2025]
+                            ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯          [13.09.2025]
 
  - Contact: potsmugen@gmail.com
  - Website: https://network.mugenguild.com/pots/
@@ -238,6 +238,9 @@ FALL RECOVERY
 
 
 ==========< VERSION HISTORY >==========
+
+<13.09.2025>
+ - Ikemen GO compatibility update
 
 <22.02.2025>
  - Minor fixes

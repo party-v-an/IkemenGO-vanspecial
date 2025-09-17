@@ -501,7 +501,7 @@ ctrl = 0
 [State 1113061, Accel]
 type = veladd
 trigger1 = 1
-y = gethitvar(yaccel)
+y = max(0.35, gethitvar(yaccel))
 
 [State 1113061, Vel]
 type = hitvelset

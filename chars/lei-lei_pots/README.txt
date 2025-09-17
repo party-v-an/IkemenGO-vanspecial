@@ -1,6 +1,6 @@
                               __________________________________
 =============================| Lei-Lei by Phantom.of.the.Server |==============================
-                              ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯          [22.02.2025]
+                              ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯          [13.09.2025]
 
  - Contact: potsmugen@gmail.com
  - Website: https://network.mugenguild.com/pots/
@@ -240,6 +240,10 @@ Daibakusou: Rimoukon (Dark Force)     Great Burst Rush: Separated Wild Soul
 
 
 ==========< VERSION HISTORY >==========
+
+<13.09.2025>
+ - Some cosmetic changes
+ - Ikemen GO compatibility update
 
 <22.02.2025>
  - Minor fixes

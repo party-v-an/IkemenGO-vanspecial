@@ -1035,11 +1035,12 @@ trigger1 = 1 || map(parry_helper_ID) := gethitvar(ID)
 
 [State Freeze Parried Helper]
 redirectID = map(parry_helper_ID)
-type = modifyplayer
-trigger1 = !time
+type = posadd
 trigger1 = playerIDexist(map(parry_helper_ID))
 trigger1 = playerID(map(parry_helper_ID)), movetype = A
-hitpausetime = 15
+trigger1 = playerID(map(parry_helper_ID)), hitpausetime = 0
+x = -1 * playerID(map(parry_helper_ID)), vel x
+y = -1 * playerID(map(parry_helper_ID)), vel y
 
 [State 760, Consecutive Parries]
 type = posadd
@@ -1130,11 +1131,12 @@ trigger1 = 1 || map(parry_helper_ID) := gethitvar(ID)
 
 [State Freeze Parried Helper]
 redirectID = map(parry_helper_ID)
-type = modifyplayer
-trigger1 = !time
+type = posadd
 trigger1 = playerIDexist(map(parry_helper_ID))
 trigger1 = playerID(map(parry_helper_ID)), movetype = A
-hitpausetime = 15
+trigger1 = playerID(map(parry_helper_ID)), hitpausetime = 0
+x = -1 * playerID(map(parry_helper_ID)), vel x
+y = -1 * playerID(map(parry_helper_ID)), vel y
 
 [State 761, Freeze]
 type = posfreeze
@@ -1218,11 +1220,12 @@ trigger1 = 1 || map(parry_helper_ID) := gethitvar(ID)
 
 [State Freeze Parried Helper]
 redirectID = map(parry_helper_ID)
-type = modifyplayer
-trigger1 = !time
+type = posadd
 trigger1 = playerIDexist(map(parry_helper_ID))
 trigger1 = playerID(map(parry_helper_ID)), movetype = A
-hitpausetime = 15
+trigger1 = playerID(map(parry_helper_ID)), hitpausetime = 0
+x = -1 * playerID(map(parry_helper_ID)), vel x
+y = -1 * playerID(map(parry_helper_ID)), vel y
 
 [State 762, Freeze]
 type = posfreeze
@@ -1386,7 +1389,7 @@ value = 9999
 type = reversaldef
 trigger1 = !var(0)
 trigger1 = anim = 765 || anim = 767
-trigger1 = (root, stateno != 5120) || !(root, animtime)
+trigger1 = root, hitbyattr(SCA, AA, AP)
 reversal.attr = SCA, AA
 p1stateno = 766
 pausetime = 0, 15
@@ -1397,6 +1400,7 @@ numhits = 0
 type = reversaldef
 trigger1 = !var(0)
 trigger1 = anim = 766
+trigger1 = root, hitbyattr(SC, AA, AP); no air
 reversal.attr = SC, AA
 p1stateno = 766
 pausetime = 0, 15
@@ -1628,7 +1632,7 @@ value = 5050
 [State 5200, Accel]
 type = veladd
 trigger1 = time > 0
-y = gethitvar(yaccel)
+y = max(0.35, gethitvar(yaccel))
 
 [State 5200, End]
 type = selfstate
@@ -1822,7 +1826,7 @@ value = 5050
 [State 5220, Accel]
 type = veladd
 trigger1 = 1
-y = gethitvar(yaccel)
+y = max(0.35, gethitvar(yaccel))
 
 [State 5220, End]
 type = selfstate
@@ -2660,7 +2664,14 @@ ID = 8999
 name = "Camera"
 postype = p1
 
-[State 191, tray]
+[State 191, Tray]
+type = playsnd
+trigger1 = animelemtime(1) = 30
+trigger1 = !numhelper(6015)
+value = 1, 2
+volumescale = 75
+
+[State 191, Tray]
 type = helper
 trigger1 = animelemtime(1) = 30
 trigger1 = !numhelper(6015)
@@ -2693,7 +2704,7 @@ y = -10.25
 [State 191, Loop Anim]
 type = changeanim
 trigger1 = animelem = 12
-trigger1 = pos y < 0
+trigger1 = !(pos y > -vel y)
 value = 191
 elem = 10
 
@@ -3493,21 +3504,18 @@ ignorehitpause = 1
 
 [State -2, Unthrowable Flag - Hurt]
 type = mapset
-triggerall = numenemy
+triggerall = p2, ctrl = 0
 triggerall = p2, anim != 5300
 triggerall = p2stateno != p2, const(statedizzy)
 trigger1 = p2stateno = [150, 155]
-trigger2 = p2stateno = 51
-trigger2 = p2, prevstateno = [140, 155]
-trigger3 = p2stateno = 5040
-trigger4 = p2stateno = 5120;just in case
-trigger5 = p2stateno = 5201
-trigger6 = !map(customcombo)
-trigger6 = p2movetype = H
-trigger6 = p2statetype != A
-trigger7 = p2movetype = H
-trigger7 = p2statetype = A
-trigger7 = p2, hitfall = 0
+trigger2 = p2stateno = 5120; Just in case
+trigger3 = p2stateno = 5201
+trigger4 = p2movetype = H
+trigger4 = p2statetype != A
+trigger4 = !map(customcombo)
+trigger5 = p2movetype = H
+trigger5 = p2statetype = A
+trigger5 = p2, hitfall = 0
 map = "unthrowable"
 value = 3
 ignorehitpause = 1
@@ -3805,6 +3813,17 @@ trigger2 = animelemtime(7) >= 0 && animelemtime(20) < 0
 trigger2 = (movecontact + movereversed) = [1, 12]
 map = "hypercancel"
 value = 1
+ignorehitpause = 1
+
+[State -3, Throw Cancel Fix]; Because first frame of a throw has movehit and Custom Combo has so much freedom
+type = null
+trigger1 = numtarget
+trigger1 = movehitvar(frame)
+trigger1 = hitdefattr != SCA, AA
+trigger1 = target, gethitvar(frame)
+trigger1 = target, stateowner, ID = ID
+trigger1 = time <= 0 && target, time <= 0
+trigger1 = map(normalcancel) := 0 || map(specialcancel) := 0 || map(supercancel) := 0 || map(hypercancel) := 0
 ignorehitpause = 1
 
 [State -3, Super Cancel Flag Reset]

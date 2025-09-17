@@ -1,6 +1,6 @@
                             ________________________________________
 ===========================| Karin Kanzuki by Phantom.of.the.Server |==========================
-                            ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯         [22.02.2025]
+                            ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯         [13.09.2025]
 
  - Contact: potsmugen@gmail.com
  - Website: https://network.mugenguild.com/pots/
@@ -281,6 +281,9 @@ Kira Eisei Neraiuchi            Killer Satellite Targeting Death Ray (!!!)
 
 
 ==========< VERSION HISTORY >==========
+
+<13.09.2025>
+ - Ikemen GO compatibility update
 
 <22.02.2025>
  - Minor fixes
