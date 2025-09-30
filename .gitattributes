@@ -7,3 +7,5 @@ Ikemen_GO_Linux filter=lfs diff=lfs merge=lfs -text
 *.snd filter=lfs diff=lfs merge=lfs -text
 *.sff filter=lfs diff=lfs merge=lfs -text
 lib/** filter=lfs diff=lfs merge=lfs -text
+*.webm filter=lfs diff=lfs merge=lfs -text
+*.mkv filter=lfs diff=lfs merge=lfs -text
